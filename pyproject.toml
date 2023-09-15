@@ -2,10 +2,13 @@
 name = "jellyfin-api-client"
 version = "10.8.10"
 description = "A client library for accessing Jellyfin API"
-
-authors = []
-
+authors = [
+  "Geoffrey Coulaud <geoffrey.coulaud@gmail.com>"
+]
 readme = "README.md"
+license = "MIT"
+repository = "https://github.com/GeoffreyCoulaud/jellyfin-api-client"
+keywords = ["jellyfin", "api", "openapi"]
 packages = [
     {include = "jellyfin_api_client"},
 ]
