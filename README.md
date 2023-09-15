@@ -1,6 +1,12 @@
 # jellyfin-api-client
 A client library for accessing Jellyfin API
 
+Generated API bindings for python from the Jellyfin OpenAPI specification with the help of [openapi-python-client](https://github.com/openapi-generators/openapi-python-client).
+
+## Installation
+
+`pip install jellyfin-api-client`
+
 ## Usage
 First, create a client:
 
