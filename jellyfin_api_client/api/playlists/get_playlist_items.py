@@ -3,45 +3,47 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast, List
+from ...types import UNSET, Unset
+from typing import Dict
 from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
+from typing import Union
 from ...models.image_type import ImageType
+from typing import cast
 from ...models.item_fields import ItemFields
-from ...types import UNSET, Response, Unset
+from ...models.problem_details import ProblemDetails
 
 
 def _get_kwargs(
     playlist_id: str,
     *,
-    user_id: str,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    enable_images: Union[Unset, None, bool] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    enable_images: Union[Unset, bool] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["userId"] = user_id
 
     params["startIndex"] = start_index
 
     params["limit"] = limit
 
-    json_fields: Union[Unset, None, List[str]] = UNSET
+    json_fields: Union[Unset, List[str]] = UNSET
     if not isinstance(fields, Unset):
-        if fields is None:
-            json_fields = None
-        else:
-            json_fields = []
-            for fields_item_data in fields:
-                fields_item = fields_item_data.value
-
-                json_fields.append(fields_item)
+        json_fields = []
+        for fields_item_data in fields:
+            fields_item = fields_item_data.value
+            json_fields.append(fields_item)
 
     params["fields"] = json_fields
 
@@ -51,46 +53,46 @@ def _get_kwargs(
 
     params["imageTypeLimit"] = image_type_limit
 
-    json_enable_image_types: Union[Unset, None, List[str]] = UNSET
+    json_enable_image_types: Union[Unset, List[str]] = UNSET
     if not isinstance(enable_image_types, Unset):
-        if enable_image_types is None:
-            json_enable_image_types = None
-        else:
-            json_enable_image_types = []
-            for enable_image_types_item_data in enable_image_types:
-                enable_image_types_item = enable_image_types_item_data.value
-
-                json_enable_image_types.append(enable_image_types_item)
+        json_enable_image_types = []
+        for enable_image_types_item_data in enable_image_types:
+            enable_image_types_item = enable_image_types_item_data.value
+            json_enable_image_types.append(enable_image_types_item)
 
     params["enableImageTypes"] = json_enable_image_types
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Playlists/{playlistId}/Items".format(
-            playlistId=playlist_id,
+        "url": "/Playlists/{playlist_id}/Items".format(
+            playlist_id=playlist_id,
         ),
         "params": params,
     }
 
+    return _kwargs
+
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
+) -> Optional[Union[Any, BaseItemDtoQueryResult, ProblemDetails]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = BaseItemDtoQueryResult.from_dict(response.json())
 
         return response_200
+    if response.status_code == HTTPStatus.FORBIDDEN:
+        response_403 = ProblemDetails.from_dict(response.json())
+
+        return response_403
     if response.status_code == HTTPStatus.NOT_FOUND:
-        response_404 = cast(Any, None)
+        response_404 = ProblemDetails.from_dict(response.json())
+
         return response_404
     if response.status_code == HTTPStatus.UNAUTHORIZED:
         response_401 = cast(Any, None)
         return response_401
-    if response.status_code == HTTPStatus.FORBIDDEN:
-        response_403 = cast(Any, None)
-        return response_403
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -99,7 +101,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, BaseItemDtoQueryResult]]:
+) -> Response[Union[Any, BaseItemDtoQueryResult, ProblemDetails]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -112,34 +114,34 @@ def sync_detailed(
     playlist_id: str,
     *,
     client: AuthenticatedClient,
-    user_id: str,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    enable_images: Union[Unset, None, bool] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-) -> Response[Union[Any, BaseItemDtoQueryResult]]:
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    enable_images: Union[Unset, bool] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+) -> Response[Union[Any, BaseItemDtoQueryResult, ProblemDetails]]:
     """Gets the original items of a playlist.
 
     Args:
         playlist_id (str):
-        user_id (str):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        enable_images (Union[Unset, None, bool]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        fields (Union[Unset, List[ItemFields]]):
+        enable_images (Union[Unset, bool]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, BaseItemDtoQueryResult]]
+        Response[Union[Any, BaseItemDtoQueryResult, ProblemDetails]]
     """
 
     kwargs = _get_kwargs(
@@ -165,34 +167,34 @@ def sync(
     playlist_id: str,
     *,
     client: AuthenticatedClient,
-    user_id: str,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    enable_images: Union[Unset, None, bool] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    enable_images: Union[Unset, bool] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+) -> Optional[Union[Any, BaseItemDtoQueryResult, ProblemDetails]]:
     """Gets the original items of a playlist.
 
     Args:
         playlist_id (str):
-        user_id (str):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        enable_images (Union[Unset, None, bool]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        fields (Union[Unset, List[ItemFields]]):
+        enable_images (Union[Unset, bool]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, BaseItemDtoQueryResult]
+        Union[Any, BaseItemDtoQueryResult, ProblemDetails]
     """
 
     return sync_detailed(
@@ -213,34 +215,34 @@ async def asyncio_detailed(
     playlist_id: str,
     *,
     client: AuthenticatedClient,
-    user_id: str,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    enable_images: Union[Unset, None, bool] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-) -> Response[Union[Any, BaseItemDtoQueryResult]]:
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    enable_images: Union[Unset, bool] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+) -> Response[Union[Any, BaseItemDtoQueryResult, ProblemDetails]]:
     """Gets the original items of a playlist.
 
     Args:
         playlist_id (str):
-        user_id (str):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        enable_images (Union[Unset, None, bool]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        fields (Union[Unset, List[ItemFields]]):
+        enable_images (Union[Unset, bool]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, BaseItemDtoQueryResult]]
+        Response[Union[Any, BaseItemDtoQueryResult, ProblemDetails]]
     """
 
     kwargs = _get_kwargs(
@@ -264,34 +266,34 @@ async def asyncio(
     playlist_id: str,
     *,
     client: AuthenticatedClient,
-    user_id: str,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    enable_images: Union[Unset, None, bool] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    enable_images: Union[Unset, bool] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+) -> Optional[Union[Any, BaseItemDtoQueryResult, ProblemDetails]]:
     """Gets the original items of a playlist.
 
     Args:
         playlist_id (str):
-        user_id (str):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        enable_images (Union[Unset, None, bool]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        fields (Union[Unset, List[ItemFields]]):
+        enable_images (Union[Unset, bool]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, BaseItemDtoQueryResult]
+        Union[Any, BaseItemDtoQueryResult, ProblemDetails]
     """
 
     return (

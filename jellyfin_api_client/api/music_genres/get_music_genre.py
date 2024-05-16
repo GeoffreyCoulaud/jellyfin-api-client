@@ -1,33 +1,39 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Dict
+from typing import Union
+from typing import cast
 from ...models.base_item_dto import BaseItemDto
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     genre_name: str,
     *,
-    user_id: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["userId"] = user_id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/MusicGenres/{genreName}".format(
-            genreName=genre_name,
+        "url": "/MusicGenres/{genre_name}".format(
+            genre_name=genre_name,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -64,13 +70,13 @@ def sync_detailed(
     genre_name: str,
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, BaseItemDto]]:
     """Gets a music genre, by name.
 
     Args:
         genre_name (str):
-        user_id (Union[Unset, None, str]):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -96,13 +102,13 @@ def sync(
     genre_name: str,
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, BaseItemDto]]:
     """Gets a music genre, by name.
 
     Args:
         genre_name (str):
-        user_id (Union[Unset, None, str]):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -123,13 +129,13 @@ async def asyncio_detailed(
     genre_name: str,
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, BaseItemDto]]:
     """Gets a music genre, by name.
 
     Args:
         genre_name (str):
-        user_id (Union[Unset, None, str]):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -153,13 +159,13 @@ async def asyncio(
     genre_name: str,
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, BaseItemDto]]:
     """Gets a music genre, by name.
 
     Args:
         genre_name (str):
-        user_id (Union[Unset, None, str]):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

@@ -1,9 +1,18 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
-from ..models.codec_type import CodecType
 from ..types import UNSET, Unset
+
+from typing import cast, List
+from typing import cast, Union
+from typing import Dict
+from ..types import UNSET, Unset
+from ..models.codec_type import CodecType
+from typing import Union
+from typing import cast
 
 if TYPE_CHECKING:
     from ..models.profile_condition import ProfileCondition
@@ -17,47 +26,60 @@ class CodecProfile:
     """
     Attributes:
         type (Union[Unset, CodecType]):
-        conditions (Union[Unset, None, List['ProfileCondition']]):
-        apply_conditions (Union[Unset, None, List['ProfileCondition']]):
-        codec (Union[Unset, None, str]):
-        container (Union[Unset, None, str]):
+        conditions (Union[List['ProfileCondition'], None, Unset]):
+        apply_conditions (Union[List['ProfileCondition'], None, Unset]):
+        codec (Union[None, Unset, str]):
+        container (Union[None, Unset, str]):
     """
 
     type: Union[Unset, CodecType] = UNSET
-    conditions: Union[Unset, None, List["ProfileCondition"]] = UNSET
-    apply_conditions: Union[Unset, None, List["ProfileCondition"]] = UNSET
-    codec: Union[Unset, None, str] = UNSET
-    container: Union[Unset, None, str] = UNSET
+    conditions: Union[List["ProfileCondition"], None, Unset] = UNSET
+    apply_conditions: Union[List["ProfileCondition"], None, Unset] = UNSET
+    codec: Union[None, Unset, str] = UNSET
+    container: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.profile_condition import ProfileCondition
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        conditions: Union[Unset, None, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.conditions, Unset):
-            if self.conditions is None:
-                conditions = None
-            else:
-                conditions = []
-                for conditions_item_data in self.conditions:
-                    conditions_item = conditions_item_data.to_dict()
+        conditions: Union[List[Dict[str, Any]], None, Unset]
+        if isinstance(self.conditions, Unset):
+            conditions = UNSET
+        elif isinstance(self.conditions, list):
+            conditions = []
+            for conditions_type_0_item_data in self.conditions:
+                conditions_type_0_item = conditions_type_0_item_data.to_dict()
+                conditions.append(conditions_type_0_item)
 
-                    conditions.append(conditions_item)
+        else:
+            conditions = self.conditions
 
-        apply_conditions: Union[Unset, None, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.apply_conditions, Unset):
-            if self.apply_conditions is None:
-                apply_conditions = None
-            else:
-                apply_conditions = []
-                for apply_conditions_item_data in self.apply_conditions:
-                    apply_conditions_item = apply_conditions_item_data.to_dict()
+        apply_conditions: Union[List[Dict[str, Any]], None, Unset]
+        if isinstance(self.apply_conditions, Unset):
+            apply_conditions = UNSET
+        elif isinstance(self.apply_conditions, list):
+            apply_conditions = []
+            for apply_conditions_type_0_item_data in self.apply_conditions:
+                apply_conditions_type_0_item = apply_conditions_type_0_item_data.to_dict()
+                apply_conditions.append(apply_conditions_type_0_item)
 
-                    apply_conditions.append(apply_conditions_item)
+        else:
+            apply_conditions = self.apply_conditions
 
-        codec = self.codec
-        container = self.container
+        codec: Union[None, Unset, str]
+        if isinstance(self.codec, Unset):
+            codec = UNSET
+        else:
+            codec = self.codec
+
+        container: Union[None, Unset, str]
+        if isinstance(self.container, Unset):
+            container = UNSET
+        else:
+            container = self.container
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -86,23 +108,67 @@ class CodecProfile:
         else:
             type = CodecType(_type)
 
-        conditions = []
-        _conditions = d.pop("Conditions", UNSET)
-        for conditions_item_data in _conditions or []:
-            conditions_item = ProfileCondition.from_dict(conditions_item_data)
+        def _parse_conditions(data: object) -> Union[List["ProfileCondition"], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                conditions_type_0 = []
+                _conditions_type_0 = data
+                for conditions_type_0_item_data in _conditions_type_0:
+                    conditions_type_0_item = ProfileCondition.from_dict(conditions_type_0_item_data)
 
-            conditions.append(conditions_item)
+                    conditions_type_0.append(conditions_type_0_item)
 
-        apply_conditions = []
-        _apply_conditions = d.pop("ApplyConditions", UNSET)
-        for apply_conditions_item_data in _apply_conditions or []:
-            apply_conditions_item = ProfileCondition.from_dict(apply_conditions_item_data)
+                return conditions_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List["ProfileCondition"], None, Unset], data)
 
-            apply_conditions.append(apply_conditions_item)
+        conditions = _parse_conditions(d.pop("Conditions", UNSET))
 
-        codec = d.pop("Codec", UNSET)
+        def _parse_apply_conditions(data: object) -> Union[List["ProfileCondition"], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                apply_conditions_type_0 = []
+                _apply_conditions_type_0 = data
+                for apply_conditions_type_0_item_data in _apply_conditions_type_0:
+                    apply_conditions_type_0_item = ProfileCondition.from_dict(apply_conditions_type_0_item_data)
 
-        container = d.pop("Container", UNSET)
+                    apply_conditions_type_0.append(apply_conditions_type_0_item)
+
+                return apply_conditions_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List["ProfileCondition"], None, Unset], data)
+
+        apply_conditions = _parse_apply_conditions(d.pop("ApplyConditions", UNSET))
+
+        def _parse_codec(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        codec = _parse_codec(d.pop("Codec", UNSET))
+
+        def _parse_container(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        container = _parse_container(d.pop("Container", UNSET))
 
         codec_profile = cls(
             type=type,

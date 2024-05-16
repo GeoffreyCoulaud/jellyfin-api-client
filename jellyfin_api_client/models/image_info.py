@@ -1,9 +1,16 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
-from ..models.image_type import ImageType
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, Union
+from ..types import UNSET, Unset
+from ..models.image_type import ImageType
+
 
 T = TypeVar("T", bound="ImageInfo")
 
@@ -14,22 +21,22 @@ class ImageInfo:
 
     Attributes:
         image_type (Union[Unset, ImageType]): Enum ImageType.
-        image_index (Union[Unset, None, int]): Gets or sets the index of the image.
-        image_tag (Union[Unset, None, str]): Gets or sets the image tag.
-        path (Union[Unset, None, str]): Gets or sets the path.
-        blur_hash (Union[Unset, None, str]): Gets or sets the blurhash.
-        height (Union[Unset, None, int]): Gets or sets the height.
-        width (Union[Unset, None, int]): Gets or sets the width.
+        image_index (Union[None, Unset, int]): Gets or sets the index of the image.
+        image_tag (Union[None, Unset, str]): Gets or sets the image tag.
+        path (Union[None, Unset, str]): Gets or sets the path.
+        blur_hash (Union[None, Unset, str]): Gets or sets the blurhash.
+        height (Union[None, Unset, int]): Gets or sets the height.
+        width (Union[None, Unset, int]): Gets or sets the width.
         size (Union[Unset, int]): Gets or sets the size.
     """
 
     image_type: Union[Unset, ImageType] = UNSET
-    image_index: Union[Unset, None, int] = UNSET
-    image_tag: Union[Unset, None, str] = UNSET
-    path: Union[Unset, None, str] = UNSET
-    blur_hash: Union[Unset, None, str] = UNSET
-    height: Union[Unset, None, int] = UNSET
-    width: Union[Unset, None, int] = UNSET
+    image_index: Union[None, Unset, int] = UNSET
+    image_tag: Union[None, Unset, str] = UNSET
+    path: Union[None, Unset, str] = UNSET
+    blur_hash: Union[None, Unset, str] = UNSET
+    height: Union[None, Unset, int] = UNSET
+    width: Union[None, Unset, int] = UNSET
     size: Union[Unset, int] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
@@ -37,12 +44,42 @@ class ImageInfo:
         if not isinstance(self.image_type, Unset):
             image_type = self.image_type.value
 
-        image_index = self.image_index
-        image_tag = self.image_tag
-        path = self.path
-        blur_hash = self.blur_hash
-        height = self.height
-        width = self.width
+        image_index: Union[None, Unset, int]
+        if isinstance(self.image_index, Unset):
+            image_index = UNSET
+        else:
+            image_index = self.image_index
+
+        image_tag: Union[None, Unset, str]
+        if isinstance(self.image_tag, Unset):
+            image_tag = UNSET
+        else:
+            image_tag = self.image_tag
+
+        path: Union[None, Unset, str]
+        if isinstance(self.path, Unset):
+            path = UNSET
+        else:
+            path = self.path
+
+        blur_hash: Union[None, Unset, str]
+        if isinstance(self.blur_hash, Unset):
+            blur_hash = UNSET
+        else:
+            blur_hash = self.blur_hash
+
+        height: Union[None, Unset, int]
+        if isinstance(self.height, Unset):
+            height = UNSET
+        else:
+            height = self.height
+
+        width: Union[None, Unset, int]
+        if isinstance(self.width, Unset):
+            width = UNSET
+        else:
+            width = self.width
+
         size = self.size
 
         field_dict: Dict[str, Any] = {}
@@ -76,17 +113,59 @@ class ImageInfo:
         else:
             image_type = ImageType(_image_type)
 
-        image_index = d.pop("ImageIndex", UNSET)
+        def _parse_image_index(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        image_tag = d.pop("ImageTag", UNSET)
+        image_index = _parse_image_index(d.pop("ImageIndex", UNSET))
 
-        path = d.pop("Path", UNSET)
+        def _parse_image_tag(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        blur_hash = d.pop("BlurHash", UNSET)
+        image_tag = _parse_image_tag(d.pop("ImageTag", UNSET))
 
-        height = d.pop("Height", UNSET)
+        def _parse_path(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        width = d.pop("Width", UNSET)
+        path = _parse_path(d.pop("Path", UNSET))
+
+        def _parse_blur_hash(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        blur_hash = _parse_blur_hash(d.pop("BlurHash", UNSET))
+
+        def _parse_height(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        height = _parse_height(d.pop("Height", UNSET))
+
+        def _parse_width(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        width = _parse_width(d.pop("Width", UNSET))
 
         size = d.pop("Size", UNSET)
 

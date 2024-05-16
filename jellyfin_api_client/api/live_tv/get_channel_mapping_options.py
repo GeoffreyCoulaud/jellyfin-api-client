@@ -1,30 +1,36 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Dict
 from ...models.channel_mapping_options_dto import ChannelMappingOptionsDto
-from ...types import UNSET, Response, Unset
+from typing import Union
+from typing import cast
 
 
 def _get_kwargs(
     *,
-    provider_id: Union[Unset, None, str] = UNSET,
+    provider_id: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["providerId"] = provider_id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/LiveTv/ChannelMappingOptions",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -60,12 +66,12 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    provider_id: Union[Unset, None, str] = UNSET,
+    provider_id: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, ChannelMappingOptionsDto]]:
     """Get channel mapping options.
 
     Args:
-        provider_id (Union[Unset, None, str]):
+        provider_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -89,12 +95,12 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    provider_id: Union[Unset, None, str] = UNSET,
+    provider_id: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, ChannelMappingOptionsDto]]:
     """Get channel mapping options.
 
     Args:
-        provider_id (Union[Unset, None, str]):
+        provider_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -113,12 +119,12 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    provider_id: Union[Unset, None, str] = UNSET,
+    provider_id: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, ChannelMappingOptionsDto]]:
     """Get channel mapping options.
 
     Args:
-        provider_id (Union[Unset, None, str]):
+        provider_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -140,12 +146,12 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    provider_id: Union[Unset, None, str] = UNSET,
+    provider_id: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, ChannelMappingOptionsDto]]:
     """Get channel mapping options.
 
     Args:
-        provider_id (Union[Unset, None, str]):
+        provider_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

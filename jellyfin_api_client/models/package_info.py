@@ -1,8 +1,17 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import cast, List
+from typing import cast, Union
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
 
 if TYPE_CHECKING:
     from ..models.version_info import VersionInfo
@@ -25,7 +34,7 @@ class PackageInfo:
         guid (Union[Unset, str]): Gets or sets the guid of the assembly associated with this plugin.
             This is used to identify the proper item for automatic updates.
         versions (Union[Unset, List['VersionInfo']]): Gets or sets the versions.
-        image_url (Union[Unset, None, str]): Gets or sets the image url for the package.
+        image_url (Union[None, Unset, str]): Gets or sets the image url for the package.
     """
 
     name: Union[Unset, str] = UNSET
@@ -35,24 +44,35 @@ class PackageInfo:
     category: Union[Unset, str] = UNSET
     guid: Union[Unset, str] = UNSET
     versions: Union[Unset, List["VersionInfo"]] = UNSET
-    image_url: Union[Unset, None, str] = UNSET
+    image_url: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.version_info import VersionInfo
+
         name = self.name
+
         description = self.description
+
         overview = self.overview
+
         owner = self.owner
+
         category = self.category
+
         guid = self.guid
+
         versions: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.versions, Unset):
             versions = []
             for versions_item_data in self.versions:
                 versions_item = versions_item_data.to_dict()
-
                 versions.append(versions_item)
 
-        image_url = self.image_url
+        image_url: Union[None, Unset, str]
+        if isinstance(self.image_url, Unset):
+            image_url = UNSET
+        else:
+            image_url = self.image_url
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -99,7 +119,14 @@ class PackageInfo:
 
             versions.append(versions_item)
 
-        image_url = d.pop("imageUrl", UNSET)
+        def _parse_image_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        image_url = _parse_image_url(d.pop("imageUrl", UNSET))
 
         package_info = cls(
             name=name,

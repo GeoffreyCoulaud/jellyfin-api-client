@@ -1,14 +1,19 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.image_format import ImageFormat
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Dict
 from ...models.image_type import ImageType
+from typing import cast
+from typing import Union
+from ...models.image_format import ImageFormat
 from ...models.problem_details import ProblemDetails
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
@@ -22,20 +27,17 @@ def _get_kwargs(
     percent_played: float,
     unplayed_count: int,
     *,
-    width: Union[Unset, None, int] = UNSET,
-    height: Union[Unset, None, int] = UNSET,
-    quality: Union[Unset, None, int] = UNSET,
-    fill_width: Union[Unset, None, int] = UNSET,
-    fill_height: Union[Unset, None, int] = UNSET,
-    crop_whitespace: Union[Unset, None, bool] = UNSET,
-    add_played_indicator: Union[Unset, None, bool] = UNSET,
-    blur: Union[Unset, None, int] = UNSET,
-    background_color: Union[Unset, None, str] = UNSET,
-    foreground_layer: Union[Unset, None, str] = UNSET,
+    width: Union[Unset, int] = UNSET,
+    height: Union[Unset, int] = UNSET,
+    quality: Union[Unset, int] = UNSET,
+    fill_width: Union[Unset, int] = UNSET,
+    fill_height: Union[Unset, int] = UNSET,
+    blur: Union[Unset, int] = UNSET,
+    background_color: Union[Unset, str] = UNSET,
+    foreground_layer: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["width"] = width
 
     params["height"] = height
@@ -46,10 +48,6 @@ def _get_kwargs(
 
     params["fillHeight"] = fill_height
 
-    params["cropWhitespace"] = crop_whitespace
-
-    params["addPlayedIndicator"] = add_played_indicator
-
     params["blur"] = blur
 
     params["backgroundColor"] = background_color
@@ -58,21 +56,23 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "head",
-        "url": "/Items/{itemId}/Images/{imageType}/{imageIndex}/{tag}/{format}/{maxWidth}/{maxHeight}/{percentPlayed}/{unplayedCount}".format(
-            itemId=item_id,
-            imageType=image_type,
-            imageIndex=image_index,
+        "url": "/Items/{item_id}/Images/{image_type}/{image_index}/{tag}/{format_}/{max_width}/{max_height}/{percent_played}/{unplayed_count}".format(
+            item_id=item_id,
+            image_type=image_type,
+            image_index=image_index,
             tag=tag,
-            format=format_,
-            maxWidth=max_width,
-            maxHeight=max_height,
-            percentPlayed=percent_played,
-            unplayedCount=unplayed_count,
+            format_=format_,
+            max_width=max_width,
+            max_height=max_height,
+            percent_played=percent_played,
+            unplayed_count=unplayed_count,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -111,16 +111,14 @@ def sync_detailed(
     unplayed_count: int,
     *,
     client: Union[AuthenticatedClient, Client],
-    width: Union[Unset, None, int] = UNSET,
-    height: Union[Unset, None, int] = UNSET,
-    quality: Union[Unset, None, int] = UNSET,
-    fill_width: Union[Unset, None, int] = UNSET,
-    fill_height: Union[Unset, None, int] = UNSET,
-    crop_whitespace: Union[Unset, None, bool] = UNSET,
-    add_played_indicator: Union[Unset, None, bool] = UNSET,
-    blur: Union[Unset, None, int] = UNSET,
-    background_color: Union[Unset, None, str] = UNSET,
-    foreground_layer: Union[Unset, None, str] = UNSET,
+    width: Union[Unset, int] = UNSET,
+    height: Union[Unset, int] = UNSET,
+    quality: Union[Unset, int] = UNSET,
+    fill_width: Union[Unset, int] = UNSET,
+    fill_height: Union[Unset, int] = UNSET,
+    blur: Union[Unset, int] = UNSET,
+    background_color: Union[Unset, str] = UNSET,
+    foreground_layer: Union[Unset, str] = UNSET,
 ) -> Response[ProblemDetails]:
     """Gets the item's image.
 
@@ -134,16 +132,14 @@ def sync_detailed(
         max_height (int):
         percent_played (float):
         unplayed_count (int):
-        width (Union[Unset, None, int]):
-        height (Union[Unset, None, int]):
-        quality (Union[Unset, None, int]):
-        fill_width (Union[Unset, None, int]):
-        fill_height (Union[Unset, None, int]):
-        crop_whitespace (Union[Unset, None, bool]):
-        add_played_indicator (Union[Unset, None, bool]):
-        blur (Union[Unset, None, int]):
-        background_color (Union[Unset, None, str]):
-        foreground_layer (Union[Unset, None, str]):
+        width (Union[Unset, int]):
+        height (Union[Unset, int]):
+        quality (Union[Unset, int]):
+        fill_width (Union[Unset, int]):
+        fill_height (Union[Unset, int]):
+        blur (Union[Unset, int]):
+        background_color (Union[Unset, str]):
+        foreground_layer (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -168,8 +164,6 @@ def sync_detailed(
         quality=quality,
         fill_width=fill_width,
         fill_height=fill_height,
-        crop_whitespace=crop_whitespace,
-        add_played_indicator=add_played_indicator,
         blur=blur,
         background_color=background_color,
         foreground_layer=foreground_layer,
@@ -194,16 +188,14 @@ def sync(
     unplayed_count: int,
     *,
     client: Union[AuthenticatedClient, Client],
-    width: Union[Unset, None, int] = UNSET,
-    height: Union[Unset, None, int] = UNSET,
-    quality: Union[Unset, None, int] = UNSET,
-    fill_width: Union[Unset, None, int] = UNSET,
-    fill_height: Union[Unset, None, int] = UNSET,
-    crop_whitespace: Union[Unset, None, bool] = UNSET,
-    add_played_indicator: Union[Unset, None, bool] = UNSET,
-    blur: Union[Unset, None, int] = UNSET,
-    background_color: Union[Unset, None, str] = UNSET,
-    foreground_layer: Union[Unset, None, str] = UNSET,
+    width: Union[Unset, int] = UNSET,
+    height: Union[Unset, int] = UNSET,
+    quality: Union[Unset, int] = UNSET,
+    fill_width: Union[Unset, int] = UNSET,
+    fill_height: Union[Unset, int] = UNSET,
+    blur: Union[Unset, int] = UNSET,
+    background_color: Union[Unset, str] = UNSET,
+    foreground_layer: Union[Unset, str] = UNSET,
 ) -> Optional[ProblemDetails]:
     """Gets the item's image.
 
@@ -217,16 +209,14 @@ def sync(
         max_height (int):
         percent_played (float):
         unplayed_count (int):
-        width (Union[Unset, None, int]):
-        height (Union[Unset, None, int]):
-        quality (Union[Unset, None, int]):
-        fill_width (Union[Unset, None, int]):
-        fill_height (Union[Unset, None, int]):
-        crop_whitespace (Union[Unset, None, bool]):
-        add_played_indicator (Union[Unset, None, bool]):
-        blur (Union[Unset, None, int]):
-        background_color (Union[Unset, None, str]):
-        foreground_layer (Union[Unset, None, str]):
+        width (Union[Unset, int]):
+        height (Union[Unset, int]):
+        quality (Union[Unset, int]):
+        fill_width (Union[Unset, int]):
+        fill_height (Union[Unset, int]):
+        blur (Union[Unset, int]):
+        background_color (Union[Unset, str]):
+        foreground_layer (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -252,8 +242,6 @@ def sync(
         quality=quality,
         fill_width=fill_width,
         fill_height=fill_height,
-        crop_whitespace=crop_whitespace,
-        add_played_indicator=add_played_indicator,
         blur=blur,
         background_color=background_color,
         foreground_layer=foreground_layer,
@@ -272,16 +260,14 @@ async def asyncio_detailed(
     unplayed_count: int,
     *,
     client: Union[AuthenticatedClient, Client],
-    width: Union[Unset, None, int] = UNSET,
-    height: Union[Unset, None, int] = UNSET,
-    quality: Union[Unset, None, int] = UNSET,
-    fill_width: Union[Unset, None, int] = UNSET,
-    fill_height: Union[Unset, None, int] = UNSET,
-    crop_whitespace: Union[Unset, None, bool] = UNSET,
-    add_played_indicator: Union[Unset, None, bool] = UNSET,
-    blur: Union[Unset, None, int] = UNSET,
-    background_color: Union[Unset, None, str] = UNSET,
-    foreground_layer: Union[Unset, None, str] = UNSET,
+    width: Union[Unset, int] = UNSET,
+    height: Union[Unset, int] = UNSET,
+    quality: Union[Unset, int] = UNSET,
+    fill_width: Union[Unset, int] = UNSET,
+    fill_height: Union[Unset, int] = UNSET,
+    blur: Union[Unset, int] = UNSET,
+    background_color: Union[Unset, str] = UNSET,
+    foreground_layer: Union[Unset, str] = UNSET,
 ) -> Response[ProblemDetails]:
     """Gets the item's image.
 
@@ -295,16 +281,14 @@ async def asyncio_detailed(
         max_height (int):
         percent_played (float):
         unplayed_count (int):
-        width (Union[Unset, None, int]):
-        height (Union[Unset, None, int]):
-        quality (Union[Unset, None, int]):
-        fill_width (Union[Unset, None, int]):
-        fill_height (Union[Unset, None, int]):
-        crop_whitespace (Union[Unset, None, bool]):
-        add_played_indicator (Union[Unset, None, bool]):
-        blur (Union[Unset, None, int]):
-        background_color (Union[Unset, None, str]):
-        foreground_layer (Union[Unset, None, str]):
+        width (Union[Unset, int]):
+        height (Union[Unset, int]):
+        quality (Union[Unset, int]):
+        fill_width (Union[Unset, int]):
+        fill_height (Union[Unset, int]):
+        blur (Union[Unset, int]):
+        background_color (Union[Unset, str]):
+        foreground_layer (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -329,8 +313,6 @@ async def asyncio_detailed(
         quality=quality,
         fill_width=fill_width,
         fill_height=fill_height,
-        crop_whitespace=crop_whitespace,
-        add_played_indicator=add_played_indicator,
         blur=blur,
         background_color=background_color,
         foreground_layer=foreground_layer,
@@ -353,16 +335,14 @@ async def asyncio(
     unplayed_count: int,
     *,
     client: Union[AuthenticatedClient, Client],
-    width: Union[Unset, None, int] = UNSET,
-    height: Union[Unset, None, int] = UNSET,
-    quality: Union[Unset, None, int] = UNSET,
-    fill_width: Union[Unset, None, int] = UNSET,
-    fill_height: Union[Unset, None, int] = UNSET,
-    crop_whitespace: Union[Unset, None, bool] = UNSET,
-    add_played_indicator: Union[Unset, None, bool] = UNSET,
-    blur: Union[Unset, None, int] = UNSET,
-    background_color: Union[Unset, None, str] = UNSET,
-    foreground_layer: Union[Unset, None, str] = UNSET,
+    width: Union[Unset, int] = UNSET,
+    height: Union[Unset, int] = UNSET,
+    quality: Union[Unset, int] = UNSET,
+    fill_width: Union[Unset, int] = UNSET,
+    fill_height: Union[Unset, int] = UNSET,
+    blur: Union[Unset, int] = UNSET,
+    background_color: Union[Unset, str] = UNSET,
+    foreground_layer: Union[Unset, str] = UNSET,
 ) -> Optional[ProblemDetails]:
     """Gets the item's image.
 
@@ -376,16 +356,14 @@ async def asyncio(
         max_height (int):
         percent_played (float):
         unplayed_count (int):
-        width (Union[Unset, None, int]):
-        height (Union[Unset, None, int]):
-        quality (Union[Unset, None, int]):
-        fill_width (Union[Unset, None, int]):
-        fill_height (Union[Unset, None, int]):
-        crop_whitespace (Union[Unset, None, bool]):
-        add_played_indicator (Union[Unset, None, bool]):
-        blur (Union[Unset, None, int]):
-        background_color (Union[Unset, None, str]):
-        foreground_layer (Union[Unset, None, str]):
+        width (Union[Unset, int]):
+        height (Union[Unset, int]):
+        quality (Union[Unset, int]):
+        fill_width (Union[Unset, int]):
+        fill_height (Union[Unset, int]):
+        blur (Union[Unset, int]):
+        background_color (Union[Unset, str]):
+        foreground_layer (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -412,8 +390,6 @@ async def asyncio(
             quality=quality,
             fill_width=fill_width,
             fill_height=fill_height,
-            crop_whitespace=crop_whitespace,
-            add_played_indicator=add_played_indicator,
             blur=blur,
             background_color=background_color,
             foreground_layer=foreground_layer,

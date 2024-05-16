@@ -1,34 +1,52 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast
 from ...models.device_options_dto import DeviceOptionsDto
-from ...types import UNSET, Response
+from typing import Dict
 
 
 def _get_kwargs(
     *,
-    json_body: DeviceOptionsDto,
+    body: Union[
+        DeviceOptionsDto,
+        DeviceOptionsDto,
+    ],
     id: str,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
     params: Dict[str, Any] = {}
+
     params["id"] = id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Devices/Options",
-        "json": json_json_body,
         "params": params,
     }
+
+    if isinstance(body, DeviceOptionsDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, DeviceOptionsDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
@@ -56,14 +74,18 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: DeviceOptionsDto,
+    body: Union[
+        DeviceOptionsDto,
+        DeviceOptionsDto,
+    ],
     id: str,
 ) -> Response[Any]:
     """Update device options.
 
     Args:
         id (str):
-        json_body (DeviceOptionsDto): A dto representing custom options for a device.
+        body (DeviceOptionsDto): A dto representing custom options for a device.
+        body (DeviceOptionsDto): A dto representing custom options for a device.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -74,7 +96,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         id=id,
     )
 
@@ -88,14 +110,18 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: DeviceOptionsDto,
+    body: Union[
+        DeviceOptionsDto,
+        DeviceOptionsDto,
+    ],
     id: str,
 ) -> Response[Any]:
     """Update device options.
 
     Args:
         id (str):
-        json_body (DeviceOptionsDto): A dto representing custom options for a device.
+        body (DeviceOptionsDto): A dto representing custom options for a device.
+        body (DeviceOptionsDto): A dto representing custom options for a device.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -106,7 +132,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         id=id,
     )
 

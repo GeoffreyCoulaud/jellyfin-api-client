@@ -3,55 +3,62 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.base_item_kind import BaseItemKind
-from ...models.image_type import ImageType
-from ...models.item_fields import ItemFields
+from typing import cast, List
+from ...types import UNSET, Unset
+from typing import Dict
+from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
+from typing import Union
 from ...models.item_filter import ItemFilter
+from ...models.image_type import ImageType
 from ...models.sort_order import SortOrder
-from ...types import UNSET, Response, Unset
+from typing import cast
+from ...models.item_fields import ItemFields
+from ...models.item_sort_by import ItemSortBy
+from ...models.media_type import MediaType
 
 
 def _get_kwargs(
     *,
-    min_community_rating: Union[Unset, None, float] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    genres: Union[Unset, None, List[str]] = UNSET,
-    genre_ids: Union[Unset, None, List[str]] = UNSET,
-    official_ratings: Union[Unset, None, List[str]] = UNSET,
-    tags: Union[Unset, None, List[str]] = UNSET,
-    years: Union[Unset, None, List[int]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    person: Union[Unset, None, str] = UNSET,
-    person_ids: Union[Unset, None, List[str]] = UNSET,
-    person_types: Union[Unset, None, List[str]] = UNSET,
-    studios: Union[Unset, None, List[str]] = UNSET,
-    studio_ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    name_starts_with_or_greater: Union[Unset, None, str] = UNSET,
-    name_starts_with: Union[Unset, None, str] = UNSET,
-    name_less_than: Union[Unset, None, str] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    sort_order: Union[Unset, None, List[SortOrder]] = UNSET,
-    enable_images: Union[Unset, None, bool] = True,
-    enable_total_record_count: Union[Unset, None, bool] = True,
+    min_community_rating: Union[Unset, float] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    genres: Union[Unset, List[str]] = UNSET,
+    genre_ids: Union[Unset, List[str]] = UNSET,
+    official_ratings: Union[Unset, List[str]] = UNSET,
+    tags: Union[Unset, List[str]] = UNSET,
+    years: Union[Unset, List[int]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    person: Union[Unset, str] = UNSET,
+    person_ids: Union[Unset, List[str]] = UNSET,
+    person_types: Union[Unset, List[str]] = UNSET,
+    studios: Union[Unset, List[str]] = UNSET,
+    studio_ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    name_starts_with_or_greater: Union[Unset, str] = UNSET,
+    name_starts_with: Union[Unset, str] = UNSET,
+    name_less_than: Union[Unset, str] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    sort_order: Union[Unset, List[SortOrder]] = UNSET,
+    enable_images: Union[Unset, bool] = True,
+    enable_total_record_count: Union[Unset, bool] = True,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["minCommunityRating"] = min_community_rating
 
     params["startIndex"] = start_index
@@ -62,111 +69,80 @@ def _get_kwargs(
 
     params["parentId"] = parent_id
 
-    json_fields: Union[Unset, None, List[str]] = UNSET
+    json_fields: Union[Unset, List[str]] = UNSET
     if not isinstance(fields, Unset):
-        if fields is None:
-            json_fields = None
-        else:
-            json_fields = []
-            for fields_item_data in fields:
-                fields_item = fields_item_data.value
-
-                json_fields.append(fields_item)
+        json_fields = []
+        for fields_item_data in fields:
+            fields_item = fields_item_data.value
+            json_fields.append(fields_item)
 
     params["fields"] = json_fields
 
-    json_exclude_item_types: Union[Unset, None, List[str]] = UNSET
+    json_exclude_item_types: Union[Unset, List[str]] = UNSET
     if not isinstance(exclude_item_types, Unset):
-        if exclude_item_types is None:
-            json_exclude_item_types = None
-        else:
-            json_exclude_item_types = []
-            for exclude_item_types_item_data in exclude_item_types:
-                exclude_item_types_item = exclude_item_types_item_data.value
-
-                json_exclude_item_types.append(exclude_item_types_item)
+        json_exclude_item_types = []
+        for exclude_item_types_item_data in exclude_item_types:
+            exclude_item_types_item = exclude_item_types_item_data.value
+            json_exclude_item_types.append(exclude_item_types_item)
 
     params["excludeItemTypes"] = json_exclude_item_types
 
-    json_include_item_types: Union[Unset, None, List[str]] = UNSET
+    json_include_item_types: Union[Unset, List[str]] = UNSET
     if not isinstance(include_item_types, Unset):
-        if include_item_types is None:
-            json_include_item_types = None
-        else:
-            json_include_item_types = []
-            for include_item_types_item_data in include_item_types:
-                include_item_types_item = include_item_types_item_data.value
-
-                json_include_item_types.append(include_item_types_item)
+        json_include_item_types = []
+        for include_item_types_item_data in include_item_types:
+            include_item_types_item = include_item_types_item_data.value
+            json_include_item_types.append(include_item_types_item)
 
     params["includeItemTypes"] = json_include_item_types
 
-    json_filters: Union[Unset, None, List[str]] = UNSET
+    json_filters: Union[Unset, List[str]] = UNSET
     if not isinstance(filters, Unset):
-        if filters is None:
-            json_filters = None
-        else:
-            json_filters = []
-            for filters_item_data in filters:
-                filters_item = filters_item_data.value
-
-                json_filters.append(filters_item)
+        json_filters = []
+        for filters_item_data in filters:
+            filters_item = filters_item_data.value
+            json_filters.append(filters_item)
 
     params["filters"] = json_filters
 
     params["isFavorite"] = is_favorite
 
-    json_media_types: Union[Unset, None, List[str]] = UNSET
+    json_media_types: Union[Unset, List[str]] = UNSET
     if not isinstance(media_types, Unset):
-        if media_types is None:
-            json_media_types = None
-        else:
-            json_media_types = media_types
+        json_media_types = []
+        for media_types_item_data in media_types:
+            media_types_item = media_types_item_data.value
+            json_media_types.append(media_types_item)
 
     params["mediaTypes"] = json_media_types
 
-    json_genres: Union[Unset, None, List[str]] = UNSET
+    json_genres: Union[Unset, List[str]] = UNSET
     if not isinstance(genres, Unset):
-        if genres is None:
-            json_genres = None
-        else:
-            json_genres = genres
+        json_genres = genres
 
     params["genres"] = json_genres
 
-    json_genre_ids: Union[Unset, None, List[str]] = UNSET
+    json_genre_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(genre_ids, Unset):
-        if genre_ids is None:
-            json_genre_ids = None
-        else:
-            json_genre_ids = genre_ids
+        json_genre_ids = genre_ids
 
     params["genreIds"] = json_genre_ids
 
-    json_official_ratings: Union[Unset, None, List[str]] = UNSET
+    json_official_ratings: Union[Unset, List[str]] = UNSET
     if not isinstance(official_ratings, Unset):
-        if official_ratings is None:
-            json_official_ratings = None
-        else:
-            json_official_ratings = official_ratings
+        json_official_ratings = official_ratings
 
     params["officialRatings"] = json_official_ratings
 
-    json_tags: Union[Unset, None, List[str]] = UNSET
+    json_tags: Union[Unset, List[str]] = UNSET
     if not isinstance(tags, Unset):
-        if tags is None:
-            json_tags = None
-        else:
-            json_tags = tags
+        json_tags = tags
 
     params["tags"] = json_tags
 
-    json_years: Union[Unset, None, List[int]] = UNSET
+    json_years: Union[Unset, List[int]] = UNSET
     if not isinstance(years, Unset):
-        if years is None:
-            json_years = None
-        else:
-            json_years = years
+        json_years = years
 
     params["years"] = json_years
 
@@ -174,54 +150,38 @@ def _get_kwargs(
 
     params["imageTypeLimit"] = image_type_limit
 
-    json_enable_image_types: Union[Unset, None, List[str]] = UNSET
+    json_enable_image_types: Union[Unset, List[str]] = UNSET
     if not isinstance(enable_image_types, Unset):
-        if enable_image_types is None:
-            json_enable_image_types = None
-        else:
-            json_enable_image_types = []
-            for enable_image_types_item_data in enable_image_types:
-                enable_image_types_item = enable_image_types_item_data.value
-
-                json_enable_image_types.append(enable_image_types_item)
+        json_enable_image_types = []
+        for enable_image_types_item_data in enable_image_types:
+            enable_image_types_item = enable_image_types_item_data.value
+            json_enable_image_types.append(enable_image_types_item)
 
     params["enableImageTypes"] = json_enable_image_types
 
     params["person"] = person
 
-    json_person_ids: Union[Unset, None, List[str]] = UNSET
+    json_person_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(person_ids, Unset):
-        if person_ids is None:
-            json_person_ids = None
-        else:
-            json_person_ids = person_ids
+        json_person_ids = person_ids
 
     params["personIds"] = json_person_ids
 
-    json_person_types: Union[Unset, None, List[str]] = UNSET
+    json_person_types: Union[Unset, List[str]] = UNSET
     if not isinstance(person_types, Unset):
-        if person_types is None:
-            json_person_types = None
-        else:
-            json_person_types = person_types
+        json_person_types = person_types
 
     params["personTypes"] = json_person_types
 
-    json_studios: Union[Unset, None, List[str]] = UNSET
+    json_studios: Union[Unset, List[str]] = UNSET
     if not isinstance(studios, Unset):
-        if studios is None:
-            json_studios = None
-        else:
-            json_studios = studios
+        json_studios = studios
 
     params["studios"] = json_studios
 
-    json_studio_ids: Union[Unset, None, List[str]] = UNSET
+    json_studio_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(studio_ids, Unset):
-        if studio_ids is None:
-            json_studio_ids = None
-        else:
-            json_studio_ids = studio_ids
+        json_studio_ids = studio_ids
 
     params["studioIds"] = json_studio_ids
 
@@ -233,25 +193,21 @@ def _get_kwargs(
 
     params["nameLessThan"] = name_less_than
 
-    json_sort_by: Union[Unset, None, List[str]] = UNSET
+    json_sort_by: Union[Unset, List[str]] = UNSET
     if not isinstance(sort_by, Unset):
-        if sort_by is None:
-            json_sort_by = None
-        else:
-            json_sort_by = sort_by
+        json_sort_by = []
+        for sort_by_item_data in sort_by:
+            sort_by_item = sort_by_item_data.value
+            json_sort_by.append(sort_by_item)
 
     params["sortBy"] = json_sort_by
 
-    json_sort_order: Union[Unset, None, List[str]] = UNSET
+    json_sort_order: Union[Unset, List[str]] = UNSET
     if not isinstance(sort_order, Unset):
-        if sort_order is None:
-            json_sort_order = None
-        else:
-            json_sort_order = []
-            for sort_order_item_data in sort_order:
-                sort_order_item = sort_order_item_data.value
-
-                json_sort_order.append(sort_order_item)
+        json_sort_order = []
+        for sort_order_item_data in sort_order:
+            sort_order_item = sort_order_item_data.value
+            json_sort_order.append(sort_order_item)
 
     params["sortOrder"] = json_sort_order
 
@@ -261,11 +217,13 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Artists",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -301,74 +259,74 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    min_community_rating: Union[Unset, None, float] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    genres: Union[Unset, None, List[str]] = UNSET,
-    genre_ids: Union[Unset, None, List[str]] = UNSET,
-    official_ratings: Union[Unset, None, List[str]] = UNSET,
-    tags: Union[Unset, None, List[str]] = UNSET,
-    years: Union[Unset, None, List[int]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    person: Union[Unset, None, str] = UNSET,
-    person_ids: Union[Unset, None, List[str]] = UNSET,
-    person_types: Union[Unset, None, List[str]] = UNSET,
-    studios: Union[Unset, None, List[str]] = UNSET,
-    studio_ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    name_starts_with_or_greater: Union[Unset, None, str] = UNSET,
-    name_starts_with: Union[Unset, None, str] = UNSET,
-    name_less_than: Union[Unset, None, str] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    sort_order: Union[Unset, None, List[SortOrder]] = UNSET,
-    enable_images: Union[Unset, None, bool] = True,
-    enable_total_record_count: Union[Unset, None, bool] = True,
+    min_community_rating: Union[Unset, float] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    genres: Union[Unset, List[str]] = UNSET,
+    genre_ids: Union[Unset, List[str]] = UNSET,
+    official_ratings: Union[Unset, List[str]] = UNSET,
+    tags: Union[Unset, List[str]] = UNSET,
+    years: Union[Unset, List[int]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    person: Union[Unset, str] = UNSET,
+    person_ids: Union[Unset, List[str]] = UNSET,
+    person_types: Union[Unset, List[str]] = UNSET,
+    studios: Union[Unset, List[str]] = UNSET,
+    studio_ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    name_starts_with_or_greater: Union[Unset, str] = UNSET,
+    name_starts_with: Union[Unset, str] = UNSET,
+    name_less_than: Union[Unset, str] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    sort_order: Union[Unset, List[SortOrder]] = UNSET,
+    enable_images: Union[Unset, bool] = True,
+    enable_total_record_count: Union[Unset, bool] = True,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets all artists from a given item, folder, or the entire library.
 
     Args:
-        min_community_rating (Union[Unset, None, float]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        search_term (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        exclude_item_types (Union[Unset, None, List[BaseItemKind]]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        filters (Union[Unset, None, List[ItemFilter]]):
-        is_favorite (Union[Unset, None, bool]):
-        media_types (Union[Unset, None, List[str]]):
-        genres (Union[Unset, None, List[str]]):
-        genre_ids (Union[Unset, None, List[str]]):
-        official_ratings (Union[Unset, None, List[str]]):
-        tags (Union[Unset, None, List[str]]):
-        years (Union[Unset, None, List[int]]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        person (Union[Unset, None, str]):
-        person_ids (Union[Unset, None, List[str]]):
-        person_types (Union[Unset, None, List[str]]):
-        studios (Union[Unset, None, List[str]]):
-        studio_ids (Union[Unset, None, List[str]]):
-        user_id (Union[Unset, None, str]):
-        name_starts_with_or_greater (Union[Unset, None, str]):
-        name_starts_with (Union[Unset, None, str]):
-        name_less_than (Union[Unset, None, str]):
-        sort_by (Union[Unset, None, List[str]]):
-        sort_order (Union[Unset, None, List[SortOrder]]):
-        enable_images (Union[Unset, None, bool]):  Default: True.
-        enable_total_record_count (Union[Unset, None, bool]):  Default: True.
+        min_community_rating (Union[Unset, float]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        search_term (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        exclude_item_types (Union[Unset, List[BaseItemKind]]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        filters (Union[Unset, List[ItemFilter]]):
+        is_favorite (Union[Unset, bool]):
+        media_types (Union[Unset, List[MediaType]]):
+        genres (Union[Unset, List[str]]):
+        genre_ids (Union[Unset, List[str]]):
+        official_ratings (Union[Unset, List[str]]):
+        tags (Union[Unset, List[str]]):
+        years (Union[Unset, List[int]]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        person (Union[Unset, str]):
+        person_ids (Union[Unset, List[str]]):
+        person_types (Union[Unset, List[str]]):
+        studios (Union[Unset, List[str]]):
+        studio_ids (Union[Unset, List[str]]):
+        user_id (Union[Unset, str]):
+        name_starts_with_or_greater (Union[Unset, str]):
+        name_starts_with (Union[Unset, str]):
+        name_less_than (Union[Unset, str]):
+        sort_by (Union[Unset, List[ItemSortBy]]):
+        sort_order (Union[Unset, List[SortOrder]]):
+        enable_images (Union[Unset, bool]):  Default: True.
+        enable_total_record_count (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -423,74 +381,74 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    min_community_rating: Union[Unset, None, float] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    genres: Union[Unset, None, List[str]] = UNSET,
-    genre_ids: Union[Unset, None, List[str]] = UNSET,
-    official_ratings: Union[Unset, None, List[str]] = UNSET,
-    tags: Union[Unset, None, List[str]] = UNSET,
-    years: Union[Unset, None, List[int]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    person: Union[Unset, None, str] = UNSET,
-    person_ids: Union[Unset, None, List[str]] = UNSET,
-    person_types: Union[Unset, None, List[str]] = UNSET,
-    studios: Union[Unset, None, List[str]] = UNSET,
-    studio_ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    name_starts_with_or_greater: Union[Unset, None, str] = UNSET,
-    name_starts_with: Union[Unset, None, str] = UNSET,
-    name_less_than: Union[Unset, None, str] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    sort_order: Union[Unset, None, List[SortOrder]] = UNSET,
-    enable_images: Union[Unset, None, bool] = True,
-    enable_total_record_count: Union[Unset, None, bool] = True,
+    min_community_rating: Union[Unset, float] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    genres: Union[Unset, List[str]] = UNSET,
+    genre_ids: Union[Unset, List[str]] = UNSET,
+    official_ratings: Union[Unset, List[str]] = UNSET,
+    tags: Union[Unset, List[str]] = UNSET,
+    years: Union[Unset, List[int]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    person: Union[Unset, str] = UNSET,
+    person_ids: Union[Unset, List[str]] = UNSET,
+    person_types: Union[Unset, List[str]] = UNSET,
+    studios: Union[Unset, List[str]] = UNSET,
+    studio_ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    name_starts_with_or_greater: Union[Unset, str] = UNSET,
+    name_starts_with: Union[Unset, str] = UNSET,
+    name_less_than: Union[Unset, str] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    sort_order: Union[Unset, List[SortOrder]] = UNSET,
+    enable_images: Union[Unset, bool] = True,
+    enable_total_record_count: Union[Unset, bool] = True,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets all artists from a given item, folder, or the entire library.
 
     Args:
-        min_community_rating (Union[Unset, None, float]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        search_term (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        exclude_item_types (Union[Unset, None, List[BaseItemKind]]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        filters (Union[Unset, None, List[ItemFilter]]):
-        is_favorite (Union[Unset, None, bool]):
-        media_types (Union[Unset, None, List[str]]):
-        genres (Union[Unset, None, List[str]]):
-        genre_ids (Union[Unset, None, List[str]]):
-        official_ratings (Union[Unset, None, List[str]]):
-        tags (Union[Unset, None, List[str]]):
-        years (Union[Unset, None, List[int]]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        person (Union[Unset, None, str]):
-        person_ids (Union[Unset, None, List[str]]):
-        person_types (Union[Unset, None, List[str]]):
-        studios (Union[Unset, None, List[str]]):
-        studio_ids (Union[Unset, None, List[str]]):
-        user_id (Union[Unset, None, str]):
-        name_starts_with_or_greater (Union[Unset, None, str]):
-        name_starts_with (Union[Unset, None, str]):
-        name_less_than (Union[Unset, None, str]):
-        sort_by (Union[Unset, None, List[str]]):
-        sort_order (Union[Unset, None, List[SortOrder]]):
-        enable_images (Union[Unset, None, bool]):  Default: True.
-        enable_total_record_count (Union[Unset, None, bool]):  Default: True.
+        min_community_rating (Union[Unset, float]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        search_term (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        exclude_item_types (Union[Unset, List[BaseItemKind]]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        filters (Union[Unset, List[ItemFilter]]):
+        is_favorite (Union[Unset, bool]):
+        media_types (Union[Unset, List[MediaType]]):
+        genres (Union[Unset, List[str]]):
+        genre_ids (Union[Unset, List[str]]):
+        official_ratings (Union[Unset, List[str]]):
+        tags (Union[Unset, List[str]]):
+        years (Union[Unset, List[int]]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        person (Union[Unset, str]):
+        person_ids (Union[Unset, List[str]]):
+        person_types (Union[Unset, List[str]]):
+        studios (Union[Unset, List[str]]):
+        studio_ids (Union[Unset, List[str]]):
+        user_id (Union[Unset, str]):
+        name_starts_with_or_greater (Union[Unset, str]):
+        name_starts_with (Union[Unset, str]):
+        name_less_than (Union[Unset, str]):
+        sort_by (Union[Unset, List[ItemSortBy]]):
+        sort_order (Union[Unset, List[SortOrder]]):
+        enable_images (Union[Unset, bool]):  Default: True.
+        enable_total_record_count (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -540,74 +498,74 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    min_community_rating: Union[Unset, None, float] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    genres: Union[Unset, None, List[str]] = UNSET,
-    genre_ids: Union[Unset, None, List[str]] = UNSET,
-    official_ratings: Union[Unset, None, List[str]] = UNSET,
-    tags: Union[Unset, None, List[str]] = UNSET,
-    years: Union[Unset, None, List[int]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    person: Union[Unset, None, str] = UNSET,
-    person_ids: Union[Unset, None, List[str]] = UNSET,
-    person_types: Union[Unset, None, List[str]] = UNSET,
-    studios: Union[Unset, None, List[str]] = UNSET,
-    studio_ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    name_starts_with_or_greater: Union[Unset, None, str] = UNSET,
-    name_starts_with: Union[Unset, None, str] = UNSET,
-    name_less_than: Union[Unset, None, str] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    sort_order: Union[Unset, None, List[SortOrder]] = UNSET,
-    enable_images: Union[Unset, None, bool] = True,
-    enable_total_record_count: Union[Unset, None, bool] = True,
+    min_community_rating: Union[Unset, float] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    genres: Union[Unset, List[str]] = UNSET,
+    genre_ids: Union[Unset, List[str]] = UNSET,
+    official_ratings: Union[Unset, List[str]] = UNSET,
+    tags: Union[Unset, List[str]] = UNSET,
+    years: Union[Unset, List[int]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    person: Union[Unset, str] = UNSET,
+    person_ids: Union[Unset, List[str]] = UNSET,
+    person_types: Union[Unset, List[str]] = UNSET,
+    studios: Union[Unset, List[str]] = UNSET,
+    studio_ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    name_starts_with_or_greater: Union[Unset, str] = UNSET,
+    name_starts_with: Union[Unset, str] = UNSET,
+    name_less_than: Union[Unset, str] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    sort_order: Union[Unset, List[SortOrder]] = UNSET,
+    enable_images: Union[Unset, bool] = True,
+    enable_total_record_count: Union[Unset, bool] = True,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets all artists from a given item, folder, or the entire library.
 
     Args:
-        min_community_rating (Union[Unset, None, float]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        search_term (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        exclude_item_types (Union[Unset, None, List[BaseItemKind]]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        filters (Union[Unset, None, List[ItemFilter]]):
-        is_favorite (Union[Unset, None, bool]):
-        media_types (Union[Unset, None, List[str]]):
-        genres (Union[Unset, None, List[str]]):
-        genre_ids (Union[Unset, None, List[str]]):
-        official_ratings (Union[Unset, None, List[str]]):
-        tags (Union[Unset, None, List[str]]):
-        years (Union[Unset, None, List[int]]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        person (Union[Unset, None, str]):
-        person_ids (Union[Unset, None, List[str]]):
-        person_types (Union[Unset, None, List[str]]):
-        studios (Union[Unset, None, List[str]]):
-        studio_ids (Union[Unset, None, List[str]]):
-        user_id (Union[Unset, None, str]):
-        name_starts_with_or_greater (Union[Unset, None, str]):
-        name_starts_with (Union[Unset, None, str]):
-        name_less_than (Union[Unset, None, str]):
-        sort_by (Union[Unset, None, List[str]]):
-        sort_order (Union[Unset, None, List[SortOrder]]):
-        enable_images (Union[Unset, None, bool]):  Default: True.
-        enable_total_record_count (Union[Unset, None, bool]):  Default: True.
+        min_community_rating (Union[Unset, float]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        search_term (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        exclude_item_types (Union[Unset, List[BaseItemKind]]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        filters (Union[Unset, List[ItemFilter]]):
+        is_favorite (Union[Unset, bool]):
+        media_types (Union[Unset, List[MediaType]]):
+        genres (Union[Unset, List[str]]):
+        genre_ids (Union[Unset, List[str]]):
+        official_ratings (Union[Unset, List[str]]):
+        tags (Union[Unset, List[str]]):
+        years (Union[Unset, List[int]]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        person (Union[Unset, str]):
+        person_ids (Union[Unset, List[str]]):
+        person_types (Union[Unset, List[str]]):
+        studios (Union[Unset, List[str]]):
+        studio_ids (Union[Unset, List[str]]):
+        user_id (Union[Unset, str]):
+        name_starts_with_or_greater (Union[Unset, str]):
+        name_starts_with (Union[Unset, str]):
+        name_less_than (Union[Unset, str]):
+        sort_by (Union[Unset, List[ItemSortBy]]):
+        sort_order (Union[Unset, List[SortOrder]]):
+        enable_images (Union[Unset, bool]):  Default: True.
+        enable_total_record_count (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -660,74 +618,74 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    min_community_rating: Union[Unset, None, float] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    genres: Union[Unset, None, List[str]] = UNSET,
-    genre_ids: Union[Unset, None, List[str]] = UNSET,
-    official_ratings: Union[Unset, None, List[str]] = UNSET,
-    tags: Union[Unset, None, List[str]] = UNSET,
-    years: Union[Unset, None, List[int]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    person: Union[Unset, None, str] = UNSET,
-    person_ids: Union[Unset, None, List[str]] = UNSET,
-    person_types: Union[Unset, None, List[str]] = UNSET,
-    studios: Union[Unset, None, List[str]] = UNSET,
-    studio_ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    name_starts_with_or_greater: Union[Unset, None, str] = UNSET,
-    name_starts_with: Union[Unset, None, str] = UNSET,
-    name_less_than: Union[Unset, None, str] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    sort_order: Union[Unset, None, List[SortOrder]] = UNSET,
-    enable_images: Union[Unset, None, bool] = True,
-    enable_total_record_count: Union[Unset, None, bool] = True,
+    min_community_rating: Union[Unset, float] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    genres: Union[Unset, List[str]] = UNSET,
+    genre_ids: Union[Unset, List[str]] = UNSET,
+    official_ratings: Union[Unset, List[str]] = UNSET,
+    tags: Union[Unset, List[str]] = UNSET,
+    years: Union[Unset, List[int]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    person: Union[Unset, str] = UNSET,
+    person_ids: Union[Unset, List[str]] = UNSET,
+    person_types: Union[Unset, List[str]] = UNSET,
+    studios: Union[Unset, List[str]] = UNSET,
+    studio_ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    name_starts_with_or_greater: Union[Unset, str] = UNSET,
+    name_starts_with: Union[Unset, str] = UNSET,
+    name_less_than: Union[Unset, str] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    sort_order: Union[Unset, List[SortOrder]] = UNSET,
+    enable_images: Union[Unset, bool] = True,
+    enable_total_record_count: Union[Unset, bool] = True,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets all artists from a given item, folder, or the entire library.
 
     Args:
-        min_community_rating (Union[Unset, None, float]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        search_term (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        exclude_item_types (Union[Unset, None, List[BaseItemKind]]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        filters (Union[Unset, None, List[ItemFilter]]):
-        is_favorite (Union[Unset, None, bool]):
-        media_types (Union[Unset, None, List[str]]):
-        genres (Union[Unset, None, List[str]]):
-        genre_ids (Union[Unset, None, List[str]]):
-        official_ratings (Union[Unset, None, List[str]]):
-        tags (Union[Unset, None, List[str]]):
-        years (Union[Unset, None, List[int]]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        person (Union[Unset, None, str]):
-        person_ids (Union[Unset, None, List[str]]):
-        person_types (Union[Unset, None, List[str]]):
-        studios (Union[Unset, None, List[str]]):
-        studio_ids (Union[Unset, None, List[str]]):
-        user_id (Union[Unset, None, str]):
-        name_starts_with_or_greater (Union[Unset, None, str]):
-        name_starts_with (Union[Unset, None, str]):
-        name_less_than (Union[Unset, None, str]):
-        sort_by (Union[Unset, None, List[str]]):
-        sort_order (Union[Unset, None, List[SortOrder]]):
-        enable_images (Union[Unset, None, bool]):  Default: True.
-        enable_total_record_count (Union[Unset, None, bool]):  Default: True.
+        min_community_rating (Union[Unset, float]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        search_term (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        exclude_item_types (Union[Unset, List[BaseItemKind]]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        filters (Union[Unset, List[ItemFilter]]):
+        is_favorite (Union[Unset, bool]):
+        media_types (Union[Unset, List[MediaType]]):
+        genres (Union[Unset, List[str]]):
+        genre_ids (Union[Unset, List[str]]):
+        official_ratings (Union[Unset, List[str]]):
+        tags (Union[Unset, List[str]]):
+        years (Union[Unset, List[int]]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        person (Union[Unset, str]):
+        person_ids (Union[Unset, List[str]]):
+        person_types (Union[Unset, List[str]]):
+        studios (Union[Unset, List[str]]):
+        studio_ids (Union[Unset, List[str]]):
+        user_id (Union[Unset, str]):
+        name_starts_with_or_greater (Union[Unset, str]):
+        name_starts_with (Union[Unset, str]):
+        name_less_than (Union[Unset, str]):
+        sort_by (Union[Unset, List[ItemSortBy]]):
+        sort_order (Union[Unset, List[SortOrder]]):
+        enable_images (Union[Unset, bool]):  Default: True.
+        enable_total_record_count (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

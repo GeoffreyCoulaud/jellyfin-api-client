@@ -1,8 +1,15 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="MediaUrl")
 
@@ -11,16 +18,25 @@ T = TypeVar("T", bound="MediaUrl")
 class MediaUrl:
     """
     Attributes:
-        url (Union[Unset, None, str]):
-        name (Union[Unset, None, str]):
+        url (Union[None, Unset, str]):
+        name (Union[None, Unset, str]):
     """
 
-    url: Union[Unset, None, str] = UNSET
-    name: Union[Unset, None, str] = UNSET
+    url: Union[None, Unset, str] = UNSET
+    name: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        url = self.url
-        name = self.name
+        url: Union[None, Unset, str]
+        if isinstance(self.url, Unset):
+            url = UNSET
+        else:
+            url = self.url
+
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -34,9 +50,24 @@ class MediaUrl:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        url = d.pop("Url", UNSET)
 
-        name = d.pop("Name", UNSET)
+        def _parse_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        url = _parse_url(d.pop("Url", UNSET))
+
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        name = _parse_name(d.pop("Name", UNSET))
 
         media_url = cls(
             url=url,

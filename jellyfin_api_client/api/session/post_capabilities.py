@@ -1,63 +1,62 @@
 from http import HTTPStatus
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast, List
+from ...types import UNSET, Unset
 from ...models.general_command_type import GeneralCommandType
-from ...types import UNSET, Response, Unset
+from typing import Union
+from ...models.media_type import MediaType
 
 
 def _get_kwargs(
     *,
-    id: Union[Unset, None, str] = UNSET,
-    playable_media_types: Union[Unset, None, List[str]] = UNSET,
-    supported_commands: Union[Unset, None, List[GeneralCommandType]] = UNSET,
-    supports_media_control: Union[Unset, None, bool] = False,
-    supports_sync: Union[Unset, None, bool] = False,
-    supports_persistent_identifier: Union[Unset, None, bool] = True,
+    id: Union[Unset, str] = UNSET,
+    playable_media_types: Union[Unset, List[MediaType]] = UNSET,
+    supported_commands: Union[Unset, List[GeneralCommandType]] = UNSET,
+    supports_media_control: Union[Unset, bool] = False,
+    supports_persistent_identifier: Union[Unset, bool] = True,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["id"] = id
 
-    json_playable_media_types: Union[Unset, None, List[str]] = UNSET
+    json_playable_media_types: Union[Unset, List[str]] = UNSET
     if not isinstance(playable_media_types, Unset):
-        if playable_media_types is None:
-            json_playable_media_types = None
-        else:
-            json_playable_media_types = playable_media_types
+        json_playable_media_types = []
+        for playable_media_types_item_data in playable_media_types:
+            playable_media_types_item = playable_media_types_item_data.value
+            json_playable_media_types.append(playable_media_types_item)
 
     params["playableMediaTypes"] = json_playable_media_types
 
-    json_supported_commands: Union[Unset, None, List[str]] = UNSET
+    json_supported_commands: Union[Unset, List[str]] = UNSET
     if not isinstance(supported_commands, Unset):
-        if supported_commands is None:
-            json_supported_commands = None
-        else:
-            json_supported_commands = []
-            for supported_commands_item_data in supported_commands:
-                supported_commands_item = supported_commands_item_data.value
-
-                json_supported_commands.append(supported_commands_item)
+        json_supported_commands = []
+        for supported_commands_item_data in supported_commands:
+            supported_commands_item = supported_commands_item_data.value
+            json_supported_commands.append(supported_commands_item)
 
     params["supportedCommands"] = json_supported_commands
 
     params["supportsMediaControl"] = supports_media_control
 
-    params["supportsSync"] = supports_sync
-
     params["supportsPersistentIdentifier"] = supports_persistent_identifier
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Sessions/Capabilities",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
@@ -85,22 +84,20 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    id: Union[Unset, None, str] = UNSET,
-    playable_media_types: Union[Unset, None, List[str]] = UNSET,
-    supported_commands: Union[Unset, None, List[GeneralCommandType]] = UNSET,
-    supports_media_control: Union[Unset, None, bool] = False,
-    supports_sync: Union[Unset, None, bool] = False,
-    supports_persistent_identifier: Union[Unset, None, bool] = True,
+    id: Union[Unset, str] = UNSET,
+    playable_media_types: Union[Unset, List[MediaType]] = UNSET,
+    supported_commands: Union[Unset, List[GeneralCommandType]] = UNSET,
+    supports_media_control: Union[Unset, bool] = False,
+    supports_persistent_identifier: Union[Unset, bool] = True,
 ) -> Response[Any]:
     """Updates capabilities for a device.
 
     Args:
-        id (Union[Unset, None, str]):
-        playable_media_types (Union[Unset, None, List[str]]):
-        supported_commands (Union[Unset, None, List[GeneralCommandType]]):
-        supports_media_control (Union[Unset, None, bool]):
-        supports_sync (Union[Unset, None, bool]):
-        supports_persistent_identifier (Union[Unset, None, bool]):  Default: True.
+        id (Union[Unset, str]):
+        playable_media_types (Union[Unset, List[MediaType]]):
+        supported_commands (Union[Unset, List[GeneralCommandType]]):
+        supports_media_control (Union[Unset, bool]):  Default: False.
+        supports_persistent_identifier (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -115,7 +112,6 @@ def sync_detailed(
         playable_media_types=playable_media_types,
         supported_commands=supported_commands,
         supports_media_control=supports_media_control,
-        supports_sync=supports_sync,
         supports_persistent_identifier=supports_persistent_identifier,
     )
 
@@ -129,22 +125,20 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    id: Union[Unset, None, str] = UNSET,
-    playable_media_types: Union[Unset, None, List[str]] = UNSET,
-    supported_commands: Union[Unset, None, List[GeneralCommandType]] = UNSET,
-    supports_media_control: Union[Unset, None, bool] = False,
-    supports_sync: Union[Unset, None, bool] = False,
-    supports_persistent_identifier: Union[Unset, None, bool] = True,
+    id: Union[Unset, str] = UNSET,
+    playable_media_types: Union[Unset, List[MediaType]] = UNSET,
+    supported_commands: Union[Unset, List[GeneralCommandType]] = UNSET,
+    supports_media_control: Union[Unset, bool] = False,
+    supports_persistent_identifier: Union[Unset, bool] = True,
 ) -> Response[Any]:
     """Updates capabilities for a device.
 
     Args:
-        id (Union[Unset, None, str]):
-        playable_media_types (Union[Unset, None, List[str]]):
-        supported_commands (Union[Unset, None, List[GeneralCommandType]]):
-        supports_media_control (Union[Unset, None, bool]):
-        supports_sync (Union[Unset, None, bool]):
-        supports_persistent_identifier (Union[Unset, None, bool]):  Default: True.
+        id (Union[Unset, str]):
+        playable_media_types (Union[Unset, List[MediaType]]):
+        supported_commands (Union[Unset, List[GeneralCommandType]]):
+        supports_media_control (Union[Unset, bool]):  Default: False.
+        supports_persistent_identifier (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -159,7 +153,6 @@ async def asyncio_detailed(
         playable_media_types=playable_media_types,
         supported_commands=supported_commands,
         supports_media_control=supports_media_control,
-        supports_sync=supports_sync,
         supports_persistent_identifier=supports_persistent_identifier,
     )
 

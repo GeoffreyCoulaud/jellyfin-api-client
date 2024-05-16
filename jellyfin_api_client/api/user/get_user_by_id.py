@@ -1,26 +1,29 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.problem_details import ProblemDetails
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast
 from ...models.user_dto import UserDto
-from ...types import Response
+from ...models.problem_details import ProblemDetails
+from typing import Dict
 
 
 def _get_kwargs(
     user_id: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Users/{userId}".format(
-            userId=user_id,
+        "url": "/Users/{user_id}".format(
+            user_id=user_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

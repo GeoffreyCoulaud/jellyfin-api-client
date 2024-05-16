@@ -1,27 +1,44 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast
+from typing import Dict
 from ...models.set_playlist_item_request_dto import SetPlaylistItemRequestDto
-from ...types import Response
 
 
 def _get_kwargs(
     *,
-    json_body: SetPlaylistItemRequestDto,
+    body: Union[
+        SetPlaylistItemRequestDto,
+        SetPlaylistItemRequestDto,
+    ],
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/SyncPlay/SetPlaylistItem",
-        "json": json_json_body,
     }
+
+    if isinstance(body, SetPlaylistItemRequestDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, SetPlaylistItemRequestDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
@@ -49,12 +66,16 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: SetPlaylistItemRequestDto,
+    body: Union[
+        SetPlaylistItemRequestDto,
+        SetPlaylistItemRequestDto,
+    ],
 ) -> Response[Any]:
     """Request to change playlist item in SyncPlay group.
 
     Args:
-        json_body (SetPlaylistItemRequestDto): Class SetPlaylistItemRequestDto.
+        body (SetPlaylistItemRequestDto): Class SetPlaylistItemRequestDto.
+        body (SetPlaylistItemRequestDto): Class SetPlaylistItemRequestDto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -65,7 +86,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -78,12 +99,16 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: SetPlaylistItemRequestDto,
+    body: Union[
+        SetPlaylistItemRequestDto,
+        SetPlaylistItemRequestDto,
+    ],
 ) -> Response[Any]:
     """Request to change playlist item in SyncPlay group.
 
     Args:
-        json_body (SetPlaylistItemRequestDto): Class SetPlaylistItemRequestDto.
+        body (SetPlaylistItemRequestDto): Class SetPlaylistItemRequestDto.
+        body (SetPlaylistItemRequestDto): Class SetPlaylistItemRequestDto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -94,7 +119,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)

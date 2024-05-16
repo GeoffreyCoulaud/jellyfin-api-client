@@ -1,0 +1,14 @@
+from enum import Enum
+
+
+class TranscodingInfoHardwareAccelerationType(str, Enum):
+    AMF = "AMF"
+    NVENC = "NVENC"
+    QSV = "QSV"
+    RKMPP = "RKMPP"
+    V4L2M2M = "V4L2M2M"
+    VAAPI = "VAAPI"
+    VIDEOTOOLBOX = "VideoToolBox"
+
+    def __str__(self) -> str:
+        return str(self.value)

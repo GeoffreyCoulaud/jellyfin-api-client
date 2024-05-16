@@ -1,9 +1,18 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
-from ..models.task_state import TaskState
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+from typing import cast, List
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
+from ..models.task_state import TaskState
 
 if TYPE_CHECKING:
     from ..models.task_result import TaskResult
@@ -18,56 +27,94 @@ class TaskInfo:
     """Class TaskInfo.
 
     Attributes:
-        name (Union[Unset, None, str]): Gets or sets the name.
+        name (Union[None, Unset, str]): Gets or sets the name.
         state (Union[Unset, TaskState]): Enum TaskState.
-        current_progress_percentage (Union[Unset, None, float]): Gets or sets the progress.
-        id (Union[Unset, None, str]): Gets or sets the id.
-        last_execution_result (Union[Unset, None, TaskResult]): Class TaskExecutionInfo.
-        triggers (Union[Unset, None, List['TaskTriggerInfo']]): Gets or sets the triggers.
-        description (Union[Unset, None, str]): Gets or sets the description.
-        category (Union[Unset, None, str]): Gets or sets the category.
+        current_progress_percentage (Union[None, Unset, float]): Gets or sets the progress.
+        id (Union[None, Unset, str]): Gets or sets the id.
+        last_execution_result (Union['TaskResult', None, Unset]): Gets or sets the last execution result.
+        triggers (Union[List['TaskTriggerInfo'], None, Unset]): Gets or sets the triggers.
+        description (Union[None, Unset, str]): Gets or sets the description.
+        category (Union[None, Unset, str]): Gets or sets the category.
         is_hidden (Union[Unset, bool]): Gets or sets a value indicating whether this instance is hidden.
-        key (Union[Unset, None, str]): Gets or sets the key.
+        key (Union[None, Unset, str]): Gets or sets the key.
     """
 
-    name: Union[Unset, None, str] = UNSET
+    name: Union[None, Unset, str] = UNSET
     state: Union[Unset, TaskState] = UNSET
-    current_progress_percentage: Union[Unset, None, float] = UNSET
-    id: Union[Unset, None, str] = UNSET
-    last_execution_result: Union[Unset, None, "TaskResult"] = UNSET
-    triggers: Union[Unset, None, List["TaskTriggerInfo"]] = UNSET
-    description: Union[Unset, None, str] = UNSET
-    category: Union[Unset, None, str] = UNSET
+    current_progress_percentage: Union[None, Unset, float] = UNSET
+    id: Union[None, Unset, str] = UNSET
+    last_execution_result: Union["TaskResult", None, Unset] = UNSET
+    triggers: Union[List["TaskTriggerInfo"], None, Unset] = UNSET
+    description: Union[None, Unset, str] = UNSET
+    category: Union[None, Unset, str] = UNSET
     is_hidden: Union[Unset, bool] = UNSET
-    key: Union[Unset, None, str] = UNSET
+    key: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        name = self.name
+        from ..models.task_result import TaskResult
+        from ..models.task_trigger_info import TaskTriggerInfo
+
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
+
         state: Union[Unset, str] = UNSET
         if not isinstance(self.state, Unset):
             state = self.state.value
 
-        current_progress_percentage = self.current_progress_percentage
-        id = self.id
-        last_execution_result: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.last_execution_result, Unset):
-            last_execution_result = self.last_execution_result.to_dict() if self.last_execution_result else None
+        current_progress_percentage: Union[None, Unset, float]
+        if isinstance(self.current_progress_percentage, Unset):
+            current_progress_percentage = UNSET
+        else:
+            current_progress_percentage = self.current_progress_percentage
 
-        triggers: Union[Unset, None, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.triggers, Unset):
-            if self.triggers is None:
-                triggers = None
-            else:
-                triggers = []
-                for triggers_item_data in self.triggers:
-                    triggers_item = triggers_item_data.to_dict()
+        id: Union[None, Unset, str]
+        if isinstance(self.id, Unset):
+            id = UNSET
+        else:
+            id = self.id
 
-                    triggers.append(triggers_item)
+        last_execution_result: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.last_execution_result, Unset):
+            last_execution_result = UNSET
+        elif isinstance(self.last_execution_result, TaskResult):
+            last_execution_result = self.last_execution_result.to_dict()
+        else:
+            last_execution_result = self.last_execution_result
 
-        description = self.description
-        category = self.category
+        triggers: Union[List[Dict[str, Any]], None, Unset]
+        if isinstance(self.triggers, Unset):
+            triggers = UNSET
+        elif isinstance(self.triggers, list):
+            triggers = []
+            for triggers_type_0_item_data in self.triggers:
+                triggers_type_0_item = triggers_type_0_item_data.to_dict()
+                triggers.append(triggers_type_0_item)
+
+        else:
+            triggers = self.triggers
+
+        description: Union[None, Unset, str]
+        if isinstance(self.description, Unset):
+            description = UNSET
+        else:
+            description = self.description
+
+        category: Union[None, Unset, str]
+        if isinstance(self.category, Unset):
+            category = UNSET
+        else:
+            category = self.category
+
         is_hidden = self.is_hidden
-        key = self.key
+
+        key: Union[None, Unset, str]
+        if isinstance(self.key, Unset):
+            key = UNSET
+        else:
+            key = self.key
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -100,7 +147,15 @@ class TaskInfo:
         from ..models.task_trigger_info import TaskTriggerInfo
 
         d = src_dict.copy()
-        name = d.pop("Name", UNSET)
+
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        name = _parse_name(d.pop("Name", UNSET))
 
         _state = d.pop("State", UNSET)
         state: Union[Unset, TaskState]
@@ -109,33 +164,91 @@ class TaskInfo:
         else:
             state = TaskState(_state)
 
-        current_progress_percentage = d.pop("CurrentProgressPercentage", UNSET)
+        def _parse_current_progress_percentage(data: object) -> Union[None, Unset, float]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, float], data)
 
-        id = d.pop("Id", UNSET)
+        current_progress_percentage = _parse_current_progress_percentage(d.pop("CurrentProgressPercentage", UNSET))
 
-        _last_execution_result = d.pop("LastExecutionResult", UNSET)
-        last_execution_result: Union[Unset, None, TaskResult]
-        if _last_execution_result is None:
-            last_execution_result = None
-        elif isinstance(_last_execution_result, Unset):
-            last_execution_result = UNSET
-        else:
-            last_execution_result = TaskResult.from_dict(_last_execution_result)
+        def _parse_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        triggers = []
-        _triggers = d.pop("Triggers", UNSET)
-        for triggers_item_data in _triggers or []:
-            triggers_item = TaskTriggerInfo.from_dict(triggers_item_data)
+        id = _parse_id(d.pop("Id", UNSET))
 
-            triggers.append(triggers_item)
+        def _parse_last_execution_result(data: object) -> Union["TaskResult", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                last_execution_result_type_1 = TaskResult.from_dict(data)
 
-        description = d.pop("Description", UNSET)
+                return last_execution_result_type_1
+            except:  # noqa: E722
+                pass
+            return cast(Union["TaskResult", None, Unset], data)
 
-        category = d.pop("Category", UNSET)
+        last_execution_result = _parse_last_execution_result(d.pop("LastExecutionResult", UNSET))
+
+        def _parse_triggers(data: object) -> Union[List["TaskTriggerInfo"], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                triggers_type_0 = []
+                _triggers_type_0 = data
+                for triggers_type_0_item_data in _triggers_type_0:
+                    triggers_type_0_item = TaskTriggerInfo.from_dict(triggers_type_0_item_data)
+
+                    triggers_type_0.append(triggers_type_0_item)
+
+                return triggers_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List["TaskTriggerInfo"], None, Unset], data)
+
+        triggers = _parse_triggers(d.pop("Triggers", UNSET))
+
+        def _parse_description(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        description = _parse_description(d.pop("Description", UNSET))
+
+        def _parse_category(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        category = _parse_category(d.pop("Category", UNSET))
 
         is_hidden = d.pop("IsHidden", UNSET)
 
-        key = d.pop("Key", UNSET)
+        def _parse_key(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        key = _parse_key(d.pop("Key", UNSET))
 
         task_info = cls(
             name=name,

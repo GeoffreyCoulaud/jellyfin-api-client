@@ -1,16 +1,25 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
-from dateutil.parser import isoparse
+from attrs import field as _attrs_field
 
-from ..models.day_of_week import DayOfWeek
-from ..models.day_pattern import DayPattern
-from ..models.keep_until import KeepUntil
 from ..types import UNSET, Unset
 
+from typing import cast, Union
+from typing import cast, List
+from typing import Dict
+import datetime
+from ..models.day_of_week import DayOfWeek
+from ..models.series_timer_info_dto_day_pattern import SeriesTimerInfoDtoDayPattern
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
+from dateutil.parser import isoparse
+from ..models.keep_until import KeepUntil
+
 if TYPE_CHECKING:
-    from ..models.series_timer_info_dto_image_tags import SeriesTimerInfoDtoImageTags
+    from ..models.series_timer_info_dto_image_tags_type_0 import SeriesTimerInfoDtoImageTagsType0
 
 
 T = TypeVar("T", bound="SeriesTimerInfoDto")
@@ -21,29 +30,29 @@ class SeriesTimerInfoDto:
     """Class SeriesTimerInfoDto.
 
     Attributes:
-        id (Union[Unset, None, str]): Gets or sets the Id of the recording.
-        type (Union[Unset, None, str]):
-        server_id (Union[Unset, None, str]): Gets or sets the server identifier.
-        external_id (Union[Unset, None, str]): Gets or sets the external identifier.
+        id (Union[None, Unset, str]): Gets or sets the Id of the recording.
+        type (Union[None, Unset, str]):
+        server_id (Union[None, Unset, str]): Gets or sets the server identifier.
+        external_id (Union[None, Unset, str]): Gets or sets the external identifier.
         channel_id (Union[Unset, str]): Gets or sets the channel id of the recording.
-        external_channel_id (Union[Unset, None, str]): Gets or sets the external channel identifier.
-        channel_name (Union[Unset, None, str]): Gets or sets the channel name of the recording.
-        channel_primary_image_tag (Union[Unset, None, str]):
-        program_id (Union[Unset, None, str]): Gets or sets the program identifier.
-        external_program_id (Union[Unset, None, str]): Gets or sets the external program identifier.
-        name (Union[Unset, None, str]): Gets or sets the name of the recording.
-        overview (Union[Unset, None, str]): Gets or sets the description of the recording.
+        external_channel_id (Union[None, Unset, str]): Gets or sets the external channel identifier.
+        channel_name (Union[None, Unset, str]): Gets or sets the channel name of the recording.
+        channel_primary_image_tag (Union[None, Unset, str]):
+        program_id (Union[None, Unset, str]): Gets or sets the program identifier.
+        external_program_id (Union[None, Unset, str]): Gets or sets the external program identifier.
+        name (Union[None, Unset, str]): Gets or sets the name of the recording.
+        overview (Union[None, Unset, str]): Gets or sets the description of the recording.
         start_date (Union[Unset, datetime.datetime]): Gets or sets the start date of the recording, in UTC.
         end_date (Union[Unset, datetime.datetime]): Gets or sets the end date of the recording, in UTC.
-        service_name (Union[Unset, None, str]): Gets or sets the name of the service.
+        service_name (Union[None, Unset, str]): Gets or sets the name of the service.
         priority (Union[Unset, int]): Gets or sets the priority.
         pre_padding_seconds (Union[Unset, int]): Gets or sets the pre padding seconds.
         post_padding_seconds (Union[Unset, int]): Gets or sets the post padding seconds.
         is_pre_padding_required (Union[Unset, bool]): Gets or sets a value indicating whether this instance is pre
             padding required.
-        parent_backdrop_item_id (Union[Unset, None, str]): Gets or sets the Id of the Parent that has a backdrop if the
+        parent_backdrop_item_id (Union[None, Unset, str]): Gets or sets the Id of the Parent that has a backdrop if the
             item does not have one.
-        parent_backdrop_image_tags (Union[Unset, None, List[str]]): Gets or sets the parent backdrop image tags.
+        parent_backdrop_image_tags (Union[List[str], None, Unset]): Gets or sets the parent backdrop image tags.
         is_post_padding_required (Union[Unset, bool]): Gets or sets a value indicating whether this instance is post
             padding required.
         keep_until (Union[Unset, KeepUntil]):
@@ -52,36 +61,36 @@ class SeriesTimerInfoDto:
         record_any_channel (Union[Unset, bool]): Gets or sets a value indicating whether [record any channel].
         keep_up_to (Union[Unset, int]):
         record_new_only (Union[Unset, bool]): Gets or sets a value indicating whether [record new only].
-        days (Union[Unset, None, List[DayOfWeek]]): Gets or sets the days.
-        day_pattern (Union[Unset, None, DayPattern]):
-        image_tags (Union[Unset, None, SeriesTimerInfoDtoImageTags]): Gets or sets the image tags.
-        parent_thumb_item_id (Union[Unset, None, str]): Gets or sets the parent thumb item id.
-        parent_thumb_image_tag (Union[Unset, None, str]): Gets or sets the parent thumb image tag.
-        parent_primary_image_item_id (Union[Unset, None, str]): Gets or sets the parent primary image item identifier.
-        parent_primary_image_tag (Union[Unset, None, str]): Gets or sets the parent primary image tag.
+        days (Union[List[DayOfWeek], None, Unset]): Gets or sets the days.
+        day_pattern (Union[Unset, SeriesTimerInfoDtoDayPattern]): Gets or sets the day pattern.
+        image_tags (Union['SeriesTimerInfoDtoImageTagsType0', None, Unset]): Gets or sets the image tags.
+        parent_thumb_item_id (Union[None, Unset, str]): Gets or sets the parent thumb item id.
+        parent_thumb_image_tag (Union[None, Unset, str]): Gets or sets the parent thumb image tag.
+        parent_primary_image_item_id (Union[None, Unset, str]): Gets or sets the parent primary image item identifier.
+        parent_primary_image_tag (Union[None, Unset, str]): Gets or sets the parent primary image tag.
     """
 
-    id: Union[Unset, None, str] = UNSET
-    type: Union[Unset, None, str] = UNSET
-    server_id: Union[Unset, None, str] = UNSET
-    external_id: Union[Unset, None, str] = UNSET
+    id: Union[None, Unset, str] = UNSET
+    type: Union[None, Unset, str] = UNSET
+    server_id: Union[None, Unset, str] = UNSET
+    external_id: Union[None, Unset, str] = UNSET
     channel_id: Union[Unset, str] = UNSET
-    external_channel_id: Union[Unset, None, str] = UNSET
-    channel_name: Union[Unset, None, str] = UNSET
-    channel_primary_image_tag: Union[Unset, None, str] = UNSET
-    program_id: Union[Unset, None, str] = UNSET
-    external_program_id: Union[Unset, None, str] = UNSET
-    name: Union[Unset, None, str] = UNSET
-    overview: Union[Unset, None, str] = UNSET
+    external_channel_id: Union[None, Unset, str] = UNSET
+    channel_name: Union[None, Unset, str] = UNSET
+    channel_primary_image_tag: Union[None, Unset, str] = UNSET
+    program_id: Union[None, Unset, str] = UNSET
+    external_program_id: Union[None, Unset, str] = UNSET
+    name: Union[None, Unset, str] = UNSET
+    overview: Union[None, Unset, str] = UNSET
     start_date: Union[Unset, datetime.datetime] = UNSET
     end_date: Union[Unset, datetime.datetime] = UNSET
-    service_name: Union[Unset, None, str] = UNSET
+    service_name: Union[None, Unset, str] = UNSET
     priority: Union[Unset, int] = UNSET
     pre_padding_seconds: Union[Unset, int] = UNSET
     post_padding_seconds: Union[Unset, int] = UNSET
     is_pre_padding_required: Union[Unset, bool] = UNSET
-    parent_backdrop_item_id: Union[Unset, None, str] = UNSET
-    parent_backdrop_image_tags: Union[Unset, None, List[str]] = UNSET
+    parent_backdrop_item_id: Union[None, Unset, str] = UNSET
+    parent_backdrop_image_tags: Union[List[str], None, Unset] = UNSET
     is_post_padding_required: Union[Unset, bool] = UNSET
     keep_until: Union[Unset, KeepUntil] = UNSET
     record_any_time: Union[Unset, bool] = UNSET
@@ -89,27 +98,85 @@ class SeriesTimerInfoDto:
     record_any_channel: Union[Unset, bool] = UNSET
     keep_up_to: Union[Unset, int] = UNSET
     record_new_only: Union[Unset, bool] = UNSET
-    days: Union[Unset, None, List[DayOfWeek]] = UNSET
-    day_pattern: Union[Unset, None, DayPattern] = UNSET
-    image_tags: Union[Unset, None, "SeriesTimerInfoDtoImageTags"] = UNSET
-    parent_thumb_item_id: Union[Unset, None, str] = UNSET
-    parent_thumb_image_tag: Union[Unset, None, str] = UNSET
-    parent_primary_image_item_id: Union[Unset, None, str] = UNSET
-    parent_primary_image_tag: Union[Unset, None, str] = UNSET
+    days: Union[List[DayOfWeek], None, Unset] = UNSET
+    day_pattern: Union[Unset, SeriesTimerInfoDtoDayPattern] = UNSET
+    image_tags: Union["SeriesTimerInfoDtoImageTagsType0", None, Unset] = UNSET
+    parent_thumb_item_id: Union[None, Unset, str] = UNSET
+    parent_thumb_image_tag: Union[None, Unset, str] = UNSET
+    parent_primary_image_item_id: Union[None, Unset, str] = UNSET
+    parent_primary_image_tag: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        id = self.id
-        type = self.type
-        server_id = self.server_id
-        external_id = self.external_id
+        from ..models.series_timer_info_dto_image_tags_type_0 import SeriesTimerInfoDtoImageTagsType0
+
+        id: Union[None, Unset, str]
+        if isinstance(self.id, Unset):
+            id = UNSET
+        else:
+            id = self.id
+
+        type: Union[None, Unset, str]
+        if isinstance(self.type, Unset):
+            type = UNSET
+        else:
+            type = self.type
+
+        server_id: Union[None, Unset, str]
+        if isinstance(self.server_id, Unset):
+            server_id = UNSET
+        else:
+            server_id = self.server_id
+
+        external_id: Union[None, Unset, str]
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
+
         channel_id = self.channel_id
-        external_channel_id = self.external_channel_id
-        channel_name = self.channel_name
-        channel_primary_image_tag = self.channel_primary_image_tag
-        program_id = self.program_id
-        external_program_id = self.external_program_id
-        name = self.name
-        overview = self.overview
+
+        external_channel_id: Union[None, Unset, str]
+        if isinstance(self.external_channel_id, Unset):
+            external_channel_id = UNSET
+        else:
+            external_channel_id = self.external_channel_id
+
+        channel_name: Union[None, Unset, str]
+        if isinstance(self.channel_name, Unset):
+            channel_name = UNSET
+        else:
+            channel_name = self.channel_name
+
+        channel_primary_image_tag: Union[None, Unset, str]
+        if isinstance(self.channel_primary_image_tag, Unset):
+            channel_primary_image_tag = UNSET
+        else:
+            channel_primary_image_tag = self.channel_primary_image_tag
+
+        program_id: Union[None, Unset, str]
+        if isinstance(self.program_id, Unset):
+            program_id = UNSET
+        else:
+            program_id = self.program_id
+
+        external_program_id: Union[None, Unset, str]
+        if isinstance(self.external_program_id, Unset):
+            external_program_id = UNSET
+        else:
+            external_program_id = self.external_program_id
+
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
+
+        overview: Union[None, Unset, str]
+        if isinstance(self.overview, Unset):
+            overview = UNSET
+        else:
+            overview = self.overview
+
         start_date: Union[Unset, str] = UNSET
         if not isinstance(self.start_date, Unset):
             start_date = self.start_date.isoformat()
@@ -118,52 +185,98 @@ class SeriesTimerInfoDto:
         if not isinstance(self.end_date, Unset):
             end_date = self.end_date.isoformat()
 
-        service_name = self.service_name
+        service_name: Union[None, Unset, str]
+        if isinstance(self.service_name, Unset):
+            service_name = UNSET
+        else:
+            service_name = self.service_name
+
         priority = self.priority
+
         pre_padding_seconds = self.pre_padding_seconds
+
         post_padding_seconds = self.post_padding_seconds
+
         is_pre_padding_required = self.is_pre_padding_required
-        parent_backdrop_item_id = self.parent_backdrop_item_id
-        parent_backdrop_image_tags: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.parent_backdrop_image_tags, Unset):
-            if self.parent_backdrop_image_tags is None:
-                parent_backdrop_image_tags = None
-            else:
-                parent_backdrop_image_tags = self.parent_backdrop_image_tags
+
+        parent_backdrop_item_id: Union[None, Unset, str]
+        if isinstance(self.parent_backdrop_item_id, Unset):
+            parent_backdrop_item_id = UNSET
+        else:
+            parent_backdrop_item_id = self.parent_backdrop_item_id
+
+        parent_backdrop_image_tags: Union[List[str], None, Unset]
+        if isinstance(self.parent_backdrop_image_tags, Unset):
+            parent_backdrop_image_tags = UNSET
+        elif isinstance(self.parent_backdrop_image_tags, list):
+            parent_backdrop_image_tags = self.parent_backdrop_image_tags
+
+        else:
+            parent_backdrop_image_tags = self.parent_backdrop_image_tags
 
         is_post_padding_required = self.is_post_padding_required
+
         keep_until: Union[Unset, str] = UNSET
         if not isinstance(self.keep_until, Unset):
             keep_until = self.keep_until.value
 
         record_any_time = self.record_any_time
+
         skip_episodes_in_library = self.skip_episodes_in_library
+
         record_any_channel = self.record_any_channel
+
         keep_up_to = self.keep_up_to
+
         record_new_only = self.record_new_only
-        days: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.days, Unset):
-            if self.days is None:
-                days = None
-            else:
-                days = []
-                for days_item_data in self.days:
-                    days_item = days_item_data.value
 
-                    days.append(days_item)
+        days: Union[List[str], None, Unset]
+        if isinstance(self.days, Unset):
+            days = UNSET
+        elif isinstance(self.days, list):
+            days = []
+            for days_type_0_item_data in self.days:
+                days_type_0_item = days_type_0_item_data.value
+                days.append(days_type_0_item)
 
-        day_pattern: Union[Unset, None, str] = UNSET
+        else:
+            days = self.days
+
+        day_pattern: Union[Unset, str] = UNSET
         if not isinstance(self.day_pattern, Unset):
-            day_pattern = self.day_pattern.value if self.day_pattern else None
+            day_pattern = self.day_pattern.value
 
-        image_tags: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.image_tags, Unset):
-            image_tags = self.image_tags.to_dict() if self.image_tags else None
+        image_tags: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.image_tags, Unset):
+            image_tags = UNSET
+        elif isinstance(self.image_tags, SeriesTimerInfoDtoImageTagsType0):
+            image_tags = self.image_tags.to_dict()
+        else:
+            image_tags = self.image_tags
 
-        parent_thumb_item_id = self.parent_thumb_item_id
-        parent_thumb_image_tag = self.parent_thumb_image_tag
-        parent_primary_image_item_id = self.parent_primary_image_item_id
-        parent_primary_image_tag = self.parent_primary_image_tag
+        parent_thumb_item_id: Union[None, Unset, str]
+        if isinstance(self.parent_thumb_item_id, Unset):
+            parent_thumb_item_id = UNSET
+        else:
+            parent_thumb_item_id = self.parent_thumb_item_id
+
+        parent_thumb_image_tag: Union[None, Unset, str]
+        if isinstance(self.parent_thumb_image_tag, Unset):
+            parent_thumb_image_tag = UNSET
+        else:
+            parent_thumb_image_tag = self.parent_thumb_image_tag
+
+        parent_primary_image_item_id: Union[None, Unset, str]
+        if isinstance(self.parent_primary_image_item_id, Unset):
+            parent_primary_image_item_id = UNSET
+        else:
+            parent_primary_image_item_id = self.parent_primary_image_item_id
+
+        parent_primary_image_tag: Union[None, Unset, str]
+        if isinstance(self.parent_primary_image_tag, Unset):
+            parent_primary_image_tag = UNSET
+        else:
+            parent_primary_image_tag = self.parent_primary_image_tag
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -242,32 +355,110 @@ class SeriesTimerInfoDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.series_timer_info_dto_image_tags import SeriesTimerInfoDtoImageTags
+        from ..models.series_timer_info_dto_image_tags_type_0 import SeriesTimerInfoDtoImageTagsType0
 
         d = src_dict.copy()
-        id = d.pop("Id", UNSET)
 
-        type = d.pop("Type", UNSET)
+        def _parse_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        server_id = d.pop("ServerId", UNSET)
+        id = _parse_id(d.pop("Id", UNSET))
 
-        external_id = d.pop("ExternalId", UNSET)
+        def _parse_type(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        type = _parse_type(d.pop("Type", UNSET))
+
+        def _parse_server_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        server_id = _parse_server_id(d.pop("ServerId", UNSET))
+
+        def _parse_external_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        external_id = _parse_external_id(d.pop("ExternalId", UNSET))
 
         channel_id = d.pop("ChannelId", UNSET)
 
-        external_channel_id = d.pop("ExternalChannelId", UNSET)
+        def _parse_external_channel_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        channel_name = d.pop("ChannelName", UNSET)
+        external_channel_id = _parse_external_channel_id(d.pop("ExternalChannelId", UNSET))
 
-        channel_primary_image_tag = d.pop("ChannelPrimaryImageTag", UNSET)
+        def _parse_channel_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        program_id = d.pop("ProgramId", UNSET)
+        channel_name = _parse_channel_name(d.pop("ChannelName", UNSET))
 
-        external_program_id = d.pop("ExternalProgramId", UNSET)
+        def _parse_channel_primary_image_tag(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        name = d.pop("Name", UNSET)
+        channel_primary_image_tag = _parse_channel_primary_image_tag(d.pop("ChannelPrimaryImageTag", UNSET))
 
-        overview = d.pop("Overview", UNSET)
+        def _parse_program_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        program_id = _parse_program_id(d.pop("ProgramId", UNSET))
+
+        def _parse_external_program_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        external_program_id = _parse_external_program_id(d.pop("ExternalProgramId", UNSET))
+
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        name = _parse_name(d.pop("Name", UNSET))
+
+        def _parse_overview(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        overview = _parse_overview(d.pop("Overview", UNSET))
 
         _start_date = d.pop("StartDate", UNSET)
         start_date: Union[Unset, datetime.datetime]
@@ -283,7 +474,14 @@ class SeriesTimerInfoDto:
         else:
             end_date = isoparse(_end_date)
 
-        service_name = d.pop("ServiceName", UNSET)
+        def _parse_service_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        service_name = _parse_service_name(d.pop("ServiceName", UNSET))
 
         priority = d.pop("Priority", UNSET)
 
@@ -293,9 +491,31 @@ class SeriesTimerInfoDto:
 
         is_pre_padding_required = d.pop("IsPrePaddingRequired", UNSET)
 
-        parent_backdrop_item_id = d.pop("ParentBackdropItemId", UNSET)
+        def _parse_parent_backdrop_item_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        parent_backdrop_image_tags = cast(List[str], d.pop("ParentBackdropImageTags", UNSET))
+        parent_backdrop_item_id = _parse_parent_backdrop_item_id(d.pop("ParentBackdropItemId", UNSET))
+
+        def _parse_parent_backdrop_image_tags(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                parent_backdrop_image_tags_type_0 = cast(List[str], data)
+
+                return parent_backdrop_image_tags_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        parent_backdrop_image_tags = _parse_parent_backdrop_image_tags(d.pop("ParentBackdropImageTags", UNSET))
 
         is_post_padding_required = d.pop("IsPostPaddingRequired", UNSET)
 
@@ -316,38 +536,87 @@ class SeriesTimerInfoDto:
 
         record_new_only = d.pop("RecordNewOnly", UNSET)
 
-        days = []
-        _days = d.pop("Days", UNSET)
-        for days_item_data in _days or []:
-            days_item = DayOfWeek(days_item_data)
+        def _parse_days(data: object) -> Union[List[DayOfWeek], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                days_type_0 = []
+                _days_type_0 = data
+                for days_type_0_item_data in _days_type_0:
+                    days_type_0_item = DayOfWeek(days_type_0_item_data)
 
-            days.append(days_item)
+                    days_type_0.append(days_type_0_item)
+
+                return days_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[DayOfWeek], None, Unset], data)
+
+        days = _parse_days(d.pop("Days", UNSET))
 
         _day_pattern = d.pop("DayPattern", UNSET)
-        day_pattern: Union[Unset, None, DayPattern]
-        if _day_pattern is None:
-            day_pattern = None
-        elif isinstance(_day_pattern, Unset):
+        day_pattern: Union[Unset, SeriesTimerInfoDtoDayPattern]
+        if isinstance(_day_pattern, Unset):
             day_pattern = UNSET
         else:
-            day_pattern = DayPattern(_day_pattern)
+            day_pattern = SeriesTimerInfoDtoDayPattern(_day_pattern)
 
-        _image_tags = d.pop("ImageTags", UNSET)
-        image_tags: Union[Unset, None, SeriesTimerInfoDtoImageTags]
-        if _image_tags is None:
-            image_tags = None
-        elif isinstance(_image_tags, Unset):
-            image_tags = UNSET
-        else:
-            image_tags = SeriesTimerInfoDtoImageTags.from_dict(_image_tags)
+        def _parse_image_tags(data: object) -> Union["SeriesTimerInfoDtoImageTagsType0", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                image_tags_type_0 = SeriesTimerInfoDtoImageTagsType0.from_dict(data)
 
-        parent_thumb_item_id = d.pop("ParentThumbItemId", UNSET)
+                return image_tags_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union["SeriesTimerInfoDtoImageTagsType0", None, Unset], data)
 
-        parent_thumb_image_tag = d.pop("ParentThumbImageTag", UNSET)
+        image_tags = _parse_image_tags(d.pop("ImageTags", UNSET))
 
-        parent_primary_image_item_id = d.pop("ParentPrimaryImageItemId", UNSET)
+        def _parse_parent_thumb_item_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        parent_primary_image_tag = d.pop("ParentPrimaryImageTag", UNSET)
+        parent_thumb_item_id = _parse_parent_thumb_item_id(d.pop("ParentThumbItemId", UNSET))
+
+        def _parse_parent_thumb_image_tag(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        parent_thumb_image_tag = _parse_parent_thumb_image_tag(d.pop("ParentThumbImageTag", UNSET))
+
+        def _parse_parent_primary_image_item_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        parent_primary_image_item_id = _parse_parent_primary_image_item_id(d.pop("ParentPrimaryImageItemId", UNSET))
+
+        def _parse_parent_primary_image_tag(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        parent_primary_image_tag = _parse_parent_primary_image_tag(d.pop("ParentPrimaryImageTag", UNSET))
 
         series_timer_info_dto = cls(
             id=id,

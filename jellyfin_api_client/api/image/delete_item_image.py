@@ -1,36 +1,42 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Dict
 from ...models.image_type import ImageType
+from typing import cast
+from typing import Union
 from ...models.problem_details import ProblemDetails
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     item_id: str,
     image_type: ImageType,
     *,
-    image_index: Union[Unset, None, int] = UNSET,
+    image_index: Union[Unset, int] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["imageIndex"] = image_index
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
-        "url": "/Items/{itemId}/Images/{imageType}".format(
-            itemId=item_id,
-            imageType=image_type,
+        "url": "/Items/{item_id}/Images/{image_type}".format(
+            item_id=item_id,
+            image_type=image_type,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -71,14 +77,14 @@ def sync_detailed(
     image_type: ImageType,
     *,
     client: AuthenticatedClient,
-    image_index: Union[Unset, None, int] = UNSET,
+    image_index: Union[Unset, int] = UNSET,
 ) -> Response[Union[Any, ProblemDetails]]:
     """Delete an item's image.
 
     Args:
         item_id (str):
         image_type (ImageType): Enum ImageType.
-        image_index (Union[Unset, None, int]):
+        image_index (Union[Unset, int]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -106,14 +112,14 @@ def sync(
     image_type: ImageType,
     *,
     client: AuthenticatedClient,
-    image_index: Union[Unset, None, int] = UNSET,
+    image_index: Union[Unset, int] = UNSET,
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Delete an item's image.
 
     Args:
         item_id (str):
         image_type (ImageType): Enum ImageType.
-        image_index (Union[Unset, None, int]):
+        image_index (Union[Unset, int]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -136,14 +142,14 @@ async def asyncio_detailed(
     image_type: ImageType,
     *,
     client: AuthenticatedClient,
-    image_index: Union[Unset, None, int] = UNSET,
+    image_index: Union[Unset, int] = UNSET,
 ) -> Response[Union[Any, ProblemDetails]]:
     """Delete an item's image.
 
     Args:
         item_id (str):
         image_type (ImageType): Enum ImageType.
-        image_index (Union[Unset, None, int]):
+        image_index (Union[Unset, int]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -169,14 +175,14 @@ async def asyncio(
     image_type: ImageType,
     *,
     client: AuthenticatedClient,
-    image_index: Union[Unset, None, int] = UNSET,
+    image_index: Union[Unset, int] = UNSET,
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Delete an item's image.
 
     Args:
         item_id (str):
         image_type (ImageType): Enum ImageType.
-        image_index (Union[Unset, None, int]):
+        image_index (Union[Unset, int]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

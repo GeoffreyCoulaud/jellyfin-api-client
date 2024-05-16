@@ -1,8 +1,15 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, List
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="RemoveFromPlaylistRequestDto")
 
@@ -12,7 +19,7 @@ class RemoveFromPlaylistRequestDto:
     """Class RemoveFromPlaylistRequestDto.
 
     Attributes:
-        playlist_item_ids (Union[Unset, List[str]]): Gets or sets the playlist identifiers ot the items. Ignored when
+        playlist_item_ids (Union[Unset, List[str]]): Gets or sets the playlist identifiers of the items. Ignored when
             clearing the playlist.
         clear_playlist (Union[Unset, bool]): Gets or sets a value indicating whether the entire playlist should be
             cleared.
@@ -30,6 +37,7 @@ class RemoveFromPlaylistRequestDto:
             playlist_item_ids = self.playlist_item_ids
 
         clear_playlist = self.clear_playlist
+
         clear_playing_item = self.clear_playing_item
 
         field_dict: Dict[str, Any] = {}

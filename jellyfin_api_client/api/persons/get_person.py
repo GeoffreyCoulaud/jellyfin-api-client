@@ -1,34 +1,40 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Dict
+from typing import Union
+from typing import cast
 from ...models.base_item_dto import BaseItemDto
 from ...models.problem_details import ProblemDetails
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     name: str,
     *,
-    user_id: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["userId"] = user_id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Persons/{name}".format(
             name=name,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -69,13 +75,13 @@ def sync_detailed(
     name: str,
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, BaseItemDto, ProblemDetails]]:
     """Get person by name.
 
     Args:
         name (str):
-        user_id (Union[Unset, None, str]):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -101,13 +107,13 @@ def sync(
     name: str,
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, BaseItemDto, ProblemDetails]]:
     """Get person by name.
 
     Args:
         name (str):
-        user_id (Union[Unset, None, str]):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -128,13 +134,13 @@ async def asyncio_detailed(
     name: str,
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, BaseItemDto, ProblemDetails]]:
     """Get person by name.
 
     Args:
         name (str):
-        user_id (Union[Unset, None, str]):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -158,13 +164,13 @@ async def asyncio(
     name: str,
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, BaseItemDto, ProblemDetails]]:
     """Get person by name.
 
     Args:
         name (str):
-        user_id (Union[Unset, None, str]):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

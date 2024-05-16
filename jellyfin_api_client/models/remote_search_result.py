@@ -1,13 +1,22 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
-from dateutil.parser import isoparse
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import cast, Union
+from typing import cast, List
+from typing import Dict
+import datetime
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
+from dateutil.parser import isoparse
+
 if TYPE_CHECKING:
-    from ..models.remote_search_result_provider_ids import RemoteSearchResultProviderIds
+    from ..models.remote_search_result_provider_ids_type_0 import RemoteSearchResultProviderIdsType0
 
 
 T = TypeVar("T", bound="RemoteSearchResult")
@@ -17,64 +26,119 @@ T = TypeVar("T", bound="RemoteSearchResult")
 class RemoteSearchResult:
     """
     Attributes:
-        name (Union[Unset, None, str]): Gets or sets the name.
-        provider_ids (Union[Unset, None, RemoteSearchResultProviderIds]): Gets or sets the provider ids.
-        production_year (Union[Unset, None, int]): Gets or sets the year.
-        index_number (Union[Unset, None, int]):
-        index_number_end (Union[Unset, None, int]):
-        parent_index_number (Union[Unset, None, int]):
-        premiere_date (Union[Unset, None, datetime.datetime]):
-        image_url (Union[Unset, None, str]):
-        search_provider_name (Union[Unset, None, str]):
-        overview (Union[Unset, None, str]):
-        album_artist (Union[Unset, None, RemoteSearchResult]):
-        artists (Union[Unset, None, List['RemoteSearchResult']]):
+        name (Union[None, Unset, str]): Gets or sets the name.
+        provider_ids (Union['RemoteSearchResultProviderIdsType0', None, Unset]): Gets or sets the provider ids.
+        production_year (Union[None, Unset, int]): Gets or sets the year.
+        index_number (Union[None, Unset, int]):
+        index_number_end (Union[None, Unset, int]):
+        parent_index_number (Union[None, Unset, int]):
+        premiere_date (Union[None, Unset, datetime.datetime]):
+        image_url (Union[None, Unset, str]):
+        search_provider_name (Union[None, Unset, str]):
+        overview (Union[None, Unset, str]):
+        album_artist (Union['RemoteSearchResult', None, Unset]):
+        artists (Union[List['RemoteSearchResult'], None, Unset]):
     """
 
-    name: Union[Unset, None, str] = UNSET
-    provider_ids: Union[Unset, None, "RemoteSearchResultProviderIds"] = UNSET
-    production_year: Union[Unset, None, int] = UNSET
-    index_number: Union[Unset, None, int] = UNSET
-    index_number_end: Union[Unset, None, int] = UNSET
-    parent_index_number: Union[Unset, None, int] = UNSET
-    premiere_date: Union[Unset, None, datetime.datetime] = UNSET
-    image_url: Union[Unset, None, str] = UNSET
-    search_provider_name: Union[Unset, None, str] = UNSET
-    overview: Union[Unset, None, str] = UNSET
-    album_artist: Union[Unset, None, "RemoteSearchResult"] = UNSET
-    artists: Union[Unset, None, List["RemoteSearchResult"]] = UNSET
+    name: Union[None, Unset, str] = UNSET
+    provider_ids: Union["RemoteSearchResultProviderIdsType0", None, Unset] = UNSET
+    production_year: Union[None, Unset, int] = UNSET
+    index_number: Union[None, Unset, int] = UNSET
+    index_number_end: Union[None, Unset, int] = UNSET
+    parent_index_number: Union[None, Unset, int] = UNSET
+    premiere_date: Union[None, Unset, datetime.datetime] = UNSET
+    image_url: Union[None, Unset, str] = UNSET
+    search_provider_name: Union[None, Unset, str] = UNSET
+    overview: Union[None, Unset, str] = UNSET
+    album_artist: Union["RemoteSearchResult", None, Unset] = UNSET
+    artists: Union[List["RemoteSearchResult"], None, Unset] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        name = self.name
-        provider_ids: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.provider_ids, Unset):
-            provider_ids = self.provider_ids.to_dict() if self.provider_ids else None
+        from ..models.remote_search_result_provider_ids_type_0 import RemoteSearchResultProviderIdsType0
 
-        production_year = self.production_year
-        index_number = self.index_number
-        index_number_end = self.index_number_end
-        parent_index_number = self.parent_index_number
-        premiere_date: Union[Unset, None, str] = UNSET
-        if not isinstance(self.premiere_date, Unset):
-            premiere_date = self.premiere_date.isoformat() if self.premiere_date else None
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
 
-        image_url = self.image_url
-        search_provider_name = self.search_provider_name
-        overview = self.overview
-        album_artist: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.album_artist, Unset):
-            album_artist = self.album_artist.to_dict() if self.album_artist else None
+        provider_ids: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.provider_ids, Unset):
+            provider_ids = UNSET
+        elif isinstance(self.provider_ids, RemoteSearchResultProviderIdsType0):
+            provider_ids = self.provider_ids.to_dict()
+        else:
+            provider_ids = self.provider_ids
 
-        artists: Union[Unset, None, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.artists, Unset):
-            if self.artists is None:
-                artists = None
-            else:
-                artists = []
-                for artists_item_data in self.artists:
-                    artists_item = artists_item_data.to_dict()
+        production_year: Union[None, Unset, int]
+        if isinstance(self.production_year, Unset):
+            production_year = UNSET
+        else:
+            production_year = self.production_year
 
-                    artists.append(artists_item)
+        index_number: Union[None, Unset, int]
+        if isinstance(self.index_number, Unset):
+            index_number = UNSET
+        else:
+            index_number = self.index_number
+
+        index_number_end: Union[None, Unset, int]
+        if isinstance(self.index_number_end, Unset):
+            index_number_end = UNSET
+        else:
+            index_number_end = self.index_number_end
+
+        parent_index_number: Union[None, Unset, int]
+        if isinstance(self.parent_index_number, Unset):
+            parent_index_number = UNSET
+        else:
+            parent_index_number = self.parent_index_number
+
+        premiere_date: Union[None, Unset, str]
+        if isinstance(self.premiere_date, Unset):
+            premiere_date = UNSET
+        elif isinstance(self.premiere_date, datetime.datetime):
+            premiere_date = self.premiere_date.isoformat()
+        else:
+            premiere_date = self.premiere_date
+
+        image_url: Union[None, Unset, str]
+        if isinstance(self.image_url, Unset):
+            image_url = UNSET
+        else:
+            image_url = self.image_url
+
+        search_provider_name: Union[None, Unset, str]
+        if isinstance(self.search_provider_name, Unset):
+            search_provider_name = UNSET
+        else:
+            search_provider_name = self.search_provider_name
+
+        overview: Union[None, Unset, str]
+        if isinstance(self.overview, Unset):
+            overview = UNSET
+        else:
+            overview = self.overview
+
+        album_artist: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.album_artist, Unset):
+            album_artist = UNSET
+        elif isinstance(self.album_artist, RemoteSearchResult):
+            album_artist = self.album_artist.to_dict()
+        else:
+            album_artist = self.album_artist
+
+        artists: Union[List[Dict[str, Any]], None, Unset]
+        if isinstance(self.artists, Unset):
+            artists = UNSET
+        elif isinstance(self.artists, list):
+            artists = []
+            for artists_type_0_item_data in self.artists:
+                artists_type_0_item = artists_type_0_item_data.to_dict()
+                artists.append(artists_type_0_item)
+
+        else:
+            artists = self.artists
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -107,58 +171,154 @@ class RemoteSearchResult:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.remote_search_result_provider_ids import RemoteSearchResultProviderIds
+        from ..models.remote_search_result_provider_ids_type_0 import RemoteSearchResultProviderIdsType0
 
         d = src_dict.copy()
-        name = d.pop("Name", UNSET)
 
-        _provider_ids = d.pop("ProviderIds", UNSET)
-        provider_ids: Union[Unset, None, RemoteSearchResultProviderIds]
-        if _provider_ids is None:
-            provider_ids = None
-        elif isinstance(_provider_ids, Unset):
-            provider_ids = UNSET
-        else:
-            provider_ids = RemoteSearchResultProviderIds.from_dict(_provider_ids)
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        production_year = d.pop("ProductionYear", UNSET)
+        name = _parse_name(d.pop("Name", UNSET))
 
-        index_number = d.pop("IndexNumber", UNSET)
+        def _parse_provider_ids(data: object) -> Union["RemoteSearchResultProviderIdsType0", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                provider_ids_type_0 = RemoteSearchResultProviderIdsType0.from_dict(data)
 
-        index_number_end = d.pop("IndexNumberEnd", UNSET)
+                return provider_ids_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union["RemoteSearchResultProviderIdsType0", None, Unset], data)
 
-        parent_index_number = d.pop("ParentIndexNumber", UNSET)
+        provider_ids = _parse_provider_ids(d.pop("ProviderIds", UNSET))
 
-        _premiere_date = d.pop("PremiereDate", UNSET)
-        premiere_date: Union[Unset, None, datetime.datetime]
-        if _premiere_date is None:
-            premiere_date = None
-        elif isinstance(_premiere_date, Unset):
-            premiere_date = UNSET
-        else:
-            premiere_date = isoparse(_premiere_date)
+        def _parse_production_year(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        image_url = d.pop("ImageUrl", UNSET)
+        production_year = _parse_production_year(d.pop("ProductionYear", UNSET))
 
-        search_provider_name = d.pop("SearchProviderName", UNSET)
+        def _parse_index_number(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        overview = d.pop("Overview", UNSET)
+        index_number = _parse_index_number(d.pop("IndexNumber", UNSET))
 
-        _album_artist = d.pop("AlbumArtist", UNSET)
-        album_artist: Union[Unset, None, RemoteSearchResult]
-        if _album_artist is None:
-            album_artist = None
-        elif isinstance(_album_artist, Unset):
-            album_artist = UNSET
-        else:
-            album_artist = RemoteSearchResult.from_dict(_album_artist)
+        def _parse_index_number_end(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        artists = []
-        _artists = d.pop("Artists", UNSET)
-        for artists_item_data in _artists or []:
-            artists_item = RemoteSearchResult.from_dict(artists_item_data)
+        index_number_end = _parse_index_number_end(d.pop("IndexNumberEnd", UNSET))
 
-            artists.append(artists_item)
+        def _parse_parent_index_number(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        parent_index_number = _parse_parent_index_number(d.pop("ParentIndexNumber", UNSET))
+
+        def _parse_premiere_date(data: object) -> Union[None, Unset, datetime.datetime]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                premiere_date_type_0 = isoparse(data)
+
+                return premiere_date_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, datetime.datetime], data)
+
+        premiere_date = _parse_premiere_date(d.pop("PremiereDate", UNSET))
+
+        def _parse_image_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        image_url = _parse_image_url(d.pop("ImageUrl", UNSET))
+
+        def _parse_search_provider_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        search_provider_name = _parse_search_provider_name(d.pop("SearchProviderName", UNSET))
+
+        def _parse_overview(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        overview = _parse_overview(d.pop("Overview", UNSET))
+
+        def _parse_album_artist(data: object) -> Union["RemoteSearchResult", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                album_artist_type_1 = RemoteSearchResult.from_dict(data)
+
+                return album_artist_type_1
+            except:  # noqa: E722
+                pass
+            return cast(Union["RemoteSearchResult", None, Unset], data)
+
+        album_artist = _parse_album_artist(d.pop("AlbumArtist", UNSET))
+
+        def _parse_artists(data: object) -> Union[List["RemoteSearchResult"], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                artists_type_0 = []
+                _artists_type_0 = data
+                for artists_type_0_item_data in _artists_type_0:
+                    artists_type_0_item = RemoteSearchResult.from_dict(artists_type_0_item_data)
+
+                    artists_type_0.append(artists_type_0_item)
+
+                return artists_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List["RemoteSearchResult"], None, Unset], data)
+
+        artists = _parse_artists(d.pop("Artists", UNSET))
 
         remote_search_result = cls(
             name=name,

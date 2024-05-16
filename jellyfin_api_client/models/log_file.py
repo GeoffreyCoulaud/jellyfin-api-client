@@ -1,10 +1,17 @@
-import datetime
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
-from dateutil.parser import isoparse
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+import datetime
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
+from dateutil.parser import isoparse
+
 
 T = TypeVar("T", bound="LogFile")
 
@@ -16,13 +23,13 @@ class LogFile:
         date_created (Union[Unset, datetime.datetime]): Gets or sets the date created.
         date_modified (Union[Unset, datetime.datetime]): Gets or sets the date modified.
         size (Union[Unset, int]): Gets or sets the size.
-        name (Union[Unset, None, str]): Gets or sets the name.
+        name (Union[Unset, str]): Gets or sets the name.
     """
 
     date_created: Union[Unset, datetime.datetime] = UNSET
     date_modified: Union[Unset, datetime.datetime] = UNSET
     size: Union[Unset, int] = UNSET
-    name: Union[Unset, None, str] = UNSET
+    name: Union[Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         date_created: Union[Unset, str] = UNSET
@@ -34,6 +41,7 @@ class LogFile:
             date_modified = self.date_modified.isoformat()
 
         size = self.size
+
         name = self.name
 
         field_dict: Dict[str, Any] = {}

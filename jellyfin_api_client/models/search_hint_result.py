@@ -1,8 +1,16 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import cast, List
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
 
 if TYPE_CHECKING:
     from ..models.search_hint import SearchHint
@@ -24,12 +32,13 @@ class SearchHintResult:
     total_record_count: Union[Unset, int] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.search_hint import SearchHint
+
         search_hints: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.search_hints, Unset):
             search_hints = []
             for search_hints_item_data in self.search_hints:
                 search_hints_item = search_hints_item_data.to_dict()
-
                 search_hints.append(search_hints_item)
 
         total_record_count = self.total_record_count

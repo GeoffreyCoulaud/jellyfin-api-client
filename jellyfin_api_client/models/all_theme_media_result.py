@@ -1,8 +1,16 @@
-from typing import TYPE_CHECKING, Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
 
 if TYPE_CHECKING:
     from ..models.theme_media_result import ThemeMediaResult
@@ -15,27 +23,41 @@ T = TypeVar("T", bound="AllThemeMediaResult")
 class AllThemeMediaResult:
     """
     Attributes:
-        theme_videos_result (Union[Unset, None, ThemeMediaResult]): Class ThemeMediaResult.
-        theme_songs_result (Union[Unset, None, ThemeMediaResult]): Class ThemeMediaResult.
-        soundtrack_songs_result (Union[Unset, None, ThemeMediaResult]): Class ThemeMediaResult.
+        theme_videos_result (Union['ThemeMediaResult', None, Unset]): Class ThemeMediaResult.
+        theme_songs_result (Union['ThemeMediaResult', None, Unset]): Class ThemeMediaResult.
+        soundtrack_songs_result (Union['ThemeMediaResult', None, Unset]): Class ThemeMediaResult.
     """
 
-    theme_videos_result: Union[Unset, None, "ThemeMediaResult"] = UNSET
-    theme_songs_result: Union[Unset, None, "ThemeMediaResult"] = UNSET
-    soundtrack_songs_result: Union[Unset, None, "ThemeMediaResult"] = UNSET
+    theme_videos_result: Union["ThemeMediaResult", None, Unset] = UNSET
+    theme_songs_result: Union["ThemeMediaResult", None, Unset] = UNSET
+    soundtrack_songs_result: Union["ThemeMediaResult", None, Unset] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        theme_videos_result: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.theme_videos_result, Unset):
-            theme_videos_result = self.theme_videos_result.to_dict() if self.theme_videos_result else None
+        from ..models.theme_media_result import ThemeMediaResult
 
-        theme_songs_result: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.theme_songs_result, Unset):
-            theme_songs_result = self.theme_songs_result.to_dict() if self.theme_songs_result else None
+        theme_videos_result: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.theme_videos_result, Unset):
+            theme_videos_result = UNSET
+        elif isinstance(self.theme_videos_result, ThemeMediaResult):
+            theme_videos_result = self.theme_videos_result.to_dict()
+        else:
+            theme_videos_result = self.theme_videos_result
 
-        soundtrack_songs_result: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.soundtrack_songs_result, Unset):
-            soundtrack_songs_result = self.soundtrack_songs_result.to_dict() if self.soundtrack_songs_result else None
+        theme_songs_result: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.theme_songs_result, Unset):
+            theme_songs_result = UNSET
+        elif isinstance(self.theme_songs_result, ThemeMediaResult):
+            theme_songs_result = self.theme_songs_result.to_dict()
+        else:
+            theme_songs_result = self.theme_songs_result
+
+        soundtrack_songs_result: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.soundtrack_songs_result, Unset):
+            soundtrack_songs_result = UNSET
+        elif isinstance(self.soundtrack_songs_result, ThemeMediaResult):
+            soundtrack_songs_result = self.soundtrack_songs_result.to_dict()
+        else:
+            soundtrack_songs_result = self.soundtrack_songs_result
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -53,32 +75,57 @@ class AllThemeMediaResult:
         from ..models.theme_media_result import ThemeMediaResult
 
         d = src_dict.copy()
-        _theme_videos_result = d.pop("ThemeVideosResult", UNSET)
-        theme_videos_result: Union[Unset, None, ThemeMediaResult]
-        if _theme_videos_result is None:
-            theme_videos_result = None
-        elif isinstance(_theme_videos_result, Unset):
-            theme_videos_result = UNSET
-        else:
-            theme_videos_result = ThemeMediaResult.from_dict(_theme_videos_result)
 
-        _theme_songs_result = d.pop("ThemeSongsResult", UNSET)
-        theme_songs_result: Union[Unset, None, ThemeMediaResult]
-        if _theme_songs_result is None:
-            theme_songs_result = None
-        elif isinstance(_theme_songs_result, Unset):
-            theme_songs_result = UNSET
-        else:
-            theme_songs_result = ThemeMediaResult.from_dict(_theme_songs_result)
+        def _parse_theme_videos_result(data: object) -> Union["ThemeMediaResult", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                theme_videos_result_type_1 = ThemeMediaResult.from_dict(data)
 
-        _soundtrack_songs_result = d.pop("SoundtrackSongsResult", UNSET)
-        soundtrack_songs_result: Union[Unset, None, ThemeMediaResult]
-        if _soundtrack_songs_result is None:
-            soundtrack_songs_result = None
-        elif isinstance(_soundtrack_songs_result, Unset):
-            soundtrack_songs_result = UNSET
-        else:
-            soundtrack_songs_result = ThemeMediaResult.from_dict(_soundtrack_songs_result)
+                return theme_videos_result_type_1
+            except:  # noqa: E722
+                pass
+            return cast(Union["ThemeMediaResult", None, Unset], data)
+
+        theme_videos_result = _parse_theme_videos_result(d.pop("ThemeVideosResult", UNSET))
+
+        def _parse_theme_songs_result(data: object) -> Union["ThemeMediaResult", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                theme_songs_result_type_1 = ThemeMediaResult.from_dict(data)
+
+                return theme_songs_result_type_1
+            except:  # noqa: E722
+                pass
+            return cast(Union["ThemeMediaResult", None, Unset], data)
+
+        theme_songs_result = _parse_theme_songs_result(d.pop("ThemeSongsResult", UNSET))
+
+        def _parse_soundtrack_songs_result(data: object) -> Union["ThemeMediaResult", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                soundtrack_songs_result_type_1 = ThemeMediaResult.from_dict(data)
+
+                return soundtrack_songs_result_type_1
+            except:  # noqa: E722
+                pass
+            return cast(Union["ThemeMediaResult", None, Unset], data)
+
+        soundtrack_songs_result = _parse_soundtrack_songs_result(d.pop("SoundtrackSongsResult", UNSET))
 
         all_theme_media_result = cls(
             theme_videos_result=theme_videos_result,

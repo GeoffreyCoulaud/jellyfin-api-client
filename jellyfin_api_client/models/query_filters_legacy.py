@@ -1,8 +1,16 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from ..types import UNSET, Unset
+from typing import cast, List
+from typing import cast, Union
+from typing import Union
+
 
 T = TypeVar("T", bound="QueryFiltersLegacy")
 
@@ -11,45 +19,53 @@ T = TypeVar("T", bound="QueryFiltersLegacy")
 class QueryFiltersLegacy:
     """
     Attributes:
-        genres (Union[Unset, None, List[str]]):
-        tags (Union[Unset, None, List[str]]):
-        official_ratings (Union[Unset, None, List[str]]):
-        years (Union[Unset, None, List[int]]):
+        genres (Union[List[str], None, Unset]):
+        tags (Union[List[str], None, Unset]):
+        official_ratings (Union[List[str], None, Unset]):
+        years (Union[List[int], None, Unset]):
     """
 
-    genres: Union[Unset, None, List[str]] = UNSET
-    tags: Union[Unset, None, List[str]] = UNSET
-    official_ratings: Union[Unset, None, List[str]] = UNSET
-    years: Union[Unset, None, List[int]] = UNSET
+    genres: Union[List[str], None, Unset] = UNSET
+    tags: Union[List[str], None, Unset] = UNSET
+    official_ratings: Union[List[str], None, Unset] = UNSET
+    years: Union[List[int], None, Unset] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        genres: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.genres, Unset):
-            if self.genres is None:
-                genres = None
-            else:
-                genres = self.genres
+        genres: Union[List[str], None, Unset]
+        if isinstance(self.genres, Unset):
+            genres = UNSET
+        elif isinstance(self.genres, list):
+            genres = self.genres
 
-        tags: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.tags, Unset):
-            if self.tags is None:
-                tags = None
-            else:
-                tags = self.tags
+        else:
+            genres = self.genres
 
-        official_ratings: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.official_ratings, Unset):
-            if self.official_ratings is None:
-                official_ratings = None
-            else:
-                official_ratings = self.official_ratings
+        tags: Union[List[str], None, Unset]
+        if isinstance(self.tags, Unset):
+            tags = UNSET
+        elif isinstance(self.tags, list):
+            tags = self.tags
 
-        years: Union[Unset, None, List[int]] = UNSET
-        if not isinstance(self.years, Unset):
-            if self.years is None:
-                years = None
-            else:
-                years = self.years
+        else:
+            tags = self.tags
+
+        official_ratings: Union[List[str], None, Unset]
+        if isinstance(self.official_ratings, Unset):
+            official_ratings = UNSET
+        elif isinstance(self.official_ratings, list):
+            official_ratings = self.official_ratings
+
+        else:
+            official_ratings = self.official_ratings
+
+        years: Union[List[int], None, Unset]
+        if isinstance(self.years, Unset):
+            years = UNSET
+        elif isinstance(self.years, list):
+            years = self.years
+
+        else:
+            years = self.years
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -67,13 +83,74 @@ class QueryFiltersLegacy:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        genres = cast(List[str], d.pop("Genres", UNSET))
 
-        tags = cast(List[str], d.pop("Tags", UNSET))
+        def _parse_genres(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                genres_type_0 = cast(List[str], data)
 
-        official_ratings = cast(List[str], d.pop("OfficialRatings", UNSET))
+                return genres_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
 
-        years = cast(List[int], d.pop("Years", UNSET))
+        genres = _parse_genres(d.pop("Genres", UNSET))
+
+        def _parse_tags(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                tags_type_0 = cast(List[str], data)
+
+                return tags_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        tags = _parse_tags(d.pop("Tags", UNSET))
+
+        def _parse_official_ratings(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                official_ratings_type_0 = cast(List[str], data)
+
+                return official_ratings_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        official_ratings = _parse_official_ratings(d.pop("OfficialRatings", UNSET))
+
+        def _parse_years(data: object) -> Union[List[int], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                years_type_0 = cast(List[int], data)
+
+                return years_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[int], None, Unset], data)
+
+        years = _parse_years(d.pop("Years", UNSET))
 
         query_filters_legacy = cls(
             genres=genres,

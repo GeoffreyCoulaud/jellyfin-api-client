@@ -1,15 +1,27 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
-from ..models.image_saving_convention import ImageSavingConvention
 from ..types import UNSET, Unset
 
+from typing import cast, Union
+from typing import cast, List
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
+from ..models.image_resolution import ImageResolution
+from ..models.image_saving_convention import ImageSavingConvention
+
 if TYPE_CHECKING:
-    from ..models.metadata_options import MetadataOptions
-    from ..models.name_value_pair import NameValuePair
-    from ..models.path_substitution import PathSubstitution
     from ..models.repository_info import RepositoryInfo
+    from ..models.path_substitution import PathSubstitution
+    from ..models.metadata_options import MetadataOptions
+    from ..models.trickplay_options import TrickplayOptions
+    from ..models.name_value_pair import NameValuePair
+    from ..models.cast_receiver_application import CastReceiverApplication
 
 
 T = TypeVar("T", bound="ServerConfiguration")
@@ -23,10 +35,10 @@ class ServerConfiguration:
         log_file_retention_days (Union[Unset, int]): Gets or sets the number of days we should retain log files.
         is_startup_wizard_completed (Union[Unset, bool]): Gets or sets a value indicating whether this instance is first
             run.
-        cache_path (Union[Unset, None, str]): Gets or sets the cache path.
-        previous_version (Union[Unset, None, str]): Gets or sets the last known version that was ran using the
+        cache_path (Union[None, Unset, str]): Gets or sets the cache path.
+        previous_version (Union[None, Unset, str]): Gets or sets the last known version that was ran using the
             configuration.
-        previous_version_str (Union[Unset, None, str]): Gets or sets the stringified PreviousVersion to be
+        previous_version_str (Union[None, Unset, str]): Gets or sets the stringified PreviousVersion to be
             stored/loaded,
             because System.Version itself isn't xml-serializable.
         enable_metrics (Union[Unset, bool]): Gets or sets a value indicating whether to enable prometheus metrics
@@ -61,11 +73,16 @@ class ServerConfiguration:
         max_audiobook_resume (Union[Unset, int]): Gets or sets the remaining minutes of a book that can be played while
             still saving playstate. If this percentage is crossed playstate will be reset to the beginning and the item will
             be marked watched.
+        inactive_session_threshold (Union[Unset, int]): Gets or sets the threshold in minutes after a inactive session
+            gets closed automatically.
+            If set to 0 the check for inactive sessions gets disabled.
         library_monitor_delay (Union[Unset, int]): Gets or sets the delay in seconds that we will wait after a file
             system change to try and discover what has been added/removed
             Some delay is necessary with some items because their creation is not atomic.  It involves the creation of
             several
             different directories and files.
+        library_update_duration (Union[Unset, int]): Gets or sets the duration in seconds that we will wait after a
+            library updated event before executing the library changed notification.
         image_saving_convention (Union[Unset, ImageSavingConvention]):
         metadata_options (Union[Unset, List['MetadataOptions']]):
         skip_deserialization_for_basic_types (Union[Unset, bool]):
@@ -87,7 +104,7 @@ class ServerConfiguration:
         slow_response_threshold_ms (Union[Unset, int]): Gets or sets the threshold for the slow response time warning in
             ms.
         cors_hosts (Union[Unset, List[str]]): Gets or sets the cors hosts.
-        activity_log_retention_days (Union[Unset, None, int]): Gets or sets the number of days we should retain activity
+        activity_log_retention_days (Union[None, Unset, int]): Gets or sets the number of days we should retain activity
             logs.
         library_scan_fanout_concurrency (Union[Unset, int]): Gets or sets the how the library scan fans out.
         library_metadata_refresh_concurrency (Union[Unset, int]): Gets or sets the how many metadata refreshes can run
@@ -96,13 +113,20 @@ class ServerConfiguration:
             automatically be deleted from the plugin folder.
         allow_client_log_upload (Union[Unset, bool]): Gets or sets a value indicating whether clients should be allowed
             to upload logs.
+        dummy_chapter_duration (Union[Unset, int]): Gets or sets the dummy chapter duration in seconds, use 0 (zero) or
+            less to disable generation alltogether.
+        chapter_image_resolution (Union[Unset, ImageResolution]): Enum ImageResolution.
+        parallel_image_encoding_limit (Union[Unset, int]): Gets or sets the limit for parallel image encoding.
+        cast_receiver_applications (Union[Unset, List['CastReceiverApplication']]): Gets or sets the list of cast
+            receiver applications.
+        trickplay_options (Union[Unset, TrickplayOptions]): Class TrickplayOptions.
     """
 
     log_file_retention_days: Union[Unset, int] = UNSET
     is_startup_wizard_completed: Union[Unset, bool] = UNSET
-    cache_path: Union[Unset, None, str] = UNSET
-    previous_version: Union[Unset, None, str] = UNSET
-    previous_version_str: Union[Unset, None, str] = UNSET
+    cache_path: Union[None, Unset, str] = UNSET
+    previous_version: Union[None, Unset, str] = UNSET
+    previous_version_str: Union[None, Unset, str] = UNSET
     enable_metrics: Union[Unset, bool] = UNSET
     enable_normalized_item_by_name_ids: Union[Unset, bool] = UNSET
     is_port_authorized: Union[Unset, bool] = UNSET
@@ -121,7 +145,9 @@ class ServerConfiguration:
     min_resume_duration_seconds: Union[Unset, int] = UNSET
     min_audiobook_resume: Union[Unset, int] = UNSET
     max_audiobook_resume: Union[Unset, int] = UNSET
+    inactive_session_threshold: Union[Unset, int] = UNSET
     library_monitor_delay: Union[Unset, int] = UNSET
+    library_update_duration: Union[Unset, int] = UNSET
     image_saving_convention: Union[Unset, ImageSavingConvention] = UNSET
     metadata_options: Union[Unset, List["MetadataOptions"]] = UNSET
     skip_deserialization_for_basic_types: Union[Unset, bool] = UNSET
@@ -141,28 +167,67 @@ class ServerConfiguration:
     enable_slow_response_warning: Union[Unset, bool] = UNSET
     slow_response_threshold_ms: Union[Unset, int] = UNSET
     cors_hosts: Union[Unset, List[str]] = UNSET
-    activity_log_retention_days: Union[Unset, None, int] = UNSET
+    activity_log_retention_days: Union[None, Unset, int] = UNSET
     library_scan_fanout_concurrency: Union[Unset, int] = UNSET
     library_metadata_refresh_concurrency: Union[Unset, int] = UNSET
     remove_old_plugins: Union[Unset, bool] = UNSET
     allow_client_log_upload: Union[Unset, bool] = UNSET
+    dummy_chapter_duration: Union[Unset, int] = UNSET
+    chapter_image_resolution: Union[Unset, ImageResolution] = UNSET
+    parallel_image_encoding_limit: Union[Unset, int] = UNSET
+    cast_receiver_applications: Union[Unset, List["CastReceiverApplication"]] = UNSET
+    trickplay_options: Union[Unset, "TrickplayOptions"] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.repository_info import RepositoryInfo
+        from ..models.path_substitution import PathSubstitution
+        from ..models.metadata_options import MetadataOptions
+        from ..models.trickplay_options import TrickplayOptions
+        from ..models.name_value_pair import NameValuePair
+        from ..models.cast_receiver_application import CastReceiverApplication
+
         log_file_retention_days = self.log_file_retention_days
+
         is_startup_wizard_completed = self.is_startup_wizard_completed
-        cache_path = self.cache_path
-        previous_version = self.previous_version
-        previous_version_str = self.previous_version_str
+
+        cache_path: Union[None, Unset, str]
+        if isinstance(self.cache_path, Unset):
+            cache_path = UNSET
+        else:
+            cache_path = self.cache_path
+
+        previous_version: Union[None, Unset, str]
+        if isinstance(self.previous_version, Unset):
+            previous_version = UNSET
+        else:
+            previous_version = self.previous_version
+
+        previous_version_str: Union[None, Unset, str]
+        if isinstance(self.previous_version_str, Unset):
+            previous_version_str = UNSET
+        else:
+            previous_version_str = self.previous_version_str
+
         enable_metrics = self.enable_metrics
+
         enable_normalized_item_by_name_ids = self.enable_normalized_item_by_name_ids
+
         is_port_authorized = self.is_port_authorized
+
         quick_connect_available = self.quick_connect_available
+
         enable_case_sensitive_item_ids = self.enable_case_sensitive_item_ids
+
         disable_live_tv_channel_user_data_name = self.disable_live_tv_channel_user_data_name
+
         metadata_path = self.metadata_path
+
         metadata_network_path = self.metadata_network_path
+
         preferred_metadata_language = self.preferred_metadata_language
+
         metadata_country_code = self.metadata_country_code
+
         sort_replace_characters: Union[Unset, List[str]] = UNSET
         if not isinstance(self.sort_replace_characters, Unset):
             sort_replace_characters = self.sort_replace_characters
@@ -176,11 +241,21 @@ class ServerConfiguration:
             sort_remove_words = self.sort_remove_words
 
         min_resume_pct = self.min_resume_pct
+
         max_resume_pct = self.max_resume_pct
+
         min_resume_duration_seconds = self.min_resume_duration_seconds
+
         min_audiobook_resume = self.min_audiobook_resume
+
         max_audiobook_resume = self.max_audiobook_resume
+
+        inactive_session_threshold = self.inactive_session_threshold
+
         library_monitor_delay = self.library_monitor_delay
+
+        library_update_duration = self.library_update_duration
+
         image_saving_convention: Union[Unset, str] = UNSET
         if not isinstance(self.image_saving_convention, Unset):
             image_saving_convention = self.image_saving_convention.value
@@ -190,25 +265,31 @@ class ServerConfiguration:
             metadata_options = []
             for metadata_options_item_data in self.metadata_options:
                 metadata_options_item = metadata_options_item_data.to_dict()
-
                 metadata_options.append(metadata_options_item)
 
         skip_deserialization_for_basic_types = self.skip_deserialization_for_basic_types
+
         server_name = self.server_name
+
         ui_culture = self.ui_culture
+
         save_metadata_hidden = self.save_metadata_hidden
+
         content_types: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.content_types, Unset):
             content_types = []
             for content_types_item_data in self.content_types:
                 content_types_item = content_types_item_data.to_dict()
-
                 content_types.append(content_types_item)
 
         remote_client_bitrate_limit = self.remote_client_bitrate_limit
+
         enable_folder_view = self.enable_folder_view
+
         enable_grouping_into_collections = self.enable_grouping_into_collections
+
         display_specials_within_seasons = self.display_specials_within_seasons
+
         codecs_used: Union[Unset, List[str]] = UNSET
         if not isinstance(self.codecs_used, Unset):
             codecs_used = self.codecs_used
@@ -218,30 +299,59 @@ class ServerConfiguration:
             plugin_repositories = []
             for plugin_repositories_item_data in self.plugin_repositories:
                 plugin_repositories_item = plugin_repositories_item_data.to_dict()
-
                 plugin_repositories.append(plugin_repositories_item)
 
         enable_external_content_in_suggestions = self.enable_external_content_in_suggestions
+
         image_extraction_timeout_ms = self.image_extraction_timeout_ms
+
         path_substitutions: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.path_substitutions, Unset):
             path_substitutions = []
             for path_substitutions_item_data in self.path_substitutions:
                 path_substitutions_item = path_substitutions_item_data.to_dict()
-
                 path_substitutions.append(path_substitutions_item)
 
         enable_slow_response_warning = self.enable_slow_response_warning
+
         slow_response_threshold_ms = self.slow_response_threshold_ms
+
         cors_hosts: Union[Unset, List[str]] = UNSET
         if not isinstance(self.cors_hosts, Unset):
             cors_hosts = self.cors_hosts
 
-        activity_log_retention_days = self.activity_log_retention_days
+        activity_log_retention_days: Union[None, Unset, int]
+        if isinstance(self.activity_log_retention_days, Unset):
+            activity_log_retention_days = UNSET
+        else:
+            activity_log_retention_days = self.activity_log_retention_days
+
         library_scan_fanout_concurrency = self.library_scan_fanout_concurrency
+
         library_metadata_refresh_concurrency = self.library_metadata_refresh_concurrency
+
         remove_old_plugins = self.remove_old_plugins
+
         allow_client_log_upload = self.allow_client_log_upload
+
+        dummy_chapter_duration = self.dummy_chapter_duration
+
+        chapter_image_resolution: Union[Unset, str] = UNSET
+        if not isinstance(self.chapter_image_resolution, Unset):
+            chapter_image_resolution = self.chapter_image_resolution.value
+
+        parallel_image_encoding_limit = self.parallel_image_encoding_limit
+
+        cast_receiver_applications: Union[Unset, List[Dict[str, Any]]] = UNSET
+        if not isinstance(self.cast_receiver_applications, Unset):
+            cast_receiver_applications = []
+            for cast_receiver_applications_item_data in self.cast_receiver_applications:
+                cast_receiver_applications_item = cast_receiver_applications_item_data.to_dict()
+                cast_receiver_applications.append(cast_receiver_applications_item)
+
+        trickplay_options: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.trickplay_options, Unset):
+            trickplay_options = self.trickplay_options.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -291,8 +401,12 @@ class ServerConfiguration:
             field_dict["MinAudiobookResume"] = min_audiobook_resume
         if max_audiobook_resume is not UNSET:
             field_dict["MaxAudiobookResume"] = max_audiobook_resume
+        if inactive_session_threshold is not UNSET:
+            field_dict["InactiveSessionThreshold"] = inactive_session_threshold
         if library_monitor_delay is not UNSET:
             field_dict["LibraryMonitorDelay"] = library_monitor_delay
+        if library_update_duration is not UNSET:
+            field_dict["LibraryUpdateDuration"] = library_update_duration
         if image_saving_convention is not UNSET:
             field_dict["ImageSavingConvention"] = image_saving_convention
         if metadata_options is not UNSET:
@@ -341,26 +455,59 @@ class ServerConfiguration:
             field_dict["RemoveOldPlugins"] = remove_old_plugins
         if allow_client_log_upload is not UNSET:
             field_dict["AllowClientLogUpload"] = allow_client_log_upload
+        if dummy_chapter_duration is not UNSET:
+            field_dict["DummyChapterDuration"] = dummy_chapter_duration
+        if chapter_image_resolution is not UNSET:
+            field_dict["ChapterImageResolution"] = chapter_image_resolution
+        if parallel_image_encoding_limit is not UNSET:
+            field_dict["ParallelImageEncodingLimit"] = parallel_image_encoding_limit
+        if cast_receiver_applications is not UNSET:
+            field_dict["CastReceiverApplications"] = cast_receiver_applications
+        if trickplay_options is not UNSET:
+            field_dict["TrickplayOptions"] = trickplay_options
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.metadata_options import MetadataOptions
-        from ..models.name_value_pair import NameValuePair
-        from ..models.path_substitution import PathSubstitution
         from ..models.repository_info import RepositoryInfo
+        from ..models.path_substitution import PathSubstitution
+        from ..models.metadata_options import MetadataOptions
+        from ..models.trickplay_options import TrickplayOptions
+        from ..models.name_value_pair import NameValuePair
+        from ..models.cast_receiver_application import CastReceiverApplication
 
         d = src_dict.copy()
         log_file_retention_days = d.pop("LogFileRetentionDays", UNSET)
 
         is_startup_wizard_completed = d.pop("IsStartupWizardCompleted", UNSET)
 
-        cache_path = d.pop("CachePath", UNSET)
+        def _parse_cache_path(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        previous_version = d.pop("PreviousVersion", UNSET)
+        cache_path = _parse_cache_path(d.pop("CachePath", UNSET))
 
-        previous_version_str = d.pop("PreviousVersionStr", UNSET)
+        def _parse_previous_version(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        previous_version = _parse_previous_version(d.pop("PreviousVersion", UNSET))
+
+        def _parse_previous_version_str(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        previous_version_str = _parse_previous_version_str(d.pop("PreviousVersionStr", UNSET))
 
         enable_metrics = d.pop("EnableMetrics", UNSET)
 
@@ -398,7 +545,11 @@ class ServerConfiguration:
 
         max_audiobook_resume = d.pop("MaxAudiobookResume", UNSET)
 
+        inactive_session_threshold = d.pop("InactiveSessionThreshold", UNSET)
+
         library_monitor_delay = d.pop("LibraryMonitorDelay", UNSET)
+
+        library_update_duration = d.pop("LibraryUpdateDuration", UNSET)
 
         _image_saving_convention = d.pop("ImageSavingConvention", UNSET)
         image_saving_convention: Union[Unset, ImageSavingConvention]
@@ -463,7 +614,14 @@ class ServerConfiguration:
 
         cors_hosts = cast(List[str], d.pop("CorsHosts", UNSET))
 
-        activity_log_retention_days = d.pop("ActivityLogRetentionDays", UNSET)
+        def _parse_activity_log_retention_days(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        activity_log_retention_days = _parse_activity_log_retention_days(d.pop("ActivityLogRetentionDays", UNSET))
 
         library_scan_fanout_concurrency = d.pop("LibraryScanFanoutConcurrency", UNSET)
 
@@ -472,6 +630,31 @@ class ServerConfiguration:
         remove_old_plugins = d.pop("RemoveOldPlugins", UNSET)
 
         allow_client_log_upload = d.pop("AllowClientLogUpload", UNSET)
+
+        dummy_chapter_duration = d.pop("DummyChapterDuration", UNSET)
+
+        _chapter_image_resolution = d.pop("ChapterImageResolution", UNSET)
+        chapter_image_resolution: Union[Unset, ImageResolution]
+        if isinstance(_chapter_image_resolution, Unset):
+            chapter_image_resolution = UNSET
+        else:
+            chapter_image_resolution = ImageResolution(_chapter_image_resolution)
+
+        parallel_image_encoding_limit = d.pop("ParallelImageEncodingLimit", UNSET)
+
+        cast_receiver_applications = []
+        _cast_receiver_applications = d.pop("CastReceiverApplications", UNSET)
+        for cast_receiver_applications_item_data in _cast_receiver_applications or []:
+            cast_receiver_applications_item = CastReceiverApplication.from_dict(cast_receiver_applications_item_data)
+
+            cast_receiver_applications.append(cast_receiver_applications_item)
+
+        _trickplay_options = d.pop("TrickplayOptions", UNSET)
+        trickplay_options: Union[Unset, TrickplayOptions]
+        if isinstance(_trickplay_options, Unset):
+            trickplay_options = UNSET
+        else:
+            trickplay_options = TrickplayOptions.from_dict(_trickplay_options)
 
         server_configuration = cls(
             log_file_retention_days=log_file_retention_days,
@@ -497,7 +680,9 @@ class ServerConfiguration:
             min_resume_duration_seconds=min_resume_duration_seconds,
             min_audiobook_resume=min_audiobook_resume,
             max_audiobook_resume=max_audiobook_resume,
+            inactive_session_threshold=inactive_session_threshold,
             library_monitor_delay=library_monitor_delay,
+            library_update_duration=library_update_duration,
             image_saving_convention=image_saving_convention,
             metadata_options=metadata_options,
             skip_deserialization_for_basic_types=skip_deserialization_for_basic_types,
@@ -522,6 +707,11 @@ class ServerConfiguration:
             library_metadata_refresh_concurrency=library_metadata_refresh_concurrency,
             remove_old_plugins=remove_old_plugins,
             allow_client_log_upload=allow_client_log_upload,
+            dummy_chapter_duration=dummy_chapter_duration,
+            chapter_image_resolution=chapter_image_resolution,
+            parallel_image_encoding_limit=parallel_image_encoding_limit,
+            cast_receiver_applications=cast_receiver_applications,
+            trickplay_options=trickplay_options,
         )
 
         return server_configuration

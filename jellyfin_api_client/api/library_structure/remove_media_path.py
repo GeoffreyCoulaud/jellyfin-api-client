@@ -1,22 +1,24 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...types import UNSET, Response, Unset
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import Union
+from ...types import UNSET, Unset
 
 
 def _get_kwargs(
     *,
-    name: Union[Unset, None, str] = UNSET,
-    path: Union[Unset, None, str] = UNSET,
-    refresh_library: Union[Unset, None, bool] = False,
+    name: Union[Unset, str] = UNSET,
+    path: Union[Unset, str] = UNSET,
+    refresh_library: Union[Unset, bool] = False,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["name"] = name
 
     params["path"] = path
@@ -25,11 +27,13 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
         "url": "/Library/VirtualFolders/Paths",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
@@ -57,16 +61,16 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    name: Union[Unset, None, str] = UNSET,
-    path: Union[Unset, None, str] = UNSET,
-    refresh_library: Union[Unset, None, bool] = False,
+    name: Union[Unset, str] = UNSET,
+    path: Union[Unset, str] = UNSET,
+    refresh_library: Union[Unset, bool] = False,
 ) -> Response[Any]:
     """Remove a media path.
 
     Args:
-        name (Union[Unset, None, str]):
-        path (Union[Unset, None, str]):
-        refresh_library (Union[Unset, None, bool]):
+        name (Union[Unset, str]):
+        path (Union[Unset, str]):
+        refresh_library (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -92,16 +96,16 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    name: Union[Unset, None, str] = UNSET,
-    path: Union[Unset, None, str] = UNSET,
-    refresh_library: Union[Unset, None, bool] = False,
+    name: Union[Unset, str] = UNSET,
+    path: Union[Unset, str] = UNSET,
+    refresh_library: Union[Unset, bool] = False,
 ) -> Response[Any]:
     """Remove a media path.
 
     Args:
-        name (Union[Unset, None, str]):
-        path (Union[Unset, None, str]):
-        refresh_library (Union[Unset, None, bool]):
+        name (Union[Unset, str]):
+        path (Union[Unset, str]):
+        refresh_library (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

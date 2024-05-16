@@ -1,35 +1,39 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Dict
+from typing import Union
+from typing import cast
 from ...models.metadata_refresh_mode import MetadataRefreshMode
 from ...models.problem_details import ProblemDetails
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     item_id: str,
     *,
-    metadata_refresh_mode: Union[Unset, None, MetadataRefreshMode] = MetadataRefreshMode.NONE,
-    image_refresh_mode: Union[Unset, None, MetadataRefreshMode] = MetadataRefreshMode.NONE,
-    replace_all_metadata: Union[Unset, None, bool] = False,
-    replace_all_images: Union[Unset, None, bool] = False,
+    metadata_refresh_mode: Union[Unset, MetadataRefreshMode] = MetadataRefreshMode.NONE,
+    image_refresh_mode: Union[Unset, MetadataRefreshMode] = MetadataRefreshMode.NONE,
+    replace_all_metadata: Union[Unset, bool] = False,
+    replace_all_images: Union[Unset, bool] = False,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
-    json_metadata_refresh_mode: Union[Unset, None, str] = UNSET
+
+    json_metadata_refresh_mode: Union[Unset, str] = UNSET
     if not isinstance(metadata_refresh_mode, Unset):
-        json_metadata_refresh_mode = metadata_refresh_mode.value if metadata_refresh_mode else None
+        json_metadata_refresh_mode = metadata_refresh_mode.value
 
     params["metadataRefreshMode"] = json_metadata_refresh_mode
 
-    json_image_refresh_mode: Union[Unset, None, str] = UNSET
+    json_image_refresh_mode: Union[Unset, str] = UNSET
     if not isinstance(image_refresh_mode, Unset):
-        json_image_refresh_mode = image_refresh_mode.value if image_refresh_mode else None
+        json_image_refresh_mode = image_refresh_mode.value
 
     params["imageRefreshMode"] = json_image_refresh_mode
 
@@ -39,13 +43,15 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/Items/{itemId}/Refresh".format(
-            itemId=item_id,
+        "url": "/Items/{item_id}/Refresh".format(
+            item_id=item_id,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -85,21 +91,21 @@ def sync_detailed(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    metadata_refresh_mode: Union[Unset, None, MetadataRefreshMode] = MetadataRefreshMode.NONE,
-    image_refresh_mode: Union[Unset, None, MetadataRefreshMode] = MetadataRefreshMode.NONE,
-    replace_all_metadata: Union[Unset, None, bool] = False,
-    replace_all_images: Union[Unset, None, bool] = False,
+    metadata_refresh_mode: Union[Unset, MetadataRefreshMode] = MetadataRefreshMode.NONE,
+    image_refresh_mode: Union[Unset, MetadataRefreshMode] = MetadataRefreshMode.NONE,
+    replace_all_metadata: Union[Unset, bool] = False,
+    replace_all_images: Union[Unset, bool] = False,
 ) -> Response[Union[Any, ProblemDetails]]:
     """Refreshes metadata for an item.
 
     Args:
         item_id (str):
-        metadata_refresh_mode (Union[Unset, None, MetadataRefreshMode]):  Default:
+        metadata_refresh_mode (Union[Unset, MetadataRefreshMode]):  Default:
             MetadataRefreshMode.NONE.
-        image_refresh_mode (Union[Unset, None, MetadataRefreshMode]):  Default:
+        image_refresh_mode (Union[Unset, MetadataRefreshMode]):  Default:
             MetadataRefreshMode.NONE.
-        replace_all_metadata (Union[Unset, None, bool]):
-        replace_all_images (Union[Unset, None, bool]):
+        replace_all_metadata (Union[Unset, bool]):  Default: False.
+        replace_all_images (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -128,21 +134,21 @@ def sync(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    metadata_refresh_mode: Union[Unset, None, MetadataRefreshMode] = MetadataRefreshMode.NONE,
-    image_refresh_mode: Union[Unset, None, MetadataRefreshMode] = MetadataRefreshMode.NONE,
-    replace_all_metadata: Union[Unset, None, bool] = False,
-    replace_all_images: Union[Unset, None, bool] = False,
+    metadata_refresh_mode: Union[Unset, MetadataRefreshMode] = MetadataRefreshMode.NONE,
+    image_refresh_mode: Union[Unset, MetadataRefreshMode] = MetadataRefreshMode.NONE,
+    replace_all_metadata: Union[Unset, bool] = False,
+    replace_all_images: Union[Unset, bool] = False,
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Refreshes metadata for an item.
 
     Args:
         item_id (str):
-        metadata_refresh_mode (Union[Unset, None, MetadataRefreshMode]):  Default:
+        metadata_refresh_mode (Union[Unset, MetadataRefreshMode]):  Default:
             MetadataRefreshMode.NONE.
-        image_refresh_mode (Union[Unset, None, MetadataRefreshMode]):  Default:
+        image_refresh_mode (Union[Unset, MetadataRefreshMode]):  Default:
             MetadataRefreshMode.NONE.
-        replace_all_metadata (Union[Unset, None, bool]):
-        replace_all_images (Union[Unset, None, bool]):
+        replace_all_metadata (Union[Unset, bool]):  Default: False.
+        replace_all_images (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -166,21 +172,21 @@ async def asyncio_detailed(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    metadata_refresh_mode: Union[Unset, None, MetadataRefreshMode] = MetadataRefreshMode.NONE,
-    image_refresh_mode: Union[Unset, None, MetadataRefreshMode] = MetadataRefreshMode.NONE,
-    replace_all_metadata: Union[Unset, None, bool] = False,
-    replace_all_images: Union[Unset, None, bool] = False,
+    metadata_refresh_mode: Union[Unset, MetadataRefreshMode] = MetadataRefreshMode.NONE,
+    image_refresh_mode: Union[Unset, MetadataRefreshMode] = MetadataRefreshMode.NONE,
+    replace_all_metadata: Union[Unset, bool] = False,
+    replace_all_images: Union[Unset, bool] = False,
 ) -> Response[Union[Any, ProblemDetails]]:
     """Refreshes metadata for an item.
 
     Args:
         item_id (str):
-        metadata_refresh_mode (Union[Unset, None, MetadataRefreshMode]):  Default:
+        metadata_refresh_mode (Union[Unset, MetadataRefreshMode]):  Default:
             MetadataRefreshMode.NONE.
-        image_refresh_mode (Union[Unset, None, MetadataRefreshMode]):  Default:
+        image_refresh_mode (Union[Unset, MetadataRefreshMode]):  Default:
             MetadataRefreshMode.NONE.
-        replace_all_metadata (Union[Unset, None, bool]):
-        replace_all_images (Union[Unset, None, bool]):
+        replace_all_metadata (Union[Unset, bool]):  Default: False.
+        replace_all_images (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -207,21 +213,21 @@ async def asyncio(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    metadata_refresh_mode: Union[Unset, None, MetadataRefreshMode] = MetadataRefreshMode.NONE,
-    image_refresh_mode: Union[Unset, None, MetadataRefreshMode] = MetadataRefreshMode.NONE,
-    replace_all_metadata: Union[Unset, None, bool] = False,
-    replace_all_images: Union[Unset, None, bool] = False,
+    metadata_refresh_mode: Union[Unset, MetadataRefreshMode] = MetadataRefreshMode.NONE,
+    image_refresh_mode: Union[Unset, MetadataRefreshMode] = MetadataRefreshMode.NONE,
+    replace_all_metadata: Union[Unset, bool] = False,
+    replace_all_images: Union[Unset, bool] = False,
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Refreshes metadata for an item.
 
     Args:
         item_id (str):
-        metadata_refresh_mode (Union[Unset, None, MetadataRefreshMode]):  Default:
+        metadata_refresh_mode (Union[Unset, MetadataRefreshMode]):  Default:
             MetadataRefreshMode.NONE.
-        image_refresh_mode (Union[Unset, None, MetadataRefreshMode]):  Default:
+        image_refresh_mode (Union[Unset, MetadataRefreshMode]):  Default:
             MetadataRefreshMode.NONE.
-        replace_all_metadata (Union[Unset, None, bool]):
-        replace_all_images (Union[Unset, None, bool]):
+        replace_all_metadata (Union[Unset, bool]):  Default: False.
+        replace_all_images (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

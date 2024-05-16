@@ -1,8 +1,16 @@
-from typing import TYPE_CHECKING, Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
 
 if TYPE_CHECKING:
     from ..models.package_info import PackageInfo
@@ -17,32 +25,64 @@ class InstallationInfo:
 
     Attributes:
         guid (Union[Unset, str]): Gets or sets the Id.
-        name (Union[Unset, None, str]): Gets or sets the name.
-        version (Union[Unset, None, str]): Gets or sets the version.
-        changelog (Union[Unset, None, str]): Gets or sets the changelog for this version.
-        source_url (Union[Unset, None, str]): Gets or sets the source URL.
-        checksum (Union[Unset, None, str]): Gets or sets a checksum for the binary.
-        package_info (Union[Unset, None, PackageInfo]): Class PackageInfo.
+        name (Union[None, Unset, str]): Gets or sets the name.
+        version (Union[None, Unset, str]): Gets or sets the version.
+        changelog (Union[None, Unset, str]): Gets or sets the changelog for this version.
+        source_url (Union[None, Unset, str]): Gets or sets the source URL.
+        checksum (Union[None, Unset, str]): Gets or sets a checksum for the binary.
+        package_info (Union['PackageInfo', None, Unset]): Gets or sets package information for the installation.
     """
 
     guid: Union[Unset, str] = UNSET
-    name: Union[Unset, None, str] = UNSET
-    version: Union[Unset, None, str] = UNSET
-    changelog: Union[Unset, None, str] = UNSET
-    source_url: Union[Unset, None, str] = UNSET
-    checksum: Union[Unset, None, str] = UNSET
-    package_info: Union[Unset, None, "PackageInfo"] = UNSET
+    name: Union[None, Unset, str] = UNSET
+    version: Union[None, Unset, str] = UNSET
+    changelog: Union[None, Unset, str] = UNSET
+    source_url: Union[None, Unset, str] = UNSET
+    checksum: Union[None, Unset, str] = UNSET
+    package_info: Union["PackageInfo", None, Unset] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.package_info import PackageInfo
+
         guid = self.guid
-        name = self.name
-        version = self.version
-        changelog = self.changelog
-        source_url = self.source_url
-        checksum = self.checksum
-        package_info: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.package_info, Unset):
-            package_info = self.package_info.to_dict() if self.package_info else None
+
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
+
+        version: Union[None, Unset, str]
+        if isinstance(self.version, Unset):
+            version = UNSET
+        else:
+            version = self.version
+
+        changelog: Union[None, Unset, str]
+        if isinstance(self.changelog, Unset):
+            changelog = UNSET
+        else:
+            changelog = self.changelog
+
+        source_url: Union[None, Unset, str]
+        if isinstance(self.source_url, Unset):
+            source_url = UNSET
+        else:
+            source_url = self.source_url
+
+        checksum: Union[None, Unset, str]
+        if isinstance(self.checksum, Unset):
+            checksum = UNSET
+        else:
+            checksum = self.checksum
+
+        package_info: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.package_info, Unset):
+            package_info = UNSET
+        elif isinstance(self.package_info, PackageInfo):
+            package_info = self.package_info.to_dict()
+        else:
+            package_info = self.package_info
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -70,24 +110,67 @@ class InstallationInfo:
         d = src_dict.copy()
         guid = d.pop("Guid", UNSET)
 
-        name = d.pop("Name", UNSET)
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        version = d.pop("Version", UNSET)
+        name = _parse_name(d.pop("Name", UNSET))
 
-        changelog = d.pop("Changelog", UNSET)
+        def _parse_version(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        source_url = d.pop("SourceUrl", UNSET)
+        version = _parse_version(d.pop("Version", UNSET))
 
-        checksum = d.pop("Checksum", UNSET)
+        def _parse_changelog(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        _package_info = d.pop("PackageInfo", UNSET)
-        package_info: Union[Unset, None, PackageInfo]
-        if _package_info is None:
-            package_info = None
-        elif isinstance(_package_info, Unset):
-            package_info = UNSET
-        else:
-            package_info = PackageInfo.from_dict(_package_info)
+        changelog = _parse_changelog(d.pop("Changelog", UNSET))
+
+        def _parse_source_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        source_url = _parse_source_url(d.pop("SourceUrl", UNSET))
+
+        def _parse_checksum(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        checksum = _parse_checksum(d.pop("Checksum", UNSET))
+
+        def _parse_package_info(data: object) -> Union["PackageInfo", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                package_info_type_1 = PackageInfo.from_dict(data)
+
+                return package_info_type_1
+            except:  # noqa: E722
+                pass
+            return cast(Union["PackageInfo", None, Unset], data)
+
+        package_info = _parse_package_info(d.pop("PackageInfo", UNSET))
 
         installation_info = cls(
             guid=guid,

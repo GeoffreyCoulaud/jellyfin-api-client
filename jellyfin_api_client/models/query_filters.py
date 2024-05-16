@@ -1,8 +1,17 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import cast, List
+from typing import cast, Union
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
 
 if TYPE_CHECKING:
     from ..models.name_guid_pair import NameGuidPair
@@ -15,31 +24,36 @@ T = TypeVar("T", bound="QueryFilters")
 class QueryFilters:
     """
     Attributes:
-        genres (Union[Unset, None, List['NameGuidPair']]):
-        tags (Union[Unset, None, List[str]]):
+        genres (Union[List['NameGuidPair'], None, Unset]):
+        tags (Union[List[str], None, Unset]):
     """
 
-    genres: Union[Unset, None, List["NameGuidPair"]] = UNSET
-    tags: Union[Unset, None, List[str]] = UNSET
+    genres: Union[List["NameGuidPair"], None, Unset] = UNSET
+    tags: Union[List[str], None, Unset] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        genres: Union[Unset, None, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.genres, Unset):
-            if self.genres is None:
-                genres = None
-            else:
-                genres = []
-                for genres_item_data in self.genres:
-                    genres_item = genres_item_data.to_dict()
+        from ..models.name_guid_pair import NameGuidPair
 
-                    genres.append(genres_item)
+        genres: Union[List[Dict[str, Any]], None, Unset]
+        if isinstance(self.genres, Unset):
+            genres = UNSET
+        elif isinstance(self.genres, list):
+            genres = []
+            for genres_type_0_item_data in self.genres:
+                genres_type_0_item = genres_type_0_item_data.to_dict()
+                genres.append(genres_type_0_item)
 
-        tags: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.tags, Unset):
-            if self.tags is None:
-                tags = None
-            else:
-                tags = self.tags
+        else:
+            genres = self.genres
+
+        tags: Union[List[str], None, Unset]
+        if isinstance(self.tags, Unset):
+            tags = UNSET
+        elif isinstance(self.tags, list):
+            tags = self.tags
+
+        else:
+            tags = self.tags
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -55,14 +69,45 @@ class QueryFilters:
         from ..models.name_guid_pair import NameGuidPair
 
         d = src_dict.copy()
-        genres = []
-        _genres = d.pop("Genres", UNSET)
-        for genres_item_data in _genres or []:
-            genres_item = NameGuidPair.from_dict(genres_item_data)
 
-            genres.append(genres_item)
+        def _parse_genres(data: object) -> Union[List["NameGuidPair"], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                genres_type_0 = []
+                _genres_type_0 = data
+                for genres_type_0_item_data in _genres_type_0:
+                    genres_type_0_item = NameGuidPair.from_dict(genres_type_0_item_data)
 
-        tags = cast(List[str], d.pop("Tags", UNSET))
+                    genres_type_0.append(genres_type_0_item)
+
+                return genres_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List["NameGuidPair"], None, Unset], data)
+
+        genres = _parse_genres(d.pop("Genres", UNSET))
+
+        def _parse_tags(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                tags_type_0 = cast(List[str], data)
+
+                return tags_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        tags = _parse_tags(d.pop("Tags", UNSET))
 
         query_filters = cls(
             genres=genres,

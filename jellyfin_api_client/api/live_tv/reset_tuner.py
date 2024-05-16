@@ -1,24 +1,24 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...types import Response
+from ...types import Response, UNSET
+from ... import errors
 
 
 def _get_kwargs(
     tuner_id: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/LiveTv/Tuners/{tunerId}/Reset".format(
-            tunerId=tuner_id,
+        "url": "/LiveTv/Tuners/{tuner_id}/Reset".format(
+            tuner_id=tuner_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:

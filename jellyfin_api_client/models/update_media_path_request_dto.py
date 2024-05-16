@@ -1,6 +1,13 @@
-from typing import TYPE_CHECKING, Any, Dict, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from typing import cast
+from typing import Dict
 
 if TYPE_CHECKING:
     from ..models.media_path_info import MediaPathInfo
@@ -22,7 +29,10 @@ class UpdateMediaPathRequestDto:
     path_info: "MediaPathInfo"
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.media_path_info import MediaPathInfo
+
         name = self.name
+
         path_info = self.path_info.to_dict()
 
         field_dict: Dict[str, Any] = {}

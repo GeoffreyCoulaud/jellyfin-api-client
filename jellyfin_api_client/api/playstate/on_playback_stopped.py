@@ -1,26 +1,27 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...types import UNSET, Response, Unset
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import Union
+from ...types import UNSET, Unset
 
 
 def _get_kwargs(
-    user_id: str,
     item_id: str,
     *,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    next_media_type: Union[Unset, None, str] = UNSET,
-    position_ticks: Union[Unset, None, int] = UNSET,
-    live_stream_id: Union[Unset, None, str] = UNSET,
-    play_session_id: Union[Unset, None, str] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    next_media_type: Union[Unset, str] = UNSET,
+    position_ticks: Union[Unset, int] = UNSET,
+    live_stream_id: Union[Unset, str] = UNSET,
+    play_session_id: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["mediaSourceId"] = media_source_id
 
     params["nextMediaType"] = next_media_type
@@ -33,14 +34,15 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
-        "url": "/Users/{userId}/PlayingItems/{itemId}".format(
-            userId=user_id,
-            itemId=item_id,
+        "url": "/PlayingItems/{item_id}".format(
+            item_id=item_id,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
@@ -66,26 +68,24 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
 
 def sync_detailed(
-    user_id: str,
     item_id: str,
     *,
     client: AuthenticatedClient,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    next_media_type: Union[Unset, None, str] = UNSET,
-    position_ticks: Union[Unset, None, int] = UNSET,
-    live_stream_id: Union[Unset, None, str] = UNSET,
-    play_session_id: Union[Unset, None, str] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    next_media_type: Union[Unset, str] = UNSET,
+    position_ticks: Union[Unset, int] = UNSET,
+    live_stream_id: Union[Unset, str] = UNSET,
+    play_session_id: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
-    """Reports that a user has stopped playing an item.
+    """Reports that a session has stopped playing an item.
 
     Args:
-        user_id (str):
         item_id (str):
-        media_source_id (Union[Unset, None, str]):
-        next_media_type (Union[Unset, None, str]):
-        position_ticks (Union[Unset, None, int]):
-        live_stream_id (Union[Unset, None, str]):
-        play_session_id (Union[Unset, None, str]):
+        media_source_id (Union[Unset, str]):
+        next_media_type (Union[Unset, str]):
+        position_ticks (Union[Unset, int]):
+        live_stream_id (Union[Unset, str]):
+        play_session_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -96,7 +96,6 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        user_id=user_id,
         item_id=item_id,
         media_source_id=media_source_id,
         next_media_type=next_media_type,
@@ -113,26 +112,24 @@ def sync_detailed(
 
 
 async def asyncio_detailed(
-    user_id: str,
     item_id: str,
     *,
     client: AuthenticatedClient,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    next_media_type: Union[Unset, None, str] = UNSET,
-    position_ticks: Union[Unset, None, int] = UNSET,
-    live_stream_id: Union[Unset, None, str] = UNSET,
-    play_session_id: Union[Unset, None, str] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    next_media_type: Union[Unset, str] = UNSET,
+    position_ticks: Union[Unset, int] = UNSET,
+    live_stream_id: Union[Unset, str] = UNSET,
+    play_session_id: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
-    """Reports that a user has stopped playing an item.
+    """Reports that a session has stopped playing an item.
 
     Args:
-        user_id (str):
         item_id (str):
-        media_source_id (Union[Unset, None, str]):
-        next_media_type (Union[Unset, None, str]):
-        position_ticks (Union[Unset, None, int]):
-        live_stream_id (Union[Unset, None, str]):
-        play_session_id (Union[Unset, None, str]):
+        media_source_id (Union[Unset, str]):
+        next_media_type (Union[Unset, str]):
+        position_ticks (Union[Unset, int]):
+        live_stream_id (Union[Unset, str]):
+        play_session_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -143,7 +140,6 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        user_id=user_id,
         item_id=item_id,
         media_source_id=media_source_id,
         next_media_type=next_media_type,

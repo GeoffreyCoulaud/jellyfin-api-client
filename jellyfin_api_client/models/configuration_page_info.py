@@ -1,8 +1,15 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="ConfigurationPageInfo")
 
@@ -15,26 +22,47 @@ class ConfigurationPageInfo:
         name (Union[Unset, str]): Gets or sets the name.
         enable_in_main_menu (Union[Unset, bool]): Gets or sets a value indicating whether the configurations page is
             enabled in the main menu.
-        menu_section (Union[Unset, None, str]): Gets or sets the menu section.
-        menu_icon (Union[Unset, None, str]): Gets or sets the menu icon.
-        display_name (Union[Unset, None, str]): Gets or sets the display name.
-        plugin_id (Union[Unset, None, str]): Gets or sets the plugin id.
+        menu_section (Union[None, Unset, str]): Gets or sets the menu section.
+        menu_icon (Union[None, Unset, str]): Gets or sets the menu icon.
+        display_name (Union[None, Unset, str]): Gets or sets the display name.
+        plugin_id (Union[None, Unset, str]): Gets or sets the plugin id.
     """
 
     name: Union[Unset, str] = UNSET
     enable_in_main_menu: Union[Unset, bool] = UNSET
-    menu_section: Union[Unset, None, str] = UNSET
-    menu_icon: Union[Unset, None, str] = UNSET
-    display_name: Union[Unset, None, str] = UNSET
-    plugin_id: Union[Unset, None, str] = UNSET
+    menu_section: Union[None, Unset, str] = UNSET
+    menu_icon: Union[None, Unset, str] = UNSET
+    display_name: Union[None, Unset, str] = UNSET
+    plugin_id: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
+
         enable_in_main_menu = self.enable_in_main_menu
-        menu_section = self.menu_section
-        menu_icon = self.menu_icon
-        display_name = self.display_name
-        plugin_id = self.plugin_id
+
+        menu_section: Union[None, Unset, str]
+        if isinstance(self.menu_section, Unset):
+            menu_section = UNSET
+        else:
+            menu_section = self.menu_section
+
+        menu_icon: Union[None, Unset, str]
+        if isinstance(self.menu_icon, Unset):
+            menu_icon = UNSET
+        else:
+            menu_icon = self.menu_icon
+
+        display_name: Union[None, Unset, str]
+        if isinstance(self.display_name, Unset):
+            display_name = UNSET
+        else:
+            display_name = self.display_name
+
+        plugin_id: Union[None, Unset, str]
+        if isinstance(self.plugin_id, Unset):
+            plugin_id = UNSET
+        else:
+            plugin_id = self.plugin_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -60,13 +88,41 @@ class ConfigurationPageInfo:
 
         enable_in_main_menu = d.pop("EnableInMainMenu", UNSET)
 
-        menu_section = d.pop("MenuSection", UNSET)
+        def _parse_menu_section(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        menu_icon = d.pop("MenuIcon", UNSET)
+        menu_section = _parse_menu_section(d.pop("MenuSection", UNSET))
 
-        display_name = d.pop("DisplayName", UNSET)
+        def _parse_menu_icon(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        plugin_id = d.pop("PluginId", UNSET)
+        menu_icon = _parse_menu_icon(d.pop("MenuIcon", UNSET))
+
+        def _parse_display_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        display_name = _parse_display_name(d.pop("DisplayName", UNSET))
+
+        def _parse_plugin_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        plugin_id = _parse_plugin_id(d.pop("PluginId", UNSET))
 
         configuration_page_info = cls(
             name=name,

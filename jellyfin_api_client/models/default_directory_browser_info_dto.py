@@ -1,8 +1,15 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="DefaultDirectoryBrowserInfoDto")
 
@@ -12,13 +19,17 @@ class DefaultDirectoryBrowserInfoDto:
     """Default directory browser info.
 
     Attributes:
-        path (Union[Unset, None, str]): Gets or sets the path.
+        path (Union[None, Unset, str]): Gets or sets the path.
     """
 
-    path: Union[Unset, None, str] = UNSET
+    path: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        path = self.path
+        path: Union[None, Unset, str]
+        if isinstance(self.path, Unset):
+            path = UNSET
+        else:
+            path = self.path
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -30,7 +41,15 @@ class DefaultDirectoryBrowserInfoDto:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        path = d.pop("Path", UNSET)
+
+        def _parse_path(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        path = _parse_path(d.pop("Path", UNSET))
 
         default_directory_browser_info_dto = cls(
             path=path,

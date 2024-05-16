@@ -1,9 +1,16 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
-from ..models.external_id_media_type import ExternalIdMediaType
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..models.external_id_info_type import ExternalIdInfoType
+from typing import cast, Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="ExternalIdInfo")
 
@@ -17,24 +24,33 @@ class ExternalIdInfo:
             etc).
         key (Union[Unset, str]): Gets or sets the unique key for this id. This key should be unique across all
             providers.
-        type (Union[Unset, None, ExternalIdMediaType]): The specific media type of an
-            MediaBrowser.Model.Providers.ExternalIdInfo.
-        url_format_string (Union[Unset, None, str]): Gets or sets the URL format string.
+        type (Union[Unset, ExternalIdInfoType]): Gets or sets the specific media type for this id. This is used to
+            distinguish between the different
+            external id types for providers with multiple ids.
+            A null value indicates there is no specific media type associated with the external id, or this is the
+            default id for the external provider so there is no need to specify a type.
+        url_format_string (Union[None, Unset, str]): Gets or sets the URL format string.
     """
 
     name: Union[Unset, str] = UNSET
     key: Union[Unset, str] = UNSET
-    type: Union[Unset, None, ExternalIdMediaType] = UNSET
-    url_format_string: Union[Unset, None, str] = UNSET
+    type: Union[Unset, ExternalIdInfoType] = UNSET
+    url_format_string: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
-        key = self.key
-        type: Union[Unset, None, str] = UNSET
-        if not isinstance(self.type, Unset):
-            type = self.type.value if self.type else None
 
-        url_format_string = self.url_format_string
+        key = self.key
+
+        type: Union[Unset, str] = UNSET
+        if not isinstance(self.type, Unset):
+            type = self.type.value
+
+        url_format_string: Union[None, Unset, str]
+        if isinstance(self.url_format_string, Unset):
+            url_format_string = UNSET
+        else:
+            url_format_string = self.url_format_string
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -57,15 +73,20 @@ class ExternalIdInfo:
         key = d.pop("Key", UNSET)
 
         _type = d.pop("Type", UNSET)
-        type: Union[Unset, None, ExternalIdMediaType]
-        if _type is None:
-            type = None
-        elif isinstance(_type, Unset):
+        type: Union[Unset, ExternalIdInfoType]
+        if isinstance(_type, Unset):
             type = UNSET
         else:
-            type = ExternalIdMediaType(_type)
+            type = ExternalIdInfoType(_type)
 
-        url_format_string = d.pop("UrlFormatString", UNSET)
+        def _parse_url_format_string(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        url_format_string = _parse_url_format_string(d.pop("UrlFormatString", UNSET))
 
         external_id_info = cls(
             name=name,

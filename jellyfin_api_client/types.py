@@ -1,6 +1,6 @@
 """ Contains some shared types for properties """
 from http import HTTPStatus
-from typing import BinaryIO, Generic, Literal, MutableMapping, Optional, Tuple, TypeVar
+from typing import Any, BinaryIO, Generic, MutableMapping, Optional, Tuple, TypeVar, Literal
 
 from attrs import define
 
@@ -41,4 +41,4 @@ class Response(Generic[T]):
     parsed: Optional[T]
 
 
-__all__ = ["File", "Response", "FileJsonType"]
+__all__ = ["File", "Response", "FileJsonType", "Unset", "UNSET"]

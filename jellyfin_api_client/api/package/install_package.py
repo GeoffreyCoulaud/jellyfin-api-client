@@ -1,24 +1,28 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Dict
+from typing import Union
+from typing import cast
 from ...models.problem_details import ProblemDetails
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     name: str,
     *,
-    assembly_guid: Union[Unset, None, str] = UNSET,
-    version: Union[Unset, None, str] = UNSET,
-    repository_url: Union[Unset, None, str] = UNSET,
+    assembly_guid: Union[Unset, str] = UNSET,
+    version: Union[Unset, str] = UNSET,
+    repository_url: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["assemblyGuid"] = assembly_guid
 
     params["version"] = version
@@ -27,13 +31,15 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Packages/Installed/{name}".format(
             name=name,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -73,17 +79,17 @@ def sync_detailed(
     name: str,
     *,
     client: AuthenticatedClient,
-    assembly_guid: Union[Unset, None, str] = UNSET,
-    version: Union[Unset, None, str] = UNSET,
-    repository_url: Union[Unset, None, str] = UNSET,
+    assembly_guid: Union[Unset, str] = UNSET,
+    version: Union[Unset, str] = UNSET,
+    repository_url: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, ProblemDetails]]:
     """Installs a package.
 
     Args:
         name (str):
-        assembly_guid (Union[Unset, None, str]):
-        version (Union[Unset, None, str]):
-        repository_url (Union[Unset, None, str]):
+        assembly_guid (Union[Unset, str]):
+        version (Union[Unset, str]):
+        repository_url (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -111,17 +117,17 @@ def sync(
     name: str,
     *,
     client: AuthenticatedClient,
-    assembly_guid: Union[Unset, None, str] = UNSET,
-    version: Union[Unset, None, str] = UNSET,
-    repository_url: Union[Unset, None, str] = UNSET,
+    assembly_guid: Union[Unset, str] = UNSET,
+    version: Union[Unset, str] = UNSET,
+    repository_url: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Installs a package.
 
     Args:
         name (str):
-        assembly_guid (Union[Unset, None, str]):
-        version (Union[Unset, None, str]):
-        repository_url (Union[Unset, None, str]):
+        assembly_guid (Union[Unset, str]):
+        version (Union[Unset, str]):
+        repository_url (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -144,17 +150,17 @@ async def asyncio_detailed(
     name: str,
     *,
     client: AuthenticatedClient,
-    assembly_guid: Union[Unset, None, str] = UNSET,
-    version: Union[Unset, None, str] = UNSET,
-    repository_url: Union[Unset, None, str] = UNSET,
+    assembly_guid: Union[Unset, str] = UNSET,
+    version: Union[Unset, str] = UNSET,
+    repository_url: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, ProblemDetails]]:
     """Installs a package.
 
     Args:
         name (str):
-        assembly_guid (Union[Unset, None, str]):
-        version (Union[Unset, None, str]):
-        repository_url (Union[Unset, None, str]):
+        assembly_guid (Union[Unset, str]):
+        version (Union[Unset, str]):
+        repository_url (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -180,17 +186,17 @@ async def asyncio(
     name: str,
     *,
     client: AuthenticatedClient,
-    assembly_guid: Union[Unset, None, str] = UNSET,
-    version: Union[Unset, None, str] = UNSET,
-    repository_url: Union[Unset, None, str] = UNSET,
+    assembly_guid: Union[Unset, str] = UNSET,
+    version: Union[Unset, str] = UNSET,
+    repository_url: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Installs a package.
 
     Args:
         name (str):
-        assembly_guid (Union[Unset, None, str]):
-        version (Union[Unset, None, str]):
-        repository_url (Union[Unset, None, str]):
+        assembly_guid (Union[Unset, str]):
+        version (Union[Unset, str]):
+        repository_url (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

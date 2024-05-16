@@ -3,44 +3,48 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.base_item_kind import BaseItemKind
-from ...types import UNSET, Response, Unset
+from typing import cast, List
+from ...types import UNSET, Unset
+from typing import Dict
+from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
+from typing import Union
+from typing import cast
+from ...models.media_type import MediaType
 
 
 def _get_kwargs(
-    user_id: str,
     *,
-    media_type: Union[Unset, None, List[str]] = UNSET,
-    type: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    media_type: Union[Unset, List[MediaType]] = UNSET,
+    type: Union[Unset, List[BaseItemKind]] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = False,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
-    json_media_type: Union[Unset, None, List[str]] = UNSET
+
+    params["userId"] = user_id
+
+    json_media_type: Union[Unset, List[str]] = UNSET
     if not isinstance(media_type, Unset):
-        if media_type is None:
-            json_media_type = None
-        else:
-            json_media_type = media_type
+        json_media_type = []
+        for media_type_item_data in media_type:
+            media_type_item = media_type_item_data.value
+            json_media_type.append(media_type_item)
 
     params["mediaType"] = json_media_type
 
-    json_type: Union[Unset, None, List[str]] = UNSET
+    json_type: Union[Unset, List[str]] = UNSET
     if not isinstance(type, Unset):
-        if type is None:
-            json_type = None
-        else:
-            json_type = []
-            for type_item_data in type:
-                type_item = type_item_data.value
-
-                json_type.append(type_item)
+        json_type = []
+        for type_item_data in type:
+            type_item = type_item_data.value
+            json_type.append(type_item)
 
     params["type"] = json_type
 
@@ -52,13 +56,13 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Users/{userId}/Suggestions".format(
-            userId=user_id,
-        ),
+        "url": "/Items/Suggestions",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -92,24 +96,24 @@ def _build_response(
 
 
 def sync_detailed(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    media_type: Union[Unset, None, List[str]] = UNSET,
-    type: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    media_type: Union[Unset, List[MediaType]] = UNSET,
+    type: Union[Unset, List[BaseItemKind]] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = False,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets suggestions.
 
     Args:
-        user_id (str):
-        media_type (Union[Unset, None, List[str]]):
-        type (Union[Unset, None, List[BaseItemKind]]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        enable_total_record_count (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        media_type (Union[Unset, List[MediaType]]):
+        type (Union[Unset, List[BaseItemKind]]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        enable_total_record_count (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -136,24 +140,24 @@ def sync_detailed(
 
 
 def sync(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    media_type: Union[Unset, None, List[str]] = UNSET,
-    type: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    media_type: Union[Unset, List[MediaType]] = UNSET,
+    type: Union[Unset, List[BaseItemKind]] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = False,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets suggestions.
 
     Args:
-        user_id (str):
-        media_type (Union[Unset, None, List[str]]):
-        type (Union[Unset, None, List[BaseItemKind]]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        enable_total_record_count (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        media_type (Union[Unset, List[MediaType]]):
+        type (Union[Unset, List[BaseItemKind]]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        enable_total_record_count (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -164,8 +168,8 @@ def sync(
     """
 
     return sync_detailed(
-        user_id=user_id,
         client=client,
+        user_id=user_id,
         media_type=media_type,
         type=type,
         start_index=start_index,
@@ -175,24 +179,24 @@ def sync(
 
 
 async def asyncio_detailed(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    media_type: Union[Unset, None, List[str]] = UNSET,
-    type: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    media_type: Union[Unset, List[MediaType]] = UNSET,
+    type: Union[Unset, List[BaseItemKind]] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = False,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets suggestions.
 
     Args:
-        user_id (str):
-        media_type (Union[Unset, None, List[str]]):
-        type (Union[Unset, None, List[BaseItemKind]]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        enable_total_record_count (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        media_type (Union[Unset, List[MediaType]]):
+        type (Union[Unset, List[BaseItemKind]]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        enable_total_record_count (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -217,24 +221,24 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    media_type: Union[Unset, None, List[str]] = UNSET,
-    type: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    media_type: Union[Unset, List[MediaType]] = UNSET,
+    type: Union[Unset, List[BaseItemKind]] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = False,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets suggestions.
 
     Args:
-        user_id (str):
-        media_type (Union[Unset, None, List[str]]):
-        type (Union[Unset, None, List[BaseItemKind]]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        enable_total_record_count (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        media_type (Union[Unset, List[MediaType]]):
+        type (Union[Unset, List[BaseItemKind]]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        enable_total_record_count (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -246,8 +250,8 @@ async def asyncio(
 
     return (
         await asyncio_detailed(
-            user_id=user_id,
             client=client,
+            user_id=user_id,
             media_type=media_type,
             type=type,
             start_index=start_index,

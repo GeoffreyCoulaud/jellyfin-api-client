@@ -1,28 +1,45 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.forgot_password_pin_dto import ForgotPasswordPinDto
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.pin_redeem_result import PinRedeemResult
-from ...types import Response
+from typing import cast
+from typing import Dict
+from ...models.forgot_password_pin_dto import ForgotPasswordPinDto
 
 
 def _get_kwargs(
     *,
-    json_body: ForgotPasswordPinDto,
+    body: Union[
+        ForgotPasswordPinDto,
+        ForgotPasswordPinDto,
+    ],
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Users/ForgotPassword/Pin",
-        "json": json_json_body,
     }
+
+    if isinstance(body, ForgotPasswordPinDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, ForgotPasswordPinDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -52,12 +69,16 @@ def _build_response(
 def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: ForgotPasswordPinDto,
+    body: Union[
+        ForgotPasswordPinDto,
+        ForgotPasswordPinDto,
+    ],
 ) -> Response[PinRedeemResult]:
     """Redeems a forgot password pin.
 
     Args:
-        json_body (ForgotPasswordPinDto): Forgot Password Pin enter request body DTO.
+        body (ForgotPasswordPinDto): Forgot Password Pin enter request body DTO.
+        body (ForgotPasswordPinDto): Forgot Password Pin enter request body DTO.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -68,7 +89,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -81,12 +102,16 @@ def sync_detailed(
 def sync(
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: ForgotPasswordPinDto,
+    body: Union[
+        ForgotPasswordPinDto,
+        ForgotPasswordPinDto,
+    ],
 ) -> Optional[PinRedeemResult]:
     """Redeems a forgot password pin.
 
     Args:
-        json_body (ForgotPasswordPinDto): Forgot Password Pin enter request body DTO.
+        body (ForgotPasswordPinDto): Forgot Password Pin enter request body DTO.
+        body (ForgotPasswordPinDto): Forgot Password Pin enter request body DTO.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -98,19 +123,23 @@ def sync(
 
     return sync_detailed(
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
 async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: ForgotPasswordPinDto,
+    body: Union[
+        ForgotPasswordPinDto,
+        ForgotPasswordPinDto,
+    ],
 ) -> Response[PinRedeemResult]:
     """Redeems a forgot password pin.
 
     Args:
-        json_body (ForgotPasswordPinDto): Forgot Password Pin enter request body DTO.
+        body (ForgotPasswordPinDto): Forgot Password Pin enter request body DTO.
+        body (ForgotPasswordPinDto): Forgot Password Pin enter request body DTO.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -121,7 +150,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -132,12 +161,16 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
-    json_body: ForgotPasswordPinDto,
+    body: Union[
+        ForgotPasswordPinDto,
+        ForgotPasswordPinDto,
+    ],
 ) -> Optional[PinRedeemResult]:
     """Redeems a forgot password pin.
 
     Args:
-        json_body (ForgotPasswordPinDto): Forgot Password Pin enter request body DTO.
+        body (ForgotPasswordPinDto): Forgot Password Pin enter request body DTO.
+        body (ForgotPasswordPinDto): Forgot Password Pin enter request body DTO.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -150,6 +183,6 @@ async def asyncio(
     return (
         await asyncio_detailed(
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

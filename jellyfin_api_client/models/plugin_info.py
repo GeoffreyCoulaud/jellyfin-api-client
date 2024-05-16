@@ -1,9 +1,16 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
-from ..models.plugin_status import PluginStatus
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, Union
+from ..types import UNSET, Unset
+from ..models.plugin_status import PluginStatus
+
 
 T = TypeVar("T", bound="PluginInfo")
 
@@ -15,7 +22,7 @@ class PluginInfo:
     Attributes:
         name (Union[Unset, str]): Gets or sets the name.
         version (Union[Unset, str]): Gets or sets the version.
-        configuration_file_name (Union[Unset, None, str]): Gets or sets the name of the configuration file.
+        configuration_file_name (Union[None, Unset, str]): Gets or sets the name of the configuration file.
         description (Union[Unset, str]): Gets or sets the description.
         id (Union[Unset, str]): Gets or sets the unique id.
         can_uninstall (Union[Unset, bool]): Gets or sets a value indicating whether the plugin can be uninstalled.
@@ -25,7 +32,7 @@ class PluginInfo:
 
     name: Union[Unset, str] = UNSET
     version: Union[Unset, str] = UNSET
-    configuration_file_name: Union[Unset, None, str] = UNSET
+    configuration_file_name: Union[None, Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
     id: Union[Unset, str] = UNSET
     can_uninstall: Union[Unset, bool] = UNSET
@@ -34,12 +41,23 @@ class PluginInfo:
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
+
         version = self.version
-        configuration_file_name = self.configuration_file_name
+
+        configuration_file_name: Union[None, Unset, str]
+        if isinstance(self.configuration_file_name, Unset):
+            configuration_file_name = UNSET
+        else:
+            configuration_file_name = self.configuration_file_name
+
         description = self.description
+
         id = self.id
+
         can_uninstall = self.can_uninstall
+
         has_image = self.has_image
+
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
             status = self.status.value
@@ -72,7 +90,14 @@ class PluginInfo:
 
         version = d.pop("Version", UNSET)
 
-        configuration_file_name = d.pop("ConfigurationFileName", UNSET)
+        def _parse_configuration_file_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        configuration_file_name = _parse_configuration_file_name(d.pop("ConfigurationFileName", UNSET))
 
         description = d.pop("Description", UNSET)
 

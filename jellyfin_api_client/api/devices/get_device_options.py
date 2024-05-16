@@ -1,31 +1,35 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.device_options import DeviceOptions
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast
 from ...models.problem_details import ProblemDetails
-from ...types import UNSET, Response
+from ...models.device_options import DeviceOptions
+from typing import Dict
 
 
 def _get_kwargs(
     *,
     id: str,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["id"] = id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Devices/Options",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(

@@ -1,12 +1,13 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.base_item_kind import BaseItemKind
-from ...types import UNSET, Response
 
 
 def _get_kwargs(
@@ -16,11 +17,9 @@ def _get_kwargs(
     item_id: str,
     item_name: str,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
-    json_item_type = item_type.value
 
+    json_item_type = item_type.value
     params["itemType"] = json_item_type
 
     params["itemId"] = item_id
@@ -29,13 +28,15 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/Sessions/{sessionId}/Viewing".format(
-            sessionId=session_id,
+        "url": "/Sessions/{session_id}/Viewing".format(
+            session_id=session_id,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:

@@ -1,32 +1,36 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...types import UNSET, Response, Unset
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import Union
+from ...types import UNSET, Unset
 
 
 def _get_kwargs(
     *,
-    session_id: Union[Unset, None, str] = UNSET,
+    session_id: Union[Unset, str] = UNSET,
     item_id: str,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["sessionId"] = session_id
 
     params["itemId"] = item_id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Sessions/Viewing",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
@@ -54,13 +58,13 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    session_id: Union[Unset, None, str] = UNSET,
+    session_id: Union[Unset, str] = UNSET,
     item_id: str,
 ) -> Response[Any]:
     """Reports that a session is viewing an item.
 
     Args:
-        session_id (Union[Unset, None, str]):
+        session_id (Union[Unset, str]):
         item_id (str):
 
     Raises:
@@ -86,13 +90,13 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    session_id: Union[Unset, None, str] = UNSET,
+    session_id: Union[Unset, str] = UNSET,
     item_id: str,
 ) -> Response[Any]:
     """Reports that a session is viewing an item.
 
     Args:
-        session_id (Union[Unset, None, str]):
+        session_id (Union[Unset, str]):
         item_id (str):
 
     Raises:

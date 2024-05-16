@@ -1,13 +1,22 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
-from ..models.image_type import ImageType
 from ..types import UNSET, Unset
 
+from typing import cast, Union
+from typing import cast, List
+from typing import Dict
+from ..models.image_type import ImageType
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.image_option import ImageOption
     from ..models.library_option_info_dto import LibraryOptionInfoDto
+    from ..models.image_option import ImageOption
 
 
 T = TypeVar("T", bound="LibraryTypeOptionsDto")
@@ -18,27 +27,34 @@ class LibraryTypeOptionsDto:
     """Library type options dto.
 
     Attributes:
-        type (Union[Unset, None, str]): Gets or sets the type.
+        type (Union[None, Unset, str]): Gets or sets the type.
         metadata_fetchers (Union[Unset, List['LibraryOptionInfoDto']]): Gets or sets the metadata fetchers.
         image_fetchers (Union[Unset, List['LibraryOptionInfoDto']]): Gets or sets the image fetchers.
         supported_image_types (Union[Unset, List[ImageType]]): Gets or sets the supported image types.
         default_image_options (Union[Unset, List['ImageOption']]): Gets or sets the default image options.
     """
 
-    type: Union[Unset, None, str] = UNSET
+    type: Union[None, Unset, str] = UNSET
     metadata_fetchers: Union[Unset, List["LibraryOptionInfoDto"]] = UNSET
     image_fetchers: Union[Unset, List["LibraryOptionInfoDto"]] = UNSET
     supported_image_types: Union[Unset, List[ImageType]] = UNSET
     default_image_options: Union[Unset, List["ImageOption"]] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        type = self.type
+        from ..models.library_option_info_dto import LibraryOptionInfoDto
+        from ..models.image_option import ImageOption
+
+        type: Union[None, Unset, str]
+        if isinstance(self.type, Unset):
+            type = UNSET
+        else:
+            type = self.type
+
         metadata_fetchers: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.metadata_fetchers, Unset):
             metadata_fetchers = []
             for metadata_fetchers_item_data in self.metadata_fetchers:
                 metadata_fetchers_item = metadata_fetchers_item_data.to_dict()
-
                 metadata_fetchers.append(metadata_fetchers_item)
 
         image_fetchers: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -46,7 +62,6 @@ class LibraryTypeOptionsDto:
             image_fetchers = []
             for image_fetchers_item_data in self.image_fetchers:
                 image_fetchers_item = image_fetchers_item_data.to_dict()
-
                 image_fetchers.append(image_fetchers_item)
 
         supported_image_types: Union[Unset, List[str]] = UNSET
@@ -54,7 +69,6 @@ class LibraryTypeOptionsDto:
             supported_image_types = []
             for supported_image_types_item_data in self.supported_image_types:
                 supported_image_types_item = supported_image_types_item_data.value
-
                 supported_image_types.append(supported_image_types_item)
 
         default_image_options: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -62,7 +76,6 @@ class LibraryTypeOptionsDto:
             default_image_options = []
             for default_image_options_item_data in self.default_image_options:
                 default_image_options_item = default_image_options_item_data.to_dict()
-
                 default_image_options.append(default_image_options_item)
 
         field_dict: Dict[str, Any] = {}
@@ -82,11 +95,19 @@ class LibraryTypeOptionsDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.image_option import ImageOption
         from ..models.library_option_info_dto import LibraryOptionInfoDto
+        from ..models.image_option import ImageOption
 
         d = src_dict.copy()
-        type = d.pop("Type", UNSET)
+
+        def _parse_type(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        type = _parse_type(d.pop("Type", UNSET))
 
         metadata_fetchers = []
         _metadata_fetchers = d.pop("MetadataFetchers", UNSET)

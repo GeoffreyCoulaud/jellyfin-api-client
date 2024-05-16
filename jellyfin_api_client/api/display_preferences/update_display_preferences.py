@@ -1,40 +1,60 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Dict
+from typing import Union
+from typing import cast
 from ...models.display_preferences_dto import DisplayPreferencesDto
-from ...types import UNSET, Response
 
 
 def _get_kwargs(
     display_preferences_id: str,
     *,
-    json_body: DisplayPreferencesDto,
-    user_id: str,
+    body: Union[
+        DisplayPreferencesDto,
+        DisplayPreferencesDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
     client_query: str,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
     params: Dict[str, Any] = {}
+
     params["userId"] = user_id
 
     params["client"] = client_query
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/DisplayPreferences/{displayPreferencesId}".format(
-            displayPreferencesId=display_preferences_id,
+        "url": "/DisplayPreferences/{display_preferences_id}".format(
+            display_preferences_id=display_preferences_id,
         ),
-        "json": json_json_body,
         "params": params,
     }
+
+    if isinstance(body, DisplayPreferencesDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, DisplayPreferencesDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
@@ -63,18 +83,23 @@ def sync_detailed(
     display_preferences_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: DisplayPreferencesDto,
-    user_id: str,
+    body: Union[
+        DisplayPreferencesDto,
+        DisplayPreferencesDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
     client_query: str,
 ) -> Response[Any]:
     """Update Display Preferences.
 
     Args:
         display_preferences_id (str):
-        user_id (str):
+        user_id (Union[Unset, str]):
         client_query (str):
-        json_body (DisplayPreferencesDto): Defines the display preferences for any item that
-            supports them (usually Folders).
+        body (DisplayPreferencesDto): Defines the display preferences for any item that supports
+            them (usually Folders).
+        body (DisplayPreferencesDto): Defines the display preferences for any item that supports
+            them (usually Folders).
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -86,7 +111,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         display_preferences_id=display_preferences_id,
-        json_body=json_body,
+        body=body,
         user_id=user_id,
         client_query=client_query,
     )
@@ -102,18 +127,23 @@ async def asyncio_detailed(
     display_preferences_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: DisplayPreferencesDto,
-    user_id: str,
+    body: Union[
+        DisplayPreferencesDto,
+        DisplayPreferencesDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
     client_query: str,
 ) -> Response[Any]:
     """Update Display Preferences.
 
     Args:
         display_preferences_id (str):
-        user_id (str):
+        user_id (Union[Unset, str]):
         client_query (str):
-        json_body (DisplayPreferencesDto): Defines the display preferences for any item that
-            supports them (usually Folders).
+        body (DisplayPreferencesDto): Defines the display preferences for any item that supports
+            them (usually Folders).
+        body (DisplayPreferencesDto): Defines the display preferences for any item that supports
+            them (usually Folders).
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -125,7 +155,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         display_preferences_id=display_preferences_id,
-        json_body=json_body,
+        body=body,
         user_id=user_id,
         client_query=client_query,
     )

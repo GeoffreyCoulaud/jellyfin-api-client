@@ -3,19 +3,23 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast
+from typing import cast, List
+from typing import Dict
 from ...models.culture_dto import CultureDto
-from ...types import Response
 
 
 def _get_kwargs() -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Localization/Cultures",
     }
+
+    return _kwargs
 
 
 def _parse_response(

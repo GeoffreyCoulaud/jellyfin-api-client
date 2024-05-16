@@ -1,35 +1,42 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Dict
 from ...models.user_item_data_dto import UserItemDataDto
-from ...types import UNSET, Response, Unset
+from typing import Union
+from typing import cast
 
 
 def _get_kwargs(
-    user_id: str,
     item_id: str,
     *,
-    likes: Union[Unset, None, bool] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    likes: Union[Unset, bool] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
+    params["userId"] = user_id
+
     params["likes"] = likes
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/Users/{userId}/Items/{itemId}/Rating".format(
-            userId=user_id,
-            itemId=item_id,
+        "url": "/UserItems/{item_id}/Rating".format(
+            item_id=item_id,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -63,18 +70,18 @@ def _build_response(
 
 
 def sync_detailed(
-    user_id: str,
     item_id: str,
     *,
     client: AuthenticatedClient,
-    likes: Union[Unset, None, bool] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    likes: Union[Unset, bool] = UNSET,
 ) -> Response[Union[Any, UserItemDataDto]]:
     """Updates a user's rating for an item.
 
     Args:
-        user_id (str):
         item_id (str):
-        likes (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        likes (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -85,8 +92,8 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        user_id=user_id,
         item_id=item_id,
+        user_id=user_id,
         likes=likes,
     )
 
@@ -98,18 +105,18 @@ def sync_detailed(
 
 
 def sync(
-    user_id: str,
     item_id: str,
     *,
     client: AuthenticatedClient,
-    likes: Union[Unset, None, bool] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    likes: Union[Unset, bool] = UNSET,
 ) -> Optional[Union[Any, UserItemDataDto]]:
     """Updates a user's rating for an item.
 
     Args:
-        user_id (str):
         item_id (str):
-        likes (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        likes (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -120,26 +127,26 @@ def sync(
     """
 
     return sync_detailed(
-        user_id=user_id,
         item_id=item_id,
         client=client,
+        user_id=user_id,
         likes=likes,
     ).parsed
 
 
 async def asyncio_detailed(
-    user_id: str,
     item_id: str,
     *,
     client: AuthenticatedClient,
-    likes: Union[Unset, None, bool] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    likes: Union[Unset, bool] = UNSET,
 ) -> Response[Union[Any, UserItemDataDto]]:
     """Updates a user's rating for an item.
 
     Args:
-        user_id (str):
         item_id (str):
-        likes (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        likes (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -150,8 +157,8 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        user_id=user_id,
         item_id=item_id,
+        user_id=user_id,
         likes=likes,
     )
 
@@ -161,18 +168,18 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    user_id: str,
     item_id: str,
     *,
     client: AuthenticatedClient,
-    likes: Union[Unset, None, bool] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    likes: Union[Unset, bool] = UNSET,
 ) -> Optional[Union[Any, UserItemDataDto]]:
     """Updates a user's rating for an item.
 
     Args:
-        user_id (str):
         item_id (str):
-        likes (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        likes (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -184,9 +191,9 @@ async def asyncio(
 
     return (
         await asyncio_detailed(
-            user_id=user_id,
             item_id=item_id,
             client=client,
+            user_id=user_id,
             likes=likes,
         )
     ).parsed

@@ -1,8 +1,16 @@
-from typing import TYPE_CHECKING, Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
 
 if TYPE_CHECKING:
     from ..models.library_options import LibraryOptions
@@ -17,17 +25,24 @@ class UpdateLibraryOptionsDto:
 
     Attributes:
         id (Union[Unset, str]): Gets or sets the library item id.
-        library_options (Union[Unset, None, LibraryOptions]):
+        library_options (Union['LibraryOptions', None, Unset]): Gets or sets library options.
     """
 
     id: Union[Unset, str] = UNSET
-    library_options: Union[Unset, None, "LibraryOptions"] = UNSET
+    library_options: Union["LibraryOptions", None, Unset] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.library_options import LibraryOptions
+
         id = self.id
-        library_options: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.library_options, Unset):
-            library_options = self.library_options.to_dict() if self.library_options else None
+
+        library_options: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.library_options, Unset):
+            library_options = UNSET
+        elif isinstance(self.library_options, LibraryOptions):
+            library_options = self.library_options.to_dict()
+        else:
+            library_options = self.library_options
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -45,14 +60,22 @@ class UpdateLibraryOptionsDto:
         d = src_dict.copy()
         id = d.pop("Id", UNSET)
 
-        _library_options = d.pop("LibraryOptions", UNSET)
-        library_options: Union[Unset, None, LibraryOptions]
-        if _library_options is None:
-            library_options = None
-        elif isinstance(_library_options, Unset):
-            library_options = UNSET
-        else:
-            library_options = LibraryOptions.from_dict(_library_options)
+        def _parse_library_options(data: object) -> Union["LibraryOptions", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                library_options_type_1 = LibraryOptions.from_dict(data)
+
+                return library_options_type_1
+            except:  # noqa: E722
+                pass
+            return cast(Union["LibraryOptions", None, Unset], data)
+
+        library_options = _parse_library_options(d.pop("LibraryOptions", UNSET))
 
         update_library_options_dto = cls(
             id=id,

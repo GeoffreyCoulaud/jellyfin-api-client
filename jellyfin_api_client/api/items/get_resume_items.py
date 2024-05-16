@@ -3,36 +3,44 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.base_item_kind import BaseItemKind
+from typing import cast, List
+from ...types import UNSET, Unset
+from typing import Dict
+from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
+from typing import Union
 from ...models.image_type import ImageType
+from typing import cast
 from ...models.item_fields import ItemFields
-from ...types import UNSET, Response, Unset
+from ...models.media_type import MediaType
 
 
 def _get_kwargs(
-    user_id: str,
     *,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = True,
-    enable_images: Union[Unset, None, bool] = True,
-    exclude_active_sessions: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = True,
+    enable_images: Union[Unset, bool] = True,
+    exclude_active_sessions: Union[Unset, bool] = False,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
+    params["userId"] = user_id
+
     params["startIndex"] = start_index
 
     params["limit"] = limit
@@ -41,25 +49,21 @@ def _get_kwargs(
 
     params["parentId"] = parent_id
 
-    json_fields: Union[Unset, None, List[str]] = UNSET
+    json_fields: Union[Unset, List[str]] = UNSET
     if not isinstance(fields, Unset):
-        if fields is None:
-            json_fields = None
-        else:
-            json_fields = []
-            for fields_item_data in fields:
-                fields_item = fields_item_data.value
-
-                json_fields.append(fields_item)
+        json_fields = []
+        for fields_item_data in fields:
+            fields_item = fields_item_data.value
+            json_fields.append(fields_item)
 
     params["fields"] = json_fields
 
-    json_media_types: Union[Unset, None, List[str]] = UNSET
+    json_media_types: Union[Unset, List[str]] = UNSET
     if not isinstance(media_types, Unset):
-        if media_types is None:
-            json_media_types = None
-        else:
-            json_media_types = media_types
+        json_media_types = []
+        for media_types_item_data in media_types:
+            media_types_item = media_types_item_data.value
+            json_media_types.append(media_types_item)
 
     params["mediaTypes"] = json_media_types
 
@@ -67,42 +71,30 @@ def _get_kwargs(
 
     params["imageTypeLimit"] = image_type_limit
 
-    json_enable_image_types: Union[Unset, None, List[str]] = UNSET
+    json_enable_image_types: Union[Unset, List[str]] = UNSET
     if not isinstance(enable_image_types, Unset):
-        if enable_image_types is None:
-            json_enable_image_types = None
-        else:
-            json_enable_image_types = []
-            for enable_image_types_item_data in enable_image_types:
-                enable_image_types_item = enable_image_types_item_data.value
-
-                json_enable_image_types.append(enable_image_types_item)
+        json_enable_image_types = []
+        for enable_image_types_item_data in enable_image_types:
+            enable_image_types_item = enable_image_types_item_data.value
+            json_enable_image_types.append(enable_image_types_item)
 
     params["enableImageTypes"] = json_enable_image_types
 
-    json_exclude_item_types: Union[Unset, None, List[str]] = UNSET
+    json_exclude_item_types: Union[Unset, List[str]] = UNSET
     if not isinstance(exclude_item_types, Unset):
-        if exclude_item_types is None:
-            json_exclude_item_types = None
-        else:
-            json_exclude_item_types = []
-            for exclude_item_types_item_data in exclude_item_types:
-                exclude_item_types_item = exclude_item_types_item_data.value
-
-                json_exclude_item_types.append(exclude_item_types_item)
+        json_exclude_item_types = []
+        for exclude_item_types_item_data in exclude_item_types:
+            exclude_item_types_item = exclude_item_types_item_data.value
+            json_exclude_item_types.append(exclude_item_types_item)
 
     params["excludeItemTypes"] = json_exclude_item_types
 
-    json_include_item_types: Union[Unset, None, List[str]] = UNSET
+    json_include_item_types: Union[Unset, List[str]] = UNSET
     if not isinstance(include_item_types, Unset):
-        if include_item_types is None:
-            json_include_item_types = None
-        else:
-            json_include_item_types = []
-            for include_item_types_item_data in include_item_types:
-                include_item_types_item = include_item_types_item_data.value
-
-                json_include_item_types.append(include_item_types_item)
+        json_include_item_types = []
+        for include_item_types_item_data in include_item_types:
+            include_item_types_item = include_item_types_item_data.value
+            json_include_item_types.append(include_item_types_item)
 
     params["includeItemTypes"] = json_include_item_types
 
@@ -114,13 +106,13 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Users/{userId}/Items/Resume".format(
-            userId=user_id,
-        ),
+        "url": "/UserItems/Resume",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -154,42 +146,42 @@ def _build_response(
 
 
 def sync_detailed(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = True,
-    enable_images: Union[Unset, None, bool] = True,
-    exclude_active_sessions: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = True,
+    enable_images: Union[Unset, bool] = True,
+    exclude_active_sessions: Union[Unset, bool] = False,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets items based on a query.
 
     Args:
-        user_id (str):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        search_term (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        media_types (Union[Unset, None, List[str]]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        exclude_item_types (Union[Unset, None, List[BaseItemKind]]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        enable_total_record_count (Union[Unset, None, bool]):  Default: True.
-        enable_images (Union[Unset, None, bool]):  Default: True.
-        exclude_active_sessions (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        search_term (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        media_types (Union[Unset, List[MediaType]]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        exclude_item_types (Union[Unset, List[BaseItemKind]]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        enable_total_record_count (Union[Unset, bool]):  Default: True.
+        enable_images (Union[Unset, bool]):  Default: True.
+        exclude_active_sessions (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -225,42 +217,42 @@ def sync_detailed(
 
 
 def sync(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = True,
-    enable_images: Union[Unset, None, bool] = True,
-    exclude_active_sessions: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = True,
+    enable_images: Union[Unset, bool] = True,
+    exclude_active_sessions: Union[Unset, bool] = False,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets items based on a query.
 
     Args:
-        user_id (str):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        search_term (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        media_types (Union[Unset, None, List[str]]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        exclude_item_types (Union[Unset, None, List[BaseItemKind]]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        enable_total_record_count (Union[Unset, None, bool]):  Default: True.
-        enable_images (Union[Unset, None, bool]):  Default: True.
-        exclude_active_sessions (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        search_term (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        media_types (Union[Unset, List[MediaType]]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        exclude_item_types (Union[Unset, List[BaseItemKind]]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        enable_total_record_count (Union[Unset, bool]):  Default: True.
+        enable_images (Union[Unset, bool]):  Default: True.
+        exclude_active_sessions (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -271,8 +263,8 @@ def sync(
     """
 
     return sync_detailed(
-        user_id=user_id,
         client=client,
+        user_id=user_id,
         start_index=start_index,
         limit=limit,
         search_term=search_term,
@@ -291,42 +283,42 @@ def sync(
 
 
 async def asyncio_detailed(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = True,
-    enable_images: Union[Unset, None, bool] = True,
-    exclude_active_sessions: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = True,
+    enable_images: Union[Unset, bool] = True,
+    exclude_active_sessions: Union[Unset, bool] = False,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets items based on a query.
 
     Args:
-        user_id (str):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        search_term (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        media_types (Union[Unset, None, List[str]]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        exclude_item_types (Union[Unset, None, List[BaseItemKind]]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        enable_total_record_count (Union[Unset, None, bool]):  Default: True.
-        enable_images (Union[Unset, None, bool]):  Default: True.
-        exclude_active_sessions (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        search_term (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        media_types (Union[Unset, List[MediaType]]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        exclude_item_types (Union[Unset, List[BaseItemKind]]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        enable_total_record_count (Union[Unset, bool]):  Default: True.
+        enable_images (Union[Unset, bool]):  Default: True.
+        exclude_active_sessions (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -360,42 +352,42 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = True,
-    enable_images: Union[Unset, None, bool] = True,
-    exclude_active_sessions: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = True,
+    enable_images: Union[Unset, bool] = True,
+    exclude_active_sessions: Union[Unset, bool] = False,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets items based on a query.
 
     Args:
-        user_id (str):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        search_term (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        media_types (Union[Unset, None, List[str]]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        exclude_item_types (Union[Unset, None, List[BaseItemKind]]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        enable_total_record_count (Union[Unset, None, bool]):  Default: True.
-        enable_images (Union[Unset, None, bool]):  Default: True.
-        exclude_active_sessions (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        search_term (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        media_types (Union[Unset, List[MediaType]]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        exclude_item_types (Union[Unset, List[BaseItemKind]]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        enable_total_record_count (Union[Unset, bool]):  Default: True.
+        enable_images (Union[Unset, bool]):  Default: True.
+        exclude_active_sessions (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -407,8 +399,8 @@ async def asyncio(
 
     return (
         await asyncio_detailed(
-            user_id=user_id,
             client=client,
+            user_id=user_id,
             start_index=start_index,
             limit=limit,
             search_term=search_term,

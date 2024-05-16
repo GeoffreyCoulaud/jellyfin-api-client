@@ -5,6 +5,7 @@ class MediaStreamType(str, Enum):
     AUDIO = "Audio"
     DATA = "Data"
     EMBEDDEDIMAGE = "EmbeddedImage"
+    LYRIC = "Lyric"
     SUBTITLE = "Subtitle"
     VIDEO = "Video"
 

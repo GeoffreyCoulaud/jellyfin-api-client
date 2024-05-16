@@ -3,74 +3,70 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast, List
+from ...types import UNSET, Unset
+from typing import Dict
 from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
-from ...models.item_fields import ItemFields
+from typing import Union
 from ...models.item_filter import ItemFilter
-from ...types import UNSET, Response, Unset
+from typing import cast
+from ...models.item_fields import ItemFields
 
 
 def _get_kwargs(
     *,
-    user_id: Union[Unset, None, str] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    channel_ids: Union[Unset, None, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    channel_ids: Union[Unset, List[str]] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["userId"] = user_id
 
     params["startIndex"] = start_index
 
     params["limit"] = limit
 
-    json_filters: Union[Unset, None, List[str]] = UNSET
+    json_filters: Union[Unset, List[str]] = UNSET
     if not isinstance(filters, Unset):
-        if filters is None:
-            json_filters = None
-        else:
-            json_filters = []
-            for filters_item_data in filters:
-                filters_item = filters_item_data.value
-
-                json_filters.append(filters_item)
+        json_filters = []
+        for filters_item_data in filters:
+            filters_item = filters_item_data.value
+            json_filters.append(filters_item)
 
     params["filters"] = json_filters
 
-    json_fields: Union[Unset, None, List[str]] = UNSET
+    json_fields: Union[Unset, List[str]] = UNSET
     if not isinstance(fields, Unset):
-        if fields is None:
-            json_fields = None
-        else:
-            json_fields = []
-            for fields_item_data in fields:
-                fields_item = fields_item_data.value
-
-                json_fields.append(fields_item)
+        json_fields = []
+        for fields_item_data in fields:
+            fields_item = fields_item_data.value
+            json_fields.append(fields_item)
 
     params["fields"] = json_fields
 
-    json_channel_ids: Union[Unset, None, List[str]] = UNSET
+    json_channel_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(channel_ids, Unset):
-        if channel_ids is None:
-            json_channel_ids = None
-        else:
-            json_channel_ids = channel_ids
+        json_channel_ids = channel_ids
 
     params["channelIds"] = json_channel_ids
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Channels/Items/Latest",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -106,22 +102,22 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    channel_ids: Union[Unset, None, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    channel_ids: Union[Unset, List[str]] = UNSET,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets latest channel items.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        filters (Union[Unset, None, List[ItemFilter]]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        channel_ids (Union[Unset, None, List[str]]):
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        filters (Union[Unset, List[ItemFilter]]):
+        fields (Union[Unset, List[ItemFields]]):
+        channel_ids (Union[Unset, List[str]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -150,22 +146,22 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    channel_ids: Union[Unset, None, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    channel_ids: Union[Unset, List[str]] = UNSET,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets latest channel items.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        filters (Union[Unset, None, List[ItemFilter]]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        channel_ids (Union[Unset, None, List[str]]):
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        filters (Union[Unset, List[ItemFilter]]):
+        fields (Union[Unset, List[ItemFields]]):
+        channel_ids (Union[Unset, List[str]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -189,22 +185,22 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    channel_ids: Union[Unset, None, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    channel_ids: Union[Unset, List[str]] = UNSET,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets latest channel items.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        filters (Union[Unset, None, List[ItemFilter]]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        channel_ids (Union[Unset, None, List[str]]):
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        filters (Union[Unset, List[ItemFilter]]):
+        fields (Union[Unset, List[ItemFields]]):
+        channel_ids (Union[Unset, List[str]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -231,22 +227,22 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    channel_ids: Union[Unset, None, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    channel_ids: Union[Unset, List[str]] = UNSET,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets latest channel items.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        filters (Union[Unset, None, List[ItemFilter]]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        channel_ids (Union[Unset, None, List[str]]):
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        filters (Union[Unset, List[ItemFilter]]):
+        fields (Union[Unset, List[ItemFields]]):
+        channel_ids (Union[Unset, List[str]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

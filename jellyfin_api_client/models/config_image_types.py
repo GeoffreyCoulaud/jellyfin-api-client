@@ -1,8 +1,16 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, List
+from typing import cast, Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="ConfigImageTypes")
 
@@ -11,60 +19,80 @@ T = TypeVar("T", bound="ConfigImageTypes")
 class ConfigImageTypes:
     """
     Attributes:
-        backdrop_sizes (Union[Unset, None, List[str]]):
-        base_url (Union[Unset, None, str]):
-        logo_sizes (Union[Unset, None, List[str]]):
-        poster_sizes (Union[Unset, None, List[str]]):
-        profile_sizes (Union[Unset, None, List[str]]):
-        secure_base_url (Union[Unset, None, str]):
-        still_sizes (Union[Unset, None, List[str]]):
+        backdrop_sizes (Union[List[str], None, Unset]):
+        base_url (Union[None, Unset, str]):
+        logo_sizes (Union[List[str], None, Unset]):
+        poster_sizes (Union[List[str], None, Unset]):
+        profile_sizes (Union[List[str], None, Unset]):
+        secure_base_url (Union[None, Unset, str]):
+        still_sizes (Union[List[str], None, Unset]):
     """
 
-    backdrop_sizes: Union[Unset, None, List[str]] = UNSET
-    base_url: Union[Unset, None, str] = UNSET
-    logo_sizes: Union[Unset, None, List[str]] = UNSET
-    poster_sizes: Union[Unset, None, List[str]] = UNSET
-    profile_sizes: Union[Unset, None, List[str]] = UNSET
-    secure_base_url: Union[Unset, None, str] = UNSET
-    still_sizes: Union[Unset, None, List[str]] = UNSET
+    backdrop_sizes: Union[List[str], None, Unset] = UNSET
+    base_url: Union[None, Unset, str] = UNSET
+    logo_sizes: Union[List[str], None, Unset] = UNSET
+    poster_sizes: Union[List[str], None, Unset] = UNSET
+    profile_sizes: Union[List[str], None, Unset] = UNSET
+    secure_base_url: Union[None, Unset, str] = UNSET
+    still_sizes: Union[List[str], None, Unset] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        backdrop_sizes: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.backdrop_sizes, Unset):
-            if self.backdrop_sizes is None:
-                backdrop_sizes = None
-            else:
-                backdrop_sizes = self.backdrop_sizes
+        backdrop_sizes: Union[List[str], None, Unset]
+        if isinstance(self.backdrop_sizes, Unset):
+            backdrop_sizes = UNSET
+        elif isinstance(self.backdrop_sizes, list):
+            backdrop_sizes = self.backdrop_sizes
 
-        base_url = self.base_url
-        logo_sizes: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.logo_sizes, Unset):
-            if self.logo_sizes is None:
-                logo_sizes = None
-            else:
-                logo_sizes = self.logo_sizes
+        else:
+            backdrop_sizes = self.backdrop_sizes
 
-        poster_sizes: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.poster_sizes, Unset):
-            if self.poster_sizes is None:
-                poster_sizes = None
-            else:
-                poster_sizes = self.poster_sizes
+        base_url: Union[None, Unset, str]
+        if isinstance(self.base_url, Unset):
+            base_url = UNSET
+        else:
+            base_url = self.base_url
 
-        profile_sizes: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.profile_sizes, Unset):
-            if self.profile_sizes is None:
-                profile_sizes = None
-            else:
-                profile_sizes = self.profile_sizes
+        logo_sizes: Union[List[str], None, Unset]
+        if isinstance(self.logo_sizes, Unset):
+            logo_sizes = UNSET
+        elif isinstance(self.logo_sizes, list):
+            logo_sizes = self.logo_sizes
 
-        secure_base_url = self.secure_base_url
-        still_sizes: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.still_sizes, Unset):
-            if self.still_sizes is None:
-                still_sizes = None
-            else:
-                still_sizes = self.still_sizes
+        else:
+            logo_sizes = self.logo_sizes
+
+        poster_sizes: Union[List[str], None, Unset]
+        if isinstance(self.poster_sizes, Unset):
+            poster_sizes = UNSET
+        elif isinstance(self.poster_sizes, list):
+            poster_sizes = self.poster_sizes
+
+        else:
+            poster_sizes = self.poster_sizes
+
+        profile_sizes: Union[List[str], None, Unset]
+        if isinstance(self.profile_sizes, Unset):
+            profile_sizes = UNSET
+        elif isinstance(self.profile_sizes, list):
+            profile_sizes = self.profile_sizes
+
+        else:
+            profile_sizes = self.profile_sizes
+
+        secure_base_url: Union[None, Unset, str]
+        if isinstance(self.secure_base_url, Unset):
+            secure_base_url = UNSET
+        else:
+            secure_base_url = self.secure_base_url
+
+        still_sizes: Union[List[str], None, Unset]
+        if isinstance(self.still_sizes, Unset):
+            still_sizes = UNSET
+        elif isinstance(self.still_sizes, list):
+            still_sizes = self.still_sizes
+
+        else:
+            still_sizes = self.still_sizes
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -88,19 +116,109 @@ class ConfigImageTypes:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        backdrop_sizes = cast(List[str], d.pop("BackdropSizes", UNSET))
 
-        base_url = d.pop("BaseUrl", UNSET)
+        def _parse_backdrop_sizes(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                backdrop_sizes_type_0 = cast(List[str], data)
 
-        logo_sizes = cast(List[str], d.pop("LogoSizes", UNSET))
+                return backdrop_sizes_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
 
-        poster_sizes = cast(List[str], d.pop("PosterSizes", UNSET))
+        backdrop_sizes = _parse_backdrop_sizes(d.pop("BackdropSizes", UNSET))
 
-        profile_sizes = cast(List[str], d.pop("ProfileSizes", UNSET))
+        def _parse_base_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        secure_base_url = d.pop("SecureBaseUrl", UNSET)
+        base_url = _parse_base_url(d.pop("BaseUrl", UNSET))
 
-        still_sizes = cast(List[str], d.pop("StillSizes", UNSET))
+        def _parse_logo_sizes(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                logo_sizes_type_0 = cast(List[str], data)
+
+                return logo_sizes_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        logo_sizes = _parse_logo_sizes(d.pop("LogoSizes", UNSET))
+
+        def _parse_poster_sizes(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                poster_sizes_type_0 = cast(List[str], data)
+
+                return poster_sizes_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        poster_sizes = _parse_poster_sizes(d.pop("PosterSizes", UNSET))
+
+        def _parse_profile_sizes(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                profile_sizes_type_0 = cast(List[str], data)
+
+                return profile_sizes_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        profile_sizes = _parse_profile_sizes(d.pop("ProfileSizes", UNSET))
+
+        def _parse_secure_base_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        secure_base_url = _parse_secure_base_url(d.pop("SecureBaseUrl", UNSET))
+
+        def _parse_still_sizes(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                still_sizes_type_0 = cast(List[str], data)
+
+                return still_sizes_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        still_sizes = _parse_still_sizes(d.pop("StillSizes", UNSET))
 
         config_image_types = cls(
             backdrop_sizes=backdrop_sizes,

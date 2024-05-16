@@ -1,30 +1,47 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.general_command import GeneralCommand
-from ...types import Response
+from typing import cast
+from typing import Dict
 
 
 def _get_kwargs(
     session_id: str,
     *,
-    json_body: GeneralCommand,
+    body: Union[
+        GeneralCommand,
+        GeneralCommand,
+    ],
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/Sessions/{sessionId}/Command".format(
-            sessionId=session_id,
+        "url": "/Sessions/{session_id}/Command".format(
+            session_id=session_id,
         ),
-        "json": json_json_body,
     }
+
+    if isinstance(body, GeneralCommand):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, GeneralCommand):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
@@ -53,13 +70,17 @@ def sync_detailed(
     session_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: GeneralCommand,
+    body: Union[
+        GeneralCommand,
+        GeneralCommand,
+    ],
 ) -> Response[Any]:
     """Issues a full general command to a client.
 
     Args:
         session_id (str):
-        json_body (GeneralCommand):
+        body (GeneralCommand):
+        body (GeneralCommand):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -71,7 +92,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         session_id=session_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -85,13 +106,17 @@ async def asyncio_detailed(
     session_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: GeneralCommand,
+    body: Union[
+        GeneralCommand,
+        GeneralCommand,
+    ],
 ) -> Response[Any]:
     """Issues a full general command to a client.
 
     Args:
         session_id (str):
-        json_body (GeneralCommand):
+        body (GeneralCommand):
+        body (GeneralCommand):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -103,7 +128,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         session_id=session_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)

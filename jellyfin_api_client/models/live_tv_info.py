@@ -1,8 +1,16 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import cast, List
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
 
 if TYPE_CHECKING:
     from ..models.live_tv_service_info import LiveTvServiceInfo
@@ -25,15 +33,17 @@ class LiveTvInfo:
     enabled_users: Union[Unset, List[str]] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.live_tv_service_info import LiveTvServiceInfo
+
         services: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.services, Unset):
             services = []
             for services_item_data in self.services:
                 services_item = services_item_data.to_dict()
-
                 services.append(services_item)
 
         is_enabled = self.is_enabled
+
         enabled_users: Union[Unset, List[str]] = UNSET
         if not isinstance(self.enabled_users, Unset):
             enabled_users = self.enabled_users

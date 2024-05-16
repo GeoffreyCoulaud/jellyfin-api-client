@@ -1,33 +1,42 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Dict
 from ...models.live_stream_response import LiveStreamResponse
 from ...models.open_live_stream_dto import OpenLiveStreamDto
-from ...types import UNSET, Response, Unset
+from typing import Union
+from typing import cast
 
 
 def _get_kwargs(
     *,
-    json_body: OpenLiveStreamDto,
-    open_token: Union[Unset, None, str] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    play_session_id: Union[Unset, None, str] = UNSET,
-    max_streaming_bitrate: Union[Unset, None, int] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    item_id: Union[Unset, None, str] = UNSET,
-    enable_direct_play: Union[Unset, None, bool] = UNSET,
-    enable_direct_stream: Union[Unset, None, bool] = UNSET,
+    body: Union[
+        OpenLiveStreamDto,
+        OpenLiveStreamDto,
+    ],
+    open_token: Union[Unset, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    play_session_id: Union[Unset, str] = UNSET,
+    max_streaming_bitrate: Union[Unset, int] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    item_id: Union[Unset, str] = UNSET,
+    enable_direct_play: Union[Unset, bool] = UNSET,
+    enable_direct_stream: Union[Unset, bool] = UNSET,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
     params: Dict[str, Any] = {}
+
     params["openToken"] = open_token
 
     params["userId"] = user_id
@@ -52,14 +61,25 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/LiveStreams/Open",
-        "json": json_json_body,
         "params": params,
     }
+
+    if isinstance(body, OpenLiveStreamDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, OpenLiveStreamDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -95,34 +115,38 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: OpenLiveStreamDto,
-    open_token: Union[Unset, None, str] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    play_session_id: Union[Unset, None, str] = UNSET,
-    max_streaming_bitrate: Union[Unset, None, int] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    item_id: Union[Unset, None, str] = UNSET,
-    enable_direct_play: Union[Unset, None, bool] = UNSET,
-    enable_direct_stream: Union[Unset, None, bool] = UNSET,
+    body: Union[
+        OpenLiveStreamDto,
+        OpenLiveStreamDto,
+    ],
+    open_token: Union[Unset, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    play_session_id: Union[Unset, str] = UNSET,
+    max_streaming_bitrate: Union[Unset, int] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    item_id: Union[Unset, str] = UNSET,
+    enable_direct_play: Union[Unset, bool] = UNSET,
+    enable_direct_stream: Union[Unset, bool] = UNSET,
 ) -> Response[Union[Any, LiveStreamResponse]]:
     """Opens a media source.
 
     Args:
-        open_token (Union[Unset, None, str]):
-        user_id (Union[Unset, None, str]):
-        play_session_id (Union[Unset, None, str]):
-        max_streaming_bitrate (Union[Unset, None, int]):
-        start_time_ticks (Union[Unset, None, int]):
-        audio_stream_index (Union[Unset, None, int]):
-        subtitle_stream_index (Union[Unset, None, int]):
-        max_audio_channels (Union[Unset, None, int]):
-        item_id (Union[Unset, None, str]):
-        enable_direct_play (Union[Unset, None, bool]):
-        enable_direct_stream (Union[Unset, None, bool]):
-        json_body (OpenLiveStreamDto): Open live stream dto.
+        open_token (Union[Unset, str]):
+        user_id (Union[Unset, str]):
+        play_session_id (Union[Unset, str]):
+        max_streaming_bitrate (Union[Unset, int]):
+        start_time_ticks (Union[Unset, int]):
+        audio_stream_index (Union[Unset, int]):
+        subtitle_stream_index (Union[Unset, int]):
+        max_audio_channels (Union[Unset, int]):
+        item_id (Union[Unset, str]):
+        enable_direct_play (Union[Unset, bool]):
+        enable_direct_stream (Union[Unset, bool]):
+        body (OpenLiveStreamDto): Open live stream dto.
+        body (OpenLiveStreamDto): Open live stream dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -133,7 +157,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         open_token=open_token,
         user_id=user_id,
         play_session_id=play_session_id,
@@ -157,34 +181,38 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    json_body: OpenLiveStreamDto,
-    open_token: Union[Unset, None, str] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    play_session_id: Union[Unset, None, str] = UNSET,
-    max_streaming_bitrate: Union[Unset, None, int] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    item_id: Union[Unset, None, str] = UNSET,
-    enable_direct_play: Union[Unset, None, bool] = UNSET,
-    enable_direct_stream: Union[Unset, None, bool] = UNSET,
+    body: Union[
+        OpenLiveStreamDto,
+        OpenLiveStreamDto,
+    ],
+    open_token: Union[Unset, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    play_session_id: Union[Unset, str] = UNSET,
+    max_streaming_bitrate: Union[Unset, int] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    item_id: Union[Unset, str] = UNSET,
+    enable_direct_play: Union[Unset, bool] = UNSET,
+    enable_direct_stream: Union[Unset, bool] = UNSET,
 ) -> Optional[Union[Any, LiveStreamResponse]]:
     """Opens a media source.
 
     Args:
-        open_token (Union[Unset, None, str]):
-        user_id (Union[Unset, None, str]):
-        play_session_id (Union[Unset, None, str]):
-        max_streaming_bitrate (Union[Unset, None, int]):
-        start_time_ticks (Union[Unset, None, int]):
-        audio_stream_index (Union[Unset, None, int]):
-        subtitle_stream_index (Union[Unset, None, int]):
-        max_audio_channels (Union[Unset, None, int]):
-        item_id (Union[Unset, None, str]):
-        enable_direct_play (Union[Unset, None, bool]):
-        enable_direct_stream (Union[Unset, None, bool]):
-        json_body (OpenLiveStreamDto): Open live stream dto.
+        open_token (Union[Unset, str]):
+        user_id (Union[Unset, str]):
+        play_session_id (Union[Unset, str]):
+        max_streaming_bitrate (Union[Unset, int]):
+        start_time_ticks (Union[Unset, int]):
+        audio_stream_index (Union[Unset, int]):
+        subtitle_stream_index (Union[Unset, int]):
+        max_audio_channels (Union[Unset, int]):
+        item_id (Union[Unset, str]):
+        enable_direct_play (Union[Unset, bool]):
+        enable_direct_stream (Union[Unset, bool]):
+        body (OpenLiveStreamDto): Open live stream dto.
+        body (OpenLiveStreamDto): Open live stream dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -196,7 +224,7 @@ def sync(
 
     return sync_detailed(
         client=client,
-        json_body=json_body,
+        body=body,
         open_token=open_token,
         user_id=user_id,
         play_session_id=play_session_id,
@@ -214,34 +242,38 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: OpenLiveStreamDto,
-    open_token: Union[Unset, None, str] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    play_session_id: Union[Unset, None, str] = UNSET,
-    max_streaming_bitrate: Union[Unset, None, int] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    item_id: Union[Unset, None, str] = UNSET,
-    enable_direct_play: Union[Unset, None, bool] = UNSET,
-    enable_direct_stream: Union[Unset, None, bool] = UNSET,
+    body: Union[
+        OpenLiveStreamDto,
+        OpenLiveStreamDto,
+    ],
+    open_token: Union[Unset, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    play_session_id: Union[Unset, str] = UNSET,
+    max_streaming_bitrate: Union[Unset, int] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    item_id: Union[Unset, str] = UNSET,
+    enable_direct_play: Union[Unset, bool] = UNSET,
+    enable_direct_stream: Union[Unset, bool] = UNSET,
 ) -> Response[Union[Any, LiveStreamResponse]]:
     """Opens a media source.
 
     Args:
-        open_token (Union[Unset, None, str]):
-        user_id (Union[Unset, None, str]):
-        play_session_id (Union[Unset, None, str]):
-        max_streaming_bitrate (Union[Unset, None, int]):
-        start_time_ticks (Union[Unset, None, int]):
-        audio_stream_index (Union[Unset, None, int]):
-        subtitle_stream_index (Union[Unset, None, int]):
-        max_audio_channels (Union[Unset, None, int]):
-        item_id (Union[Unset, None, str]):
-        enable_direct_play (Union[Unset, None, bool]):
-        enable_direct_stream (Union[Unset, None, bool]):
-        json_body (OpenLiveStreamDto): Open live stream dto.
+        open_token (Union[Unset, str]):
+        user_id (Union[Unset, str]):
+        play_session_id (Union[Unset, str]):
+        max_streaming_bitrate (Union[Unset, int]):
+        start_time_ticks (Union[Unset, int]):
+        audio_stream_index (Union[Unset, int]):
+        subtitle_stream_index (Union[Unset, int]):
+        max_audio_channels (Union[Unset, int]):
+        item_id (Union[Unset, str]):
+        enable_direct_play (Union[Unset, bool]):
+        enable_direct_stream (Union[Unset, bool]):
+        body (OpenLiveStreamDto): Open live stream dto.
+        body (OpenLiveStreamDto): Open live stream dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -252,7 +284,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         open_token=open_token,
         user_id=user_id,
         play_session_id=play_session_id,
@@ -274,34 +306,38 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    json_body: OpenLiveStreamDto,
-    open_token: Union[Unset, None, str] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    play_session_id: Union[Unset, None, str] = UNSET,
-    max_streaming_bitrate: Union[Unset, None, int] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    item_id: Union[Unset, None, str] = UNSET,
-    enable_direct_play: Union[Unset, None, bool] = UNSET,
-    enable_direct_stream: Union[Unset, None, bool] = UNSET,
+    body: Union[
+        OpenLiveStreamDto,
+        OpenLiveStreamDto,
+    ],
+    open_token: Union[Unset, str] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    play_session_id: Union[Unset, str] = UNSET,
+    max_streaming_bitrate: Union[Unset, int] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    item_id: Union[Unset, str] = UNSET,
+    enable_direct_play: Union[Unset, bool] = UNSET,
+    enable_direct_stream: Union[Unset, bool] = UNSET,
 ) -> Optional[Union[Any, LiveStreamResponse]]:
     """Opens a media source.
 
     Args:
-        open_token (Union[Unset, None, str]):
-        user_id (Union[Unset, None, str]):
-        play_session_id (Union[Unset, None, str]):
-        max_streaming_bitrate (Union[Unset, None, int]):
-        start_time_ticks (Union[Unset, None, int]):
-        audio_stream_index (Union[Unset, None, int]):
-        subtitle_stream_index (Union[Unset, None, int]):
-        max_audio_channels (Union[Unset, None, int]):
-        item_id (Union[Unset, None, str]):
-        enable_direct_play (Union[Unset, None, bool]):
-        enable_direct_stream (Union[Unset, None, bool]):
-        json_body (OpenLiveStreamDto): Open live stream dto.
+        open_token (Union[Unset, str]):
+        user_id (Union[Unset, str]):
+        play_session_id (Union[Unset, str]):
+        max_streaming_bitrate (Union[Unset, int]):
+        start_time_ticks (Union[Unset, int]):
+        audio_stream_index (Union[Unset, int]):
+        subtitle_stream_index (Union[Unset, int]):
+        max_audio_channels (Union[Unset, int]):
+        item_id (Union[Unset, str]):
+        enable_direct_play (Union[Unset, bool]):
+        enable_direct_stream (Union[Unset, bool]):
+        body (OpenLiveStreamDto): Open live stream dto.
+        body (OpenLiveStreamDto): Open live stream dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -314,7 +350,7 @@ async def asyncio(
     return (
         await asyncio_detailed(
             client=client,
-            json_body=json_body,
+            body=body,
             open_token=open_token,
             user_id=user_id,
             play_session_id=play_session_id,

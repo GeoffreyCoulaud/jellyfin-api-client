@@ -1,40 +1,47 @@
 from http import HTTPStatus
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast, List
+from ...types import UNSET, Unset
+from typing import Dict
+from typing import Union
+from typing import cast
 from ...models.add_virtual_folder_dto import AddVirtualFolderDto
 from ...models.collection_type_options import CollectionTypeOptions
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
-    json_body: AddVirtualFolderDto,
-    name: Union[Unset, None, str] = UNSET,
-    collection_type: Union[Unset, None, CollectionTypeOptions] = UNSET,
-    paths: Union[Unset, None, List[str]] = UNSET,
-    refresh_library: Union[Unset, None, bool] = False,
+    body: Union[
+        AddVirtualFolderDto,
+        AddVirtualFolderDto,
+    ],
+    name: Union[Unset, str] = UNSET,
+    collection_type: Union[Unset, CollectionTypeOptions] = UNSET,
+    paths: Union[Unset, List[str]] = UNSET,
+    refresh_library: Union[Unset, bool] = False,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
     params: Dict[str, Any] = {}
+
     params["name"] = name
 
-    json_collection_type: Union[Unset, None, str] = UNSET
+    json_collection_type: Union[Unset, str] = UNSET
     if not isinstance(collection_type, Unset):
-        json_collection_type = collection_type.value if collection_type else None
+        json_collection_type = collection_type.value
 
     params["collectionType"] = json_collection_type
 
-    json_paths: Union[Unset, None, List[str]] = UNSET
+    json_paths: Union[Unset, List[str]] = UNSET
     if not isinstance(paths, Unset):
-        if paths is None:
-            json_paths = None
-        else:
-            json_paths = paths
+        json_paths = paths
 
     params["paths"] = json_paths
 
@@ -42,14 +49,25 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Library/VirtualFolders",
-        "json": json_json_body,
         "params": params,
     }
+
+    if isinstance(body, AddVirtualFolderDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, AddVirtualFolderDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
@@ -77,20 +95,24 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: AddVirtualFolderDto,
-    name: Union[Unset, None, str] = UNSET,
-    collection_type: Union[Unset, None, CollectionTypeOptions] = UNSET,
-    paths: Union[Unset, None, List[str]] = UNSET,
-    refresh_library: Union[Unset, None, bool] = False,
+    body: Union[
+        AddVirtualFolderDto,
+        AddVirtualFolderDto,
+    ],
+    name: Union[Unset, str] = UNSET,
+    collection_type: Union[Unset, CollectionTypeOptions] = UNSET,
+    paths: Union[Unset, List[str]] = UNSET,
+    refresh_library: Union[Unset, bool] = False,
 ) -> Response[Any]:
     """Adds a virtual folder.
 
     Args:
-        name (Union[Unset, None, str]):
-        collection_type (Union[Unset, None, CollectionTypeOptions]):
-        paths (Union[Unset, None, List[str]]):
-        refresh_library (Union[Unset, None, bool]):
-        json_body (AddVirtualFolderDto): Add virtual folder dto.
+        name (Union[Unset, str]):
+        collection_type (Union[Unset, CollectionTypeOptions]): The collection type options.
+        paths (Union[Unset, List[str]]):
+        refresh_library (Union[Unset, bool]):  Default: False.
+        body (AddVirtualFolderDto): Add virtual folder dto.
+        body (AddVirtualFolderDto): Add virtual folder dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -101,7 +123,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         name=name,
         collection_type=collection_type,
         paths=paths,
@@ -118,20 +140,24 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: AddVirtualFolderDto,
-    name: Union[Unset, None, str] = UNSET,
-    collection_type: Union[Unset, None, CollectionTypeOptions] = UNSET,
-    paths: Union[Unset, None, List[str]] = UNSET,
-    refresh_library: Union[Unset, None, bool] = False,
+    body: Union[
+        AddVirtualFolderDto,
+        AddVirtualFolderDto,
+    ],
+    name: Union[Unset, str] = UNSET,
+    collection_type: Union[Unset, CollectionTypeOptions] = UNSET,
+    paths: Union[Unset, List[str]] = UNSET,
+    refresh_library: Union[Unset, bool] = False,
 ) -> Response[Any]:
     """Adds a virtual folder.
 
     Args:
-        name (Union[Unset, None, str]):
-        collection_type (Union[Unset, None, CollectionTypeOptions]):
-        paths (Union[Unset, None, List[str]]):
-        refresh_library (Union[Unset, None, bool]):
-        json_body (AddVirtualFolderDto): Add virtual folder dto.
+        name (Union[Unset, str]):
+        collection_type (Union[Unset, CollectionTypeOptions]): The collection type options.
+        paths (Union[Unset, List[str]]):
+        refresh_library (Union[Unset, bool]):  Default: False.
+        body (AddVirtualFolderDto): Add virtual folder dto.
+        body (AddVirtualFolderDto): Add virtual folder dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -142,7 +168,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         name=name,
         collection_type=collection_type,
         paths=paths,

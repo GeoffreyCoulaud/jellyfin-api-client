@@ -1,9 +1,18 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
-from ..models.collection_type_options import CollectionTypeOptions
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+from typing import cast, List
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
+from ..models.virtual_folder_info_collection_type import VirtualFolderInfoCollectionType
 
 if TYPE_CHECKING:
     from ..models.library_options import LibraryOptions
@@ -17,46 +26,78 @@ class VirtualFolderInfo:
     """Used to hold information about a user's list of configured virtual folders.
 
     Attributes:
-        name (Union[Unset, None, str]): Gets or sets the name.
-        locations (Union[Unset, None, List[str]]): Gets or sets the locations.
-        collection_type (Union[Unset, None, CollectionTypeOptions]):
-        library_options (Union[Unset, None, LibraryOptions]):
-        item_id (Union[Unset, None, str]): Gets or sets the item identifier.
-        primary_image_item_id (Union[Unset, None, str]): Gets or sets the primary image item identifier.
-        refresh_progress (Union[Unset, None, float]):
-        refresh_status (Union[Unset, None, str]):
+        name (Union[None, Unset, str]): Gets or sets the name.
+        locations (Union[List[str], None, Unset]): Gets or sets the locations.
+        collection_type (Union[Unset, VirtualFolderInfoCollectionType]): Gets or sets the type of the collection.
+        library_options (Union['LibraryOptions', None, Unset]):
+        item_id (Union[None, Unset, str]): Gets or sets the item identifier.
+        primary_image_item_id (Union[None, Unset, str]): Gets or sets the primary image item identifier.
+        refresh_progress (Union[None, Unset, float]):
+        refresh_status (Union[None, Unset, str]):
     """
 
-    name: Union[Unset, None, str] = UNSET
-    locations: Union[Unset, None, List[str]] = UNSET
-    collection_type: Union[Unset, None, CollectionTypeOptions] = UNSET
-    library_options: Union[Unset, None, "LibraryOptions"] = UNSET
-    item_id: Union[Unset, None, str] = UNSET
-    primary_image_item_id: Union[Unset, None, str] = UNSET
-    refresh_progress: Union[Unset, None, float] = UNSET
-    refresh_status: Union[Unset, None, str] = UNSET
+    name: Union[None, Unset, str] = UNSET
+    locations: Union[List[str], None, Unset] = UNSET
+    collection_type: Union[Unset, VirtualFolderInfoCollectionType] = UNSET
+    library_options: Union["LibraryOptions", None, Unset] = UNSET
+    item_id: Union[None, Unset, str] = UNSET
+    primary_image_item_id: Union[None, Unset, str] = UNSET
+    refresh_progress: Union[None, Unset, float] = UNSET
+    refresh_status: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        name = self.name
-        locations: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.locations, Unset):
-            if self.locations is None:
-                locations = None
-            else:
-                locations = self.locations
+        from ..models.library_options import LibraryOptions
 
-        collection_type: Union[Unset, None, str] = UNSET
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
+
+        locations: Union[List[str], None, Unset]
+        if isinstance(self.locations, Unset):
+            locations = UNSET
+        elif isinstance(self.locations, list):
+            locations = self.locations
+
+        else:
+            locations = self.locations
+
+        collection_type: Union[Unset, str] = UNSET
         if not isinstance(self.collection_type, Unset):
-            collection_type = self.collection_type.value if self.collection_type else None
+            collection_type = self.collection_type.value
 
-        library_options: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.library_options, Unset):
-            library_options = self.library_options.to_dict() if self.library_options else None
+        library_options: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.library_options, Unset):
+            library_options = UNSET
+        elif isinstance(self.library_options, LibraryOptions):
+            library_options = self.library_options.to_dict()
+        else:
+            library_options = self.library_options
 
-        item_id = self.item_id
-        primary_image_item_id = self.primary_image_item_id
-        refresh_progress = self.refresh_progress
-        refresh_status = self.refresh_status
+        item_id: Union[None, Unset, str]
+        if isinstance(self.item_id, Unset):
+            item_id = UNSET
+        else:
+            item_id = self.item_id
+
+        primary_image_item_id: Union[None, Unset, str]
+        if isinstance(self.primary_image_item_id, Unset):
+            primary_image_item_id = UNSET
+        else:
+            primary_image_item_id = self.primary_image_item_id
+
+        refresh_progress: Union[None, Unset, float]
+        if isinstance(self.refresh_progress, Unset):
+            refresh_progress = UNSET
+        else:
+            refresh_progress = self.refresh_progress
+
+        refresh_status: Union[None, Unset, str]
+        if isinstance(self.refresh_status, Unset):
+            refresh_status = UNSET
+        else:
+            refresh_status = self.refresh_status
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -84,35 +125,92 @@ class VirtualFolderInfo:
         from ..models.library_options import LibraryOptions
 
         d = src_dict.copy()
-        name = d.pop("Name", UNSET)
 
-        locations = cast(List[str], d.pop("Locations", UNSET))
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        name = _parse_name(d.pop("Name", UNSET))
+
+        def _parse_locations(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                locations_type_0 = cast(List[str], data)
+
+                return locations_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        locations = _parse_locations(d.pop("Locations", UNSET))
 
         _collection_type = d.pop("CollectionType", UNSET)
-        collection_type: Union[Unset, None, CollectionTypeOptions]
-        if _collection_type is None:
-            collection_type = None
-        elif isinstance(_collection_type, Unset):
+        collection_type: Union[Unset, VirtualFolderInfoCollectionType]
+        if isinstance(_collection_type, Unset):
             collection_type = UNSET
         else:
-            collection_type = CollectionTypeOptions(_collection_type)
+            collection_type = VirtualFolderInfoCollectionType(_collection_type)
 
-        _library_options = d.pop("LibraryOptions", UNSET)
-        library_options: Union[Unset, None, LibraryOptions]
-        if _library_options is None:
-            library_options = None
-        elif isinstance(_library_options, Unset):
-            library_options = UNSET
-        else:
-            library_options = LibraryOptions.from_dict(_library_options)
+        def _parse_library_options(data: object) -> Union["LibraryOptions", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                library_options_type_1 = LibraryOptions.from_dict(data)
 
-        item_id = d.pop("ItemId", UNSET)
+                return library_options_type_1
+            except:  # noqa: E722
+                pass
+            return cast(Union["LibraryOptions", None, Unset], data)
 
-        primary_image_item_id = d.pop("PrimaryImageItemId", UNSET)
+        library_options = _parse_library_options(d.pop("LibraryOptions", UNSET))
 
-        refresh_progress = d.pop("RefreshProgress", UNSET)
+        def _parse_item_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        refresh_status = d.pop("RefreshStatus", UNSET)
+        item_id = _parse_item_id(d.pop("ItemId", UNSET))
+
+        def _parse_primary_image_item_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        primary_image_item_id = _parse_primary_image_item_id(d.pop("PrimaryImageItemId", UNSET))
+
+        def _parse_refresh_progress(data: object) -> Union[None, Unset, float]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, float], data)
+
+        refresh_progress = _parse_refresh_progress(d.pop("RefreshProgress", UNSET))
+
+        def _parse_refresh_status(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        refresh_status = _parse_refresh_status(d.pop("RefreshStatus", UNSET))
 
         virtual_folder_info = cls(
             name=name,

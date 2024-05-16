@@ -3,30 +3,38 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast, List
+from ...types import UNSET, Unset
+from typing import Dict
 from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
-from ...types import UNSET, Response, Unset
+from typing import Union
+from typing import cast
+from ...models.collection_type import CollectionType
 
 
 def _get_kwargs(
-    user_id: str,
     *,
-    include_external_content: Union[Unset, None, bool] = UNSET,
-    preset_views: Union[Unset, None, List[str]] = UNSET,
-    include_hidden: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    include_external_content: Union[Unset, bool] = UNSET,
+    preset_views: Union[Unset, List[CollectionType]] = UNSET,
+    include_hidden: Union[Unset, bool] = False,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
+    params["userId"] = user_id
+
     params["includeExternalContent"] = include_external_content
 
-    json_preset_views: Union[Unset, None, List[str]] = UNSET
+    json_preset_views: Union[Unset, List[str]] = UNSET
     if not isinstance(preset_views, Unset):
-        if preset_views is None:
-            json_preset_views = None
-        else:
-            json_preset_views = preset_views
+        json_preset_views = []
+        for preset_views_item_data in preset_views:
+            preset_views_item = preset_views_item_data.value
+            json_preset_views.append(preset_views_item)
 
     params["presetViews"] = json_preset_views
 
@@ -34,13 +42,13 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Users/{userId}/Views".format(
-            userId=user_id,
-        ),
+        "url": "/UserViews",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -74,20 +82,20 @@ def _build_response(
 
 
 def sync_detailed(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    include_external_content: Union[Unset, None, bool] = UNSET,
-    preset_views: Union[Unset, None, List[str]] = UNSET,
-    include_hidden: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    include_external_content: Union[Unset, bool] = UNSET,
+    preset_views: Union[Unset, List[CollectionType]] = UNSET,
+    include_hidden: Union[Unset, bool] = False,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Get user views.
 
     Args:
-        user_id (str):
-        include_external_content (Union[Unset, None, bool]):
-        preset_views (Union[Unset, None, List[str]]):
-        include_hidden (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        include_external_content (Union[Unset, bool]):
+        preset_views (Union[Unset, List[CollectionType]]):
+        include_hidden (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -112,20 +120,20 @@ def sync_detailed(
 
 
 def sync(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    include_external_content: Union[Unset, None, bool] = UNSET,
-    preset_views: Union[Unset, None, List[str]] = UNSET,
-    include_hidden: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    include_external_content: Union[Unset, bool] = UNSET,
+    preset_views: Union[Unset, List[CollectionType]] = UNSET,
+    include_hidden: Union[Unset, bool] = False,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Get user views.
 
     Args:
-        user_id (str):
-        include_external_content (Union[Unset, None, bool]):
-        preset_views (Union[Unset, None, List[str]]):
-        include_hidden (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        include_external_content (Union[Unset, bool]):
+        preset_views (Union[Unset, List[CollectionType]]):
+        include_hidden (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -136,8 +144,8 @@ def sync(
     """
 
     return sync_detailed(
-        user_id=user_id,
         client=client,
+        user_id=user_id,
         include_external_content=include_external_content,
         preset_views=preset_views,
         include_hidden=include_hidden,
@@ -145,20 +153,20 @@ def sync(
 
 
 async def asyncio_detailed(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    include_external_content: Union[Unset, None, bool] = UNSET,
-    preset_views: Union[Unset, None, List[str]] = UNSET,
-    include_hidden: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    include_external_content: Union[Unset, bool] = UNSET,
+    preset_views: Union[Unset, List[CollectionType]] = UNSET,
+    include_hidden: Union[Unset, bool] = False,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Get user views.
 
     Args:
-        user_id (str):
-        include_external_content (Union[Unset, None, bool]):
-        preset_views (Union[Unset, None, List[str]]):
-        include_hidden (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        include_external_content (Union[Unset, bool]):
+        preset_views (Union[Unset, List[CollectionType]]):
+        include_hidden (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -181,20 +189,20 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    include_external_content: Union[Unset, None, bool] = UNSET,
-    preset_views: Union[Unset, None, List[str]] = UNSET,
-    include_hidden: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    include_external_content: Union[Unset, bool] = UNSET,
+    preset_views: Union[Unset, List[CollectionType]] = UNSET,
+    include_hidden: Union[Unset, bool] = False,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Get user views.
 
     Args:
-        user_id (str):
-        include_external_content (Union[Unset, None, bool]):
-        preset_views (Union[Unset, None, List[str]]):
-        include_hidden (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        include_external_content (Union[Unset, bool]):
+        preset_views (Union[Unset, List[CollectionType]]):
+        include_hidden (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -206,8 +214,8 @@ async def asyncio(
 
     return (
         await asyncio_detailed(
-            user_id=user_id,
             client=client,
+            user_id=user_id,
             include_external_content=include_external_content,
             preset_views=preset_views,
             include_hidden=include_hidden,

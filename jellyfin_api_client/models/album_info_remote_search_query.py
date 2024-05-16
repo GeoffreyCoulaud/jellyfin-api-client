@@ -1,8 +1,16 @@
-from typing import TYPE_CHECKING, Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
 
 if TYPE_CHECKING:
     from ..models.album_info import AlbumInfo
@@ -15,25 +23,37 @@ T = TypeVar("T", bound="AlbumInfoRemoteSearchQuery")
 class AlbumInfoRemoteSearchQuery:
     """
     Attributes:
-        search_info (Union[Unset, None, AlbumInfo]):
+        search_info (Union['AlbumInfo', None, Unset]):
         item_id (Union[Unset, str]):
-        search_provider_name (Union[Unset, None, str]): Gets or sets the provider name to search within if set.
+        search_provider_name (Union[None, Unset, str]): Gets or sets the provider name to search within if set.
         include_disabled_providers (Union[Unset, bool]): Gets or sets a value indicating whether disabled providers
             should be included.
     """
 
-    search_info: Union[Unset, None, "AlbumInfo"] = UNSET
+    search_info: Union["AlbumInfo", None, Unset] = UNSET
     item_id: Union[Unset, str] = UNSET
-    search_provider_name: Union[Unset, None, str] = UNSET
+    search_provider_name: Union[None, Unset, str] = UNSET
     include_disabled_providers: Union[Unset, bool] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        search_info: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.search_info, Unset):
-            search_info = self.search_info.to_dict() if self.search_info else None
+        from ..models.album_info import AlbumInfo
+
+        search_info: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.search_info, Unset):
+            search_info = UNSET
+        elif isinstance(self.search_info, AlbumInfo):
+            search_info = self.search_info.to_dict()
+        else:
+            search_info = self.search_info
 
         item_id = self.item_id
-        search_provider_name = self.search_provider_name
+
+        search_provider_name: Union[None, Unset, str]
+        if isinstance(self.search_provider_name, Unset):
+            search_provider_name = UNSET
+        else:
+            search_provider_name = self.search_provider_name
+
         include_disabled_providers = self.include_disabled_providers
 
         field_dict: Dict[str, Any] = {}
@@ -54,18 +74,34 @@ class AlbumInfoRemoteSearchQuery:
         from ..models.album_info import AlbumInfo
 
         d = src_dict.copy()
-        _search_info = d.pop("SearchInfo", UNSET)
-        search_info: Union[Unset, None, AlbumInfo]
-        if _search_info is None:
-            search_info = None
-        elif isinstance(_search_info, Unset):
-            search_info = UNSET
-        else:
-            search_info = AlbumInfo.from_dict(_search_info)
+
+        def _parse_search_info(data: object) -> Union["AlbumInfo", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                search_info_type_1 = AlbumInfo.from_dict(data)
+
+                return search_info_type_1
+            except:  # noqa: E722
+                pass
+            return cast(Union["AlbumInfo", None, Unset], data)
+
+        search_info = _parse_search_info(d.pop("SearchInfo", UNSET))
 
         item_id = d.pop("ItemId", UNSET)
 
-        search_provider_name = d.pop("SearchProviderName", UNSET)
+        def _parse_search_provider_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        search_provider_name = _parse_search_provider_name(d.pop("SearchProviderName", UNSET))
 
         include_disabled_providers = d.pop("IncludeDisabledProviders", UNSET)
 

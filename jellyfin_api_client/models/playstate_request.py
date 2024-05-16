@@ -1,9 +1,16 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
-from ..models.playstate_command import PlaystateCommand
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, Union
+from ..types import UNSET, Unset
+from ..models.playstate_command import PlaystateCommand
+
 
 T = TypeVar("T", bound="PlaystateRequest")
 
@@ -13,21 +20,30 @@ class PlaystateRequest:
     """
     Attributes:
         command (Union[Unset, PlaystateCommand]): Enum PlaystateCommand.
-        seek_position_ticks (Union[Unset, None, int]):
-        controlling_user_id (Union[Unset, None, str]): Gets or sets the controlling user identifier.
+        seek_position_ticks (Union[None, Unset, int]):
+        controlling_user_id (Union[None, Unset, str]): Gets or sets the controlling user identifier.
     """
 
     command: Union[Unset, PlaystateCommand] = UNSET
-    seek_position_ticks: Union[Unset, None, int] = UNSET
-    controlling_user_id: Union[Unset, None, str] = UNSET
+    seek_position_ticks: Union[None, Unset, int] = UNSET
+    controlling_user_id: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         command: Union[Unset, str] = UNSET
         if not isinstance(self.command, Unset):
             command = self.command.value
 
-        seek_position_ticks = self.seek_position_ticks
-        controlling_user_id = self.controlling_user_id
+        seek_position_ticks: Union[None, Unset, int]
+        if isinstance(self.seek_position_ticks, Unset):
+            seek_position_ticks = UNSET
+        else:
+            seek_position_ticks = self.seek_position_ticks
+
+        controlling_user_id: Union[None, Unset, str]
+        if isinstance(self.controlling_user_id, Unset):
+            controlling_user_id = UNSET
+        else:
+            controlling_user_id = self.controlling_user_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -50,9 +66,23 @@ class PlaystateRequest:
         else:
             command = PlaystateCommand(_command)
 
-        seek_position_ticks = d.pop("SeekPositionTicks", UNSET)
+        def _parse_seek_position_ticks(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        controlling_user_id = d.pop("ControllingUserId", UNSET)
+        seek_position_ticks = _parse_seek_position_ticks(d.pop("SeekPositionTicks", UNSET))
+
+        def _parse_controlling_user_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        controlling_user_id = _parse_controlling_user_id(d.pop("ControllingUserId", UNSET))
 
         playstate_request = cls(
             command=command,

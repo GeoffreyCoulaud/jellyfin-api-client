@@ -1,27 +1,30 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast
 from ...models.problem_details import ProblemDetails
-from ...types import Response
+from typing import Dict
 
 
 def _get_kwargs(
     stream_id: str,
     container: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/LiveTv/LiveStreamFiles/{streamId}/stream.{container}".format(
-            streamId=stream_id,
+        "url": "/LiveTv/LiveStreamFiles/{stream_id}/stream.{container}".format(
+            stream_id=stream_id,
             container=container,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

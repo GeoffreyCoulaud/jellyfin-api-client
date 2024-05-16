@@ -3,43 +3,44 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.base_item_kind import BaseItemKind
+from typing import cast, List
+from ...types import UNSET, Unset
+from typing import Dict
+from typing import Union
+from typing import cast
 from ...models.query_filters import QueryFilters
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
-    user_id: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    is_airing: Union[Unset, None, bool] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    recursive: Union[Unset, None, bool] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    is_airing: Union[Unset, bool] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    recursive: Union[Unset, bool] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["userId"] = user_id
 
     params["parentId"] = parent_id
 
-    json_include_item_types: Union[Unset, None, List[str]] = UNSET
+    json_include_item_types: Union[Unset, List[str]] = UNSET
     if not isinstance(include_item_types, Unset):
-        if include_item_types is None:
-            json_include_item_types = None
-        else:
-            json_include_item_types = []
-            for include_item_types_item_data in include_item_types:
-                include_item_types_item = include_item_types_item_data.value
-
-                json_include_item_types.append(include_item_types_item)
+        json_include_item_types = []
+        for include_item_types_item_data in include_item_types:
+            include_item_types_item = include_item_types_item_data.value
+            json_include_item_types.append(include_item_types_item)
 
     params["includeItemTypes"] = json_include_item_types
 
@@ -59,11 +60,13 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Items/Filters2",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -99,30 +102,30 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    is_airing: Union[Unset, None, bool] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    recursive: Union[Unset, None, bool] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    is_airing: Union[Unset, bool] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    recursive: Union[Unset, bool] = UNSET,
 ) -> Response[Union[Any, QueryFilters]]:
     """Gets query filters.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        is_airing (Union[Unset, None, bool]):
-        is_movie (Union[Unset, None, bool]):
-        is_sports (Union[Unset, None, bool]):
-        is_kids (Union[Unset, None, bool]):
-        is_news (Union[Unset, None, bool]):
-        is_series (Union[Unset, None, bool]):
-        recursive (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        is_airing (Union[Unset, bool]):
+        is_movie (Union[Unset, bool]):
+        is_sports (Union[Unset, bool]):
+        is_kids (Union[Unset, bool]):
+        is_news (Union[Unset, bool]):
+        is_series (Union[Unset, bool]):
+        recursive (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -155,30 +158,30 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    is_airing: Union[Unset, None, bool] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    recursive: Union[Unset, None, bool] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    is_airing: Union[Unset, bool] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    recursive: Union[Unset, bool] = UNSET,
 ) -> Optional[Union[Any, QueryFilters]]:
     """Gets query filters.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        is_airing (Union[Unset, None, bool]):
-        is_movie (Union[Unset, None, bool]):
-        is_sports (Union[Unset, None, bool]):
-        is_kids (Union[Unset, None, bool]):
-        is_news (Union[Unset, None, bool]):
-        is_series (Union[Unset, None, bool]):
-        recursive (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        is_airing (Union[Unset, bool]):
+        is_movie (Union[Unset, bool]):
+        is_sports (Union[Unset, bool]):
+        is_kids (Union[Unset, bool]):
+        is_news (Union[Unset, bool]):
+        is_series (Union[Unset, bool]):
+        recursive (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -206,30 +209,30 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    is_airing: Union[Unset, None, bool] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    recursive: Union[Unset, None, bool] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    is_airing: Union[Unset, bool] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    recursive: Union[Unset, bool] = UNSET,
 ) -> Response[Union[Any, QueryFilters]]:
     """Gets query filters.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        is_airing (Union[Unset, None, bool]):
-        is_movie (Union[Unset, None, bool]):
-        is_sports (Union[Unset, None, bool]):
-        is_kids (Union[Unset, None, bool]):
-        is_news (Union[Unset, None, bool]):
-        is_series (Union[Unset, None, bool]):
-        recursive (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        is_airing (Union[Unset, bool]):
+        is_movie (Union[Unset, bool]):
+        is_sports (Union[Unset, bool]):
+        is_kids (Union[Unset, bool]):
+        is_news (Union[Unset, bool]):
+        is_series (Union[Unset, bool]):
+        recursive (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -260,30 +263,30 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    is_airing: Union[Unset, None, bool] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    recursive: Union[Unset, None, bool] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    is_airing: Union[Unset, bool] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    recursive: Union[Unset, bool] = UNSET,
 ) -> Optional[Union[Any, QueryFilters]]:
     """Gets query filters.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        is_airing (Union[Unset, None, bool]):
-        is_movie (Union[Unset, None, bool]):
-        is_sports (Union[Unset, None, bool]):
-        is_kids (Union[Unset, None, bool]):
-        is_news (Union[Unset, None, bool]):
-        is_series (Union[Unset, None, bool]):
-        recursive (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        is_airing (Union[Unset, bool]):
+        is_movie (Union[Unset, bool]):
+        is_sports (Union[Unset, bool]):
+        is_kids (Union[Unset, bool]):
+        is_news (Union[Unset, bool]):
+        is_series (Union[Unset, bool]):
+        recursive (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

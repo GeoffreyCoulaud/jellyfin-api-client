@@ -1,8 +1,14 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="EndPointInfo")
 
@@ -20,6 +26,7 @@ class EndPointInfo:
 
     def to_dict(self) -> Dict[str, Any]:
         is_local = self.is_local
+
         is_in_network = self.is_in_network
 
         field_dict: Dict[str, Any] = {}

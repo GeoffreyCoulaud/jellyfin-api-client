@@ -1,26 +1,26 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...types import Response
+from ...types import Response, UNSET
+from ... import errors
 
 
 def _get_kwargs(
     item_id: str,
     playlist_id: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Videos/{itemId}/hls/{playlistId}/stream.m3u8".format(
-            itemId=item_id,
-            playlistId=playlist_id,
+        "url": "/Videos/{item_id}/hls/{playlist_id}/stream.m3u8".format(
+            item_id=item_id,
+            playlist_id=playlist_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:

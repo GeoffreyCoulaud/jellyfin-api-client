@@ -1,34 +1,54 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Dict
 from ...models.client_capabilities_dto import ClientCapabilitiesDto
-from ...types import UNSET, Response, Unset
+from typing import Union
+from typing import cast
 
 
 def _get_kwargs(
     *,
-    json_body: ClientCapabilitiesDto,
-    id: Union[Unset, None, str] = UNSET,
+    body: Union[
+        ClientCapabilitiesDto,
+        ClientCapabilitiesDto,
+    ],
+    id: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
     params: Dict[str, Any] = {}
+
     params["id"] = id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Sessions/Capabilities/Full",
-        "json": json_json_body,
         "params": params,
     }
+
+    if isinstance(body, ClientCapabilitiesDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, ClientCapabilitiesDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
@@ -56,14 +76,18 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: ClientCapabilitiesDto,
-    id: Union[Unset, None, str] = UNSET,
+    body: Union[
+        ClientCapabilitiesDto,
+        ClientCapabilitiesDto,
+    ],
+    id: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
     """Updates capabilities for a device.
 
     Args:
-        id (Union[Unset, None, str]):
-        json_body (ClientCapabilitiesDto): Client capabilities dto.
+        id (Union[Unset, str]):
+        body (ClientCapabilitiesDto): Client capabilities dto.
+        body (ClientCapabilitiesDto): Client capabilities dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -74,7 +98,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         id=id,
     )
 
@@ -88,14 +112,18 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: ClientCapabilitiesDto,
-    id: Union[Unset, None, str] = UNSET,
+    body: Union[
+        ClientCapabilitiesDto,
+        ClientCapabilitiesDto,
+    ],
+    id: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
     """Updates capabilities for a device.
 
     Args:
-        id (Union[Unset, None, str]):
-        json_body (ClientCapabilitiesDto): Client capabilities dto.
+        id (Union[Unset, str]):
+        body (ClientCapabilitiesDto): Client capabilities dto.
+        body (ClientCapabilitiesDto): Client capabilities dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -106,7 +134,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         id=id,
     )
 

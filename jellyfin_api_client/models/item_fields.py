@@ -3,7 +3,6 @@ from enum import Enum
 
 class ItemFields(str, Enum):
     AIRTIME = "AirTime"
-    BASICSYNCINFO = "BasicSyncInfo"
     CANDELETE = "CanDelete"
     CANDOWNLOAD = "CanDownload"
     CHANNELIMAGE = "ChannelImage"
@@ -57,11 +56,11 @@ class ItemFields(str, Enum):
     SPECIALEPISODENUMBERS = "SpecialEpisodeNumbers"
     SPECIALFEATURECOUNT = "SpecialFeatureCount"
     STUDIOS = "Studios"
-    SYNCINFO = "SyncInfo"
     TAGLINES = "Taglines"
     TAGS = "Tags"
     THEMESONGIDS = "ThemeSongIds"
     THEMEVIDEOIDS = "ThemeVideoIds"
+    TRICKPLAY = "Trickplay"
     WIDTH = "Width"
 
     def __str__(self) -> str:

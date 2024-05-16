@@ -1,10 +1,18 @@
-from typing import TYPE_CHECKING, Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
-from ..models.scroll_direction import ScrollDirection
-from ..models.sort_order import SortOrder
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
+from ..models.sort_order import SortOrder
+from ..models.scroll_direction import ScrollDirection
 
 if TYPE_CHECKING:
     from ..models.display_preferences_dto_custom_prefs import DisplayPreferencesDtoCustomPrefs
@@ -18,10 +26,10 @@ class DisplayPreferencesDto:
     """Defines the display preferences for any item that supports them (usually Folders).
 
     Attributes:
-        id (Union[Unset, None, str]): Gets or sets the user id.
-        view_type (Union[Unset, None, str]): Gets or sets the type of the view.
-        sort_by (Union[Unset, None, str]): Gets or sets the sort by.
-        index_by (Union[Unset, None, str]): Gets or sets the index by.
+        id (Union[None, Unset, str]): Gets or sets the user id.
+        view_type (Union[None, Unset, str]): Gets or sets the type of the view.
+        sort_by (Union[None, Unset, str]): Gets or sets the sort by.
+        index_by (Union[None, Unset, str]): Gets or sets the index by.
         remember_indexing (Union[Unset, bool]): Gets or sets a value indicating whether [remember indexing].
         primary_image_height (Union[Unset, int]): Gets or sets the height of the primary image.
         primary_image_width (Union[Unset, int]): Gets or sets the width of the primary image.
@@ -31,13 +39,13 @@ class DisplayPreferencesDto:
         remember_sorting (Union[Unset, bool]): Gets or sets a value indicating whether [remember sorting].
         sort_order (Union[Unset, SortOrder]): An enum representing the sorting order.
         show_sidebar (Union[Unset, bool]): Gets or sets a value indicating whether [show sidebar].
-        client (Union[Unset, None, str]): Gets or sets the client.
+        client (Union[None, Unset, str]): Gets or sets the client.
     """
 
-    id: Union[Unset, None, str] = UNSET
-    view_type: Union[Unset, None, str] = UNSET
-    sort_by: Union[Unset, None, str] = UNSET
-    index_by: Union[Unset, None, str] = UNSET
+    id: Union[None, Unset, str] = UNSET
+    view_type: Union[None, Unset, str] = UNSET
+    sort_by: Union[None, Unset, str] = UNSET
+    index_by: Union[None, Unset, str] = UNSET
     remember_indexing: Union[Unset, bool] = UNSET
     primary_image_height: Union[Unset, int] = UNSET
     primary_image_width: Union[Unset, int] = UNSET
@@ -47,16 +55,41 @@ class DisplayPreferencesDto:
     remember_sorting: Union[Unset, bool] = UNSET
     sort_order: Union[Unset, SortOrder] = UNSET
     show_sidebar: Union[Unset, bool] = UNSET
-    client: Union[Unset, None, str] = UNSET
+    client: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        id = self.id
-        view_type = self.view_type
-        sort_by = self.sort_by
-        index_by = self.index_by
+        from ..models.display_preferences_dto_custom_prefs import DisplayPreferencesDtoCustomPrefs
+
+        id: Union[None, Unset, str]
+        if isinstance(self.id, Unset):
+            id = UNSET
+        else:
+            id = self.id
+
+        view_type: Union[None, Unset, str]
+        if isinstance(self.view_type, Unset):
+            view_type = UNSET
+        else:
+            view_type = self.view_type
+
+        sort_by: Union[None, Unset, str]
+        if isinstance(self.sort_by, Unset):
+            sort_by = UNSET
+        else:
+            sort_by = self.sort_by
+
+        index_by: Union[None, Unset, str]
+        if isinstance(self.index_by, Unset):
+            index_by = UNSET
+        else:
+            index_by = self.index_by
+
         remember_indexing = self.remember_indexing
+
         primary_image_height = self.primary_image_height
+
         primary_image_width = self.primary_image_width
+
         custom_prefs: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.custom_prefs, Unset):
             custom_prefs = self.custom_prefs.to_dict()
@@ -66,13 +99,20 @@ class DisplayPreferencesDto:
             scroll_direction = self.scroll_direction.value
 
         show_backdrop = self.show_backdrop
+
         remember_sorting = self.remember_sorting
+
         sort_order: Union[Unset, str] = UNSET
         if not isinstance(self.sort_order, Unset):
             sort_order = self.sort_order.value
 
         show_sidebar = self.show_sidebar
-        client = self.client
+
+        client: Union[None, Unset, str]
+        if isinstance(self.client, Unset):
+            client = UNSET
+        else:
+            client = self.client
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -112,13 +152,42 @@ class DisplayPreferencesDto:
         from ..models.display_preferences_dto_custom_prefs import DisplayPreferencesDtoCustomPrefs
 
         d = src_dict.copy()
-        id = d.pop("Id", UNSET)
 
-        view_type = d.pop("ViewType", UNSET)
+        def _parse_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        sort_by = d.pop("SortBy", UNSET)
+        id = _parse_id(d.pop("Id", UNSET))
 
-        index_by = d.pop("IndexBy", UNSET)
+        def _parse_view_type(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        view_type = _parse_view_type(d.pop("ViewType", UNSET))
+
+        def _parse_sort_by(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        sort_by = _parse_sort_by(d.pop("SortBy", UNSET))
+
+        def _parse_index_by(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        index_by = _parse_index_by(d.pop("IndexBy", UNSET))
 
         remember_indexing = d.pop("RememberIndexing", UNSET)
 
@@ -153,7 +222,14 @@ class DisplayPreferencesDto:
 
         show_sidebar = d.pop("ShowSidebar", UNSET)
 
-        client = d.pop("Client", UNSET)
+        def _parse_client(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        client = _parse_client(d.pop("Client", UNSET))
 
         display_preferences_dto = cls(
             id=id,

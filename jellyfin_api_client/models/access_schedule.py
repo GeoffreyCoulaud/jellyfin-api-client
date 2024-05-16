@@ -1,9 +1,15 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import Union
 from ..models.dynamic_day_of_week import DynamicDayOfWeek
 from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="AccessSchedule")
 
@@ -29,12 +35,15 @@ class AccessSchedule:
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         user_id = self.user_id
+
         day_of_week: Union[Unset, str] = UNSET
         if not isinstance(self.day_of_week, Unset):
             day_of_week = self.day_of_week.value
 
         start_hour = self.start_hour
+
         end_hour = self.end_hour
 
         field_dict: Dict[str, Any] = {}

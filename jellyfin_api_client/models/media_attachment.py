@@ -1,8 +1,15 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="MediaAttachment")
 
@@ -12,31 +19,61 @@ class MediaAttachment:
     """Class MediaAttachment.
 
     Attributes:
-        codec (Union[Unset, None, str]): Gets or sets the codec.
-        codec_tag (Union[Unset, None, str]): Gets or sets the codec tag.
-        comment (Union[Unset, None, str]): Gets or sets the comment.
+        codec (Union[None, Unset, str]): Gets or sets the codec.
+        codec_tag (Union[None, Unset, str]): Gets or sets the codec tag.
+        comment (Union[None, Unset, str]): Gets or sets the comment.
         index (Union[Unset, int]): Gets or sets the index.
-        file_name (Union[Unset, None, str]): Gets or sets the filename.
-        mime_type (Union[Unset, None, str]): Gets or sets the MIME type.
-        delivery_url (Union[Unset, None, str]): Gets or sets the delivery URL.
+        file_name (Union[None, Unset, str]): Gets or sets the filename.
+        mime_type (Union[None, Unset, str]): Gets or sets the MIME type.
+        delivery_url (Union[None, Unset, str]): Gets or sets the delivery URL.
     """
 
-    codec: Union[Unset, None, str] = UNSET
-    codec_tag: Union[Unset, None, str] = UNSET
-    comment: Union[Unset, None, str] = UNSET
+    codec: Union[None, Unset, str] = UNSET
+    codec_tag: Union[None, Unset, str] = UNSET
+    comment: Union[None, Unset, str] = UNSET
     index: Union[Unset, int] = UNSET
-    file_name: Union[Unset, None, str] = UNSET
-    mime_type: Union[Unset, None, str] = UNSET
-    delivery_url: Union[Unset, None, str] = UNSET
+    file_name: Union[None, Unset, str] = UNSET
+    mime_type: Union[None, Unset, str] = UNSET
+    delivery_url: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        codec = self.codec
-        codec_tag = self.codec_tag
-        comment = self.comment
+        codec: Union[None, Unset, str]
+        if isinstance(self.codec, Unset):
+            codec = UNSET
+        else:
+            codec = self.codec
+
+        codec_tag: Union[None, Unset, str]
+        if isinstance(self.codec_tag, Unset):
+            codec_tag = UNSET
+        else:
+            codec_tag = self.codec_tag
+
+        comment: Union[None, Unset, str]
+        if isinstance(self.comment, Unset):
+            comment = UNSET
+        else:
+            comment = self.comment
+
         index = self.index
-        file_name = self.file_name
-        mime_type = self.mime_type
-        delivery_url = self.delivery_url
+
+        file_name: Union[None, Unset, str]
+        if isinstance(self.file_name, Unset):
+            file_name = UNSET
+        else:
+            file_name = self.file_name
+
+        mime_type: Union[None, Unset, str]
+        if isinstance(self.mime_type, Unset):
+            mime_type = UNSET
+        else:
+            mime_type = self.mime_type
+
+        delivery_url: Union[None, Unset, str]
+        if isinstance(self.delivery_url, Unset):
+            delivery_url = UNSET
+        else:
+            delivery_url = self.delivery_url
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -60,19 +97,62 @@ class MediaAttachment:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        codec = d.pop("Codec", UNSET)
 
-        codec_tag = d.pop("CodecTag", UNSET)
+        def _parse_codec(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        comment = d.pop("Comment", UNSET)
+        codec = _parse_codec(d.pop("Codec", UNSET))
+
+        def _parse_codec_tag(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        codec_tag = _parse_codec_tag(d.pop("CodecTag", UNSET))
+
+        def _parse_comment(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        comment = _parse_comment(d.pop("Comment", UNSET))
 
         index = d.pop("Index", UNSET)
 
-        file_name = d.pop("FileName", UNSET)
+        def _parse_file_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        mime_type = d.pop("MimeType", UNSET)
+        file_name = _parse_file_name(d.pop("FileName", UNSET))
 
-        delivery_url = d.pop("DeliveryUrl", UNSET)
+        def _parse_mime_type(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        mime_type = _parse_mime_type(d.pop("MimeType", UNSET))
+
+        def _parse_delivery_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        delivery_url = _parse_delivery_url(d.pop("DeliveryUrl", UNSET))
 
         media_attachment = cls(
             codec=codec,

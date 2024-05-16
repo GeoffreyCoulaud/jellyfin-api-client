@@ -3,30 +3,32 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast, List
+from ...types import UNSET, Unset
+from typing import Dict
 from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
+from typing import Union
+from typing import cast
 from ...models.item_fields import ItemFields
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     item_id: str,
     *,
-    exclude_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
+    exclude_artist_ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
-    json_exclude_artist_ids: Union[Unset, None, List[str]] = UNSET
+
+    json_exclude_artist_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(exclude_artist_ids, Unset):
-        if exclude_artist_ids is None:
-            json_exclude_artist_ids = None
-        else:
-            json_exclude_artist_ids = exclude_artist_ids
+        json_exclude_artist_ids = exclude_artist_ids
 
     params["excludeArtistIds"] = json_exclude_artist_ids
 
@@ -34,28 +36,26 @@ def _get_kwargs(
 
     params["limit"] = limit
 
-    json_fields: Union[Unset, None, List[str]] = UNSET
+    json_fields: Union[Unset, List[str]] = UNSET
     if not isinstance(fields, Unset):
-        if fields is None:
-            json_fields = None
-        else:
-            json_fields = []
-            for fields_item_data in fields:
-                fields_item = fields_item_data.value
-
-                json_fields.append(fields_item)
+        json_fields = []
+        for fields_item_data in fields:
+            fields_item = fields_item_data.value
+            json_fields.append(fields_item)
 
     params["fields"] = json_fields
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Trailers/{itemId}/Similar".format(
-            itemId=item_id,
+        "url": "/Trailers/{item_id}/Similar".format(
+            item_id=item_id,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -92,19 +92,19 @@ def sync_detailed(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    exclude_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
+    exclude_artist_ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets similar items.
 
     Args:
         item_id (str):
-        exclude_artist_ids (Union[Unset, None, List[str]]):
-        user_id (Union[Unset, None, str]):
-        limit (Union[Unset, None, int]):
-        fields (Union[Unset, None, List[ItemFields]]):
+        exclude_artist_ids (Union[Unset, List[str]]):
+        user_id (Union[Unset, str]):
+        limit (Union[Unset, int]):
+        fields (Union[Unset, List[ItemFields]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -133,19 +133,19 @@ def sync(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    exclude_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
+    exclude_artist_ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets similar items.
 
     Args:
         item_id (str):
-        exclude_artist_ids (Union[Unset, None, List[str]]):
-        user_id (Union[Unset, None, str]):
-        limit (Union[Unset, None, int]):
-        fields (Union[Unset, None, List[ItemFields]]):
+        exclude_artist_ids (Union[Unset, List[str]]):
+        user_id (Union[Unset, str]):
+        limit (Union[Unset, int]):
+        fields (Union[Unset, List[ItemFields]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -169,19 +169,19 @@ async def asyncio_detailed(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    exclude_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
+    exclude_artist_ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets similar items.
 
     Args:
         item_id (str):
-        exclude_artist_ids (Union[Unset, None, List[str]]):
-        user_id (Union[Unset, None, str]):
-        limit (Union[Unset, None, int]):
-        fields (Union[Unset, None, List[ItemFields]]):
+        exclude_artist_ids (Union[Unset, List[str]]):
+        user_id (Union[Unset, str]):
+        limit (Union[Unset, int]):
+        fields (Union[Unset, List[ItemFields]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -208,19 +208,19 @@ async def asyncio(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    exclude_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
+    exclude_artist_ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets similar items.
 
     Args:
         item_id (str):
-        exclude_artist_ids (Union[Unset, None, List[str]]):
-        user_id (Union[Unset, None, str]):
-        limit (Union[Unset, None, int]):
-        fields (Union[Unset, None, List[ItemFields]]):
+        exclude_artist_ids (Union[Unset, List[str]]):
+        user_id (Union[Unset, str]):
+        limit (Union[Unset, int]):
+        fields (Union[Unset, List[ItemFields]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

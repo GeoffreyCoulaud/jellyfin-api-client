@@ -1,9 +1,16 @@
-from typing import TYPE_CHECKING, Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import Dict
 from ..models.general_command_type import GeneralCommandType
 from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
 
 if TYPE_CHECKING:
     from ..models.general_command_arguments import GeneralCommandArguments
@@ -26,11 +33,14 @@ class GeneralCommand:
     arguments: Union[Unset, "GeneralCommandArguments"] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.general_command_arguments import GeneralCommandArguments
+
         name: Union[Unset, str] = UNSET
         if not isinstance(self.name, Unset):
             name = self.name.value
 
         controlling_user_id = self.controlling_user_id
+
         arguments: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.arguments, Unset):
             arguments = self.arguments.to_dict()

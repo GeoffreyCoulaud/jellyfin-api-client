@@ -3,26 +3,44 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.music_video_info_remote_search_query import MusicVideoInfoRemoteSearchQuery
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast, List
+from typing import Dict
+from typing import cast
 from ...models.remote_search_result import RemoteSearchResult
-from ...types import Response
+from ...models.music_video_info_remote_search_query import MusicVideoInfoRemoteSearchQuery
 
 
 def _get_kwargs(
     *,
-    json_body: MusicVideoInfoRemoteSearchQuery,
+    body: Union[
+        MusicVideoInfoRemoteSearchQuery,
+        MusicVideoInfoRemoteSearchQuery,
+    ],
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Items/RemoteSearch/MusicVideo",
-        "json": json_json_body,
     }
+
+    if isinstance(body, MusicVideoInfoRemoteSearchQuery):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, MusicVideoInfoRemoteSearchQuery):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -63,12 +81,16 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: MusicVideoInfoRemoteSearchQuery,
+    body: Union[
+        MusicVideoInfoRemoteSearchQuery,
+        MusicVideoInfoRemoteSearchQuery,
+    ],
 ) -> Response[Union[Any, List["RemoteSearchResult"]]]:
     """Get music video remote search.
 
     Args:
-        json_body (MusicVideoInfoRemoteSearchQuery):
+        body (MusicVideoInfoRemoteSearchQuery):
+        body (MusicVideoInfoRemoteSearchQuery):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -79,7 +101,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -92,12 +114,16 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    json_body: MusicVideoInfoRemoteSearchQuery,
+    body: Union[
+        MusicVideoInfoRemoteSearchQuery,
+        MusicVideoInfoRemoteSearchQuery,
+    ],
 ) -> Optional[Union[Any, List["RemoteSearchResult"]]]:
     """Get music video remote search.
 
     Args:
-        json_body (MusicVideoInfoRemoteSearchQuery):
+        body (MusicVideoInfoRemoteSearchQuery):
+        body (MusicVideoInfoRemoteSearchQuery):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -109,19 +135,23 @@ def sync(
 
     return sync_detailed(
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: MusicVideoInfoRemoteSearchQuery,
+    body: Union[
+        MusicVideoInfoRemoteSearchQuery,
+        MusicVideoInfoRemoteSearchQuery,
+    ],
 ) -> Response[Union[Any, List["RemoteSearchResult"]]]:
     """Get music video remote search.
 
     Args:
-        json_body (MusicVideoInfoRemoteSearchQuery):
+        body (MusicVideoInfoRemoteSearchQuery):
+        body (MusicVideoInfoRemoteSearchQuery):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -132,7 +162,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -143,12 +173,16 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    json_body: MusicVideoInfoRemoteSearchQuery,
+    body: Union[
+        MusicVideoInfoRemoteSearchQuery,
+        MusicVideoInfoRemoteSearchQuery,
+    ],
 ) -> Optional[Union[Any, List["RemoteSearchResult"]]]:
     """Get music video remote search.
 
     Args:
-        json_body (MusicVideoInfoRemoteSearchQuery):
+        body (MusicVideoInfoRemoteSearchQuery):
+        body (MusicVideoInfoRemoteSearchQuery):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -161,6 +195,6 @@ async def asyncio(
     return (
         await asyncio_detailed(
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

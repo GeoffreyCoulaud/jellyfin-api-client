@@ -1,13 +1,16 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.image_type import ImageType
+from typing import cast
 from ...models.problem_details import ProblemDetails
-from ...types import Response
+from typing import Dict
 
 
 def _get_kwargs(
@@ -15,16 +18,16 @@ def _get_kwargs(
     image_type: ImageType,
     image_index: int,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
-        "url": "/Items/{itemId}/Images/{imageType}/{imageIndex}".format(
-            itemId=item_id,
-            imageType=image_type,
-            imageIndex=image_index,
+        "url": "/Items/{item_id}/Images/{image_type}/{image_index}".format(
+            item_id=item_id,
+            image_type=image_type,
+            image_index=image_index,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

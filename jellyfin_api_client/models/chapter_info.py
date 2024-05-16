@@ -1,10 +1,18 @@
-import datetime
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
-from dateutil.parser import isoparse
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+import datetime
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
+from dateutil.parser import isoparse
+
 
 T = TypeVar("T", bound="ChapterInfo")
 
@@ -15,27 +23,42 @@ class ChapterInfo:
 
     Attributes:
         start_position_ticks (Union[Unset, int]): Gets or sets the start position ticks.
-        name (Union[Unset, None, str]): Gets or sets the name.
-        image_path (Union[Unset, None, str]): Gets or sets the image path.
+        name (Union[None, Unset, str]): Gets or sets the name.
+        image_path (Union[None, Unset, str]): Gets or sets the image path.
         image_date_modified (Union[Unset, datetime.datetime]):
-        image_tag (Union[Unset, None, str]):
+        image_tag (Union[None, Unset, str]):
     """
 
     start_position_ticks: Union[Unset, int] = UNSET
-    name: Union[Unset, None, str] = UNSET
-    image_path: Union[Unset, None, str] = UNSET
+    name: Union[None, Unset, str] = UNSET
+    image_path: Union[None, Unset, str] = UNSET
     image_date_modified: Union[Unset, datetime.datetime] = UNSET
-    image_tag: Union[Unset, None, str] = UNSET
+    image_tag: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         start_position_ticks = self.start_position_ticks
-        name = self.name
-        image_path = self.image_path
+
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
+
+        image_path: Union[None, Unset, str]
+        if isinstance(self.image_path, Unset):
+            image_path = UNSET
+        else:
+            image_path = self.image_path
+
         image_date_modified: Union[Unset, str] = UNSET
         if not isinstance(self.image_date_modified, Unset):
             image_date_modified = self.image_date_modified.isoformat()
 
-        image_tag = self.image_tag
+        image_tag: Union[None, Unset, str]
+        if isinstance(self.image_tag, Unset):
+            image_tag = UNSET
+        else:
+            image_tag = self.image_tag
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -57,9 +80,23 @@ class ChapterInfo:
         d = src_dict.copy()
         start_position_ticks = d.pop("StartPositionTicks", UNSET)
 
-        name = d.pop("Name", UNSET)
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        image_path = d.pop("ImagePath", UNSET)
+        name = _parse_name(d.pop("Name", UNSET))
+
+        def _parse_image_path(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        image_path = _parse_image_path(d.pop("ImagePath", UNSET))
 
         _image_date_modified = d.pop("ImageDateModified", UNSET)
         image_date_modified: Union[Unset, datetime.datetime]
@@ -68,7 +105,14 @@ class ChapterInfo:
         else:
             image_date_modified = isoparse(_image_date_modified)
 
-        image_tag = d.pop("ImageTag", UNSET)
+        def _parse_image_tag(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        image_tag = _parse_image_tag(d.pop("ImageTag", UNSET))
 
         chapter_info = cls(
             start_position_ticks=start_position_ticks,

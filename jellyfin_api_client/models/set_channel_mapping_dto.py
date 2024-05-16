@@ -1,6 +1,11 @@
-from typing import Any, Dict, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="SetChannelMappingDto")
 
@@ -21,7 +26,9 @@ class SetChannelMappingDto:
 
     def to_dict(self) -> Dict[str, Any]:
         provider_id = self.provider_id
+
         tuner_channel_id = self.tuner_channel_id
+
         provider_channel_id = self.provider_channel_id
 
         field_dict: Dict[str, Any] = {}

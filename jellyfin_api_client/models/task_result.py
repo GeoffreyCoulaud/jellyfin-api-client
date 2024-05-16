@@ -1,11 +1,19 @@
-import datetime
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from typing import cast, Union
+from ..models.task_completion_status import TaskCompletionStatus
+import datetime
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
 from dateutil.parser import isoparse
 
-from ..models.task_completion_status import TaskCompletionStatus
-from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="TaskResult")
 
@@ -18,21 +26,21 @@ class TaskResult:
         start_time_utc (Union[Unset, datetime.datetime]): Gets or sets the start time UTC.
         end_time_utc (Union[Unset, datetime.datetime]): Gets or sets the end time UTC.
         status (Union[Unset, TaskCompletionStatus]): Enum TaskCompletionStatus.
-        name (Union[Unset, None, str]): Gets or sets the name.
-        key (Union[Unset, None, str]): Gets or sets the key.
-        id (Union[Unset, None, str]): Gets or sets the id.
-        error_message (Union[Unset, None, str]): Gets or sets the error message.
-        long_error_message (Union[Unset, None, str]): Gets or sets the long error message.
+        name (Union[None, Unset, str]): Gets or sets the name.
+        key (Union[None, Unset, str]): Gets or sets the key.
+        id (Union[None, Unset, str]): Gets or sets the id.
+        error_message (Union[None, Unset, str]): Gets or sets the error message.
+        long_error_message (Union[None, Unset, str]): Gets or sets the long error message.
     """
 
     start_time_utc: Union[Unset, datetime.datetime] = UNSET
     end_time_utc: Union[Unset, datetime.datetime] = UNSET
     status: Union[Unset, TaskCompletionStatus] = UNSET
-    name: Union[Unset, None, str] = UNSET
-    key: Union[Unset, None, str] = UNSET
-    id: Union[Unset, None, str] = UNSET
-    error_message: Union[Unset, None, str] = UNSET
-    long_error_message: Union[Unset, None, str] = UNSET
+    name: Union[None, Unset, str] = UNSET
+    key: Union[None, Unset, str] = UNSET
+    id: Union[None, Unset, str] = UNSET
+    error_message: Union[None, Unset, str] = UNSET
+    long_error_message: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         start_time_utc: Union[Unset, str] = UNSET
@@ -47,11 +55,35 @@ class TaskResult:
         if not isinstance(self.status, Unset):
             status = self.status.value
 
-        name = self.name
-        key = self.key
-        id = self.id
-        error_message = self.error_message
-        long_error_message = self.long_error_message
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
+
+        key: Union[None, Unset, str]
+        if isinstance(self.key, Unset):
+            key = UNSET
+        else:
+            key = self.key
+
+        id: Union[None, Unset, str]
+        if isinstance(self.id, Unset):
+            id = UNSET
+        else:
+            id = self.id
+
+        error_message: Union[None, Unset, str]
+        if isinstance(self.error_message, Unset):
+            error_message = UNSET
+        else:
+            error_message = self.error_message
+
+        long_error_message: Union[None, Unset, str]
+        if isinstance(self.long_error_message, Unset):
+            long_error_message = UNSET
+        else:
+            long_error_message = self.long_error_message
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -98,15 +130,50 @@ class TaskResult:
         else:
             status = TaskCompletionStatus(_status)
 
-        name = d.pop("Name", UNSET)
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        key = d.pop("Key", UNSET)
+        name = _parse_name(d.pop("Name", UNSET))
 
-        id = d.pop("Id", UNSET)
+        def _parse_key(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        error_message = d.pop("ErrorMessage", UNSET)
+        key = _parse_key(d.pop("Key", UNSET))
 
-        long_error_message = d.pop("LongErrorMessage", UNSET)
+        def _parse_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        id = _parse_id(d.pop("Id", UNSET))
+
+        def _parse_error_message(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        error_message = _parse_error_message(d.pop("ErrorMessage", UNSET))
+
+        def _parse_long_error_message(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        long_error_message = _parse_long_error_message(d.pop("LongErrorMessage", UNSET))
 
         task_result = cls(
             start_time_utc=start_time_utc,

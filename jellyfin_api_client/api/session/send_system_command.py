@@ -1,27 +1,28 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.general_command_type import GeneralCommandType
-from ...types import Response
 
 
 def _get_kwargs(
     session_id: str,
     command: GeneralCommandType,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/Sessions/{sessionId}/System/{command}".format(
-            sessionId=session_id,
+        "url": "/Sessions/{session_id}/System/{command}".format(
+            session_id=session_id,
             command=command,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:

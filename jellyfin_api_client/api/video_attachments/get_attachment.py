@@ -1,13 +1,17 @@
 from http import HTTPStatus
-from io import BytesIO
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from io import BytesIO
+from typing import Dict
+from ...types import File, FileJsonType
+from typing import cast
 from ...models.problem_details import ProblemDetails
-from ...types import File, Response
 
 
 def _get_kwargs(
@@ -15,16 +19,16 @@ def _get_kwargs(
     media_source_id: str,
     index: int,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Videos/{videoId}/{mediaSourceId}/Attachments/{index}".format(
-            videoId=video_id,
-            mediaSourceId=media_source_id,
+        "url": "/Videos/{video_id}/{media_source_id}/Attachments/{index}".format(
+            video_id=video_id,
+            media_source_id=media_source_id,
             index=index,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

@@ -1,8 +1,17 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import cast, List
+from typing import cast, Union
+from typing import Dict
+from ..types import UNSET, Unset
+from typing import Union
+from typing import cast
 
 if TYPE_CHECKING:
     from ..models.remote_image_info import RemoteImageInfo
@@ -16,34 +25,40 @@ class RemoteImageResult:
     """Class RemoteImageResult.
 
     Attributes:
-        images (Union[Unset, None, List['RemoteImageInfo']]): Gets or sets the images.
+        images (Union[List['RemoteImageInfo'], None, Unset]): Gets or sets the images.
         total_record_count (Union[Unset, int]): Gets or sets the total record count.
-        providers (Union[Unset, None, List[str]]): Gets or sets the providers.
+        providers (Union[List[str], None, Unset]): Gets or sets the providers.
     """
 
-    images: Union[Unset, None, List["RemoteImageInfo"]] = UNSET
+    images: Union[List["RemoteImageInfo"], None, Unset] = UNSET
     total_record_count: Union[Unset, int] = UNSET
-    providers: Union[Unset, None, List[str]] = UNSET
+    providers: Union[List[str], None, Unset] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        images: Union[Unset, None, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.images, Unset):
-            if self.images is None:
-                images = None
-            else:
-                images = []
-                for images_item_data in self.images:
-                    images_item = images_item_data.to_dict()
+        from ..models.remote_image_info import RemoteImageInfo
 
-                    images.append(images_item)
+        images: Union[List[Dict[str, Any]], None, Unset]
+        if isinstance(self.images, Unset):
+            images = UNSET
+        elif isinstance(self.images, list):
+            images = []
+            for images_type_0_item_data in self.images:
+                images_type_0_item = images_type_0_item_data.to_dict()
+                images.append(images_type_0_item)
+
+        else:
+            images = self.images
 
         total_record_count = self.total_record_count
-        providers: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.providers, Unset):
-            if self.providers is None:
-                providers = None
-            else:
-                providers = self.providers
+
+        providers: Union[List[str], None, Unset]
+        if isinstance(self.providers, Unset):
+            providers = UNSET
+        elif isinstance(self.providers, list):
+            providers = self.providers
+
+        else:
+            providers = self.providers
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -61,16 +76,47 @@ class RemoteImageResult:
         from ..models.remote_image_info import RemoteImageInfo
 
         d = src_dict.copy()
-        images = []
-        _images = d.pop("Images", UNSET)
-        for images_item_data in _images or []:
-            images_item = RemoteImageInfo.from_dict(images_item_data)
 
-            images.append(images_item)
+        def _parse_images(data: object) -> Union[List["RemoteImageInfo"], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                images_type_0 = []
+                _images_type_0 = data
+                for images_type_0_item_data in _images_type_0:
+                    images_type_0_item = RemoteImageInfo.from_dict(images_type_0_item_data)
+
+                    images_type_0.append(images_type_0_item)
+
+                return images_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List["RemoteImageInfo"], None, Unset], data)
+
+        images = _parse_images(d.pop("Images", UNSET))
 
         total_record_count = d.pop("TotalRecordCount", UNSET)
 
-        providers = cast(List[str], d.pop("Providers", UNSET))
+        def _parse_providers(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                providers_type_0 = cast(List[str], data)
+
+                return providers_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        providers = _parse_providers(d.pop("Providers", UNSET))
 
         remote_image_result = cls(
             images=images,

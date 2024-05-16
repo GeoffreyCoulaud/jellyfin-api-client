@@ -1,8 +1,15 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="AuthenticateUserByName")
 
@@ -12,19 +19,25 @@ class AuthenticateUserByName:
     """The authenticate user by name request body.
 
     Attributes:
-        username (Union[Unset, None, str]): Gets or sets the username.
-        pw (Union[Unset, None, str]): Gets or sets the plain text password.
-        password (Union[Unset, None, str]): Gets or sets the sha1-hashed password.
+        username (Union[None, Unset, str]): Gets or sets the username.
+        pw (Union[None, Unset, str]): Gets or sets the plain text password.
     """
 
-    username: Union[Unset, None, str] = UNSET
-    pw: Union[Unset, None, str] = UNSET
-    password: Union[Unset, None, str] = UNSET
+    username: Union[None, Unset, str] = UNSET
+    pw: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        username = self.username
-        pw = self.pw
-        password = self.password
+        username: Union[None, Unset, str]
+        if isinstance(self.username, Unset):
+            username = UNSET
+        else:
+            username = self.username
+
+        pw: Union[None, Unset, str]
+        if isinstance(self.pw, Unset):
+            pw = UNSET
+        else:
+            pw = self.pw
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -32,24 +45,34 @@ class AuthenticateUserByName:
             field_dict["Username"] = username
         if pw is not UNSET:
             field_dict["Pw"] = pw
-        if password is not UNSET:
-            field_dict["Password"] = password
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        username = d.pop("Username", UNSET)
 
-        pw = d.pop("Pw", UNSET)
+        def _parse_username(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        password = d.pop("Password", UNSET)
+        username = _parse_username(d.pop("Username", UNSET))
+
+        def _parse_pw(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        pw = _parse_pw(d.pop("Pw", UNSET))
 
         authenticate_user_by_name = cls(
             username=username,
             pw=pw,
-            password=password,
         )
 
         return authenticate_user_by_name

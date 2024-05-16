@@ -1,36 +1,53 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional, Union, cast
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import UNSET, Unset
+from typing import Dict
 from ...models.user_item_data_dto import UserItemDataDto
-from ...types import Response
+from typing import Union
+from typing import cast
+from ...models.problem_details import ProblemDetails
 
 
 def _get_kwargs(
-    user_id: str,
     item_id: str,
+    *,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
+    params: Dict[str, Any] = {}
 
-    return {
+    params["userId"] = user_id
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
-        "url": "/Users/{userId}/PlayedItems/{itemId}".format(
-            userId=user_id,
-            itemId=item_id,
+        "url": "/UserPlayedItems/{item_id}".format(
+            item_id=item_id,
         ),
+        "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, UserItemDataDto]]:
+) -> Optional[Union[Any, ProblemDetails, UserItemDataDto]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = UserItemDataDto.from_dict(response.json())
 
         return response_200
+    if response.status_code == HTTPStatus.NOT_FOUND:
+        response_404 = ProblemDetails.from_dict(response.json())
+
+        return response_404
     if response.status_code == HTTPStatus.UNAUTHORIZED:
         response_401 = cast(Any, None)
         return response_401
@@ -45,7 +62,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, UserItemDataDto]]:
+) -> Response[Union[Any, ProblemDetails, UserItemDataDto]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -55,28 +72,28 @@ def _build_response(
 
 
 def sync_detailed(
-    user_id: str,
     item_id: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[Any, UserItemDataDto]]:
+    user_id: Union[Unset, str] = UNSET,
+) -> Response[Union[Any, ProblemDetails, UserItemDataDto]]:
     """Marks an item as unplayed for user.
 
     Args:
-        user_id (str):
         item_id (str):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, UserItemDataDto]]
+        Response[Union[Any, ProblemDetails, UserItemDataDto]]
     """
 
     kwargs = _get_kwargs(
-        user_id=user_id,
         item_id=item_id,
+        user_id=user_id,
     )
 
     response = client.get_httpx_client().request(
@@ -87,55 +104,55 @@ def sync_detailed(
 
 
 def sync(
-    user_id: str,
     item_id: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[Any, UserItemDataDto]]:
+    user_id: Union[Unset, str] = UNSET,
+) -> Optional[Union[Any, ProblemDetails, UserItemDataDto]]:
     """Marks an item as unplayed for user.
 
     Args:
-        user_id (str):
         item_id (str):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, UserItemDataDto]
+        Union[Any, ProblemDetails, UserItemDataDto]
     """
 
     return sync_detailed(
-        user_id=user_id,
         item_id=item_id,
         client=client,
+        user_id=user_id,
     ).parsed
 
 
 async def asyncio_detailed(
-    user_id: str,
     item_id: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[Any, UserItemDataDto]]:
+    user_id: Union[Unset, str] = UNSET,
+) -> Response[Union[Any, ProblemDetails, UserItemDataDto]]:
     """Marks an item as unplayed for user.
 
     Args:
-        user_id (str):
         item_id (str):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, UserItemDataDto]]
+        Response[Union[Any, ProblemDetails, UserItemDataDto]]
     """
 
     kwargs = _get_kwargs(
-        user_id=user_id,
         item_id=item_id,
+        user_id=user_id,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -144,29 +161,29 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    user_id: str,
     item_id: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[Any, UserItemDataDto]]:
+    user_id: Union[Unset, str] = UNSET,
+) -> Optional[Union[Any, ProblemDetails, UserItemDataDto]]:
     """Marks an item as unplayed for user.
 
     Args:
-        user_id (str):
         item_id (str):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, UserItemDataDto]
+        Union[Any, ProblemDetails, UserItemDataDto]
     """
 
     return (
         await asyncio_detailed(
-            user_id=user_id,
             item_id=item_id,
             client=client,
+            user_id=user_id,
         )
     ).parsed

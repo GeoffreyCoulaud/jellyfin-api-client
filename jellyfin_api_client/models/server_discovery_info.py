@@ -1,8 +1,15 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="ServerDiscoveryInfo")
 
@@ -15,19 +22,26 @@ class ServerDiscoveryInfo:
         address (Union[Unset, str]): Gets the address.
         id (Union[Unset, str]): Gets the server identifier.
         name (Union[Unset, str]): Gets the name.
-        endpoint_address (Union[Unset, None, str]): Gets the endpoint address.
+        endpoint_address (Union[None, Unset, str]): Gets the endpoint address.
     """
 
     address: Union[Unset, str] = UNSET
     id: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
-    endpoint_address: Union[Unset, None, str] = UNSET
+    endpoint_address: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         address = self.address
+
         id = self.id
+
         name = self.name
-        endpoint_address = self.endpoint_address
+
+        endpoint_address: Union[None, Unset, str]
+        if isinstance(self.endpoint_address, Unset):
+            endpoint_address = UNSET
+        else:
+            endpoint_address = self.endpoint_address
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -51,7 +65,14 @@ class ServerDiscoveryInfo:
 
         name = d.pop("Name", UNSET)
 
-        endpoint_address = d.pop("EndpointAddress", UNSET)
+        def _parse_endpoint_address(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        endpoint_address = _parse_endpoint_address(d.pop("EndpointAddress", UNSET))
 
         server_discovery_info = cls(
             address=address,

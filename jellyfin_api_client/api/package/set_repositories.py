@@ -1,31 +1,51 @@
 from http import HTTPStatus
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast
+from typing import cast, List
 from ...models.repository_info import RepositoryInfo
-from ...types import Response
+from typing import Dict
 
 
 def _get_kwargs(
     *,
-    json_body: List["RepositoryInfo"],
+    body: Union[
+        List["RepositoryInfo"],
+        List["RepositoryInfo"],
+    ],
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = []
-    for json_body_item_data in json_body:
-        json_body_item = json_body_item_data.to_dict()
-
-        json_json_body.append(json_body_item)
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Repositories",
-        "json": json_json_body,
     }
+
+    if isinstance(body, List["RepositoryInfo"]):
+        _json_body = []
+        for body_item_data in body:
+            body_item = body_item_data.to_dict()
+            _json_body.append(body_item)
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, List["RepositoryInfo"]):
+        _json_body = []
+        for body_item_data in body:
+            body_item = body_item_data.to_dict()
+            _json_body.append(body_item)
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
@@ -53,12 +73,16 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: List["RepositoryInfo"],
+    body: Union[
+        List["RepositoryInfo"],
+        List["RepositoryInfo"],
+    ],
 ) -> Response[Any]:
     """Sets the enabled and existing package repositories.
 
     Args:
-        json_body (List['RepositoryInfo']):
+        body (List['RepositoryInfo']):
+        body (List['RepositoryInfo']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -69,7 +93,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -82,12 +106,16 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: List["RepositoryInfo"],
+    body: Union[
+        List["RepositoryInfo"],
+        List["RepositoryInfo"],
+    ],
 ) -> Response[Any]:
     """Sets the enabled and existing package repositories.
 
     Args:
-        json_body (List['RepositoryInfo']):
+        body (List['RepositoryInfo']):
+        body (List['RepositoryInfo']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -98,7 +126,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)

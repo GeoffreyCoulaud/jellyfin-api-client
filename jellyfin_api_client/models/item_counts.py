@@ -1,8 +1,14 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="ItemCounts")
 
@@ -41,16 +47,27 @@ class ItemCounts:
 
     def to_dict(self) -> Dict[str, Any]:
         movie_count = self.movie_count
+
         series_count = self.series_count
+
         episode_count = self.episode_count
+
         artist_count = self.artist_count
+
         program_count = self.program_count
+
         trailer_count = self.trailer_count
+
         song_count = self.song_count
+
         album_count = self.album_count
+
         music_video_count = self.music_video_count
+
         box_set_count = self.box_set_count
+
         book_count = self.book_count
+
         item_count = self.item_count
 
         field_dict: Dict[str, Any] = {}

@@ -1,7 +1,14 @@
-from typing import TYPE_CHECKING, Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, Tuple, Optional, BinaryIO, TextIO, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast
+from typing import Dict
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -21,6 +28,8 @@ class LiveStreamResponse:
     media_source: Union[Unset, "MediaSourceInfo"] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.media_source_info import MediaSourceInfo
+
         media_source: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.media_source, Unset):
             media_source = self.media_source.to_dict()
