@@ -1,10 +1,14 @@
-import datetime
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
-from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
+
+from typing import Union
+import datetime
+from dateutil.parser import isoparse
+
 
 T = TypeVar("T", bound="QuickConnectResult")
 
@@ -37,12 +41,19 @@ class QuickConnectResult:
 
     def to_dict(self) -> Dict[str, Any]:
         authenticated = self.authenticated
+
         secret = self.secret
+
         code = self.code
+
         device_id = self.device_id
+
         device_name = self.device_name
+
         app_name = self.app_name
+
         app_version = self.app_version
+
         date_added: Union[Unset, str] = UNSET
         if not isinstance(self.date_added, Unset):
             date_added = self.date_added.isoformat()

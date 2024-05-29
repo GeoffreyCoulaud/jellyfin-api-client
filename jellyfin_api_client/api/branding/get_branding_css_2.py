@@ -3,25 +3,25 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...types import Response
+from ... import errors
 
 
 def _get_kwargs() -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Branding/Css.css",
     }
+
+    return _kwargs
 
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[Any, str]]:
     if response.status_code == HTTPStatus.OK:
-        response_200 = cast(str, response.json())
+        response_200 = response.text
         return response_200
     if response.status_code == HTTPStatus.NO_CONTENT:
         response_204 = cast(Any, None)

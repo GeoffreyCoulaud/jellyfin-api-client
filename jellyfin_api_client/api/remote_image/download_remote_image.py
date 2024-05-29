@@ -3,37 +3,39 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.image_type import ImageType
 from ...models.problem_details import ProblemDetails
-from ...types import UNSET, Response, Unset
+from ...types import Unset
 
 
 def _get_kwargs(
     item_id: str,
     *,
     type: ImageType,
-    image_url: Union[Unset, None, str] = UNSET,
+    image_url: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
-    json_type = type.value
 
+    json_type = type.value
     params["type"] = json_type
 
     params["imageUrl"] = image_url
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/Items/{itemId}/RemoteImages/Download".format(
-            itemId=item_id,
+        "url": "/Items/{item_id}/RemoteImages/Download".format(
+            item_id=item_id,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -74,14 +76,14 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     type: ImageType,
-    image_url: Union[Unset, None, str] = UNSET,
+    image_url: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, ProblemDetails]]:
     """Downloads a remote image for an item.
 
     Args:
         item_id (str):
         type (ImageType): Enum ImageType.
-        image_url (Union[Unset, None, str]):
+        image_url (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -109,14 +111,14 @@ def sync(
     *,
     client: AuthenticatedClient,
     type: ImageType,
-    image_url: Union[Unset, None, str] = UNSET,
+    image_url: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Downloads a remote image for an item.
 
     Args:
         item_id (str):
         type (ImageType): Enum ImageType.
-        image_url (Union[Unset, None, str]):
+        image_url (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -139,14 +141,14 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     type: ImageType,
-    image_url: Union[Unset, None, str] = UNSET,
+    image_url: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, ProblemDetails]]:
     """Downloads a remote image for an item.
 
     Args:
         item_id (str):
         type (ImageType): Enum ImageType.
-        image_url (Union[Unset, None, str]):
+        image_url (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -172,14 +174,14 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     type: ImageType,
-    image_url: Union[Unset, None, str] = UNSET,
+    image_url: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Downloads a remote image for an item.
 
     Args:
         item_id (str):
         type (ImageType): Enum ImageType.
-        image_url (Union[Unset, None, str]):
+        image_url (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

@@ -3,19 +3,20 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.branding_options import BrandingOptions
 from ...types import Response
+from ... import errors
+
+from ...models.branding_options import BrandingOptions
 
 
 def _get_kwargs() -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Branding/Configuration",
     }
+
+    return _kwargs
 
 
 def _parse_response(

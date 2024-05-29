@@ -1,10 +1,14 @@
-import datetime
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
-from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
+
+from typing import Union
+import datetime
+from dateutil.parser import isoparse
+
 
 T = TypeVar("T", bound="BufferRequestDto")
 
@@ -31,7 +35,9 @@ class BufferRequestDto:
             when = self.when.isoformat()
 
         position_ticks = self.position_ticks
+
         is_playing = self.is_playing
+
         playlist_item_id = self.playlist_item_id
 
         field_dict: Dict[str, Any] = {}

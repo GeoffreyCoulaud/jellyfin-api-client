@@ -3,46 +3,48 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
-from ...models.channel_type import ChannelType
-from ...models.image_type import ImageType
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.item_fields import ItemFields
+from ...models.channel_type import ChannelType
 from ...models.sort_order import SortOrder
-from ...types import UNSET, Response, Unset
+from ...models.image_type import ImageType
+from ...models.item_sort_by import ItemSortBy
+from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
+from ...types import Unset
 
 
 def _get_kwargs(
     *,
-    type: Union[Unset, None, ChannelType] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    is_liked: Union[Unset, None, bool] = UNSET,
-    is_disliked: Union[Unset, None, bool] = UNSET,
-    enable_images: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    sort_order: Union[Unset, None, SortOrder] = UNSET,
-    enable_favorite_sorting: Union[Unset, None, bool] = False,
-    add_current_program: Union[Unset, None, bool] = True,
+    type: Union[Unset, ChannelType] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    is_liked: Union[Unset, bool] = UNSET,
+    is_disliked: Union[Unset, bool] = UNSET,
+    enable_images: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    sort_order: Union[Unset, SortOrder] = UNSET,
+    enable_favorite_sorting: Union[Unset, bool] = False,
+    add_current_program: Union[Unset, bool] = True,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
-    json_type: Union[Unset, None, str] = UNSET
+
+    json_type: Union[Unset, str] = UNSET
     if not isinstance(type, Unset):
-        json_type = type.value if type else None
+        json_type = type.value
 
     params["type"] = json_type
 
@@ -72,46 +74,38 @@ def _get_kwargs(
 
     params["imageTypeLimit"] = image_type_limit
 
-    json_enable_image_types: Union[Unset, None, List[str]] = UNSET
+    json_enable_image_types: Union[Unset, List[str]] = UNSET
     if not isinstance(enable_image_types, Unset):
-        if enable_image_types is None:
-            json_enable_image_types = None
-        else:
-            json_enable_image_types = []
-            for enable_image_types_item_data in enable_image_types:
-                enable_image_types_item = enable_image_types_item_data.value
-
-                json_enable_image_types.append(enable_image_types_item)
+        json_enable_image_types = []
+        for enable_image_types_item_data in enable_image_types:
+            enable_image_types_item = enable_image_types_item_data.value
+            json_enable_image_types.append(enable_image_types_item)
 
     params["enableImageTypes"] = json_enable_image_types
 
-    json_fields: Union[Unset, None, List[str]] = UNSET
+    json_fields: Union[Unset, List[str]] = UNSET
     if not isinstance(fields, Unset):
-        if fields is None:
-            json_fields = None
-        else:
-            json_fields = []
-            for fields_item_data in fields:
-                fields_item = fields_item_data.value
-
-                json_fields.append(fields_item)
+        json_fields = []
+        for fields_item_data in fields:
+            fields_item = fields_item_data.value
+            json_fields.append(fields_item)
 
     params["fields"] = json_fields
 
     params["enableUserData"] = enable_user_data
 
-    json_sort_by: Union[Unset, None, List[str]] = UNSET
+    json_sort_by: Union[Unset, List[str]] = UNSET
     if not isinstance(sort_by, Unset):
-        if sort_by is None:
-            json_sort_by = None
-        else:
-            json_sort_by = sort_by
+        json_sort_by = []
+        for sort_by_item_data in sort_by:
+            sort_by_item = sort_by_item_data.value
+            json_sort_by.append(sort_by_item)
 
     params["sortBy"] = json_sort_by
 
-    json_sort_order: Union[Unset, None, str] = UNSET
+    json_sort_order: Union[Unset, str] = UNSET
     if not isinstance(sort_order, Unset):
-        json_sort_order = sort_order.value if sort_order else None
+        json_sort_order = sort_order.value
 
     params["sortOrder"] = json_sort_order
 
@@ -121,11 +115,13 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/LiveTv/Channels",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -161,52 +157,52 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    type: Union[Unset, None, ChannelType] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    is_liked: Union[Unset, None, bool] = UNSET,
-    is_disliked: Union[Unset, None, bool] = UNSET,
-    enable_images: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    sort_order: Union[Unset, None, SortOrder] = UNSET,
-    enable_favorite_sorting: Union[Unset, None, bool] = False,
-    add_current_program: Union[Unset, None, bool] = True,
+    type: Union[Unset, ChannelType] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    is_liked: Union[Unset, bool] = UNSET,
+    is_disliked: Union[Unset, bool] = UNSET,
+    enable_images: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    sort_order: Union[Unset, SortOrder] = UNSET,
+    enable_favorite_sorting: Union[Unset, bool] = False,
+    add_current_program: Union[Unset, bool] = True,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets available live tv channels.
 
     Args:
-        type (Union[Unset, None, ChannelType]): Enum ChannelType.
-        user_id (Union[Unset, None, str]):
-        start_index (Union[Unset, None, int]):
-        is_movie (Union[Unset, None, bool]):
-        is_series (Union[Unset, None, bool]):
-        is_news (Union[Unset, None, bool]):
-        is_kids (Union[Unset, None, bool]):
-        is_sports (Union[Unset, None, bool]):
-        limit (Union[Unset, None, int]):
-        is_favorite (Union[Unset, None, bool]):
-        is_liked (Union[Unset, None, bool]):
-        is_disliked (Union[Unset, None, bool]):
-        enable_images (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        enable_user_data (Union[Unset, None, bool]):
-        sort_by (Union[Unset, None, List[str]]):
-        sort_order (Union[Unset, None, SortOrder]): An enum representing the sorting order.
-        enable_favorite_sorting (Union[Unset, None, bool]):
-        add_current_program (Union[Unset, None, bool]):  Default: True.
+        type (Union[Unset, ChannelType]): Enum ChannelType.
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        is_movie (Union[Unset, bool]):
+        is_series (Union[Unset, bool]):
+        is_news (Union[Unset, bool]):
+        is_kids (Union[Unset, bool]):
+        is_sports (Union[Unset, bool]):
+        limit (Union[Unset, int]):
+        is_favorite (Union[Unset, bool]):
+        is_liked (Union[Unset, bool]):
+        is_disliked (Union[Unset, bool]):
+        enable_images (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        fields (Union[Unset, List[ItemFields]]):
+        enable_user_data (Union[Unset, bool]):
+        sort_by (Union[Unset, List[ItemSortBy]]):
+        sort_order (Union[Unset, SortOrder]): An enum representing the sorting order.
+        enable_favorite_sorting (Union[Unset, bool]):  Default: False.
+        add_current_program (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -250,52 +246,52 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    type: Union[Unset, None, ChannelType] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    is_liked: Union[Unset, None, bool] = UNSET,
-    is_disliked: Union[Unset, None, bool] = UNSET,
-    enable_images: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    sort_order: Union[Unset, None, SortOrder] = UNSET,
-    enable_favorite_sorting: Union[Unset, None, bool] = False,
-    add_current_program: Union[Unset, None, bool] = True,
+    type: Union[Unset, ChannelType] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    is_liked: Union[Unset, bool] = UNSET,
+    is_disliked: Union[Unset, bool] = UNSET,
+    enable_images: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    sort_order: Union[Unset, SortOrder] = UNSET,
+    enable_favorite_sorting: Union[Unset, bool] = False,
+    add_current_program: Union[Unset, bool] = True,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets available live tv channels.
 
     Args:
-        type (Union[Unset, None, ChannelType]): Enum ChannelType.
-        user_id (Union[Unset, None, str]):
-        start_index (Union[Unset, None, int]):
-        is_movie (Union[Unset, None, bool]):
-        is_series (Union[Unset, None, bool]):
-        is_news (Union[Unset, None, bool]):
-        is_kids (Union[Unset, None, bool]):
-        is_sports (Union[Unset, None, bool]):
-        limit (Union[Unset, None, int]):
-        is_favorite (Union[Unset, None, bool]):
-        is_liked (Union[Unset, None, bool]):
-        is_disliked (Union[Unset, None, bool]):
-        enable_images (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        enable_user_data (Union[Unset, None, bool]):
-        sort_by (Union[Unset, None, List[str]]):
-        sort_order (Union[Unset, None, SortOrder]): An enum representing the sorting order.
-        enable_favorite_sorting (Union[Unset, None, bool]):
-        add_current_program (Union[Unset, None, bool]):  Default: True.
+        type (Union[Unset, ChannelType]): Enum ChannelType.
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        is_movie (Union[Unset, bool]):
+        is_series (Union[Unset, bool]):
+        is_news (Union[Unset, bool]):
+        is_kids (Union[Unset, bool]):
+        is_sports (Union[Unset, bool]):
+        limit (Union[Unset, int]):
+        is_favorite (Union[Unset, bool]):
+        is_liked (Union[Unset, bool]):
+        is_disliked (Union[Unset, bool]):
+        enable_images (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        fields (Union[Unset, List[ItemFields]]):
+        enable_user_data (Union[Unset, bool]):
+        sort_by (Union[Unset, List[ItemSortBy]]):
+        sort_order (Union[Unset, SortOrder]): An enum representing the sorting order.
+        enable_favorite_sorting (Union[Unset, bool]):  Default: False.
+        add_current_program (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -334,52 +330,52 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    type: Union[Unset, None, ChannelType] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    is_liked: Union[Unset, None, bool] = UNSET,
-    is_disliked: Union[Unset, None, bool] = UNSET,
-    enable_images: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    sort_order: Union[Unset, None, SortOrder] = UNSET,
-    enable_favorite_sorting: Union[Unset, None, bool] = False,
-    add_current_program: Union[Unset, None, bool] = True,
+    type: Union[Unset, ChannelType] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    is_liked: Union[Unset, bool] = UNSET,
+    is_disliked: Union[Unset, bool] = UNSET,
+    enable_images: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    sort_order: Union[Unset, SortOrder] = UNSET,
+    enable_favorite_sorting: Union[Unset, bool] = False,
+    add_current_program: Union[Unset, bool] = True,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets available live tv channels.
 
     Args:
-        type (Union[Unset, None, ChannelType]): Enum ChannelType.
-        user_id (Union[Unset, None, str]):
-        start_index (Union[Unset, None, int]):
-        is_movie (Union[Unset, None, bool]):
-        is_series (Union[Unset, None, bool]):
-        is_news (Union[Unset, None, bool]):
-        is_kids (Union[Unset, None, bool]):
-        is_sports (Union[Unset, None, bool]):
-        limit (Union[Unset, None, int]):
-        is_favorite (Union[Unset, None, bool]):
-        is_liked (Union[Unset, None, bool]):
-        is_disliked (Union[Unset, None, bool]):
-        enable_images (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        enable_user_data (Union[Unset, None, bool]):
-        sort_by (Union[Unset, None, List[str]]):
-        sort_order (Union[Unset, None, SortOrder]): An enum representing the sorting order.
-        enable_favorite_sorting (Union[Unset, None, bool]):
-        add_current_program (Union[Unset, None, bool]):  Default: True.
+        type (Union[Unset, ChannelType]): Enum ChannelType.
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        is_movie (Union[Unset, bool]):
+        is_series (Union[Unset, bool]):
+        is_news (Union[Unset, bool]):
+        is_kids (Union[Unset, bool]):
+        is_sports (Union[Unset, bool]):
+        limit (Union[Unset, int]):
+        is_favorite (Union[Unset, bool]):
+        is_liked (Union[Unset, bool]):
+        is_disliked (Union[Unset, bool]):
+        enable_images (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        fields (Union[Unset, List[ItemFields]]):
+        enable_user_data (Union[Unset, bool]):
+        sort_by (Union[Unset, List[ItemSortBy]]):
+        sort_order (Union[Unset, SortOrder]): An enum representing the sorting order.
+        enable_favorite_sorting (Union[Unset, bool]):  Default: False.
+        add_current_program (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -421,52 +417,52 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    type: Union[Unset, None, ChannelType] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    is_liked: Union[Unset, None, bool] = UNSET,
-    is_disliked: Union[Unset, None, bool] = UNSET,
-    enable_images: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    sort_order: Union[Unset, None, SortOrder] = UNSET,
-    enable_favorite_sorting: Union[Unset, None, bool] = False,
-    add_current_program: Union[Unset, None, bool] = True,
+    type: Union[Unset, ChannelType] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    is_liked: Union[Unset, bool] = UNSET,
+    is_disliked: Union[Unset, bool] = UNSET,
+    enable_images: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    sort_order: Union[Unset, SortOrder] = UNSET,
+    enable_favorite_sorting: Union[Unset, bool] = False,
+    add_current_program: Union[Unset, bool] = True,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets available live tv channels.
 
     Args:
-        type (Union[Unset, None, ChannelType]): Enum ChannelType.
-        user_id (Union[Unset, None, str]):
-        start_index (Union[Unset, None, int]):
-        is_movie (Union[Unset, None, bool]):
-        is_series (Union[Unset, None, bool]):
-        is_news (Union[Unset, None, bool]):
-        is_kids (Union[Unset, None, bool]):
-        is_sports (Union[Unset, None, bool]):
-        limit (Union[Unset, None, int]):
-        is_favorite (Union[Unset, None, bool]):
-        is_liked (Union[Unset, None, bool]):
-        is_disliked (Union[Unset, None, bool]):
-        enable_images (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        enable_user_data (Union[Unset, None, bool]):
-        sort_by (Union[Unset, None, List[str]]):
-        sort_order (Union[Unset, None, SortOrder]): An enum representing the sorting order.
-        enable_favorite_sorting (Union[Unset, None, bool]):
-        add_current_program (Union[Unset, None, bool]):  Default: True.
+        type (Union[Unset, ChannelType]): Enum ChannelType.
+        user_id (Union[Unset, str]):
+        start_index (Union[Unset, int]):
+        is_movie (Union[Unset, bool]):
+        is_series (Union[Unset, bool]):
+        is_news (Union[Unset, bool]):
+        is_kids (Union[Unset, bool]):
+        is_sports (Union[Unset, bool]):
+        limit (Union[Unset, int]):
+        is_favorite (Union[Unset, bool]):
+        is_liked (Union[Unset, bool]):
+        is_disliked (Union[Unset, bool]):
+        enable_images (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        fields (Union[Unset, List[ItemFields]]):
+        enable_user_data (Union[Unset, bool]):
+        sort_by (Union[Unset, List[ItemSortBy]]):
+        sort_order (Union[Unset, SortOrder]): An enum representing the sorting order.
+        enable_favorite_sorting (Union[Unset, bool]):  Default: False.
+        add_current_program (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

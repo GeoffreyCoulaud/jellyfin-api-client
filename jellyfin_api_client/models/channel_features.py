@@ -1,11 +1,17 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
-from ..models.channel_item_sort_field import ChannelItemSortField
-from ..models.channel_media_content_type import ChannelMediaContentType
-from ..models.channel_media_type import ChannelMediaType
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast
+from ..models.channel_media_type import ChannelMediaType
+from typing import List
+from ..models.channel_media_content_type import ChannelMediaContentType
+from ..models.channel_item_sort_field import ChannelItemSortField
+
 
 T = TypeVar("T", bound="ChannelFeatures")
 
@@ -19,9 +25,9 @@ class ChannelFeatures:
         can_search (Union[Unset, bool]): Gets or sets a value indicating whether this instance can search.
         media_types (Union[Unset, List[ChannelMediaType]]): Gets or sets the media types.
         content_types (Union[Unset, List[ChannelMediaContentType]]): Gets or sets the content types.
-        max_page_size (Union[Unset, None, int]): Gets or sets the maximum number of records the channel allows
+        max_page_size (Union[None, Unset, int]): Gets or sets the maximum number of records the channel allows
             retrieving at a time.
-        auto_refresh_levels (Union[Unset, None, int]): Gets or sets the automatic refresh levels.
+        auto_refresh_levels (Union[None, Unset, int]): Gets or sets the automatic refresh levels.
         default_sort_fields (Union[Unset, List[ChannelItemSortField]]): Gets or sets the default sort orders.
         supports_sort_order_toggle (Union[Unset, bool]): Gets or sets a value indicating whether a sort
             ascending/descending toggle is supported.
@@ -36,8 +42,8 @@ class ChannelFeatures:
     can_search: Union[Unset, bool] = UNSET
     media_types: Union[Unset, List[ChannelMediaType]] = UNSET
     content_types: Union[Unset, List[ChannelMediaContentType]] = UNSET
-    max_page_size: Union[Unset, None, int] = UNSET
-    auto_refresh_levels: Union[Unset, None, int] = UNSET
+    max_page_size: Union[None, Unset, int] = UNSET
+    auto_refresh_levels: Union[None, Unset, int] = UNSET
     default_sort_fields: Union[Unset, List[ChannelItemSortField]] = UNSET
     supports_sort_order_toggle: Union[Unset, bool] = UNSET
     supports_latest_media: Union[Unset, bool] = UNSET
@@ -46,14 +52,16 @@ class ChannelFeatures:
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
+
         id = self.id
+
         can_search = self.can_search
+
         media_types: Union[Unset, List[str]] = UNSET
         if not isinstance(self.media_types, Unset):
             media_types = []
             for media_types_item_data in self.media_types:
                 media_types_item = media_types_item_data.value
-
                 media_types.append(media_types_item)
 
         content_types: Union[Unset, List[str]] = UNSET
@@ -61,22 +69,33 @@ class ChannelFeatures:
             content_types = []
             for content_types_item_data in self.content_types:
                 content_types_item = content_types_item_data.value
-
                 content_types.append(content_types_item)
 
-        max_page_size = self.max_page_size
-        auto_refresh_levels = self.auto_refresh_levels
+        max_page_size: Union[None, Unset, int]
+        if isinstance(self.max_page_size, Unset):
+            max_page_size = UNSET
+        else:
+            max_page_size = self.max_page_size
+
+        auto_refresh_levels: Union[None, Unset, int]
+        if isinstance(self.auto_refresh_levels, Unset):
+            auto_refresh_levels = UNSET
+        else:
+            auto_refresh_levels = self.auto_refresh_levels
+
         default_sort_fields: Union[Unset, List[str]] = UNSET
         if not isinstance(self.default_sort_fields, Unset):
             default_sort_fields = []
             for default_sort_fields_item_data in self.default_sort_fields:
                 default_sort_fields_item = default_sort_fields_item_data.value
-
                 default_sort_fields.append(default_sort_fields_item)
 
         supports_sort_order_toggle = self.supports_sort_order_toggle
+
         supports_latest_media = self.supports_latest_media
+
         can_filter = self.can_filter
+
         supports_content_downloading = self.supports_content_downloading
 
         field_dict: Dict[str, Any] = {}
@@ -131,14 +150,32 @@ class ChannelFeatures:
 
             content_types.append(content_types_item)
 
-        max_page_size = d.pop("MaxPageSize", UNSET)
+        def _parse_max_page_size(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        auto_refresh_levels = d.pop("AutoRefreshLevels", UNSET)
+        max_page_size = _parse_max_page_size(d.pop("MaxPageSize", UNSET))
+
+        def _parse_auto_refresh_levels(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        auto_refresh_levels = _parse_auto_refresh_levels(
+            d.pop("AutoRefreshLevels", UNSET)
+        )
 
         default_sort_fields = []
         _default_sort_fields = d.pop("DefaultSortFields", UNSET)
         for default_sort_fields_item_data in _default_sort_fields or []:
-            default_sort_fields_item = ChannelItemSortField(default_sort_fields_item_data)
+            default_sort_fields_item = ChannelItemSortField(
+                default_sort_fields_item_data
+            )
 
             default_sort_fields.append(default_sort_fields_item)
 

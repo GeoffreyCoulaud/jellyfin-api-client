@@ -1,8 +1,12 @@
-from typing import TYPE_CHECKING, Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast
 
 if TYPE_CHECKING:
     from ..models.device_profile import DeviceProfile
@@ -16,16 +20,16 @@ class PlaybackInfoDto:
     """Plabyback info dto.
 
     Attributes:
-        user_id (Union[Unset, None, str]): Gets or sets the playback userId.
-        max_streaming_bitrate (Union[Unset, None, int]): Gets or sets the max streaming bitrate.
-        start_time_ticks (Union[Unset, None, int]): Gets or sets the start time in ticks.
-        audio_stream_index (Union[Unset, None, int]): Gets or sets the audio stream index.
-        subtitle_stream_index (Union[Unset, None, int]): Gets or sets the subtitle stream index.
-        max_audio_channels (Union[Unset, None, int]): Gets or sets the max audio channels.
-        media_source_id (Union[Unset, None, str]): Gets or sets the media source id.
-        live_stream_id (Union[Unset, None, str]): Gets or sets the live stream id.
-        device_profile (Union[Unset, None, DeviceProfile]): A MediaBrowser.Model.Dlna.DeviceProfile represents a set of
-            metadata which determines which content a certain device is able to play.
+        user_id (Union[None, Unset, str]): Gets or sets the playback userId.
+        max_streaming_bitrate (Union[None, Unset, int]): Gets or sets the max streaming bitrate.
+        start_time_ticks (Union[None, Unset, int]): Gets or sets the start time in ticks.
+        audio_stream_index (Union[None, Unset, int]): Gets or sets the audio stream index.
+        subtitle_stream_index (Union[None, Unset, int]): Gets or sets the subtitle stream index.
+        max_audio_channels (Union[None, Unset, int]): Gets or sets the max audio channels.
+        media_source_id (Union[None, Unset, str]): Gets or sets the media source id.
+        live_stream_id (Union[None, Unset, str]): Gets or sets the live stream id.
+        device_profile (Union['DeviceProfile', None, Unset]): A MediaBrowser.Model.Dlna.DeviceProfile represents a set
+            of metadata which determines which content a certain device is able to play.
             <br />
             Specifically, it defines the supported <see
             cref="P:MediaBrowser.Model.Dlna.DeviceProfile.ContainerProfiles">containers</see> and
@@ -34,53 +38,128 @@ class PlaybackInfoDto:
             the device is able to direct play (without transcoding or remuxing),
             as well as which <see cref="P:MediaBrowser.Model.Dlna.DeviceProfile.TranscodingProfiles">containers/codecs to
             transcode to</see> in case it isn't.
-        enable_direct_play (Union[Unset, None, bool]): Gets or sets a value indicating whether to enable direct play.
-        enable_direct_stream (Union[Unset, None, bool]): Gets or sets a value indicating whether to enable direct
+        enable_direct_play (Union[None, Unset, bool]): Gets or sets a value indicating whether to enable direct play.
+        enable_direct_stream (Union[None, Unset, bool]): Gets or sets a value indicating whether to enable direct
             stream.
-        enable_transcoding (Union[Unset, None, bool]): Gets or sets a value indicating whether to enable transcoding.
-        allow_video_stream_copy (Union[Unset, None, bool]): Gets or sets a value indicating whether to enable video
+        enable_transcoding (Union[None, Unset, bool]): Gets or sets a value indicating whether to enable transcoding.
+        allow_video_stream_copy (Union[None, Unset, bool]): Gets or sets a value indicating whether to enable video
             stream copy.
-        allow_audio_stream_copy (Union[Unset, None, bool]): Gets or sets a value indicating whether to allow audio
+        allow_audio_stream_copy (Union[None, Unset, bool]): Gets or sets a value indicating whether to allow audio
             stream copy.
-        auto_open_live_stream (Union[Unset, None, bool]): Gets or sets a value indicating whether to auto open the live
+        auto_open_live_stream (Union[None, Unset, bool]): Gets or sets a value indicating whether to auto open the live
             stream.
     """
 
-    user_id: Union[Unset, None, str] = UNSET
-    max_streaming_bitrate: Union[Unset, None, int] = UNSET
-    start_time_ticks: Union[Unset, None, int] = UNSET
-    audio_stream_index: Union[Unset, None, int] = UNSET
-    subtitle_stream_index: Union[Unset, None, int] = UNSET
-    max_audio_channels: Union[Unset, None, int] = UNSET
-    media_source_id: Union[Unset, None, str] = UNSET
-    live_stream_id: Union[Unset, None, str] = UNSET
-    device_profile: Union[Unset, None, "DeviceProfile"] = UNSET
-    enable_direct_play: Union[Unset, None, bool] = UNSET
-    enable_direct_stream: Union[Unset, None, bool] = UNSET
-    enable_transcoding: Union[Unset, None, bool] = UNSET
-    allow_video_stream_copy: Union[Unset, None, bool] = UNSET
-    allow_audio_stream_copy: Union[Unset, None, bool] = UNSET
-    auto_open_live_stream: Union[Unset, None, bool] = UNSET
+    user_id: Union[None, Unset, str] = UNSET
+    max_streaming_bitrate: Union[None, Unset, int] = UNSET
+    start_time_ticks: Union[None, Unset, int] = UNSET
+    audio_stream_index: Union[None, Unset, int] = UNSET
+    subtitle_stream_index: Union[None, Unset, int] = UNSET
+    max_audio_channels: Union[None, Unset, int] = UNSET
+    media_source_id: Union[None, Unset, str] = UNSET
+    live_stream_id: Union[None, Unset, str] = UNSET
+    device_profile: Union["DeviceProfile", None, Unset] = UNSET
+    enable_direct_play: Union[None, Unset, bool] = UNSET
+    enable_direct_stream: Union[None, Unset, bool] = UNSET
+    enable_transcoding: Union[None, Unset, bool] = UNSET
+    allow_video_stream_copy: Union[None, Unset, bool] = UNSET
+    allow_audio_stream_copy: Union[None, Unset, bool] = UNSET
+    auto_open_live_stream: Union[None, Unset, bool] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        user_id = self.user_id
-        max_streaming_bitrate = self.max_streaming_bitrate
-        start_time_ticks = self.start_time_ticks
-        audio_stream_index = self.audio_stream_index
-        subtitle_stream_index = self.subtitle_stream_index
-        max_audio_channels = self.max_audio_channels
-        media_source_id = self.media_source_id
-        live_stream_id = self.live_stream_id
-        device_profile: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.device_profile, Unset):
-            device_profile = self.device_profile.to_dict() if self.device_profile else None
+        from ..models.device_profile import DeviceProfile
 
-        enable_direct_play = self.enable_direct_play
-        enable_direct_stream = self.enable_direct_stream
-        enable_transcoding = self.enable_transcoding
-        allow_video_stream_copy = self.allow_video_stream_copy
-        allow_audio_stream_copy = self.allow_audio_stream_copy
-        auto_open_live_stream = self.auto_open_live_stream
+        user_id: Union[None, Unset, str]
+        if isinstance(self.user_id, Unset):
+            user_id = UNSET
+        else:
+            user_id = self.user_id
+
+        max_streaming_bitrate: Union[None, Unset, int]
+        if isinstance(self.max_streaming_bitrate, Unset):
+            max_streaming_bitrate = UNSET
+        else:
+            max_streaming_bitrate = self.max_streaming_bitrate
+
+        start_time_ticks: Union[None, Unset, int]
+        if isinstance(self.start_time_ticks, Unset):
+            start_time_ticks = UNSET
+        else:
+            start_time_ticks = self.start_time_ticks
+
+        audio_stream_index: Union[None, Unset, int]
+        if isinstance(self.audio_stream_index, Unset):
+            audio_stream_index = UNSET
+        else:
+            audio_stream_index = self.audio_stream_index
+
+        subtitle_stream_index: Union[None, Unset, int]
+        if isinstance(self.subtitle_stream_index, Unset):
+            subtitle_stream_index = UNSET
+        else:
+            subtitle_stream_index = self.subtitle_stream_index
+
+        max_audio_channels: Union[None, Unset, int]
+        if isinstance(self.max_audio_channels, Unset):
+            max_audio_channels = UNSET
+        else:
+            max_audio_channels = self.max_audio_channels
+
+        media_source_id: Union[None, Unset, str]
+        if isinstance(self.media_source_id, Unset):
+            media_source_id = UNSET
+        else:
+            media_source_id = self.media_source_id
+
+        live_stream_id: Union[None, Unset, str]
+        if isinstance(self.live_stream_id, Unset):
+            live_stream_id = UNSET
+        else:
+            live_stream_id = self.live_stream_id
+
+        device_profile: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.device_profile, Unset):
+            device_profile = UNSET
+        elif isinstance(self.device_profile, DeviceProfile):
+            device_profile = self.device_profile.to_dict()
+        else:
+            device_profile = self.device_profile
+
+        enable_direct_play: Union[None, Unset, bool]
+        if isinstance(self.enable_direct_play, Unset):
+            enable_direct_play = UNSET
+        else:
+            enable_direct_play = self.enable_direct_play
+
+        enable_direct_stream: Union[None, Unset, bool]
+        if isinstance(self.enable_direct_stream, Unset):
+            enable_direct_stream = UNSET
+        else:
+            enable_direct_stream = self.enable_direct_stream
+
+        enable_transcoding: Union[None, Unset, bool]
+        if isinstance(self.enable_transcoding, Unset):
+            enable_transcoding = UNSET
+        else:
+            enable_transcoding = self.enable_transcoding
+
+        allow_video_stream_copy: Union[None, Unset, bool]
+        if isinstance(self.allow_video_stream_copy, Unset):
+            allow_video_stream_copy = UNSET
+        else:
+            allow_video_stream_copy = self.allow_video_stream_copy
+
+        allow_audio_stream_copy: Union[None, Unset, bool]
+        if isinstance(self.allow_audio_stream_copy, Unset):
+            allow_audio_stream_copy = UNSET
+        else:
+            allow_audio_stream_copy = self.allow_audio_stream_copy
+
+        auto_open_live_stream: Union[None, Unset, bool]
+        if isinstance(self.auto_open_live_stream, Unset):
+            auto_open_live_stream = UNSET
+        else:
+            auto_open_live_stream = self.auto_open_live_stream
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -122,42 +201,163 @@ class PlaybackInfoDto:
         from ..models.device_profile import DeviceProfile
 
         d = src_dict.copy()
-        user_id = d.pop("UserId", UNSET)
 
-        max_streaming_bitrate = d.pop("MaxStreamingBitrate", UNSET)
+        def _parse_user_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        start_time_ticks = d.pop("StartTimeTicks", UNSET)
+        user_id = _parse_user_id(d.pop("UserId", UNSET))
 
-        audio_stream_index = d.pop("AudioStreamIndex", UNSET)
+        def _parse_max_streaming_bitrate(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        subtitle_stream_index = d.pop("SubtitleStreamIndex", UNSET)
+        max_streaming_bitrate = _parse_max_streaming_bitrate(
+            d.pop("MaxStreamingBitrate", UNSET)
+        )
 
-        max_audio_channels = d.pop("MaxAudioChannels", UNSET)
+        def _parse_start_time_ticks(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        media_source_id = d.pop("MediaSourceId", UNSET)
+        start_time_ticks = _parse_start_time_ticks(d.pop("StartTimeTicks", UNSET))
 
-        live_stream_id = d.pop("LiveStreamId", UNSET)
+        def _parse_audio_stream_index(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        _device_profile = d.pop("DeviceProfile", UNSET)
-        device_profile: Union[Unset, None, DeviceProfile]
-        if _device_profile is None:
-            device_profile = None
-        elif isinstance(_device_profile, Unset):
-            device_profile = UNSET
-        else:
-            device_profile = DeviceProfile.from_dict(_device_profile)
+        audio_stream_index = _parse_audio_stream_index(d.pop("AudioStreamIndex", UNSET))
 
-        enable_direct_play = d.pop("EnableDirectPlay", UNSET)
+        def _parse_subtitle_stream_index(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        enable_direct_stream = d.pop("EnableDirectStream", UNSET)
+        subtitle_stream_index = _parse_subtitle_stream_index(
+            d.pop("SubtitleStreamIndex", UNSET)
+        )
 
-        enable_transcoding = d.pop("EnableTranscoding", UNSET)
+        def _parse_max_audio_channels(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        allow_video_stream_copy = d.pop("AllowVideoStreamCopy", UNSET)
+        max_audio_channels = _parse_max_audio_channels(d.pop("MaxAudioChannels", UNSET))
 
-        allow_audio_stream_copy = d.pop("AllowAudioStreamCopy", UNSET)
+        def _parse_media_source_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        auto_open_live_stream = d.pop("AutoOpenLiveStream", UNSET)
+        media_source_id = _parse_media_source_id(d.pop("MediaSourceId", UNSET))
+
+        def _parse_live_stream_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        live_stream_id = _parse_live_stream_id(d.pop("LiveStreamId", UNSET))
+
+        def _parse_device_profile(data: object) -> Union["DeviceProfile", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                device_profile_type_1 = DeviceProfile.from_dict(data)
+
+                return device_profile_type_1
+            except:  # noqa: E722
+                pass
+            return cast(Union["DeviceProfile", None, Unset], data)
+
+        device_profile = _parse_device_profile(d.pop("DeviceProfile", UNSET))
+
+        def _parse_enable_direct_play(data: object) -> Union[None, Unset, bool]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, bool], data)
+
+        enable_direct_play = _parse_enable_direct_play(d.pop("EnableDirectPlay", UNSET))
+
+        def _parse_enable_direct_stream(data: object) -> Union[None, Unset, bool]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, bool], data)
+
+        enable_direct_stream = _parse_enable_direct_stream(
+            d.pop("EnableDirectStream", UNSET)
+        )
+
+        def _parse_enable_transcoding(data: object) -> Union[None, Unset, bool]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, bool], data)
+
+        enable_transcoding = _parse_enable_transcoding(
+            d.pop("EnableTranscoding", UNSET)
+        )
+
+        def _parse_allow_video_stream_copy(data: object) -> Union[None, Unset, bool]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, bool], data)
+
+        allow_video_stream_copy = _parse_allow_video_stream_copy(
+            d.pop("AllowVideoStreamCopy", UNSET)
+        )
+
+        def _parse_allow_audio_stream_copy(data: object) -> Union[None, Unset, bool]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, bool], data)
+
+        allow_audio_stream_copy = _parse_allow_audio_stream_copy(
+            d.pop("AllowAudioStreamCopy", UNSET)
+        )
+
+        def _parse_auto_open_live_stream(data: object) -> Union[None, Unset, bool]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, bool], data)
+
+        auto_open_live_stream = _parse_auto_open_live_stream(
+            d.pop("AutoOpenLiveStream", UNSET)
+        )
 
         playback_info_dto = cls(
             user_id=user_id,

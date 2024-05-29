@@ -3,28 +3,45 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.media_update_info_dto import MediaUpdateInfoDto
 from ...types import Response
+from ... import errors
+
+from ...models.media_update_info_dto import MediaUpdateInfoDto
 
 
 def _get_kwargs(
     *,
-    json_body: MediaUpdateInfoDto,
+    body: Union[
+        MediaUpdateInfoDto,
+        MediaUpdateInfoDto,
+    ],
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Library/Media/Updated",
-        "json": json_json_body,
     }
 
+    if isinstance(body, MediaUpdateInfoDto):
+        _json_body = body.to_dict()
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, MediaUpdateInfoDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
+
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
     if response.status_code == HTTPStatus.UNAUTHORIZED:
@@ -37,7 +54,9 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -49,12 +68,16 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: MediaUpdateInfoDto,
+    body: Union[
+        MediaUpdateInfoDto,
+        MediaUpdateInfoDto,
+    ],
 ) -> Response[Any]:
     """Reports that new movies have been added by an external source.
 
     Args:
-        json_body (MediaUpdateInfoDto): Media Update Info Dto.
+        body (MediaUpdateInfoDto): Media Update Info Dto.
+        body (MediaUpdateInfoDto): Media Update Info Dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -65,7 +88,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -78,12 +101,16 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: MediaUpdateInfoDto,
+    body: Union[
+        MediaUpdateInfoDto,
+        MediaUpdateInfoDto,
+    ],
 ) -> Response[Any]:
     """Reports that new movies have been added by an external source.
 
     Args:
-        json_body (MediaUpdateInfoDto): Media Update Info Dto.
+        body (MediaUpdateInfoDto): Media Update Info Dto.
+        body (MediaUpdateInfoDto): Media Update Info Dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -94,7 +121,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)

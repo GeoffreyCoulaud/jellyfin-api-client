@@ -1,8 +1,12 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+
 
 T = TypeVar("T", bound="XbmcMetadataOptions")
 
@@ -11,24 +15,32 @@ T = TypeVar("T", bound="XbmcMetadataOptions")
 class XbmcMetadataOptions:
     """
     Attributes:
-        user_id (Union[Unset, None, str]):
+        user_id (Union[None, Unset, str]):
         release_date_format (Union[Unset, str]):
         save_image_paths_in_nfo (Union[Unset, bool]):
         enable_path_substitution (Union[Unset, bool]):
         enable_extra_thumbs_duplication (Union[Unset, bool]):
     """
 
-    user_id: Union[Unset, None, str] = UNSET
+    user_id: Union[None, Unset, str] = UNSET
     release_date_format: Union[Unset, str] = UNSET
     save_image_paths_in_nfo: Union[Unset, bool] = UNSET
     enable_path_substitution: Union[Unset, bool] = UNSET
     enable_extra_thumbs_duplication: Union[Unset, bool] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        user_id = self.user_id
+        user_id: Union[None, Unset, str]
+        if isinstance(self.user_id, Unset):
+            user_id = UNSET
+        else:
+            user_id = self.user_id
+
         release_date_format = self.release_date_format
+
         save_image_paths_in_nfo = self.save_image_paths_in_nfo
+
         enable_path_substitution = self.enable_path_substitution
+
         enable_extra_thumbs_duplication = self.enable_extra_thumbs_duplication
 
         field_dict: Dict[str, Any] = {}
@@ -49,7 +61,15 @@ class XbmcMetadataOptions:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        user_id = d.pop("UserId", UNSET)
+
+        def _parse_user_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        user_id = _parse_user_id(d.pop("UserId", UNSET))
 
         release_date_format = d.pop("ReleaseDateFormat", UNSET)
 

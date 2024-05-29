@@ -3,39 +3,44 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.playstate_command import PlaystateCommand
-from ...types import UNSET, Response, Unset
+from ...types import Unset
 
 
 def _get_kwargs(
     session_id: str,
     command: PlaystateCommand,
     *,
-    seek_position_ticks: Union[Unset, None, int] = UNSET,
-    controlling_user_id: Union[Unset, None, str] = UNSET,
+    seek_position_ticks: Union[Unset, int] = UNSET,
+    controlling_user_id: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["seekPositionTicks"] = seek_position_ticks
 
     params["controllingUserId"] = controlling_user_id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/Sessions/{sessionId}/Playing/{command}".format(
-            sessionId=session_id,
+        "url": "/Sessions/{session_id}/Playing/{command}".format(
+            session_id=session_id,
             command=command,
         ),
         "params": params,
     }
 
+    return _kwargs
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
     if response.status_code == HTTPStatus.UNAUTHORIZED:
@@ -48,7 +53,9 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -62,16 +69,16 @@ def sync_detailed(
     command: PlaystateCommand,
     *,
     client: AuthenticatedClient,
-    seek_position_ticks: Union[Unset, None, int] = UNSET,
-    controlling_user_id: Union[Unset, None, str] = UNSET,
+    seek_position_ticks: Union[Unset, int] = UNSET,
+    controlling_user_id: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
     """Issues a playstate command to a client.
 
     Args:
         session_id (str):
         command (PlaystateCommand): Enum PlaystateCommand.
-        seek_position_ticks (Union[Unset, None, int]):
-        controlling_user_id (Union[Unset, None, str]):
+        seek_position_ticks (Union[Unset, int]):
+        controlling_user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -100,16 +107,16 @@ async def asyncio_detailed(
     command: PlaystateCommand,
     *,
     client: AuthenticatedClient,
-    seek_position_ticks: Union[Unset, None, int] = UNSET,
-    controlling_user_id: Union[Unset, None, str] = UNSET,
+    seek_position_ticks: Union[Unset, int] = UNSET,
+    controlling_user_id: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
     """Issues a playstate command to a client.
 
     Args:
         session_id (str):
         command (PlaystateCommand): Enum PlaystateCommand.
-        seek_position_ticks (Union[Unset, None, int]):
-        controlling_user_id (Union[Unset, None, str]):
+        seek_position_ticks (Union[Unset, int]):
+        controlling_user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

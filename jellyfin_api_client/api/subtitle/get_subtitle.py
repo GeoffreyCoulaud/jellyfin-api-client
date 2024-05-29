@@ -3,9 +3,13 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...types import UNSET, Response, Unset
+from ...types import Response, UNSET
+from ... import errors
+
+from io import BytesIO
+from ...types import Unset
+from ...types import File
 
 
 def _get_kwargs(
@@ -14,18 +18,17 @@ def _get_kwargs(
     route_index: int,
     route_format: str,
     *,
-    item_id: Union[Unset, None, str] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    index: Union[Unset, None, int] = UNSET,
-    format_: Union[Unset, None, str] = UNSET,
-    end_position_ticks: Union[Unset, None, int] = UNSET,
-    copy_timestamps: Union[Unset, None, bool] = False,
-    add_vtt_time_map: Union[Unset, None, bool] = False,
-    start_position_ticks: Union[Unset, None, int] = 0,
+    item_id: Union[Unset, str] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    index: Union[Unset, int] = UNSET,
+    format_: Union[Unset, str] = UNSET,
+    end_position_ticks: Union[Unset, int] = UNSET,
+    copy_timestamps: Union[Unset, bool] = False,
+    add_vtt_time_map: Union[Unset, bool] = False,
+    start_position_ticks: Union[Unset, int] = 0,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["itemId"] = item_id
 
     params["mediaSourceId"] = media_source_id
@@ -44,26 +47,36 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Videos/{routeItemId}/{routeMediaSourceId}/Subtitles/{routeIndex}/Stream.{routeFormat}".format(
-            routeItemId=route_item_id,
-            routeMediaSourceId=route_media_source_id,
-            routeIndex=route_index,
-            routeFormat=route_format,
+        "url": "/Videos/{route_item_id}/{route_media_source_id}/Subtitles/{route_index}/Stream.{route_format}".format(
+            route_item_id=route_item_id,
+            route_media_source_id=route_media_source_id,
+            route_index=route_index,
+            route_format=route_format,
         ),
         "params": params,
     }
 
+    return _kwargs
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[File]:
+    if response.status_code == HTTPStatus.OK:
+        response_200 = File(payload=BytesIO(response.text))
+
+        return response_200
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[File]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -79,15 +92,15 @@ def sync_detailed(
     route_format: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    item_id: Union[Unset, None, str] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    index: Union[Unset, None, int] = UNSET,
-    format_: Union[Unset, None, str] = UNSET,
-    end_position_ticks: Union[Unset, None, int] = UNSET,
-    copy_timestamps: Union[Unset, None, bool] = False,
-    add_vtt_time_map: Union[Unset, None, bool] = False,
-    start_position_ticks: Union[Unset, None, int] = 0,
-) -> Response[Any]:
+    item_id: Union[Unset, str] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    index: Union[Unset, int] = UNSET,
+    format_: Union[Unset, str] = UNSET,
+    end_position_ticks: Union[Unset, int] = UNSET,
+    copy_timestamps: Union[Unset, bool] = False,
+    add_vtt_time_map: Union[Unset, bool] = False,
+    start_position_ticks: Union[Unset, int] = 0,
+) -> Response[File]:
     """Gets subtitles in a specified format.
 
     Args:
@@ -95,21 +108,21 @@ def sync_detailed(
         route_media_source_id (str):
         route_index (int):
         route_format (str):
-        item_id (Union[Unset, None, str]):
-        media_source_id (Union[Unset, None, str]):
-        index (Union[Unset, None, int]):
-        format_ (Union[Unset, None, str]):
-        end_position_ticks (Union[Unset, None, int]):
-        copy_timestamps (Union[Unset, None, bool]):
-        add_vtt_time_map (Union[Unset, None, bool]):
-        start_position_ticks (Union[Unset, None, int]):
+        item_id (Union[Unset, str]):
+        media_source_id (Union[Unset, str]):
+        index (Union[Unset, int]):
+        format_ (Union[Unset, str]):
+        end_position_ticks (Union[Unset, int]):
+        copy_timestamps (Union[Unset, bool]):  Default: False.
+        add_vtt_time_map (Union[Unset, bool]):  Default: False.
+        start_position_ticks (Union[Unset, int]):  Default: 0.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any]
+        Response[File]
     """
 
     kwargs = _get_kwargs(
@@ -134,22 +147,22 @@ def sync_detailed(
     return _build_response(client=client, response=response)
 
 
-async def asyncio_detailed(
+def sync(
     route_item_id: str,
     route_media_source_id: str,
     route_index: int,
     route_format: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    item_id: Union[Unset, None, str] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    index: Union[Unset, None, int] = UNSET,
-    format_: Union[Unset, None, str] = UNSET,
-    end_position_ticks: Union[Unset, None, int] = UNSET,
-    copy_timestamps: Union[Unset, None, bool] = False,
-    add_vtt_time_map: Union[Unset, None, bool] = False,
-    start_position_ticks: Union[Unset, None, int] = 0,
-) -> Response[Any]:
+    item_id: Union[Unset, str] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    index: Union[Unset, int] = UNSET,
+    format_: Union[Unset, str] = UNSET,
+    end_position_ticks: Union[Unset, int] = UNSET,
+    copy_timestamps: Union[Unset, bool] = False,
+    add_vtt_time_map: Union[Unset, bool] = False,
+    start_position_ticks: Union[Unset, int] = 0,
+) -> Optional[File]:
     """Gets subtitles in a specified format.
 
     Args:
@@ -157,21 +170,78 @@ async def asyncio_detailed(
         route_media_source_id (str):
         route_index (int):
         route_format (str):
-        item_id (Union[Unset, None, str]):
-        media_source_id (Union[Unset, None, str]):
-        index (Union[Unset, None, int]):
-        format_ (Union[Unset, None, str]):
-        end_position_ticks (Union[Unset, None, int]):
-        copy_timestamps (Union[Unset, None, bool]):
-        add_vtt_time_map (Union[Unset, None, bool]):
-        start_position_ticks (Union[Unset, None, int]):
+        item_id (Union[Unset, str]):
+        media_source_id (Union[Unset, str]):
+        index (Union[Unset, int]):
+        format_ (Union[Unset, str]):
+        end_position_ticks (Union[Unset, int]):
+        copy_timestamps (Union[Unset, bool]):  Default: False.
+        add_vtt_time_map (Union[Unset, bool]):  Default: False.
+        start_position_ticks (Union[Unset, int]):  Default: 0.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any]
+        File
+    """
+
+    return sync_detailed(
+        route_item_id=route_item_id,
+        route_media_source_id=route_media_source_id,
+        route_index=route_index,
+        route_format=route_format,
+        client=client,
+        item_id=item_id,
+        media_source_id=media_source_id,
+        index=index,
+        format_=format_,
+        end_position_ticks=end_position_ticks,
+        copy_timestamps=copy_timestamps,
+        add_vtt_time_map=add_vtt_time_map,
+        start_position_ticks=start_position_ticks,
+    ).parsed
+
+
+async def asyncio_detailed(
+    route_item_id: str,
+    route_media_source_id: str,
+    route_index: int,
+    route_format: str,
+    *,
+    client: Union[AuthenticatedClient, Client],
+    item_id: Union[Unset, str] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    index: Union[Unset, int] = UNSET,
+    format_: Union[Unset, str] = UNSET,
+    end_position_ticks: Union[Unset, int] = UNSET,
+    copy_timestamps: Union[Unset, bool] = False,
+    add_vtt_time_map: Union[Unset, bool] = False,
+    start_position_ticks: Union[Unset, int] = 0,
+) -> Response[File]:
+    """Gets subtitles in a specified format.
+
+    Args:
+        route_item_id (str):
+        route_media_source_id (str):
+        route_index (int):
+        route_format (str):
+        item_id (Union[Unset, str]):
+        media_source_id (Union[Unset, str]):
+        index (Union[Unset, int]):
+        format_ (Union[Unset, str]):
+        end_position_ticks (Union[Unset, int]):
+        copy_timestamps (Union[Unset, bool]):  Default: False.
+        add_vtt_time_map (Union[Unset, bool]):  Default: False.
+        start_position_ticks (Union[Unset, int]):  Default: 0.
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[File]
     """
 
     kwargs = _get_kwargs(
@@ -192,3 +262,62 @@ async def asyncio_detailed(
     response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
+
+async def asyncio(
+    route_item_id: str,
+    route_media_source_id: str,
+    route_index: int,
+    route_format: str,
+    *,
+    client: Union[AuthenticatedClient, Client],
+    item_id: Union[Unset, str] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    index: Union[Unset, int] = UNSET,
+    format_: Union[Unset, str] = UNSET,
+    end_position_ticks: Union[Unset, int] = UNSET,
+    copy_timestamps: Union[Unset, bool] = False,
+    add_vtt_time_map: Union[Unset, bool] = False,
+    start_position_ticks: Union[Unset, int] = 0,
+) -> Optional[File]:
+    """Gets subtitles in a specified format.
+
+    Args:
+        route_item_id (str):
+        route_media_source_id (str):
+        route_index (int):
+        route_format (str):
+        item_id (Union[Unset, str]):
+        media_source_id (Union[Unset, str]):
+        index (Union[Unset, int]):
+        format_ (Union[Unset, str]):
+        end_position_ticks (Union[Unset, int]):
+        copy_timestamps (Union[Unset, bool]):  Default: False.
+        add_vtt_time_map (Union[Unset, bool]):  Default: False.
+        start_position_ticks (Union[Unset, int]):  Default: 0.
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        File
+    """
+
+    return (
+        await asyncio_detailed(
+            route_item_id=route_item_id,
+            route_media_source_id=route_media_source_id,
+            route_index=route_index,
+            route_format=route_format,
+            client=client,
+            item_id=item_id,
+            media_source_id=media_source_id,
+            index=index,
+            format_=format_,
+            end_position_ticks=end_position_ticks,
+            copy_timestamps=copy_timestamps,
+            add_vtt_time_map=add_vtt_time_map,
+            start_position_ticks=start_position_ticks,
+        )
+    ).parsed

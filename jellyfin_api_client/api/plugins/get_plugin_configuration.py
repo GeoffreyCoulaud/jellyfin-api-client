@@ -3,24 +3,25 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.base_plugin_configuration import BasePluginConfiguration
-from ...models.problem_details import ProblemDetails
 from ...types import Response
+from ... import errors
+
+from ...models.problem_details import ProblemDetails
+from ...models.base_plugin_configuration import BasePluginConfiguration
 
 
 def _get_kwargs(
     plugin_id: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Plugins/{pluginId}/Configuration".format(
-            pluginId=plugin_id,
+        "url": "/Plugins/{plugin_id}/Configuration".format(
+            plugin_id=plugin_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

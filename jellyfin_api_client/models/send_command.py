@@ -1,11 +1,16 @@
-import datetime
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
-from dateutil.parser import isoparse
 
-from ..models.send_command_type import SendCommandType
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast
+import datetime
+from dateutil.parser import isoparse
+from ..models.send_command_type import SendCommandType
+
 
 T = TypeVar("T", bound="SendCommand")
 
@@ -18,7 +23,7 @@ class SendCommand:
         group_id (Union[Unset, str]): Gets the group identifier.
         playlist_item_id (Union[Unset, str]): Gets the playlist identifier of the playing item.
         when (Union[Unset, datetime.datetime]): Gets or sets the UTC time when to execute the command.
-        position_ticks (Union[Unset, None, int]): Gets the position ticks.
+        position_ticks (Union[None, Unset, int]): Gets the position ticks.
         command (Union[Unset, SendCommandType]): Enum SendCommandType.
         emitted_at (Union[Unset, datetime.datetime]): Gets the UTC time when this command has been emitted.
     """
@@ -26,18 +31,25 @@ class SendCommand:
     group_id: Union[Unset, str] = UNSET
     playlist_item_id: Union[Unset, str] = UNSET
     when: Union[Unset, datetime.datetime] = UNSET
-    position_ticks: Union[Unset, None, int] = UNSET
+    position_ticks: Union[None, Unset, int] = UNSET
     command: Union[Unset, SendCommandType] = UNSET
     emitted_at: Union[Unset, datetime.datetime] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         group_id = self.group_id
+
         playlist_item_id = self.playlist_item_id
+
         when: Union[Unset, str] = UNSET
         if not isinstance(self.when, Unset):
             when = self.when.isoformat()
 
-        position_ticks = self.position_ticks
+        position_ticks: Union[None, Unset, int]
+        if isinstance(self.position_ticks, Unset):
+            position_ticks = UNSET
+        else:
+            position_ticks = self.position_ticks
+
         command: Union[Unset, str] = UNSET
         if not isinstance(self.command, Unset):
             command = self.command.value
@@ -77,7 +89,14 @@ class SendCommand:
         else:
             when = isoparse(_when)
 
-        position_ticks = d.pop("PositionTicks", UNSET)
+        def _parse_position_ticks(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        position_ticks = _parse_position_ticks(d.pop("PositionTicks", UNSET))
 
         _command = d.pop("Command", UNSET)
         command: Union[Unset, SendCommandType]

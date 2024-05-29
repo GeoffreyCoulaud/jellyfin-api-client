@@ -1,8 +1,12 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+
 
 T = TypeVar("T", bound="NameGuidPair")
 
@@ -11,15 +15,20 @@ T = TypeVar("T", bound="NameGuidPair")
 class NameGuidPair:
     """
     Attributes:
-        name (Union[Unset, None, str]):
+        name (Union[None, Unset, str]):
         id (Union[Unset, str]):
     """
 
-    name: Union[Unset, None, str] = UNSET
+    name: Union[None, Unset, str] = UNSET
     id: Union[Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        name = self.name
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
+
         id = self.id
 
         field_dict: Dict[str, Any] = {}
@@ -34,7 +43,15 @@ class NameGuidPair:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        name = d.pop("Name", UNSET)
+
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        name = _parse_name(d.pop("Name", UNSET))
 
         id = d.pop("Id", UNSET)
 

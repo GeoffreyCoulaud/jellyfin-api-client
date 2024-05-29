@@ -1,10 +1,15 @@
-import datetime
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
-from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast
+import datetime
+from dateutil.parser import isoparse
+
 
 T = TypeVar("T", bound="FontFile")
 
@@ -14,20 +19,26 @@ class FontFile:
     """Class FontFile.
 
     Attributes:
-        name (Union[Unset, None, str]): Gets or sets the name.
+        name (Union[None, Unset, str]): Gets or sets the name.
         size (Union[Unset, int]): Gets or sets the size.
         date_created (Union[Unset, datetime.datetime]): Gets or sets the date created.
         date_modified (Union[Unset, datetime.datetime]): Gets or sets the date modified.
     """
 
-    name: Union[Unset, None, str] = UNSET
+    name: Union[None, Unset, str] = UNSET
     size: Union[Unset, int] = UNSET
     date_created: Union[Unset, datetime.datetime] = UNSET
     date_modified: Union[Unset, datetime.datetime] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        name = self.name
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
+
         size = self.size
+
         date_created: Union[Unset, str] = UNSET
         if not isinstance(self.date_created, Unset):
             date_created = self.date_created.isoformat()
@@ -52,7 +63,15 @@ class FontFile:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        name = d.pop("Name", UNSET)
+
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        name = _parse_name(d.pop("Name", UNSET))
 
         size = d.pop("Size", UNSET)
 

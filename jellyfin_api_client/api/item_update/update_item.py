@@ -3,29 +3,44 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response
+from ... import errors
+
 from ...models.base_item_dto import BaseItemDto
 from ...models.problem_details import ProblemDetails
-from ...types import Response
 
 
 def _get_kwargs(
     item_id: str,
     *,
-    json_body: BaseItemDto,
+    body: Union[
+        BaseItemDto,
+        BaseItemDto,
+    ],
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/Items/{itemId}".format(
-            itemId=item_id,
+        "url": "/Items/{item_id}".format(
+            item_id=item_id,
         ),
-        "json": json_json_body,
     }
+
+    if isinstance(body, BaseItemDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, BaseItemDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -65,14 +80,18 @@ def sync_detailed(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: BaseItemDto,
+    body: Union[
+        BaseItemDto,
+        BaseItemDto,
+    ],
 ) -> Response[Union[Any, ProblemDetails]]:
     """Updates an item.
 
     Args:
         item_id (str):
-        json_body (BaseItemDto): This is strictly used as a data transfer object from the api
-            layer.
+        body (BaseItemDto): This is strictly used as a data transfer object from the api layer.
+            This holds information about a BaseItem in a format that is convenient for the client.
+        body (BaseItemDto): This is strictly used as a data transfer object from the api layer.
             This holds information about a BaseItem in a format that is convenient for the client.
 
     Raises:
@@ -85,7 +104,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         item_id=item_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -99,14 +118,18 @@ def sync(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: BaseItemDto,
+    body: Union[
+        BaseItemDto,
+        BaseItemDto,
+    ],
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Updates an item.
 
     Args:
         item_id (str):
-        json_body (BaseItemDto): This is strictly used as a data transfer object from the api
-            layer.
+        body (BaseItemDto): This is strictly used as a data transfer object from the api layer.
+            This holds information about a BaseItem in a format that is convenient for the client.
+        body (BaseItemDto): This is strictly used as a data transfer object from the api layer.
             This holds information about a BaseItem in a format that is convenient for the client.
 
     Raises:
@@ -120,7 +143,7 @@ def sync(
     return sync_detailed(
         item_id=item_id,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -128,14 +151,18 @@ async def asyncio_detailed(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: BaseItemDto,
+    body: Union[
+        BaseItemDto,
+        BaseItemDto,
+    ],
 ) -> Response[Union[Any, ProblemDetails]]:
     """Updates an item.
 
     Args:
         item_id (str):
-        json_body (BaseItemDto): This is strictly used as a data transfer object from the api
-            layer.
+        body (BaseItemDto): This is strictly used as a data transfer object from the api layer.
+            This holds information about a BaseItem in a format that is convenient for the client.
+        body (BaseItemDto): This is strictly used as a data transfer object from the api layer.
             This holds information about a BaseItem in a format that is convenient for the client.
 
     Raises:
@@ -148,7 +175,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         item_id=item_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -160,14 +187,18 @@ async def asyncio(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: BaseItemDto,
+    body: Union[
+        BaseItemDto,
+        BaseItemDto,
+    ],
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Updates an item.
 
     Args:
         item_id (str):
-        json_body (BaseItemDto): This is strictly used as a data transfer object from the api
-            layer.
+        body (BaseItemDto): This is strictly used as a data transfer object from the api layer.
+            This holds information about a BaseItem in a format that is convenient for the client.
+        body (BaseItemDto): This is strictly used as a data transfer object from the api layer.
             This holds information about a BaseItem in a format that is convenient for the client.
 
     Raises:
@@ -182,6 +213,6 @@ async def asyncio(
         await asyncio_detailed(
             item_id=item_id,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

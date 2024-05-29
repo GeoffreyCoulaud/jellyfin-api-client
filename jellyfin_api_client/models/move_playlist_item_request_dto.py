@@ -1,8 +1,12 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import Union
+
 
 T = TypeVar("T", bound="MovePlaylistItemRequestDto")
 
@@ -21,6 +25,7 @@ class MovePlaylistItemRequestDto:
 
     def to_dict(self) -> Dict[str, Any]:
         playlist_item_id = self.playlist_item_id
+
         new_index = self.new_index
 
         field_dict: Dict[str, Any] = {}

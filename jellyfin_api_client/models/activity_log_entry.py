@@ -1,11 +1,16 @@
-import datetime
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
+
+from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast
+import datetime
+from ..models.log_level import LogLevel
 from dateutil.parser import isoparse
 
-from ..models.log_level import LogLevel
-from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ActivityLogEntry")
 
@@ -17,40 +22,64 @@ class ActivityLogEntry:
     Attributes:
         id (Union[Unset, int]): Gets or sets the identifier.
         name (Union[Unset, str]): Gets or sets the name.
-        overview (Union[Unset, None, str]): Gets or sets the overview.
-        short_overview (Union[Unset, None, str]): Gets or sets the short overview.
+        overview (Union[None, Unset, str]): Gets or sets the overview.
+        short_overview (Union[None, Unset, str]): Gets or sets the short overview.
         type (Union[Unset, str]): Gets or sets the type.
-        item_id (Union[Unset, None, str]): Gets or sets the item identifier.
+        item_id (Union[None, Unset, str]): Gets or sets the item identifier.
         date (Union[Unset, datetime.datetime]): Gets or sets the date.
         user_id (Union[Unset, str]): Gets or sets the user identifier.
-        user_primary_image_tag (Union[Unset, None, str]): Gets or sets the user primary image tag.
+        user_primary_image_tag (Union[None, Unset, str]): Gets or sets the user primary image tag.
         severity (Union[Unset, LogLevel]):
     """
 
     id: Union[Unset, int] = UNSET
     name: Union[Unset, str] = UNSET
-    overview: Union[Unset, None, str] = UNSET
-    short_overview: Union[Unset, None, str] = UNSET
+    overview: Union[None, Unset, str] = UNSET
+    short_overview: Union[None, Unset, str] = UNSET
     type: Union[Unset, str] = UNSET
-    item_id: Union[Unset, None, str] = UNSET
+    item_id: Union[None, Unset, str] = UNSET
     date: Union[Unset, datetime.datetime] = UNSET
     user_id: Union[Unset, str] = UNSET
-    user_primary_image_tag: Union[Unset, None, str] = UNSET
+    user_primary_image_tag: Union[None, Unset, str] = UNSET
     severity: Union[Unset, LogLevel] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         name = self.name
-        overview = self.overview
-        short_overview = self.short_overview
+
+        overview: Union[None, Unset, str]
+        if isinstance(self.overview, Unset):
+            overview = UNSET
+        else:
+            overview = self.overview
+
+        short_overview: Union[None, Unset, str]
+        if isinstance(self.short_overview, Unset):
+            short_overview = UNSET
+        else:
+            short_overview = self.short_overview
+
         type = self.type
-        item_id = self.item_id
+
+        item_id: Union[None, Unset, str]
+        if isinstance(self.item_id, Unset):
+            item_id = UNSET
+        else:
+            item_id = self.item_id
+
         date: Union[Unset, str] = UNSET
         if not isinstance(self.date, Unset):
             date = self.date.isoformat()
 
         user_id = self.user_id
-        user_primary_image_tag = self.user_primary_image_tag
+
+        user_primary_image_tag: Union[None, Unset, str]
+        if isinstance(self.user_primary_image_tag, Unset):
+            user_primary_image_tag = UNSET
+        else:
+            user_primary_image_tag = self.user_primary_image_tag
+
         severity: Union[Unset, str] = UNSET
         if not isinstance(self.severity, Unset):
             severity = self.severity.value
@@ -87,13 +116,34 @@ class ActivityLogEntry:
 
         name = d.pop("Name", UNSET)
 
-        overview = d.pop("Overview", UNSET)
+        def _parse_overview(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        short_overview = d.pop("ShortOverview", UNSET)
+        overview = _parse_overview(d.pop("Overview", UNSET))
+
+        def _parse_short_overview(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        short_overview = _parse_short_overview(d.pop("ShortOverview", UNSET))
 
         type = d.pop("Type", UNSET)
 
-        item_id = d.pop("ItemId", UNSET)
+        def _parse_item_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        item_id = _parse_item_id(d.pop("ItemId", UNSET))
 
         _date = d.pop("Date", UNSET)
         date: Union[Unset, datetime.datetime]
@@ -104,7 +154,16 @@ class ActivityLogEntry:
 
         user_id = d.pop("UserId", UNSET)
 
-        user_primary_image_tag = d.pop("UserPrimaryImageTag", UNSET)
+        def _parse_user_primary_image_tag(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        user_primary_image_tag = _parse_user_primary_image_tag(
+            d.pop("UserPrimaryImageTag", UNSET)
+        )
 
         _severity = d.pop("Severity", UNSET)
         severity: Union[Unset, LogLevel]

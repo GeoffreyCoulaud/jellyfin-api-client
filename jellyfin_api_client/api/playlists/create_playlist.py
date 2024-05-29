@@ -3,49 +3,68 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.create_playlist_dto import CreatePlaylistDto
 from ...models.playlist_creation_result import PlaylistCreationResult
-from ...types import UNSET, Response, Unset
+from ...models.media_type import MediaType
+from ...types import Unset
 
 
 def _get_kwargs(
     *,
-    json_body: CreatePlaylistDto,
-    name: Union[Unset, None, str] = UNSET,
-    ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    media_type: Union[Unset, None, str] = UNSET,
+    body: Union[
+        CreatePlaylistDto,
+        CreatePlaylistDto,
+    ],
+    name: Union[Unset, str] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    media_type: Union[Unset, MediaType] = UNSET,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
     params: Dict[str, Any] = {}
+
     params["name"] = name
 
-    json_ids: Union[Unset, None, List[str]] = UNSET
+    json_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(ids, Unset):
-        if ids is None:
-            json_ids = None
-        else:
-            json_ids = ids
+        json_ids = ids
 
     params["ids"] = json_ids
 
     params["userId"] = user_id
 
-    params["mediaType"] = media_type
+    json_media_type: Union[Unset, str] = UNSET
+    if not isinstance(media_type, Unset):
+        json_media_type = media_type.value
+
+    params["mediaType"] = json_media_type
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Playlists",
-        "json": json_json_body,
         "params": params,
     }
+
+    if isinstance(body, CreatePlaylistDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, CreatePlaylistDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -81,11 +100,14 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: CreatePlaylistDto,
-    name: Union[Unset, None, str] = UNSET,
-    ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    media_type: Union[Unset, None, str] = UNSET,
+    body: Union[
+        CreatePlaylistDto,
+        CreatePlaylistDto,
+    ],
+    name: Union[Unset, str] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    media_type: Union[Unset, MediaType] = UNSET,
 ) -> Response[Union[Any, PlaylistCreationResult]]:
     """Creates a new playlist.
 
@@ -94,11 +116,12 @@ def sync_detailed(
     Query parameters are obsolete.
 
     Args:
-        name (Union[Unset, None, str]):
-        ids (Union[Unset, None, List[str]]):
-        user_id (Union[Unset, None, str]):
-        media_type (Union[Unset, None, str]):
-        json_body (CreatePlaylistDto): Create new playlist dto.
+        name (Union[Unset, str]):
+        ids (Union[Unset, List[str]]):
+        user_id (Union[Unset, str]):
+        media_type (Union[Unset, MediaType]): Media types.
+        body (CreatePlaylistDto): Create new playlist dto.
+        body (CreatePlaylistDto): Create new playlist dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -109,7 +132,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         name=name,
         ids=ids,
         user_id=user_id,
@@ -126,11 +149,14 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    json_body: CreatePlaylistDto,
-    name: Union[Unset, None, str] = UNSET,
-    ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    media_type: Union[Unset, None, str] = UNSET,
+    body: Union[
+        CreatePlaylistDto,
+        CreatePlaylistDto,
+    ],
+    name: Union[Unset, str] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    media_type: Union[Unset, MediaType] = UNSET,
 ) -> Optional[Union[Any, PlaylistCreationResult]]:
     """Creates a new playlist.
 
@@ -139,11 +165,12 @@ def sync(
     Query parameters are obsolete.
 
     Args:
-        name (Union[Unset, None, str]):
-        ids (Union[Unset, None, List[str]]):
-        user_id (Union[Unset, None, str]):
-        media_type (Union[Unset, None, str]):
-        json_body (CreatePlaylistDto): Create new playlist dto.
+        name (Union[Unset, str]):
+        ids (Union[Unset, List[str]]):
+        user_id (Union[Unset, str]):
+        media_type (Union[Unset, MediaType]): Media types.
+        body (CreatePlaylistDto): Create new playlist dto.
+        body (CreatePlaylistDto): Create new playlist dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -155,7 +182,7 @@ def sync(
 
     return sync_detailed(
         client=client,
-        json_body=json_body,
+        body=body,
         name=name,
         ids=ids,
         user_id=user_id,
@@ -166,11 +193,14 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: CreatePlaylistDto,
-    name: Union[Unset, None, str] = UNSET,
-    ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    media_type: Union[Unset, None, str] = UNSET,
+    body: Union[
+        CreatePlaylistDto,
+        CreatePlaylistDto,
+    ],
+    name: Union[Unset, str] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    media_type: Union[Unset, MediaType] = UNSET,
 ) -> Response[Union[Any, PlaylistCreationResult]]:
     """Creates a new playlist.
 
@@ -179,11 +209,12 @@ async def asyncio_detailed(
     Query parameters are obsolete.
 
     Args:
-        name (Union[Unset, None, str]):
-        ids (Union[Unset, None, List[str]]):
-        user_id (Union[Unset, None, str]):
-        media_type (Union[Unset, None, str]):
-        json_body (CreatePlaylistDto): Create new playlist dto.
+        name (Union[Unset, str]):
+        ids (Union[Unset, List[str]]):
+        user_id (Union[Unset, str]):
+        media_type (Union[Unset, MediaType]): Media types.
+        body (CreatePlaylistDto): Create new playlist dto.
+        body (CreatePlaylistDto): Create new playlist dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -194,7 +225,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
         name=name,
         ids=ids,
         user_id=user_id,
@@ -209,11 +240,14 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    json_body: CreatePlaylistDto,
-    name: Union[Unset, None, str] = UNSET,
-    ids: Union[Unset, None, List[str]] = UNSET,
-    user_id: Union[Unset, None, str] = UNSET,
-    media_type: Union[Unset, None, str] = UNSET,
+    body: Union[
+        CreatePlaylistDto,
+        CreatePlaylistDto,
+    ],
+    name: Union[Unset, str] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
+    user_id: Union[Unset, str] = UNSET,
+    media_type: Union[Unset, MediaType] = UNSET,
 ) -> Optional[Union[Any, PlaylistCreationResult]]:
     """Creates a new playlist.
 
@@ -222,11 +256,12 @@ async def asyncio(
     Query parameters are obsolete.
 
     Args:
-        name (Union[Unset, None, str]):
-        ids (Union[Unset, None, List[str]]):
-        user_id (Union[Unset, None, str]):
-        media_type (Union[Unset, None, str]):
-        json_body (CreatePlaylistDto): Create new playlist dto.
+        name (Union[Unset, str]):
+        ids (Union[Unset, List[str]]):
+        user_id (Union[Unset, str]):
+        media_type (Union[Unset, MediaType]): Media types.
+        body (CreatePlaylistDto): Create new playlist dto.
+        body (CreatePlaylistDto): Create new playlist dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -239,7 +274,7 @@ async def asyncio(
     return (
         await asyncio_detailed(
             client=client,
-            json_body=json_body,
+            body=body,
             name=name,
             ids=ids,
             user_id=user_id,

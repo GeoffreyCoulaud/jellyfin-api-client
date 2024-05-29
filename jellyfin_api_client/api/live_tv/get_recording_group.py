@@ -3,23 +3,24 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.problem_details import ProblemDetails
 from ...types import Response
+from ... import errors
+
+from ...models.problem_details import ProblemDetails
 
 
 def _get_kwargs(
     group_id: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/LiveTv/Recordings/Groups/{groupId}".format(
-            groupId=group_id,
+        "url": "/LiveTv/Recordings/Groups/{group_id}".format(
+            group_id=group_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

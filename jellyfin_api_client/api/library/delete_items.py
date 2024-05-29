@@ -3,35 +3,35 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.problem_details import ProblemDetails
-from ...types import UNSET, Response, Unset
+from ...types import Unset
 
 
 def _get_kwargs(
     *,
-    ids: Union[Unset, None, List[str]] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
-    json_ids: Union[Unset, None, List[str]] = UNSET
+
+    json_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(ids, Unset):
-        if ids is None:
-            json_ids = None
-        else:
-            json_ids = ids
+        json_ids = ids
 
     params["ids"] = json_ids
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
         "url": "/Items",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -44,6 +44,10 @@ def _parse_response(
         response_401 = ProblemDetails.from_dict(response.json())
 
         return response_401
+    if response.status_code == HTTPStatus.NOT_FOUND:
+        response_404 = ProblemDetails.from_dict(response.json())
+
+        return response_404
     if response.status_code == HTTPStatus.FORBIDDEN:
         response_403 = cast(Any, None)
         return response_403
@@ -67,12 +71,12 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    ids: Union[Unset, None, List[str]] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
 ) -> Response[Union[Any, ProblemDetails]]:
     """Deletes items from the library and filesystem.
 
     Args:
-        ids (Union[Unset, None, List[str]]):
+        ids (Union[Unset, List[str]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -96,12 +100,12 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    ids: Union[Unset, None, List[str]] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Deletes items from the library and filesystem.
 
     Args:
-        ids (Union[Unset, None, List[str]]):
+        ids (Union[Unset, List[str]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -120,12 +124,12 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    ids: Union[Unset, None, List[str]] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
 ) -> Response[Union[Any, ProblemDetails]]:
     """Deletes items from the library and filesystem.
 
     Args:
-        ids (Union[Unset, None, List[str]]):
+        ids (Union[Unset, List[str]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -147,12 +151,12 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    ids: Union[Unset, None, List[str]] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Deletes items from the library and filesystem.
 
     Args:
-        ids (Union[Unset, None, List[str]]):
+        ids (Union[Unset, List[str]]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

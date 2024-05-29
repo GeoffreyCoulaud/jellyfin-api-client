@@ -1,8 +1,12 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+
 
 T = TypeVar("T", bound="MediaPathInfo")
 
@@ -12,15 +16,20 @@ class MediaPathInfo:
     """
     Attributes:
         path (Union[Unset, str]):
-        network_path (Union[Unset, None, str]):
+        network_path (Union[None, Unset, str]):
     """
 
     path: Union[Unset, str] = UNSET
-    network_path: Union[Unset, None, str] = UNSET
+    network_path: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         path = self.path
-        network_path = self.network_path
+
+        network_path: Union[None, Unset, str]
+        if isinstance(self.network_path, Unset):
+            network_path = UNSET
+        else:
+            network_path = self.network_path
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -36,7 +45,14 @@ class MediaPathInfo:
         d = src_dict.copy()
         path = d.pop("Path", UNSET)
 
-        network_path = d.pop("NetworkPath", UNSET)
+        def _parse_network_path(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        network_path = _parse_network_path(d.pop("NetworkPath", UNSET))
 
         media_path_info = cls(
             path=path,

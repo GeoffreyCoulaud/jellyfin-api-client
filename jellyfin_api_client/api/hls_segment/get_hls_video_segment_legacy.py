@@ -3,10 +3,11 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.problem_details import ProblemDetails
 from ...types import Response
+from ... import errors
+
+from ...models.problem_details import ProblemDetails
 
 
 def _get_kwargs(
@@ -15,17 +16,17 @@ def _get_kwargs(
     segment_id: str,
     segment_container: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Videos/{itemId}/hls/{playlistId}/{segmentId}.{segmentContainer}".format(
-            itemId=item_id,
-            playlistId=playlist_id,
-            segmentId=segment_id,
-            segmentContainer=segment_container,
+        "url": "/Videos/{item_id}/hls/{playlist_id}/{segment_id}.{segment_container}".format(
+            item_id=item_id,
+            playlist_id=playlist_id,
+            segment_id=segment_id,
+            segment_container=segment_container,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

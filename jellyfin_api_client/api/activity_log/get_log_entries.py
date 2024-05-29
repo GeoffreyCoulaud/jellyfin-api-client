@@ -1,44 +1,46 @@
-import datetime
 from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+import datetime
 from ...models.activity_log_entry_query_result import ActivityLogEntryQueryResult
-from ...types import UNSET, Response, Unset
+from ...types import Unset
 
 
 def _get_kwargs(
     *,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    min_date: Union[Unset, None, datetime.datetime] = UNSET,
-    has_user_id: Union[Unset, None, bool] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    min_date: Union[Unset, datetime.datetime] = UNSET,
+    has_user_id: Union[Unset, bool] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["startIndex"] = start_index
 
     params["limit"] = limit
 
-    json_min_date: Union[Unset, None, str] = UNSET
+    json_min_date: Union[Unset, str] = UNSET
     if not isinstance(min_date, Unset):
-        json_min_date = min_date.isoformat() if min_date else None
-
+        json_min_date = min_date.isoformat()
     params["minDate"] = json_min_date
 
     params["hasUserId"] = has_user_id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/System/ActivityLog/Entries",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -74,18 +76,18 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    min_date: Union[Unset, None, datetime.datetime] = UNSET,
-    has_user_id: Union[Unset, None, bool] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    min_date: Union[Unset, datetime.datetime] = UNSET,
+    has_user_id: Union[Unset, bool] = UNSET,
 ) -> Response[Union[ActivityLogEntryQueryResult, Any]]:
     """Gets activity log entries.
 
     Args:
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        min_date (Union[Unset, None, datetime.datetime]):
-        has_user_id (Union[Unset, None, bool]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        min_date (Union[Unset, datetime.datetime]):
+        has_user_id (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -112,18 +114,18 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    min_date: Union[Unset, None, datetime.datetime] = UNSET,
-    has_user_id: Union[Unset, None, bool] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    min_date: Union[Unset, datetime.datetime] = UNSET,
+    has_user_id: Union[Unset, bool] = UNSET,
 ) -> Optional[Union[ActivityLogEntryQueryResult, Any]]:
     """Gets activity log entries.
 
     Args:
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        min_date (Union[Unset, None, datetime.datetime]):
-        has_user_id (Union[Unset, None, bool]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        min_date (Union[Unset, datetime.datetime]):
+        has_user_id (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -145,18 +147,18 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    min_date: Union[Unset, None, datetime.datetime] = UNSET,
-    has_user_id: Union[Unset, None, bool] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    min_date: Union[Unset, datetime.datetime] = UNSET,
+    has_user_id: Union[Unset, bool] = UNSET,
 ) -> Response[Union[ActivityLogEntryQueryResult, Any]]:
     """Gets activity log entries.
 
     Args:
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        min_date (Union[Unset, None, datetime.datetime]):
-        has_user_id (Union[Unset, None, bool]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        min_date (Union[Unset, datetime.datetime]):
+        has_user_id (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -181,18 +183,18 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    min_date: Union[Unset, None, datetime.datetime] = UNSET,
-    has_user_id: Union[Unset, None, bool] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    min_date: Union[Unset, datetime.datetime] = UNSET,
+    has_user_id: Union[Unset, bool] = UNSET,
 ) -> Optional[Union[ActivityLogEntryQueryResult, Any]]:
     """Gets activity log entries.
 
     Args:
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        min_date (Union[Unset, None, datetime.datetime]):
-        has_user_id (Union[Unset, None, bool]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        min_date (Union[Unset, datetime.datetime]):
+        has_user_id (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

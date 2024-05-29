@@ -1,19 +1,28 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
 
-from ..models.iso_type import IsoType
-from ..models.media_protocol import MediaProtocol
-from ..models.media_source_type import MediaSourceType
-from ..models.transport_stream_timestamp import TransportStreamTimestamp
-from ..models.video_3d_format import Video3DFormat
-from ..models.video_type import VideoType
 from ..types import UNSET, Unset
 
+from typing import Union
+from ..models.media_source_info_encoder_protocol import MediaSourceInfoEncoderProtocol
+from ..models.media_source_info_video_type import MediaSourceInfoVideoType
+from typing import cast
+from typing import List
+from ..models.media_source_info_timestamp import MediaSourceInfoTimestamp
+from ..models.media_source_info_video_3d_format import MediaSourceInfoVideo3DFormat
+from ..models.media_source_type import MediaSourceType
+from ..models.media_source_info_iso_type import MediaSourceInfoIsoType
+from ..models.media_stream_protocol import MediaStreamProtocol
+from ..models.media_protocol import MediaProtocol
+
 if TYPE_CHECKING:
-    from ..models.media_attachment import MediaAttachment
-    from ..models.media_source_info_required_http_headers import MediaSourceInfoRequiredHttpHeaders
+    from ..models.media_source_info_required_http_headers_type_0 import (
+        MediaSourceInfoRequiredHttpHeadersType0,
+    )
     from ..models.media_stream import MediaStream
+    from ..models.media_attachment import MediaAttachment
 
 
 T = TypeVar("T", bound="MediaSourceInfo")
@@ -24,18 +33,18 @@ class MediaSourceInfo:
     """
     Attributes:
         protocol (Union[Unset, MediaProtocol]):
-        id (Union[Unset, None, str]):
-        path (Union[Unset, None, str]):
-        encoder_path (Union[Unset, None, str]):
-        encoder_protocol (Union[Unset, None, MediaProtocol]):
+        id (Union[None, Unset, str]):
+        path (Union[None, Unset, str]):
+        encoder_path (Union[None, Unset, str]):
+        encoder_protocol (Union[Unset, MediaSourceInfoEncoderProtocol]):
         type (Union[Unset, MediaSourceType]):
-        container (Union[Unset, None, str]):
-        size (Union[Unset, None, int]):
-        name (Union[Unset, None, str]):
+        container (Union[None, Unset, str]):
+        size (Union[None, Unset, int]):
+        name (Union[None, Unset, str]):
         is_remote (Union[Unset, bool]): Gets or sets a value indicating whether the media is remote.
             Differentiate internet url vs local network.
-        e_tag (Union[Unset, None, str]):
-        run_time_ticks (Union[Unset, None, int]):
+        e_tag (Union[None, Unset, str]):
+        run_time_ticks (Union[None, Unset, int]):
         read_at_native_framerate (Union[Unset, bool]):
         ignore_dts (Union[Unset, bool]):
         ignore_index (Union[Unset, bool]):
@@ -45,41 +54,42 @@ class MediaSourceInfo:
         supports_direct_play (Union[Unset, bool]):
         is_infinite_stream (Union[Unset, bool]):
         requires_opening (Union[Unset, bool]):
-        open_token (Union[Unset, None, str]):
+        open_token (Union[None, Unset, str]):
         requires_closing (Union[Unset, bool]):
-        live_stream_id (Union[Unset, None, str]):
-        buffer_ms (Union[Unset, None, int]):
+        live_stream_id (Union[None, Unset, str]):
+        buffer_ms (Union[None, Unset, int]):
         requires_looping (Union[Unset, bool]):
         supports_probing (Union[Unset, bool]):
-        video_type (Union[Unset, None, VideoType]): Enum VideoType.
-        iso_type (Union[Unset, None, IsoType]): Enum IsoType.
-        video_3d_format (Union[Unset, None, Video3DFormat]):
-        media_streams (Union[Unset, None, List['MediaStream']]):
-        media_attachments (Union[Unset, None, List['MediaAttachment']]):
-        formats (Union[Unset, None, List[str]]):
-        bitrate (Union[Unset, None, int]):
-        timestamp (Union[Unset, None, TransportStreamTimestamp]):
-        required_http_headers (Union[Unset, None, MediaSourceInfoRequiredHttpHeaders]):
-        transcoding_url (Union[Unset, None, str]):
-        transcoding_sub_protocol (Union[Unset, None, str]):
-        transcoding_container (Union[Unset, None, str]):
-        analyze_duration_ms (Union[Unset, None, int]):
-        default_audio_stream_index (Union[Unset, None, int]):
-        default_subtitle_stream_index (Union[Unset, None, int]):
+        video_type (Union[Unset, MediaSourceInfoVideoType]):
+        iso_type (Union[Unset, MediaSourceInfoIsoType]):
+        video_3d_format (Union[Unset, MediaSourceInfoVideo3DFormat]):
+        media_streams (Union[List['MediaStream'], None, Unset]):
+        media_attachments (Union[List['MediaAttachment'], None, Unset]):
+        formats (Union[List[str], None, Unset]):
+        bitrate (Union[None, Unset, int]):
+        timestamp (Union[Unset, MediaSourceInfoTimestamp]):
+        required_http_headers (Union['MediaSourceInfoRequiredHttpHeadersType0', None, Unset]):
+        transcoding_url (Union[None, Unset, str]):
+        transcoding_sub_protocol (Union[Unset, MediaStreamProtocol]): Media streaming protocol.
+            Lowercase for backwards compatibility.
+        transcoding_container (Union[None, Unset, str]):
+        analyze_duration_ms (Union[None, Unset, int]):
+        default_audio_stream_index (Union[None, Unset, int]):
+        default_subtitle_stream_index (Union[None, Unset, int]):
     """
 
     protocol: Union[Unset, MediaProtocol] = UNSET
-    id: Union[Unset, None, str] = UNSET
-    path: Union[Unset, None, str] = UNSET
-    encoder_path: Union[Unset, None, str] = UNSET
-    encoder_protocol: Union[Unset, None, MediaProtocol] = UNSET
+    id: Union[None, Unset, str] = UNSET
+    path: Union[None, Unset, str] = UNSET
+    encoder_path: Union[None, Unset, str] = UNSET
+    encoder_protocol: Union[Unset, MediaSourceInfoEncoderProtocol] = UNSET
     type: Union[Unset, MediaSourceType] = UNSET
-    container: Union[Unset, None, str] = UNSET
-    size: Union[Unset, None, int] = UNSET
-    name: Union[Unset, None, str] = UNSET
+    container: Union[None, Unset, str] = UNSET
+    size: Union[None, Unset, int] = UNSET
+    name: Union[None, Unset, str] = UNSET
     is_remote: Union[Unset, bool] = UNSET
-    e_tag: Union[Unset, None, str] = UNSET
-    run_time_ticks: Union[Unset, None, int] = UNSET
+    e_tag: Union[None, Unset, str] = UNSET
+    run_time_ticks: Union[None, Unset, int] = UNSET
     read_at_native_framerate: Union[Unset, bool] = UNSET
     ignore_dts: Union[Unset, bool] = UNSET
     ignore_index: Union[Unset, bool] = UNSET
@@ -89,121 +99,239 @@ class MediaSourceInfo:
     supports_direct_play: Union[Unset, bool] = UNSET
     is_infinite_stream: Union[Unset, bool] = UNSET
     requires_opening: Union[Unset, bool] = UNSET
-    open_token: Union[Unset, None, str] = UNSET
+    open_token: Union[None, Unset, str] = UNSET
     requires_closing: Union[Unset, bool] = UNSET
-    live_stream_id: Union[Unset, None, str] = UNSET
-    buffer_ms: Union[Unset, None, int] = UNSET
+    live_stream_id: Union[None, Unset, str] = UNSET
+    buffer_ms: Union[None, Unset, int] = UNSET
     requires_looping: Union[Unset, bool] = UNSET
     supports_probing: Union[Unset, bool] = UNSET
-    video_type: Union[Unset, None, VideoType] = UNSET
-    iso_type: Union[Unset, None, IsoType] = UNSET
-    video_3d_format: Union[Unset, None, Video3DFormat] = UNSET
-    media_streams: Union[Unset, None, List["MediaStream"]] = UNSET
-    media_attachments: Union[Unset, None, List["MediaAttachment"]] = UNSET
-    formats: Union[Unset, None, List[str]] = UNSET
-    bitrate: Union[Unset, None, int] = UNSET
-    timestamp: Union[Unset, None, TransportStreamTimestamp] = UNSET
-    required_http_headers: Union[Unset, None, "MediaSourceInfoRequiredHttpHeaders"] = UNSET
-    transcoding_url: Union[Unset, None, str] = UNSET
-    transcoding_sub_protocol: Union[Unset, None, str] = UNSET
-    transcoding_container: Union[Unset, None, str] = UNSET
-    analyze_duration_ms: Union[Unset, None, int] = UNSET
-    default_audio_stream_index: Union[Unset, None, int] = UNSET
-    default_subtitle_stream_index: Union[Unset, None, int] = UNSET
+    video_type: Union[Unset, MediaSourceInfoVideoType] = UNSET
+    iso_type: Union[Unset, MediaSourceInfoIsoType] = UNSET
+    video_3d_format: Union[Unset, MediaSourceInfoVideo3DFormat] = UNSET
+    media_streams: Union[List["MediaStream"], None, Unset] = UNSET
+    media_attachments: Union[List["MediaAttachment"], None, Unset] = UNSET
+    formats: Union[List[str], None, Unset] = UNSET
+    bitrate: Union[None, Unset, int] = UNSET
+    timestamp: Union[Unset, MediaSourceInfoTimestamp] = UNSET
+    required_http_headers: Union[
+        "MediaSourceInfoRequiredHttpHeadersType0", None, Unset
+    ] = UNSET
+    transcoding_url: Union[None, Unset, str] = UNSET
+    transcoding_sub_protocol: Union[Unset, MediaStreamProtocol] = UNSET
+    transcoding_container: Union[None, Unset, str] = UNSET
+    analyze_duration_ms: Union[None, Unset, int] = UNSET
+    default_audio_stream_index: Union[None, Unset, int] = UNSET
+    default_subtitle_stream_index: Union[None, Unset, int] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.media_source_info_required_http_headers_type_0 import (
+            MediaSourceInfoRequiredHttpHeadersType0,
+        )
+
         protocol: Union[Unset, str] = UNSET
         if not isinstance(self.protocol, Unset):
             protocol = self.protocol.value
 
-        id = self.id
-        path = self.path
-        encoder_path = self.encoder_path
-        encoder_protocol: Union[Unset, None, str] = UNSET
+        id: Union[None, Unset, str]
+        if isinstance(self.id, Unset):
+            id = UNSET
+        else:
+            id = self.id
+
+        path: Union[None, Unset, str]
+        if isinstance(self.path, Unset):
+            path = UNSET
+        else:
+            path = self.path
+
+        encoder_path: Union[None, Unset, str]
+        if isinstance(self.encoder_path, Unset):
+            encoder_path = UNSET
+        else:
+            encoder_path = self.encoder_path
+
+        encoder_protocol: Union[Unset, str] = UNSET
         if not isinstance(self.encoder_protocol, Unset):
-            encoder_protocol = self.encoder_protocol.value if self.encoder_protocol else None
+            encoder_protocol = self.encoder_protocol.value
 
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        container = self.container
-        size = self.size
-        name = self.name
+        container: Union[None, Unset, str]
+        if isinstance(self.container, Unset):
+            container = UNSET
+        else:
+            container = self.container
+
+        size: Union[None, Unset, int]
+        if isinstance(self.size, Unset):
+            size = UNSET
+        else:
+            size = self.size
+
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
+
         is_remote = self.is_remote
-        e_tag = self.e_tag
-        run_time_ticks = self.run_time_ticks
+
+        e_tag: Union[None, Unset, str]
+        if isinstance(self.e_tag, Unset):
+            e_tag = UNSET
+        else:
+            e_tag = self.e_tag
+
+        run_time_ticks: Union[None, Unset, int]
+        if isinstance(self.run_time_ticks, Unset):
+            run_time_ticks = UNSET
+        else:
+            run_time_ticks = self.run_time_ticks
+
         read_at_native_framerate = self.read_at_native_framerate
+
         ignore_dts = self.ignore_dts
+
         ignore_index = self.ignore_index
+
         gen_pts_input = self.gen_pts_input
+
         supports_transcoding = self.supports_transcoding
+
         supports_direct_stream = self.supports_direct_stream
+
         supports_direct_play = self.supports_direct_play
+
         is_infinite_stream = self.is_infinite_stream
+
         requires_opening = self.requires_opening
-        open_token = self.open_token
+
+        open_token: Union[None, Unset, str]
+        if isinstance(self.open_token, Unset):
+            open_token = UNSET
+        else:
+            open_token = self.open_token
+
         requires_closing = self.requires_closing
-        live_stream_id = self.live_stream_id
-        buffer_ms = self.buffer_ms
+
+        live_stream_id: Union[None, Unset, str]
+        if isinstance(self.live_stream_id, Unset):
+            live_stream_id = UNSET
+        else:
+            live_stream_id = self.live_stream_id
+
+        buffer_ms: Union[None, Unset, int]
+        if isinstance(self.buffer_ms, Unset):
+            buffer_ms = UNSET
+        else:
+            buffer_ms = self.buffer_ms
+
         requires_looping = self.requires_looping
+
         supports_probing = self.supports_probing
-        video_type: Union[Unset, None, str] = UNSET
+
+        video_type: Union[Unset, str] = UNSET
         if not isinstance(self.video_type, Unset):
-            video_type = self.video_type.value if self.video_type else None
+            video_type = self.video_type.value
 
-        iso_type: Union[Unset, None, str] = UNSET
+        iso_type: Union[Unset, str] = UNSET
         if not isinstance(self.iso_type, Unset):
-            iso_type = self.iso_type.value if self.iso_type else None
+            iso_type = self.iso_type.value
 
-        video_3d_format: Union[Unset, None, str] = UNSET
+        video_3d_format: Union[Unset, str] = UNSET
         if not isinstance(self.video_3d_format, Unset):
-            video_3d_format = self.video_3d_format.value if self.video_3d_format else None
+            video_3d_format = self.video_3d_format.value
 
-        media_streams: Union[Unset, None, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.media_streams, Unset):
-            if self.media_streams is None:
-                media_streams = None
-            else:
-                media_streams = []
-                for media_streams_item_data in self.media_streams:
-                    media_streams_item = media_streams_item_data.to_dict()
+        media_streams: Union[List[Dict[str, Any]], None, Unset]
+        if isinstance(self.media_streams, Unset):
+            media_streams = UNSET
+        elif isinstance(self.media_streams, list):
+            media_streams = []
+            for media_streams_type_0_item_data in self.media_streams:
+                media_streams_type_0_item = media_streams_type_0_item_data.to_dict()
+                media_streams.append(media_streams_type_0_item)
 
-                    media_streams.append(media_streams_item)
+        else:
+            media_streams = self.media_streams
 
-        media_attachments: Union[Unset, None, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.media_attachments, Unset):
-            if self.media_attachments is None:
-                media_attachments = None
-            else:
-                media_attachments = []
-                for media_attachments_item_data in self.media_attachments:
-                    media_attachments_item = media_attachments_item_data.to_dict()
+        media_attachments: Union[List[Dict[str, Any]], None, Unset]
+        if isinstance(self.media_attachments, Unset):
+            media_attachments = UNSET
+        elif isinstance(self.media_attachments, list):
+            media_attachments = []
+            for media_attachments_type_0_item_data in self.media_attachments:
+                media_attachments_type_0_item = (
+                    media_attachments_type_0_item_data.to_dict()
+                )
+                media_attachments.append(media_attachments_type_0_item)
 
-                    media_attachments.append(media_attachments_item)
+        else:
+            media_attachments = self.media_attachments
 
-        formats: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.formats, Unset):
-            if self.formats is None:
-                formats = None
-            else:
-                formats = self.formats
+        formats: Union[List[str], None, Unset]
+        if isinstance(self.formats, Unset):
+            formats = UNSET
+        elif isinstance(self.formats, list):
+            formats = self.formats
 
-        bitrate = self.bitrate
-        timestamp: Union[Unset, None, str] = UNSET
+        else:
+            formats = self.formats
+
+        bitrate: Union[None, Unset, int]
+        if isinstance(self.bitrate, Unset):
+            bitrate = UNSET
+        else:
+            bitrate = self.bitrate
+
+        timestamp: Union[Unset, str] = UNSET
         if not isinstance(self.timestamp, Unset):
-            timestamp = self.timestamp.value if self.timestamp else None
+            timestamp = self.timestamp.value
 
-        required_http_headers: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.required_http_headers, Unset):
-            required_http_headers = self.required_http_headers.to_dict() if self.required_http_headers else None
+        required_http_headers: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.required_http_headers, Unset):
+            required_http_headers = UNSET
+        elif isinstance(
+            self.required_http_headers, MediaSourceInfoRequiredHttpHeadersType0
+        ):
+            required_http_headers = self.required_http_headers.to_dict()
+        else:
+            required_http_headers = self.required_http_headers
 
-        transcoding_url = self.transcoding_url
-        transcoding_sub_protocol = self.transcoding_sub_protocol
-        transcoding_container = self.transcoding_container
-        analyze_duration_ms = self.analyze_duration_ms
-        default_audio_stream_index = self.default_audio_stream_index
-        default_subtitle_stream_index = self.default_subtitle_stream_index
+        transcoding_url: Union[None, Unset, str]
+        if isinstance(self.transcoding_url, Unset):
+            transcoding_url = UNSET
+        else:
+            transcoding_url = self.transcoding_url
+
+        transcoding_sub_protocol: Union[Unset, str] = UNSET
+        if not isinstance(self.transcoding_sub_protocol, Unset):
+            transcoding_sub_protocol = self.transcoding_sub_protocol.value
+
+        transcoding_container: Union[None, Unset, str]
+        if isinstance(self.transcoding_container, Unset):
+            transcoding_container = UNSET
+        else:
+            transcoding_container = self.transcoding_container
+
+        analyze_duration_ms: Union[None, Unset, int]
+        if isinstance(self.analyze_duration_ms, Unset):
+            analyze_duration_ms = UNSET
+        else:
+            analyze_duration_ms = self.analyze_duration_ms
+
+        default_audio_stream_index: Union[None, Unset, int]
+        if isinstance(self.default_audio_stream_index, Unset):
+            default_audio_stream_index = UNSET
+        else:
+            default_audio_stream_index = self.default_audio_stream_index
+
+        default_subtitle_stream_index: Union[None, Unset, int]
+        if isinstance(self.default_subtitle_stream_index, Unset):
+            default_subtitle_stream_index = UNSET
+        else:
+            default_subtitle_stream_index = self.default_subtitle_stream_index
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -296,9 +424,11 @@ class MediaSourceInfo:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.media_attachment import MediaAttachment
-        from ..models.media_source_info_required_http_headers import MediaSourceInfoRequiredHttpHeaders
+        from ..models.media_source_info_required_http_headers_type_0 import (
+            MediaSourceInfoRequiredHttpHeadersType0,
+        )
         from ..models.media_stream import MediaStream
+        from ..models.media_attachment import MediaAttachment
 
         d = src_dict.copy()
         _protocol = d.pop("Protocol", UNSET)
@@ -308,20 +438,39 @@ class MediaSourceInfo:
         else:
             protocol = MediaProtocol(_protocol)
 
-        id = d.pop("Id", UNSET)
+        def _parse_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        path = d.pop("Path", UNSET)
+        id = _parse_id(d.pop("Id", UNSET))
 
-        encoder_path = d.pop("EncoderPath", UNSET)
+        def _parse_path(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        path = _parse_path(d.pop("Path", UNSET))
+
+        def _parse_encoder_path(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        encoder_path = _parse_encoder_path(d.pop("EncoderPath", UNSET))
 
         _encoder_protocol = d.pop("EncoderProtocol", UNSET)
-        encoder_protocol: Union[Unset, None, MediaProtocol]
-        if _encoder_protocol is None:
-            encoder_protocol = None
-        elif isinstance(_encoder_protocol, Unset):
+        encoder_protocol: Union[Unset, MediaSourceInfoEncoderProtocol]
+        if isinstance(_encoder_protocol, Unset):
             encoder_protocol = UNSET
         else:
-            encoder_protocol = MediaProtocol(_encoder_protocol)
+            encoder_protocol = MediaSourceInfoEncoderProtocol(_encoder_protocol)
 
         _type = d.pop("Type", UNSET)
         type: Union[Unset, MediaSourceType]
@@ -330,17 +479,52 @@ class MediaSourceInfo:
         else:
             type = MediaSourceType(_type)
 
-        container = d.pop("Container", UNSET)
+        def _parse_container(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        size = d.pop("Size", UNSET)
+        container = _parse_container(d.pop("Container", UNSET))
 
-        name = d.pop("Name", UNSET)
+        def _parse_size(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        size = _parse_size(d.pop("Size", UNSET))
+
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        name = _parse_name(d.pop("Name", UNSET))
 
         is_remote = d.pop("IsRemote", UNSET)
 
-        e_tag = d.pop("ETag", UNSET)
+        def _parse_e_tag(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        run_time_ticks = d.pop("RunTimeTicks", UNSET)
+        e_tag = _parse_e_tag(d.pop("ETag", UNSET))
+
+        def _parse_run_time_ticks(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        run_time_ticks = _parse_run_time_ticks(d.pop("RunTimeTicks", UNSET))
 
         read_at_native_framerate = d.pop("ReadAtNativeFramerate", UNSET)
 
@@ -360,92 +544,231 @@ class MediaSourceInfo:
 
         requires_opening = d.pop("RequiresOpening", UNSET)
 
-        open_token = d.pop("OpenToken", UNSET)
+        def _parse_open_token(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        open_token = _parse_open_token(d.pop("OpenToken", UNSET))
 
         requires_closing = d.pop("RequiresClosing", UNSET)
 
-        live_stream_id = d.pop("LiveStreamId", UNSET)
+        def _parse_live_stream_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        buffer_ms = d.pop("BufferMs", UNSET)
+        live_stream_id = _parse_live_stream_id(d.pop("LiveStreamId", UNSET))
+
+        def _parse_buffer_ms(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        buffer_ms = _parse_buffer_ms(d.pop("BufferMs", UNSET))
 
         requires_looping = d.pop("RequiresLooping", UNSET)
 
         supports_probing = d.pop("SupportsProbing", UNSET)
 
         _video_type = d.pop("VideoType", UNSET)
-        video_type: Union[Unset, None, VideoType]
-        if _video_type is None:
-            video_type = None
-        elif isinstance(_video_type, Unset):
+        video_type: Union[Unset, MediaSourceInfoVideoType]
+        if isinstance(_video_type, Unset):
             video_type = UNSET
         else:
-            video_type = VideoType(_video_type)
+            video_type = MediaSourceInfoVideoType(_video_type)
 
         _iso_type = d.pop("IsoType", UNSET)
-        iso_type: Union[Unset, None, IsoType]
-        if _iso_type is None:
-            iso_type = None
-        elif isinstance(_iso_type, Unset):
+        iso_type: Union[Unset, MediaSourceInfoIsoType]
+        if isinstance(_iso_type, Unset):
             iso_type = UNSET
         else:
-            iso_type = IsoType(_iso_type)
+            iso_type = MediaSourceInfoIsoType(_iso_type)
 
         _video_3d_format = d.pop("Video3DFormat", UNSET)
-        video_3d_format: Union[Unset, None, Video3DFormat]
-        if _video_3d_format is None:
-            video_3d_format = None
-        elif isinstance(_video_3d_format, Unset):
+        video_3d_format: Union[Unset, MediaSourceInfoVideo3DFormat]
+        if isinstance(_video_3d_format, Unset):
             video_3d_format = UNSET
         else:
-            video_3d_format = Video3DFormat(_video_3d_format)
+            video_3d_format = MediaSourceInfoVideo3DFormat(_video_3d_format)
 
-        media_streams = []
-        _media_streams = d.pop("MediaStreams", UNSET)
-        for media_streams_item_data in _media_streams or []:
-            media_streams_item = MediaStream.from_dict(media_streams_item_data)
+        def _parse_media_streams(
+            data: object,
+        ) -> Union[List["MediaStream"], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                media_streams_type_0 = []
+                _media_streams_type_0 = data
+                for media_streams_type_0_item_data in _media_streams_type_0:
+                    media_streams_type_0_item = MediaStream.from_dict(
+                        media_streams_type_0_item_data
+                    )
 
-            media_streams.append(media_streams_item)
+                    media_streams_type_0.append(media_streams_type_0_item)
 
-        media_attachments = []
-        _media_attachments = d.pop("MediaAttachments", UNSET)
-        for media_attachments_item_data in _media_attachments or []:
-            media_attachments_item = MediaAttachment.from_dict(media_attachments_item_data)
+                return media_streams_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List["MediaStream"], None, Unset], data)
 
-            media_attachments.append(media_attachments_item)
+        media_streams = _parse_media_streams(d.pop("MediaStreams", UNSET))
 
-        formats = cast(List[str], d.pop("Formats", UNSET))
+        def _parse_media_attachments(
+            data: object,
+        ) -> Union[List["MediaAttachment"], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                media_attachments_type_0 = []
+                _media_attachments_type_0 = data
+                for media_attachments_type_0_item_data in _media_attachments_type_0:
+                    media_attachments_type_0_item = MediaAttachment.from_dict(
+                        media_attachments_type_0_item_data
+                    )
 
-        bitrate = d.pop("Bitrate", UNSET)
+                    media_attachments_type_0.append(media_attachments_type_0_item)
+
+                return media_attachments_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List["MediaAttachment"], None, Unset], data)
+
+        media_attachments = _parse_media_attachments(d.pop("MediaAttachments", UNSET))
+
+        def _parse_formats(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                formats_type_0 = cast(List[str], data)
+
+                return formats_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        formats = _parse_formats(d.pop("Formats", UNSET))
+
+        def _parse_bitrate(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        bitrate = _parse_bitrate(d.pop("Bitrate", UNSET))
 
         _timestamp = d.pop("Timestamp", UNSET)
-        timestamp: Union[Unset, None, TransportStreamTimestamp]
-        if _timestamp is None:
-            timestamp = None
-        elif isinstance(_timestamp, Unset):
+        timestamp: Union[Unset, MediaSourceInfoTimestamp]
+        if isinstance(_timestamp, Unset):
             timestamp = UNSET
         else:
-            timestamp = TransportStreamTimestamp(_timestamp)
+            timestamp = MediaSourceInfoTimestamp(_timestamp)
 
-        _required_http_headers = d.pop("RequiredHttpHeaders", UNSET)
-        required_http_headers: Union[Unset, None, MediaSourceInfoRequiredHttpHeaders]
-        if _required_http_headers is None:
-            required_http_headers = None
-        elif isinstance(_required_http_headers, Unset):
-            required_http_headers = UNSET
+        def _parse_required_http_headers(
+            data: object,
+        ) -> Union["MediaSourceInfoRequiredHttpHeadersType0", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                required_http_headers_type_0 = (
+                    MediaSourceInfoRequiredHttpHeadersType0.from_dict(data)
+                )
+
+                return required_http_headers_type_0
+            except:  # noqa: E722
+                pass
+            return cast(
+                Union["MediaSourceInfoRequiredHttpHeadersType0", None, Unset], data
+            )
+
+        required_http_headers = _parse_required_http_headers(
+            d.pop("RequiredHttpHeaders", UNSET)
+        )
+
+        def _parse_transcoding_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        transcoding_url = _parse_transcoding_url(d.pop("TranscodingUrl", UNSET))
+
+        _transcoding_sub_protocol = d.pop("TranscodingSubProtocol", UNSET)
+        transcoding_sub_protocol: Union[Unset, MediaStreamProtocol]
+        if isinstance(_transcoding_sub_protocol, Unset):
+            transcoding_sub_protocol = UNSET
         else:
-            required_http_headers = MediaSourceInfoRequiredHttpHeaders.from_dict(_required_http_headers)
+            transcoding_sub_protocol = MediaStreamProtocol(_transcoding_sub_protocol)
 
-        transcoding_url = d.pop("TranscodingUrl", UNSET)
+        def _parse_transcoding_container(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        transcoding_sub_protocol = d.pop("TranscodingSubProtocol", UNSET)
+        transcoding_container = _parse_transcoding_container(
+            d.pop("TranscodingContainer", UNSET)
+        )
 
-        transcoding_container = d.pop("TranscodingContainer", UNSET)
+        def _parse_analyze_duration_ms(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        analyze_duration_ms = d.pop("AnalyzeDurationMs", UNSET)
+        analyze_duration_ms = _parse_analyze_duration_ms(
+            d.pop("AnalyzeDurationMs", UNSET)
+        )
 
-        default_audio_stream_index = d.pop("DefaultAudioStreamIndex", UNSET)
+        def _parse_default_audio_stream_index(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        default_subtitle_stream_index = d.pop("DefaultSubtitleStreamIndex", UNSET)
+        default_audio_stream_index = _parse_default_audio_stream_index(
+            d.pop("DefaultAudioStreamIndex", UNSET)
+        )
+
+        def _parse_default_subtitle_stream_index(
+            data: object,
+        ) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        default_subtitle_stream_index = _parse_default_subtitle_stream_index(
+            d.pop("DefaultSubtitleStreamIndex", UNSET)
+        )
 
         media_source_info = cls(
             protocol=protocol,

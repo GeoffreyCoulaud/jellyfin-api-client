@@ -1,9 +1,13 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
-from ..models.image_type import ImageType
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..models.image_type import ImageType
+
 
 T = TypeVar("T", bound="ImageOption")
 
@@ -27,6 +31,7 @@ class ImageOption:
             type = self.type.value
 
         limit = self.limit
+
         min_width = self.min_width
 
         field_dict: Dict[str, Any] = {}

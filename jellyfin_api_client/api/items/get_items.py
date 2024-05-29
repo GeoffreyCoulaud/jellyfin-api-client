@@ -1,114 +1,117 @@
-import datetime
 from http import HTTPStatus
 from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
-from ...models.base_item_kind import BaseItemKind
-from ...models.image_type import ImageType
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.item_fields import ItemFields
-from ...models.item_filter import ItemFilter
-from ...models.location_type import LocationType
-from ...models.series_status import SeriesStatus
 from ...models.sort_order import SortOrder
+from ...models.image_type import ImageType
+from ...models.series_status import SeriesStatus
+from ...models.location_type import LocationType
+import datetime
+from ...models.base_item_kind import BaseItemKind
+from ...models.item_filter import ItemFilter
+from ...models.item_sort_by import ItemSortBy
+from ...models.media_type import MediaType
+from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
 from ...models.video_type import VideoType
-from ...types import UNSET, Response, Unset
+from ...types import Unset
 
 
 def _get_kwargs(
     *,
-    user_id: Union[Unset, None, str] = UNSET,
-    max_official_rating: Union[Unset, None, str] = UNSET,
-    has_theme_song: Union[Unset, None, bool] = UNSET,
-    has_theme_video: Union[Unset, None, bool] = UNSET,
-    has_subtitles: Union[Unset, None, bool] = UNSET,
-    has_special_feature: Union[Unset, None, bool] = UNSET,
-    has_trailer: Union[Unset, None, bool] = UNSET,
-    adjacent_to: Union[Unset, None, str] = UNSET,
-    parent_index_number: Union[Unset, None, int] = UNSET,
-    has_parental_rating: Union[Unset, None, bool] = UNSET,
-    is_hd: Union[Unset, None, bool] = UNSET,
-    is_4k: Union[Unset, None, bool] = UNSET,
-    location_types: Union[Unset, None, List[LocationType]] = UNSET,
-    exclude_location_types: Union[Unset, None, List[LocationType]] = UNSET,
-    is_missing: Union[Unset, None, bool] = UNSET,
-    is_unaired: Union[Unset, None, bool] = UNSET,
-    min_community_rating: Union[Unset, None, float] = UNSET,
-    min_critic_rating: Union[Unset, None, float] = UNSET,
-    min_premiere_date: Union[Unset, None, datetime.datetime] = UNSET,
-    min_date_last_saved: Union[Unset, None, datetime.datetime] = UNSET,
-    min_date_last_saved_for_user: Union[Unset, None, datetime.datetime] = UNSET,
-    max_premiere_date: Union[Unset, None, datetime.datetime] = UNSET,
-    has_overview: Union[Unset, None, bool] = UNSET,
-    has_imdb_id: Union[Unset, None, bool] = UNSET,
-    has_tmdb_id: Union[Unset, None, bool] = UNSET,
-    has_tvdb_id: Union[Unset, None, bool] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    exclude_item_ids: Union[Unset, None, List[str]] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    recursive: Union[Unset, None, bool] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    sort_order: Union[Unset, None, List[SortOrder]] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    is_played: Union[Unset, None, bool] = UNSET,
-    genres: Union[Unset, None, List[str]] = UNSET,
-    official_ratings: Union[Unset, None, List[str]] = UNSET,
-    tags: Union[Unset, None, List[str]] = UNSET,
-    years: Union[Unset, None, List[int]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    person: Union[Unset, None, str] = UNSET,
-    person_ids: Union[Unset, None, List[str]] = UNSET,
-    person_types: Union[Unset, None, List[str]] = UNSET,
-    studios: Union[Unset, None, List[str]] = UNSET,
-    artists: Union[Unset, None, List[str]] = UNSET,
-    exclude_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    artist_ids: Union[Unset, None, List[str]] = UNSET,
-    album_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    contributing_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    albums: Union[Unset, None, List[str]] = UNSET,
-    album_ids: Union[Unset, None, List[str]] = UNSET,
-    ids: Union[Unset, None, List[str]] = UNSET,
-    video_types: Union[Unset, None, List[VideoType]] = UNSET,
-    min_official_rating: Union[Unset, None, str] = UNSET,
-    is_locked: Union[Unset, None, bool] = UNSET,
-    is_place_holder: Union[Unset, None, bool] = UNSET,
-    has_official_rating: Union[Unset, None, bool] = UNSET,
-    collapse_box_set_items: Union[Unset, None, bool] = UNSET,
-    min_width: Union[Unset, None, int] = UNSET,
-    min_height: Union[Unset, None, int] = UNSET,
-    max_width: Union[Unset, None, int] = UNSET,
-    max_height: Union[Unset, None, int] = UNSET,
-    is_3d: Union[Unset, None, bool] = UNSET,
-    series_status: Union[Unset, None, List[SeriesStatus]] = UNSET,
-    name_starts_with_or_greater: Union[Unset, None, str] = UNSET,
-    name_starts_with: Union[Unset, None, str] = UNSET,
-    name_less_than: Union[Unset, None, str] = UNSET,
-    studio_ids: Union[Unset, None, List[str]] = UNSET,
-    genre_ids: Union[Unset, None, List[str]] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = True,
-    enable_images: Union[Unset, None, bool] = True,
+    user_id: Union[Unset, str] = UNSET,
+    max_official_rating: Union[Unset, str] = UNSET,
+    has_theme_song: Union[Unset, bool] = UNSET,
+    has_theme_video: Union[Unset, bool] = UNSET,
+    has_subtitles: Union[Unset, bool] = UNSET,
+    has_special_feature: Union[Unset, bool] = UNSET,
+    has_trailer: Union[Unset, bool] = UNSET,
+    adjacent_to: Union[Unset, str] = UNSET,
+    parent_index_number: Union[Unset, int] = UNSET,
+    has_parental_rating: Union[Unset, bool] = UNSET,
+    is_hd: Union[Unset, bool] = UNSET,
+    is_4k: Union[Unset, bool] = UNSET,
+    location_types: Union[Unset, List[LocationType]] = UNSET,
+    exclude_location_types: Union[Unset, List[LocationType]] = UNSET,
+    is_missing: Union[Unset, bool] = UNSET,
+    is_unaired: Union[Unset, bool] = UNSET,
+    min_community_rating: Union[Unset, float] = UNSET,
+    min_critic_rating: Union[Unset, float] = UNSET,
+    min_premiere_date: Union[Unset, datetime.datetime] = UNSET,
+    min_date_last_saved: Union[Unset, datetime.datetime] = UNSET,
+    min_date_last_saved_for_user: Union[Unset, datetime.datetime] = UNSET,
+    max_premiere_date: Union[Unset, datetime.datetime] = UNSET,
+    has_overview: Union[Unset, bool] = UNSET,
+    has_imdb_id: Union[Unset, bool] = UNSET,
+    has_tmdb_id: Union[Unset, bool] = UNSET,
+    has_tvdb_id: Union[Unset, bool] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    exclude_item_ids: Union[Unset, List[str]] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    recursive: Union[Unset, bool] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    sort_order: Union[Unset, List[SortOrder]] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    image_types: Union[Unset, List[ImageType]] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    is_played: Union[Unset, bool] = UNSET,
+    genres: Union[Unset, List[str]] = UNSET,
+    official_ratings: Union[Unset, List[str]] = UNSET,
+    tags: Union[Unset, List[str]] = UNSET,
+    years: Union[Unset, List[int]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    person: Union[Unset, str] = UNSET,
+    person_ids: Union[Unset, List[str]] = UNSET,
+    person_types: Union[Unset, List[str]] = UNSET,
+    studios: Union[Unset, List[str]] = UNSET,
+    artists: Union[Unset, List[str]] = UNSET,
+    exclude_artist_ids: Union[Unset, List[str]] = UNSET,
+    artist_ids: Union[Unset, List[str]] = UNSET,
+    album_artist_ids: Union[Unset, List[str]] = UNSET,
+    contributing_artist_ids: Union[Unset, List[str]] = UNSET,
+    albums: Union[Unset, List[str]] = UNSET,
+    album_ids: Union[Unset, List[str]] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
+    video_types: Union[Unset, List[VideoType]] = UNSET,
+    min_official_rating: Union[Unset, str] = UNSET,
+    is_locked: Union[Unset, bool] = UNSET,
+    is_place_holder: Union[Unset, bool] = UNSET,
+    has_official_rating: Union[Unset, bool] = UNSET,
+    collapse_box_set_items: Union[Unset, bool] = UNSET,
+    min_width: Union[Unset, int] = UNSET,
+    min_height: Union[Unset, int] = UNSET,
+    max_width: Union[Unset, int] = UNSET,
+    max_height: Union[Unset, int] = UNSET,
+    is_3d: Union[Unset, bool] = UNSET,
+    series_status: Union[Unset, List[SeriesStatus]] = UNSET,
+    name_starts_with_or_greater: Union[Unset, str] = UNSET,
+    name_starts_with: Union[Unset, str] = UNSET,
+    name_less_than: Union[Unset, str] = UNSET,
+    studio_ids: Union[Unset, List[str]] = UNSET,
+    genre_ids: Union[Unset, List[str]] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = True,
+    enable_images: Union[Unset, bool] = True,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["userId"] = user_id
 
     params["maxOfficialRating"] = max_official_rating
@@ -133,29 +136,21 @@ def _get_kwargs(
 
     params["is4K"] = is_4k
 
-    json_location_types: Union[Unset, None, List[str]] = UNSET
+    json_location_types: Union[Unset, List[str]] = UNSET
     if not isinstance(location_types, Unset):
-        if location_types is None:
-            json_location_types = None
-        else:
-            json_location_types = []
-            for location_types_item_data in location_types:
-                location_types_item = location_types_item_data.value
-
-                json_location_types.append(location_types_item)
+        json_location_types = []
+        for location_types_item_data in location_types:
+            location_types_item = location_types_item_data.value
+            json_location_types.append(location_types_item)
 
     params["locationTypes"] = json_location_types
 
-    json_exclude_location_types: Union[Unset, None, List[str]] = UNSET
+    json_exclude_location_types: Union[Unset, List[str]] = UNSET
     if not isinstance(exclude_location_types, Unset):
-        if exclude_location_types is None:
-            json_exclude_location_types = None
-        else:
-            json_exclude_location_types = []
-            for exclude_location_types_item_data in exclude_location_types:
-                exclude_location_types_item = exclude_location_types_item_data.value
-
-                json_exclude_location_types.append(exclude_location_types_item)
+        json_exclude_location_types = []
+        for exclude_location_types_item_data in exclude_location_types:
+            exclude_location_types_item = exclude_location_types_item_data.value
+            json_exclude_location_types.append(exclude_location_types_item)
 
     params["excludeLocationTypes"] = json_exclude_location_types
 
@@ -167,30 +162,24 @@ def _get_kwargs(
 
     params["minCriticRating"] = min_critic_rating
 
-    json_min_premiere_date: Union[Unset, None, str] = UNSET
+    json_min_premiere_date: Union[Unset, str] = UNSET
     if not isinstance(min_premiere_date, Unset):
-        json_min_premiere_date = min_premiere_date.isoformat() if min_premiere_date else None
-
+        json_min_premiere_date = min_premiere_date.isoformat()
     params["minPremiereDate"] = json_min_premiere_date
 
-    json_min_date_last_saved: Union[Unset, None, str] = UNSET
+    json_min_date_last_saved: Union[Unset, str] = UNSET
     if not isinstance(min_date_last_saved, Unset):
-        json_min_date_last_saved = min_date_last_saved.isoformat() if min_date_last_saved else None
-
+        json_min_date_last_saved = min_date_last_saved.isoformat()
     params["minDateLastSaved"] = json_min_date_last_saved
 
-    json_min_date_last_saved_for_user: Union[Unset, None, str] = UNSET
+    json_min_date_last_saved_for_user: Union[Unset, str] = UNSET
     if not isinstance(min_date_last_saved_for_user, Unset):
-        json_min_date_last_saved_for_user = (
-            min_date_last_saved_for_user.isoformat() if min_date_last_saved_for_user else None
-        )
-
+        json_min_date_last_saved_for_user = min_date_last_saved_for_user.isoformat()
     params["minDateLastSavedForUser"] = json_min_date_last_saved_for_user
 
-    json_max_premiere_date: Union[Unset, None, str] = UNSET
+    json_max_premiere_date: Union[Unset, str] = UNSET
     if not isinstance(max_premiere_date, Unset):
-        json_max_premiere_date = max_premiere_date.isoformat() if max_premiere_date else None
-
+        json_max_premiere_date = max_premiere_date.isoformat()
     params["maxPremiereDate"] = json_max_premiere_date
 
     params["hasOverview"] = has_overview
@@ -211,12 +200,9 @@ def _get_kwargs(
 
     params["isSports"] = is_sports
 
-    json_exclude_item_ids: Union[Unset, None, List[str]] = UNSET
+    json_exclude_item_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(exclude_item_ids, Unset):
-        if exclude_item_ids is None:
-            json_exclude_item_ids = None
-        else:
-            json_exclude_item_ids = exclude_item_ids
+        json_exclude_item_ids = exclude_item_ids
 
     params["excludeItemIds"] = json_exclude_item_ids
 
@@ -228,141 +214,105 @@ def _get_kwargs(
 
     params["searchTerm"] = search_term
 
-    json_sort_order: Union[Unset, None, List[str]] = UNSET
+    json_sort_order: Union[Unset, List[str]] = UNSET
     if not isinstance(sort_order, Unset):
-        if sort_order is None:
-            json_sort_order = None
-        else:
-            json_sort_order = []
-            for sort_order_item_data in sort_order:
-                sort_order_item = sort_order_item_data.value
-
-                json_sort_order.append(sort_order_item)
+        json_sort_order = []
+        for sort_order_item_data in sort_order:
+            sort_order_item = sort_order_item_data.value
+            json_sort_order.append(sort_order_item)
 
     params["sortOrder"] = json_sort_order
 
     params["parentId"] = parent_id
 
-    json_fields: Union[Unset, None, List[str]] = UNSET
+    json_fields: Union[Unset, List[str]] = UNSET
     if not isinstance(fields, Unset):
-        if fields is None:
-            json_fields = None
-        else:
-            json_fields = []
-            for fields_item_data in fields:
-                fields_item = fields_item_data.value
-
-                json_fields.append(fields_item)
+        json_fields = []
+        for fields_item_data in fields:
+            fields_item = fields_item_data.value
+            json_fields.append(fields_item)
 
     params["fields"] = json_fields
 
-    json_exclude_item_types: Union[Unset, None, List[str]] = UNSET
+    json_exclude_item_types: Union[Unset, List[str]] = UNSET
     if not isinstance(exclude_item_types, Unset):
-        if exclude_item_types is None:
-            json_exclude_item_types = None
-        else:
-            json_exclude_item_types = []
-            for exclude_item_types_item_data in exclude_item_types:
-                exclude_item_types_item = exclude_item_types_item_data.value
-
-                json_exclude_item_types.append(exclude_item_types_item)
+        json_exclude_item_types = []
+        for exclude_item_types_item_data in exclude_item_types:
+            exclude_item_types_item = exclude_item_types_item_data.value
+            json_exclude_item_types.append(exclude_item_types_item)
 
     params["excludeItemTypes"] = json_exclude_item_types
 
-    json_include_item_types: Union[Unset, None, List[str]] = UNSET
+    json_include_item_types: Union[Unset, List[str]] = UNSET
     if not isinstance(include_item_types, Unset):
-        if include_item_types is None:
-            json_include_item_types = None
-        else:
-            json_include_item_types = []
-            for include_item_types_item_data in include_item_types:
-                include_item_types_item = include_item_types_item_data.value
-
-                json_include_item_types.append(include_item_types_item)
+        json_include_item_types = []
+        for include_item_types_item_data in include_item_types:
+            include_item_types_item = include_item_types_item_data.value
+            json_include_item_types.append(include_item_types_item)
 
     params["includeItemTypes"] = json_include_item_types
 
-    json_filters: Union[Unset, None, List[str]] = UNSET
+    json_filters: Union[Unset, List[str]] = UNSET
     if not isinstance(filters, Unset):
-        if filters is None:
-            json_filters = None
-        else:
-            json_filters = []
-            for filters_item_data in filters:
-                filters_item = filters_item_data.value
-
-                json_filters.append(filters_item)
+        json_filters = []
+        for filters_item_data in filters:
+            filters_item = filters_item_data.value
+            json_filters.append(filters_item)
 
     params["filters"] = json_filters
 
     params["isFavorite"] = is_favorite
 
-    json_media_types: Union[Unset, None, List[str]] = UNSET
+    json_media_types: Union[Unset, List[str]] = UNSET
     if not isinstance(media_types, Unset):
-        if media_types is None:
-            json_media_types = None
-        else:
-            json_media_types = media_types
+        json_media_types = []
+        for media_types_item_data in media_types:
+            media_types_item = media_types_item_data.value
+            json_media_types.append(media_types_item)
 
     params["mediaTypes"] = json_media_types
 
-    json_image_types: Union[Unset, None, List[str]] = UNSET
+    json_image_types: Union[Unset, List[str]] = UNSET
     if not isinstance(image_types, Unset):
-        if image_types is None:
-            json_image_types = None
-        else:
-            json_image_types = []
-            for image_types_item_data in image_types:
-                image_types_item = image_types_item_data.value
-
-                json_image_types.append(image_types_item)
+        json_image_types = []
+        for image_types_item_data in image_types:
+            image_types_item = image_types_item_data.value
+            json_image_types.append(image_types_item)
 
     params["imageTypes"] = json_image_types
 
-    json_sort_by: Union[Unset, None, List[str]] = UNSET
+    json_sort_by: Union[Unset, List[str]] = UNSET
     if not isinstance(sort_by, Unset):
-        if sort_by is None:
-            json_sort_by = None
-        else:
-            json_sort_by = sort_by
+        json_sort_by = []
+        for sort_by_item_data in sort_by:
+            sort_by_item = sort_by_item_data.value
+            json_sort_by.append(sort_by_item)
 
     params["sortBy"] = json_sort_by
 
     params["isPlayed"] = is_played
 
-    json_genres: Union[Unset, None, List[str]] = UNSET
+    json_genres: Union[Unset, List[str]] = UNSET
     if not isinstance(genres, Unset):
-        if genres is None:
-            json_genres = None
-        else:
-            json_genres = genres
+        json_genres = genres
 
     params["genres"] = json_genres
 
-    json_official_ratings: Union[Unset, None, List[str]] = UNSET
+    json_official_ratings: Union[Unset, List[str]] = UNSET
     if not isinstance(official_ratings, Unset):
-        if official_ratings is None:
-            json_official_ratings = None
-        else:
-            json_official_ratings = official_ratings
+        json_official_ratings = official_ratings
 
     params["officialRatings"] = json_official_ratings
 
-    json_tags: Union[Unset, None, List[str]] = UNSET
+    json_tags: Union[Unset, List[str]] = UNSET
     if not isinstance(tags, Unset):
-        if tags is None:
-            json_tags = None
-        else:
-            json_tags = tags
+        json_tags = tags
 
     params["tags"] = json_tags
 
-    json_years: Union[Unset, None, List[int]] = UNSET
+    json_years: Union[Unset, List[int]] = UNSET
     if not isinstance(years, Unset):
-        if years is None:
-            json_years = None
-        else:
-            json_years = years
+        json_years = years
 
     params["years"] = json_years
 
@@ -370,130 +320,89 @@ def _get_kwargs(
 
     params["imageTypeLimit"] = image_type_limit
 
-    json_enable_image_types: Union[Unset, None, List[str]] = UNSET
+    json_enable_image_types: Union[Unset, List[str]] = UNSET
     if not isinstance(enable_image_types, Unset):
-        if enable_image_types is None:
-            json_enable_image_types = None
-        else:
-            json_enable_image_types = []
-            for enable_image_types_item_data in enable_image_types:
-                enable_image_types_item = enable_image_types_item_data.value
-
-                json_enable_image_types.append(enable_image_types_item)
+        json_enable_image_types = []
+        for enable_image_types_item_data in enable_image_types:
+            enable_image_types_item = enable_image_types_item_data.value
+            json_enable_image_types.append(enable_image_types_item)
 
     params["enableImageTypes"] = json_enable_image_types
 
     params["person"] = person
 
-    json_person_ids: Union[Unset, None, List[str]] = UNSET
+    json_person_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(person_ids, Unset):
-        if person_ids is None:
-            json_person_ids = None
-        else:
-            json_person_ids = person_ids
+        json_person_ids = person_ids
 
     params["personIds"] = json_person_ids
 
-    json_person_types: Union[Unset, None, List[str]] = UNSET
+    json_person_types: Union[Unset, List[str]] = UNSET
     if not isinstance(person_types, Unset):
-        if person_types is None:
-            json_person_types = None
-        else:
-            json_person_types = person_types
+        json_person_types = person_types
 
     params["personTypes"] = json_person_types
 
-    json_studios: Union[Unset, None, List[str]] = UNSET
+    json_studios: Union[Unset, List[str]] = UNSET
     if not isinstance(studios, Unset):
-        if studios is None:
-            json_studios = None
-        else:
-            json_studios = studios
+        json_studios = studios
 
     params["studios"] = json_studios
 
-    json_artists: Union[Unset, None, List[str]] = UNSET
+    json_artists: Union[Unset, List[str]] = UNSET
     if not isinstance(artists, Unset):
-        if artists is None:
-            json_artists = None
-        else:
-            json_artists = artists
+        json_artists = artists
 
     params["artists"] = json_artists
 
-    json_exclude_artist_ids: Union[Unset, None, List[str]] = UNSET
+    json_exclude_artist_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(exclude_artist_ids, Unset):
-        if exclude_artist_ids is None:
-            json_exclude_artist_ids = None
-        else:
-            json_exclude_artist_ids = exclude_artist_ids
+        json_exclude_artist_ids = exclude_artist_ids
 
     params["excludeArtistIds"] = json_exclude_artist_ids
 
-    json_artist_ids: Union[Unset, None, List[str]] = UNSET
+    json_artist_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(artist_ids, Unset):
-        if artist_ids is None:
-            json_artist_ids = None
-        else:
-            json_artist_ids = artist_ids
+        json_artist_ids = artist_ids
 
     params["artistIds"] = json_artist_ids
 
-    json_album_artist_ids: Union[Unset, None, List[str]] = UNSET
+    json_album_artist_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(album_artist_ids, Unset):
-        if album_artist_ids is None:
-            json_album_artist_ids = None
-        else:
-            json_album_artist_ids = album_artist_ids
+        json_album_artist_ids = album_artist_ids
 
     params["albumArtistIds"] = json_album_artist_ids
 
-    json_contributing_artist_ids: Union[Unset, None, List[str]] = UNSET
+    json_contributing_artist_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(contributing_artist_ids, Unset):
-        if contributing_artist_ids is None:
-            json_contributing_artist_ids = None
-        else:
-            json_contributing_artist_ids = contributing_artist_ids
+        json_contributing_artist_ids = contributing_artist_ids
 
     params["contributingArtistIds"] = json_contributing_artist_ids
 
-    json_albums: Union[Unset, None, List[str]] = UNSET
+    json_albums: Union[Unset, List[str]] = UNSET
     if not isinstance(albums, Unset):
-        if albums is None:
-            json_albums = None
-        else:
-            json_albums = albums
+        json_albums = albums
 
     params["albums"] = json_albums
 
-    json_album_ids: Union[Unset, None, List[str]] = UNSET
+    json_album_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(album_ids, Unset):
-        if album_ids is None:
-            json_album_ids = None
-        else:
-            json_album_ids = album_ids
+        json_album_ids = album_ids
 
     params["albumIds"] = json_album_ids
 
-    json_ids: Union[Unset, None, List[str]] = UNSET
+    json_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(ids, Unset):
-        if ids is None:
-            json_ids = None
-        else:
-            json_ids = ids
+        json_ids = ids
 
     params["ids"] = json_ids
 
-    json_video_types: Union[Unset, None, List[str]] = UNSET
+    json_video_types: Union[Unset, List[str]] = UNSET
     if not isinstance(video_types, Unset):
-        if video_types is None:
-            json_video_types = None
-        else:
-            json_video_types = []
-            for video_types_item_data in video_types:
-                video_types_item = video_types_item_data.value
-
-                json_video_types.append(video_types_item)
+        json_video_types = []
+        for video_types_item_data in video_types:
+            video_types_item = video_types_item_data.value
+            json_video_types.append(video_types_item)
 
     params["videoTypes"] = json_video_types
 
@@ -517,16 +426,12 @@ def _get_kwargs(
 
     params["is3D"] = is_3d
 
-    json_series_status: Union[Unset, None, List[str]] = UNSET
+    json_series_status: Union[Unset, List[str]] = UNSET
     if not isinstance(series_status, Unset):
-        if series_status is None:
-            json_series_status = None
-        else:
-            json_series_status = []
-            for series_status_item_data in series_status:
-                series_status_item = series_status_item_data.value
-
-                json_series_status.append(series_status_item)
+        json_series_status = []
+        for series_status_item_data in series_status:
+            series_status_item = series_status_item_data.value
+            json_series_status.append(series_status_item)
 
     params["seriesStatus"] = json_series_status
 
@@ -536,21 +441,15 @@ def _get_kwargs(
 
     params["nameLessThan"] = name_less_than
 
-    json_studio_ids: Union[Unset, None, List[str]] = UNSET
+    json_studio_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(studio_ids, Unset):
-        if studio_ids is None:
-            json_studio_ids = None
-        else:
-            json_studio_ids = studio_ids
+        json_studio_ids = studio_ids
 
     params["studioIds"] = json_studio_ids
 
-    json_genre_ids: Union[Unset, None, List[str]] = UNSET
+    json_genre_ids: Union[Unset, List[str]] = UNSET
     if not isinstance(genre_ids, Unset):
-        if genre_ids is None:
-            json_genre_ids = None
-        else:
-            json_genre_ids = genre_ids
+        json_genre_ids = genre_ids
 
     params["genreIds"] = json_genre_ids
 
@@ -560,11 +459,13 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Items",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -600,180 +501,180 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    max_official_rating: Union[Unset, None, str] = UNSET,
-    has_theme_song: Union[Unset, None, bool] = UNSET,
-    has_theme_video: Union[Unset, None, bool] = UNSET,
-    has_subtitles: Union[Unset, None, bool] = UNSET,
-    has_special_feature: Union[Unset, None, bool] = UNSET,
-    has_trailer: Union[Unset, None, bool] = UNSET,
-    adjacent_to: Union[Unset, None, str] = UNSET,
-    parent_index_number: Union[Unset, None, int] = UNSET,
-    has_parental_rating: Union[Unset, None, bool] = UNSET,
-    is_hd: Union[Unset, None, bool] = UNSET,
-    is_4k: Union[Unset, None, bool] = UNSET,
-    location_types: Union[Unset, None, List[LocationType]] = UNSET,
-    exclude_location_types: Union[Unset, None, List[LocationType]] = UNSET,
-    is_missing: Union[Unset, None, bool] = UNSET,
-    is_unaired: Union[Unset, None, bool] = UNSET,
-    min_community_rating: Union[Unset, None, float] = UNSET,
-    min_critic_rating: Union[Unset, None, float] = UNSET,
-    min_premiere_date: Union[Unset, None, datetime.datetime] = UNSET,
-    min_date_last_saved: Union[Unset, None, datetime.datetime] = UNSET,
-    min_date_last_saved_for_user: Union[Unset, None, datetime.datetime] = UNSET,
-    max_premiere_date: Union[Unset, None, datetime.datetime] = UNSET,
-    has_overview: Union[Unset, None, bool] = UNSET,
-    has_imdb_id: Union[Unset, None, bool] = UNSET,
-    has_tmdb_id: Union[Unset, None, bool] = UNSET,
-    has_tvdb_id: Union[Unset, None, bool] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    exclude_item_ids: Union[Unset, None, List[str]] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    recursive: Union[Unset, None, bool] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    sort_order: Union[Unset, None, List[SortOrder]] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    is_played: Union[Unset, None, bool] = UNSET,
-    genres: Union[Unset, None, List[str]] = UNSET,
-    official_ratings: Union[Unset, None, List[str]] = UNSET,
-    tags: Union[Unset, None, List[str]] = UNSET,
-    years: Union[Unset, None, List[int]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    person: Union[Unset, None, str] = UNSET,
-    person_ids: Union[Unset, None, List[str]] = UNSET,
-    person_types: Union[Unset, None, List[str]] = UNSET,
-    studios: Union[Unset, None, List[str]] = UNSET,
-    artists: Union[Unset, None, List[str]] = UNSET,
-    exclude_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    artist_ids: Union[Unset, None, List[str]] = UNSET,
-    album_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    contributing_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    albums: Union[Unset, None, List[str]] = UNSET,
-    album_ids: Union[Unset, None, List[str]] = UNSET,
-    ids: Union[Unset, None, List[str]] = UNSET,
-    video_types: Union[Unset, None, List[VideoType]] = UNSET,
-    min_official_rating: Union[Unset, None, str] = UNSET,
-    is_locked: Union[Unset, None, bool] = UNSET,
-    is_place_holder: Union[Unset, None, bool] = UNSET,
-    has_official_rating: Union[Unset, None, bool] = UNSET,
-    collapse_box_set_items: Union[Unset, None, bool] = UNSET,
-    min_width: Union[Unset, None, int] = UNSET,
-    min_height: Union[Unset, None, int] = UNSET,
-    max_width: Union[Unset, None, int] = UNSET,
-    max_height: Union[Unset, None, int] = UNSET,
-    is_3d: Union[Unset, None, bool] = UNSET,
-    series_status: Union[Unset, None, List[SeriesStatus]] = UNSET,
-    name_starts_with_or_greater: Union[Unset, None, str] = UNSET,
-    name_starts_with: Union[Unset, None, str] = UNSET,
-    name_less_than: Union[Unset, None, str] = UNSET,
-    studio_ids: Union[Unset, None, List[str]] = UNSET,
-    genre_ids: Union[Unset, None, List[str]] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = True,
-    enable_images: Union[Unset, None, bool] = True,
+    user_id: Union[Unset, str] = UNSET,
+    max_official_rating: Union[Unset, str] = UNSET,
+    has_theme_song: Union[Unset, bool] = UNSET,
+    has_theme_video: Union[Unset, bool] = UNSET,
+    has_subtitles: Union[Unset, bool] = UNSET,
+    has_special_feature: Union[Unset, bool] = UNSET,
+    has_trailer: Union[Unset, bool] = UNSET,
+    adjacent_to: Union[Unset, str] = UNSET,
+    parent_index_number: Union[Unset, int] = UNSET,
+    has_parental_rating: Union[Unset, bool] = UNSET,
+    is_hd: Union[Unset, bool] = UNSET,
+    is_4k: Union[Unset, bool] = UNSET,
+    location_types: Union[Unset, List[LocationType]] = UNSET,
+    exclude_location_types: Union[Unset, List[LocationType]] = UNSET,
+    is_missing: Union[Unset, bool] = UNSET,
+    is_unaired: Union[Unset, bool] = UNSET,
+    min_community_rating: Union[Unset, float] = UNSET,
+    min_critic_rating: Union[Unset, float] = UNSET,
+    min_premiere_date: Union[Unset, datetime.datetime] = UNSET,
+    min_date_last_saved: Union[Unset, datetime.datetime] = UNSET,
+    min_date_last_saved_for_user: Union[Unset, datetime.datetime] = UNSET,
+    max_premiere_date: Union[Unset, datetime.datetime] = UNSET,
+    has_overview: Union[Unset, bool] = UNSET,
+    has_imdb_id: Union[Unset, bool] = UNSET,
+    has_tmdb_id: Union[Unset, bool] = UNSET,
+    has_tvdb_id: Union[Unset, bool] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    exclude_item_ids: Union[Unset, List[str]] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    recursive: Union[Unset, bool] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    sort_order: Union[Unset, List[SortOrder]] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    image_types: Union[Unset, List[ImageType]] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    is_played: Union[Unset, bool] = UNSET,
+    genres: Union[Unset, List[str]] = UNSET,
+    official_ratings: Union[Unset, List[str]] = UNSET,
+    tags: Union[Unset, List[str]] = UNSET,
+    years: Union[Unset, List[int]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    person: Union[Unset, str] = UNSET,
+    person_ids: Union[Unset, List[str]] = UNSET,
+    person_types: Union[Unset, List[str]] = UNSET,
+    studios: Union[Unset, List[str]] = UNSET,
+    artists: Union[Unset, List[str]] = UNSET,
+    exclude_artist_ids: Union[Unset, List[str]] = UNSET,
+    artist_ids: Union[Unset, List[str]] = UNSET,
+    album_artist_ids: Union[Unset, List[str]] = UNSET,
+    contributing_artist_ids: Union[Unset, List[str]] = UNSET,
+    albums: Union[Unset, List[str]] = UNSET,
+    album_ids: Union[Unset, List[str]] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
+    video_types: Union[Unset, List[VideoType]] = UNSET,
+    min_official_rating: Union[Unset, str] = UNSET,
+    is_locked: Union[Unset, bool] = UNSET,
+    is_place_holder: Union[Unset, bool] = UNSET,
+    has_official_rating: Union[Unset, bool] = UNSET,
+    collapse_box_set_items: Union[Unset, bool] = UNSET,
+    min_width: Union[Unset, int] = UNSET,
+    min_height: Union[Unset, int] = UNSET,
+    max_width: Union[Unset, int] = UNSET,
+    max_height: Union[Unset, int] = UNSET,
+    is_3d: Union[Unset, bool] = UNSET,
+    series_status: Union[Unset, List[SeriesStatus]] = UNSET,
+    name_starts_with_or_greater: Union[Unset, str] = UNSET,
+    name_starts_with: Union[Unset, str] = UNSET,
+    name_less_than: Union[Unset, str] = UNSET,
+    studio_ids: Union[Unset, List[str]] = UNSET,
+    genre_ids: Union[Unset, List[str]] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = True,
+    enable_images: Union[Unset, bool] = True,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets items based on a query.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        max_official_rating (Union[Unset, None, str]):
-        has_theme_song (Union[Unset, None, bool]):
-        has_theme_video (Union[Unset, None, bool]):
-        has_subtitles (Union[Unset, None, bool]):
-        has_special_feature (Union[Unset, None, bool]):
-        has_trailer (Union[Unset, None, bool]):
-        adjacent_to (Union[Unset, None, str]):
-        parent_index_number (Union[Unset, None, int]):
-        has_parental_rating (Union[Unset, None, bool]):
-        is_hd (Union[Unset, None, bool]):
-        is_4k (Union[Unset, None, bool]):
-        location_types (Union[Unset, None, List[LocationType]]):
-        exclude_location_types (Union[Unset, None, List[LocationType]]):
-        is_missing (Union[Unset, None, bool]):
-        is_unaired (Union[Unset, None, bool]):
-        min_community_rating (Union[Unset, None, float]):
-        min_critic_rating (Union[Unset, None, float]):
-        min_premiere_date (Union[Unset, None, datetime.datetime]):
-        min_date_last_saved (Union[Unset, None, datetime.datetime]):
-        min_date_last_saved_for_user (Union[Unset, None, datetime.datetime]):
-        max_premiere_date (Union[Unset, None, datetime.datetime]):
-        has_overview (Union[Unset, None, bool]):
-        has_imdb_id (Union[Unset, None, bool]):
-        has_tmdb_id (Union[Unset, None, bool]):
-        has_tvdb_id (Union[Unset, None, bool]):
-        is_movie (Union[Unset, None, bool]):
-        is_series (Union[Unset, None, bool]):
-        is_news (Union[Unset, None, bool]):
-        is_kids (Union[Unset, None, bool]):
-        is_sports (Union[Unset, None, bool]):
-        exclude_item_ids (Union[Unset, None, List[str]]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        recursive (Union[Unset, None, bool]):
-        search_term (Union[Unset, None, str]):
-        sort_order (Union[Unset, None, List[SortOrder]]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        exclude_item_types (Union[Unset, None, List[BaseItemKind]]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        filters (Union[Unset, None, List[ItemFilter]]):
-        is_favorite (Union[Unset, None, bool]):
-        media_types (Union[Unset, None, List[str]]):
-        image_types (Union[Unset, None, List[ImageType]]):
-        sort_by (Union[Unset, None, List[str]]):
-        is_played (Union[Unset, None, bool]):
-        genres (Union[Unset, None, List[str]]):
-        official_ratings (Union[Unset, None, List[str]]):
-        tags (Union[Unset, None, List[str]]):
-        years (Union[Unset, None, List[int]]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        person (Union[Unset, None, str]):
-        person_ids (Union[Unset, None, List[str]]):
-        person_types (Union[Unset, None, List[str]]):
-        studios (Union[Unset, None, List[str]]):
-        artists (Union[Unset, None, List[str]]):
-        exclude_artist_ids (Union[Unset, None, List[str]]):
-        artist_ids (Union[Unset, None, List[str]]):
-        album_artist_ids (Union[Unset, None, List[str]]):
-        contributing_artist_ids (Union[Unset, None, List[str]]):
-        albums (Union[Unset, None, List[str]]):
-        album_ids (Union[Unset, None, List[str]]):
-        ids (Union[Unset, None, List[str]]):
-        video_types (Union[Unset, None, List[VideoType]]):
-        min_official_rating (Union[Unset, None, str]):
-        is_locked (Union[Unset, None, bool]):
-        is_place_holder (Union[Unset, None, bool]):
-        has_official_rating (Union[Unset, None, bool]):
-        collapse_box_set_items (Union[Unset, None, bool]):
-        min_width (Union[Unset, None, int]):
-        min_height (Union[Unset, None, int]):
-        max_width (Union[Unset, None, int]):
-        max_height (Union[Unset, None, int]):
-        is_3d (Union[Unset, None, bool]):
-        series_status (Union[Unset, None, List[SeriesStatus]]):
-        name_starts_with_or_greater (Union[Unset, None, str]):
-        name_starts_with (Union[Unset, None, str]):
-        name_less_than (Union[Unset, None, str]):
-        studio_ids (Union[Unset, None, List[str]]):
-        genre_ids (Union[Unset, None, List[str]]):
-        enable_total_record_count (Union[Unset, None, bool]):  Default: True.
-        enable_images (Union[Unset, None, bool]):  Default: True.
+        user_id (Union[Unset, str]):
+        max_official_rating (Union[Unset, str]):
+        has_theme_song (Union[Unset, bool]):
+        has_theme_video (Union[Unset, bool]):
+        has_subtitles (Union[Unset, bool]):
+        has_special_feature (Union[Unset, bool]):
+        has_trailer (Union[Unset, bool]):
+        adjacent_to (Union[Unset, str]):
+        parent_index_number (Union[Unset, int]):
+        has_parental_rating (Union[Unset, bool]):
+        is_hd (Union[Unset, bool]):
+        is_4k (Union[Unset, bool]):
+        location_types (Union[Unset, List[LocationType]]):
+        exclude_location_types (Union[Unset, List[LocationType]]):
+        is_missing (Union[Unset, bool]):
+        is_unaired (Union[Unset, bool]):
+        min_community_rating (Union[Unset, float]):
+        min_critic_rating (Union[Unset, float]):
+        min_premiere_date (Union[Unset, datetime.datetime]):
+        min_date_last_saved (Union[Unset, datetime.datetime]):
+        min_date_last_saved_for_user (Union[Unset, datetime.datetime]):
+        max_premiere_date (Union[Unset, datetime.datetime]):
+        has_overview (Union[Unset, bool]):
+        has_imdb_id (Union[Unset, bool]):
+        has_tmdb_id (Union[Unset, bool]):
+        has_tvdb_id (Union[Unset, bool]):
+        is_movie (Union[Unset, bool]):
+        is_series (Union[Unset, bool]):
+        is_news (Union[Unset, bool]):
+        is_kids (Union[Unset, bool]):
+        is_sports (Union[Unset, bool]):
+        exclude_item_ids (Union[Unset, List[str]]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        recursive (Union[Unset, bool]):
+        search_term (Union[Unset, str]):
+        sort_order (Union[Unset, List[SortOrder]]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        exclude_item_types (Union[Unset, List[BaseItemKind]]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        filters (Union[Unset, List[ItemFilter]]):
+        is_favorite (Union[Unset, bool]):
+        media_types (Union[Unset, List[MediaType]]):
+        image_types (Union[Unset, List[ImageType]]):
+        sort_by (Union[Unset, List[ItemSortBy]]):
+        is_played (Union[Unset, bool]):
+        genres (Union[Unset, List[str]]):
+        official_ratings (Union[Unset, List[str]]):
+        tags (Union[Unset, List[str]]):
+        years (Union[Unset, List[int]]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        person (Union[Unset, str]):
+        person_ids (Union[Unset, List[str]]):
+        person_types (Union[Unset, List[str]]):
+        studios (Union[Unset, List[str]]):
+        artists (Union[Unset, List[str]]):
+        exclude_artist_ids (Union[Unset, List[str]]):
+        artist_ids (Union[Unset, List[str]]):
+        album_artist_ids (Union[Unset, List[str]]):
+        contributing_artist_ids (Union[Unset, List[str]]):
+        albums (Union[Unset, List[str]]):
+        album_ids (Union[Unset, List[str]]):
+        ids (Union[Unset, List[str]]):
+        video_types (Union[Unset, List[VideoType]]):
+        min_official_rating (Union[Unset, str]):
+        is_locked (Union[Unset, bool]):
+        is_place_holder (Union[Unset, bool]):
+        has_official_rating (Union[Unset, bool]):
+        collapse_box_set_items (Union[Unset, bool]):
+        min_width (Union[Unset, int]):
+        min_height (Union[Unset, int]):
+        max_width (Union[Unset, int]):
+        max_height (Union[Unset, int]):
+        is_3d (Union[Unset, bool]):
+        series_status (Union[Unset, List[SeriesStatus]]):
+        name_starts_with_or_greater (Union[Unset, str]):
+        name_starts_with (Union[Unset, str]):
+        name_less_than (Union[Unset, str]):
+        studio_ids (Union[Unset, List[str]]):
+        genre_ids (Union[Unset, List[str]]):
+        enable_total_record_count (Union[Unset, bool]):  Default: True.
+        enable_images (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -881,180 +782,180 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    max_official_rating: Union[Unset, None, str] = UNSET,
-    has_theme_song: Union[Unset, None, bool] = UNSET,
-    has_theme_video: Union[Unset, None, bool] = UNSET,
-    has_subtitles: Union[Unset, None, bool] = UNSET,
-    has_special_feature: Union[Unset, None, bool] = UNSET,
-    has_trailer: Union[Unset, None, bool] = UNSET,
-    adjacent_to: Union[Unset, None, str] = UNSET,
-    parent_index_number: Union[Unset, None, int] = UNSET,
-    has_parental_rating: Union[Unset, None, bool] = UNSET,
-    is_hd: Union[Unset, None, bool] = UNSET,
-    is_4k: Union[Unset, None, bool] = UNSET,
-    location_types: Union[Unset, None, List[LocationType]] = UNSET,
-    exclude_location_types: Union[Unset, None, List[LocationType]] = UNSET,
-    is_missing: Union[Unset, None, bool] = UNSET,
-    is_unaired: Union[Unset, None, bool] = UNSET,
-    min_community_rating: Union[Unset, None, float] = UNSET,
-    min_critic_rating: Union[Unset, None, float] = UNSET,
-    min_premiere_date: Union[Unset, None, datetime.datetime] = UNSET,
-    min_date_last_saved: Union[Unset, None, datetime.datetime] = UNSET,
-    min_date_last_saved_for_user: Union[Unset, None, datetime.datetime] = UNSET,
-    max_premiere_date: Union[Unset, None, datetime.datetime] = UNSET,
-    has_overview: Union[Unset, None, bool] = UNSET,
-    has_imdb_id: Union[Unset, None, bool] = UNSET,
-    has_tmdb_id: Union[Unset, None, bool] = UNSET,
-    has_tvdb_id: Union[Unset, None, bool] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    exclude_item_ids: Union[Unset, None, List[str]] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    recursive: Union[Unset, None, bool] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    sort_order: Union[Unset, None, List[SortOrder]] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    is_played: Union[Unset, None, bool] = UNSET,
-    genres: Union[Unset, None, List[str]] = UNSET,
-    official_ratings: Union[Unset, None, List[str]] = UNSET,
-    tags: Union[Unset, None, List[str]] = UNSET,
-    years: Union[Unset, None, List[int]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    person: Union[Unset, None, str] = UNSET,
-    person_ids: Union[Unset, None, List[str]] = UNSET,
-    person_types: Union[Unset, None, List[str]] = UNSET,
-    studios: Union[Unset, None, List[str]] = UNSET,
-    artists: Union[Unset, None, List[str]] = UNSET,
-    exclude_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    artist_ids: Union[Unset, None, List[str]] = UNSET,
-    album_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    contributing_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    albums: Union[Unset, None, List[str]] = UNSET,
-    album_ids: Union[Unset, None, List[str]] = UNSET,
-    ids: Union[Unset, None, List[str]] = UNSET,
-    video_types: Union[Unset, None, List[VideoType]] = UNSET,
-    min_official_rating: Union[Unset, None, str] = UNSET,
-    is_locked: Union[Unset, None, bool] = UNSET,
-    is_place_holder: Union[Unset, None, bool] = UNSET,
-    has_official_rating: Union[Unset, None, bool] = UNSET,
-    collapse_box_set_items: Union[Unset, None, bool] = UNSET,
-    min_width: Union[Unset, None, int] = UNSET,
-    min_height: Union[Unset, None, int] = UNSET,
-    max_width: Union[Unset, None, int] = UNSET,
-    max_height: Union[Unset, None, int] = UNSET,
-    is_3d: Union[Unset, None, bool] = UNSET,
-    series_status: Union[Unset, None, List[SeriesStatus]] = UNSET,
-    name_starts_with_or_greater: Union[Unset, None, str] = UNSET,
-    name_starts_with: Union[Unset, None, str] = UNSET,
-    name_less_than: Union[Unset, None, str] = UNSET,
-    studio_ids: Union[Unset, None, List[str]] = UNSET,
-    genre_ids: Union[Unset, None, List[str]] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = True,
-    enable_images: Union[Unset, None, bool] = True,
+    user_id: Union[Unset, str] = UNSET,
+    max_official_rating: Union[Unset, str] = UNSET,
+    has_theme_song: Union[Unset, bool] = UNSET,
+    has_theme_video: Union[Unset, bool] = UNSET,
+    has_subtitles: Union[Unset, bool] = UNSET,
+    has_special_feature: Union[Unset, bool] = UNSET,
+    has_trailer: Union[Unset, bool] = UNSET,
+    adjacent_to: Union[Unset, str] = UNSET,
+    parent_index_number: Union[Unset, int] = UNSET,
+    has_parental_rating: Union[Unset, bool] = UNSET,
+    is_hd: Union[Unset, bool] = UNSET,
+    is_4k: Union[Unset, bool] = UNSET,
+    location_types: Union[Unset, List[LocationType]] = UNSET,
+    exclude_location_types: Union[Unset, List[LocationType]] = UNSET,
+    is_missing: Union[Unset, bool] = UNSET,
+    is_unaired: Union[Unset, bool] = UNSET,
+    min_community_rating: Union[Unset, float] = UNSET,
+    min_critic_rating: Union[Unset, float] = UNSET,
+    min_premiere_date: Union[Unset, datetime.datetime] = UNSET,
+    min_date_last_saved: Union[Unset, datetime.datetime] = UNSET,
+    min_date_last_saved_for_user: Union[Unset, datetime.datetime] = UNSET,
+    max_premiere_date: Union[Unset, datetime.datetime] = UNSET,
+    has_overview: Union[Unset, bool] = UNSET,
+    has_imdb_id: Union[Unset, bool] = UNSET,
+    has_tmdb_id: Union[Unset, bool] = UNSET,
+    has_tvdb_id: Union[Unset, bool] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    exclude_item_ids: Union[Unset, List[str]] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    recursive: Union[Unset, bool] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    sort_order: Union[Unset, List[SortOrder]] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    image_types: Union[Unset, List[ImageType]] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    is_played: Union[Unset, bool] = UNSET,
+    genres: Union[Unset, List[str]] = UNSET,
+    official_ratings: Union[Unset, List[str]] = UNSET,
+    tags: Union[Unset, List[str]] = UNSET,
+    years: Union[Unset, List[int]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    person: Union[Unset, str] = UNSET,
+    person_ids: Union[Unset, List[str]] = UNSET,
+    person_types: Union[Unset, List[str]] = UNSET,
+    studios: Union[Unset, List[str]] = UNSET,
+    artists: Union[Unset, List[str]] = UNSET,
+    exclude_artist_ids: Union[Unset, List[str]] = UNSET,
+    artist_ids: Union[Unset, List[str]] = UNSET,
+    album_artist_ids: Union[Unset, List[str]] = UNSET,
+    contributing_artist_ids: Union[Unset, List[str]] = UNSET,
+    albums: Union[Unset, List[str]] = UNSET,
+    album_ids: Union[Unset, List[str]] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
+    video_types: Union[Unset, List[VideoType]] = UNSET,
+    min_official_rating: Union[Unset, str] = UNSET,
+    is_locked: Union[Unset, bool] = UNSET,
+    is_place_holder: Union[Unset, bool] = UNSET,
+    has_official_rating: Union[Unset, bool] = UNSET,
+    collapse_box_set_items: Union[Unset, bool] = UNSET,
+    min_width: Union[Unset, int] = UNSET,
+    min_height: Union[Unset, int] = UNSET,
+    max_width: Union[Unset, int] = UNSET,
+    max_height: Union[Unset, int] = UNSET,
+    is_3d: Union[Unset, bool] = UNSET,
+    series_status: Union[Unset, List[SeriesStatus]] = UNSET,
+    name_starts_with_or_greater: Union[Unset, str] = UNSET,
+    name_starts_with: Union[Unset, str] = UNSET,
+    name_less_than: Union[Unset, str] = UNSET,
+    studio_ids: Union[Unset, List[str]] = UNSET,
+    genre_ids: Union[Unset, List[str]] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = True,
+    enable_images: Union[Unset, bool] = True,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets items based on a query.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        max_official_rating (Union[Unset, None, str]):
-        has_theme_song (Union[Unset, None, bool]):
-        has_theme_video (Union[Unset, None, bool]):
-        has_subtitles (Union[Unset, None, bool]):
-        has_special_feature (Union[Unset, None, bool]):
-        has_trailer (Union[Unset, None, bool]):
-        adjacent_to (Union[Unset, None, str]):
-        parent_index_number (Union[Unset, None, int]):
-        has_parental_rating (Union[Unset, None, bool]):
-        is_hd (Union[Unset, None, bool]):
-        is_4k (Union[Unset, None, bool]):
-        location_types (Union[Unset, None, List[LocationType]]):
-        exclude_location_types (Union[Unset, None, List[LocationType]]):
-        is_missing (Union[Unset, None, bool]):
-        is_unaired (Union[Unset, None, bool]):
-        min_community_rating (Union[Unset, None, float]):
-        min_critic_rating (Union[Unset, None, float]):
-        min_premiere_date (Union[Unset, None, datetime.datetime]):
-        min_date_last_saved (Union[Unset, None, datetime.datetime]):
-        min_date_last_saved_for_user (Union[Unset, None, datetime.datetime]):
-        max_premiere_date (Union[Unset, None, datetime.datetime]):
-        has_overview (Union[Unset, None, bool]):
-        has_imdb_id (Union[Unset, None, bool]):
-        has_tmdb_id (Union[Unset, None, bool]):
-        has_tvdb_id (Union[Unset, None, bool]):
-        is_movie (Union[Unset, None, bool]):
-        is_series (Union[Unset, None, bool]):
-        is_news (Union[Unset, None, bool]):
-        is_kids (Union[Unset, None, bool]):
-        is_sports (Union[Unset, None, bool]):
-        exclude_item_ids (Union[Unset, None, List[str]]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        recursive (Union[Unset, None, bool]):
-        search_term (Union[Unset, None, str]):
-        sort_order (Union[Unset, None, List[SortOrder]]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        exclude_item_types (Union[Unset, None, List[BaseItemKind]]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        filters (Union[Unset, None, List[ItemFilter]]):
-        is_favorite (Union[Unset, None, bool]):
-        media_types (Union[Unset, None, List[str]]):
-        image_types (Union[Unset, None, List[ImageType]]):
-        sort_by (Union[Unset, None, List[str]]):
-        is_played (Union[Unset, None, bool]):
-        genres (Union[Unset, None, List[str]]):
-        official_ratings (Union[Unset, None, List[str]]):
-        tags (Union[Unset, None, List[str]]):
-        years (Union[Unset, None, List[int]]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        person (Union[Unset, None, str]):
-        person_ids (Union[Unset, None, List[str]]):
-        person_types (Union[Unset, None, List[str]]):
-        studios (Union[Unset, None, List[str]]):
-        artists (Union[Unset, None, List[str]]):
-        exclude_artist_ids (Union[Unset, None, List[str]]):
-        artist_ids (Union[Unset, None, List[str]]):
-        album_artist_ids (Union[Unset, None, List[str]]):
-        contributing_artist_ids (Union[Unset, None, List[str]]):
-        albums (Union[Unset, None, List[str]]):
-        album_ids (Union[Unset, None, List[str]]):
-        ids (Union[Unset, None, List[str]]):
-        video_types (Union[Unset, None, List[VideoType]]):
-        min_official_rating (Union[Unset, None, str]):
-        is_locked (Union[Unset, None, bool]):
-        is_place_holder (Union[Unset, None, bool]):
-        has_official_rating (Union[Unset, None, bool]):
-        collapse_box_set_items (Union[Unset, None, bool]):
-        min_width (Union[Unset, None, int]):
-        min_height (Union[Unset, None, int]):
-        max_width (Union[Unset, None, int]):
-        max_height (Union[Unset, None, int]):
-        is_3d (Union[Unset, None, bool]):
-        series_status (Union[Unset, None, List[SeriesStatus]]):
-        name_starts_with_or_greater (Union[Unset, None, str]):
-        name_starts_with (Union[Unset, None, str]):
-        name_less_than (Union[Unset, None, str]):
-        studio_ids (Union[Unset, None, List[str]]):
-        genre_ids (Union[Unset, None, List[str]]):
-        enable_total_record_count (Union[Unset, None, bool]):  Default: True.
-        enable_images (Union[Unset, None, bool]):  Default: True.
+        user_id (Union[Unset, str]):
+        max_official_rating (Union[Unset, str]):
+        has_theme_song (Union[Unset, bool]):
+        has_theme_video (Union[Unset, bool]):
+        has_subtitles (Union[Unset, bool]):
+        has_special_feature (Union[Unset, bool]):
+        has_trailer (Union[Unset, bool]):
+        adjacent_to (Union[Unset, str]):
+        parent_index_number (Union[Unset, int]):
+        has_parental_rating (Union[Unset, bool]):
+        is_hd (Union[Unset, bool]):
+        is_4k (Union[Unset, bool]):
+        location_types (Union[Unset, List[LocationType]]):
+        exclude_location_types (Union[Unset, List[LocationType]]):
+        is_missing (Union[Unset, bool]):
+        is_unaired (Union[Unset, bool]):
+        min_community_rating (Union[Unset, float]):
+        min_critic_rating (Union[Unset, float]):
+        min_premiere_date (Union[Unset, datetime.datetime]):
+        min_date_last_saved (Union[Unset, datetime.datetime]):
+        min_date_last_saved_for_user (Union[Unset, datetime.datetime]):
+        max_premiere_date (Union[Unset, datetime.datetime]):
+        has_overview (Union[Unset, bool]):
+        has_imdb_id (Union[Unset, bool]):
+        has_tmdb_id (Union[Unset, bool]):
+        has_tvdb_id (Union[Unset, bool]):
+        is_movie (Union[Unset, bool]):
+        is_series (Union[Unset, bool]):
+        is_news (Union[Unset, bool]):
+        is_kids (Union[Unset, bool]):
+        is_sports (Union[Unset, bool]):
+        exclude_item_ids (Union[Unset, List[str]]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        recursive (Union[Unset, bool]):
+        search_term (Union[Unset, str]):
+        sort_order (Union[Unset, List[SortOrder]]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        exclude_item_types (Union[Unset, List[BaseItemKind]]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        filters (Union[Unset, List[ItemFilter]]):
+        is_favorite (Union[Unset, bool]):
+        media_types (Union[Unset, List[MediaType]]):
+        image_types (Union[Unset, List[ImageType]]):
+        sort_by (Union[Unset, List[ItemSortBy]]):
+        is_played (Union[Unset, bool]):
+        genres (Union[Unset, List[str]]):
+        official_ratings (Union[Unset, List[str]]):
+        tags (Union[Unset, List[str]]):
+        years (Union[Unset, List[int]]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        person (Union[Unset, str]):
+        person_ids (Union[Unset, List[str]]):
+        person_types (Union[Unset, List[str]]):
+        studios (Union[Unset, List[str]]):
+        artists (Union[Unset, List[str]]):
+        exclude_artist_ids (Union[Unset, List[str]]):
+        artist_ids (Union[Unset, List[str]]):
+        album_artist_ids (Union[Unset, List[str]]):
+        contributing_artist_ids (Union[Unset, List[str]]):
+        albums (Union[Unset, List[str]]):
+        album_ids (Union[Unset, List[str]]):
+        ids (Union[Unset, List[str]]):
+        video_types (Union[Unset, List[VideoType]]):
+        min_official_rating (Union[Unset, str]):
+        is_locked (Union[Unset, bool]):
+        is_place_holder (Union[Unset, bool]):
+        has_official_rating (Union[Unset, bool]):
+        collapse_box_set_items (Union[Unset, bool]):
+        min_width (Union[Unset, int]):
+        min_height (Union[Unset, int]):
+        max_width (Union[Unset, int]):
+        max_height (Union[Unset, int]):
+        is_3d (Union[Unset, bool]):
+        series_status (Union[Unset, List[SeriesStatus]]):
+        name_starts_with_or_greater (Union[Unset, str]):
+        name_starts_with (Union[Unset, str]):
+        name_less_than (Union[Unset, str]):
+        studio_ids (Union[Unset, List[str]]):
+        genre_ids (Union[Unset, List[str]]):
+        enable_total_record_count (Union[Unset, bool]):  Default: True.
+        enable_images (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -1157,180 +1058,180 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    max_official_rating: Union[Unset, None, str] = UNSET,
-    has_theme_song: Union[Unset, None, bool] = UNSET,
-    has_theme_video: Union[Unset, None, bool] = UNSET,
-    has_subtitles: Union[Unset, None, bool] = UNSET,
-    has_special_feature: Union[Unset, None, bool] = UNSET,
-    has_trailer: Union[Unset, None, bool] = UNSET,
-    adjacent_to: Union[Unset, None, str] = UNSET,
-    parent_index_number: Union[Unset, None, int] = UNSET,
-    has_parental_rating: Union[Unset, None, bool] = UNSET,
-    is_hd: Union[Unset, None, bool] = UNSET,
-    is_4k: Union[Unset, None, bool] = UNSET,
-    location_types: Union[Unset, None, List[LocationType]] = UNSET,
-    exclude_location_types: Union[Unset, None, List[LocationType]] = UNSET,
-    is_missing: Union[Unset, None, bool] = UNSET,
-    is_unaired: Union[Unset, None, bool] = UNSET,
-    min_community_rating: Union[Unset, None, float] = UNSET,
-    min_critic_rating: Union[Unset, None, float] = UNSET,
-    min_premiere_date: Union[Unset, None, datetime.datetime] = UNSET,
-    min_date_last_saved: Union[Unset, None, datetime.datetime] = UNSET,
-    min_date_last_saved_for_user: Union[Unset, None, datetime.datetime] = UNSET,
-    max_premiere_date: Union[Unset, None, datetime.datetime] = UNSET,
-    has_overview: Union[Unset, None, bool] = UNSET,
-    has_imdb_id: Union[Unset, None, bool] = UNSET,
-    has_tmdb_id: Union[Unset, None, bool] = UNSET,
-    has_tvdb_id: Union[Unset, None, bool] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    exclude_item_ids: Union[Unset, None, List[str]] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    recursive: Union[Unset, None, bool] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    sort_order: Union[Unset, None, List[SortOrder]] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    is_played: Union[Unset, None, bool] = UNSET,
-    genres: Union[Unset, None, List[str]] = UNSET,
-    official_ratings: Union[Unset, None, List[str]] = UNSET,
-    tags: Union[Unset, None, List[str]] = UNSET,
-    years: Union[Unset, None, List[int]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    person: Union[Unset, None, str] = UNSET,
-    person_ids: Union[Unset, None, List[str]] = UNSET,
-    person_types: Union[Unset, None, List[str]] = UNSET,
-    studios: Union[Unset, None, List[str]] = UNSET,
-    artists: Union[Unset, None, List[str]] = UNSET,
-    exclude_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    artist_ids: Union[Unset, None, List[str]] = UNSET,
-    album_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    contributing_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    albums: Union[Unset, None, List[str]] = UNSET,
-    album_ids: Union[Unset, None, List[str]] = UNSET,
-    ids: Union[Unset, None, List[str]] = UNSET,
-    video_types: Union[Unset, None, List[VideoType]] = UNSET,
-    min_official_rating: Union[Unset, None, str] = UNSET,
-    is_locked: Union[Unset, None, bool] = UNSET,
-    is_place_holder: Union[Unset, None, bool] = UNSET,
-    has_official_rating: Union[Unset, None, bool] = UNSET,
-    collapse_box_set_items: Union[Unset, None, bool] = UNSET,
-    min_width: Union[Unset, None, int] = UNSET,
-    min_height: Union[Unset, None, int] = UNSET,
-    max_width: Union[Unset, None, int] = UNSET,
-    max_height: Union[Unset, None, int] = UNSET,
-    is_3d: Union[Unset, None, bool] = UNSET,
-    series_status: Union[Unset, None, List[SeriesStatus]] = UNSET,
-    name_starts_with_or_greater: Union[Unset, None, str] = UNSET,
-    name_starts_with: Union[Unset, None, str] = UNSET,
-    name_less_than: Union[Unset, None, str] = UNSET,
-    studio_ids: Union[Unset, None, List[str]] = UNSET,
-    genre_ids: Union[Unset, None, List[str]] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = True,
-    enable_images: Union[Unset, None, bool] = True,
+    user_id: Union[Unset, str] = UNSET,
+    max_official_rating: Union[Unset, str] = UNSET,
+    has_theme_song: Union[Unset, bool] = UNSET,
+    has_theme_video: Union[Unset, bool] = UNSET,
+    has_subtitles: Union[Unset, bool] = UNSET,
+    has_special_feature: Union[Unset, bool] = UNSET,
+    has_trailer: Union[Unset, bool] = UNSET,
+    adjacent_to: Union[Unset, str] = UNSET,
+    parent_index_number: Union[Unset, int] = UNSET,
+    has_parental_rating: Union[Unset, bool] = UNSET,
+    is_hd: Union[Unset, bool] = UNSET,
+    is_4k: Union[Unset, bool] = UNSET,
+    location_types: Union[Unset, List[LocationType]] = UNSET,
+    exclude_location_types: Union[Unset, List[LocationType]] = UNSET,
+    is_missing: Union[Unset, bool] = UNSET,
+    is_unaired: Union[Unset, bool] = UNSET,
+    min_community_rating: Union[Unset, float] = UNSET,
+    min_critic_rating: Union[Unset, float] = UNSET,
+    min_premiere_date: Union[Unset, datetime.datetime] = UNSET,
+    min_date_last_saved: Union[Unset, datetime.datetime] = UNSET,
+    min_date_last_saved_for_user: Union[Unset, datetime.datetime] = UNSET,
+    max_premiere_date: Union[Unset, datetime.datetime] = UNSET,
+    has_overview: Union[Unset, bool] = UNSET,
+    has_imdb_id: Union[Unset, bool] = UNSET,
+    has_tmdb_id: Union[Unset, bool] = UNSET,
+    has_tvdb_id: Union[Unset, bool] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    exclude_item_ids: Union[Unset, List[str]] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    recursive: Union[Unset, bool] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    sort_order: Union[Unset, List[SortOrder]] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    image_types: Union[Unset, List[ImageType]] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    is_played: Union[Unset, bool] = UNSET,
+    genres: Union[Unset, List[str]] = UNSET,
+    official_ratings: Union[Unset, List[str]] = UNSET,
+    tags: Union[Unset, List[str]] = UNSET,
+    years: Union[Unset, List[int]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    person: Union[Unset, str] = UNSET,
+    person_ids: Union[Unset, List[str]] = UNSET,
+    person_types: Union[Unset, List[str]] = UNSET,
+    studios: Union[Unset, List[str]] = UNSET,
+    artists: Union[Unset, List[str]] = UNSET,
+    exclude_artist_ids: Union[Unset, List[str]] = UNSET,
+    artist_ids: Union[Unset, List[str]] = UNSET,
+    album_artist_ids: Union[Unset, List[str]] = UNSET,
+    contributing_artist_ids: Union[Unset, List[str]] = UNSET,
+    albums: Union[Unset, List[str]] = UNSET,
+    album_ids: Union[Unset, List[str]] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
+    video_types: Union[Unset, List[VideoType]] = UNSET,
+    min_official_rating: Union[Unset, str] = UNSET,
+    is_locked: Union[Unset, bool] = UNSET,
+    is_place_holder: Union[Unset, bool] = UNSET,
+    has_official_rating: Union[Unset, bool] = UNSET,
+    collapse_box_set_items: Union[Unset, bool] = UNSET,
+    min_width: Union[Unset, int] = UNSET,
+    min_height: Union[Unset, int] = UNSET,
+    max_width: Union[Unset, int] = UNSET,
+    max_height: Union[Unset, int] = UNSET,
+    is_3d: Union[Unset, bool] = UNSET,
+    series_status: Union[Unset, List[SeriesStatus]] = UNSET,
+    name_starts_with_or_greater: Union[Unset, str] = UNSET,
+    name_starts_with: Union[Unset, str] = UNSET,
+    name_less_than: Union[Unset, str] = UNSET,
+    studio_ids: Union[Unset, List[str]] = UNSET,
+    genre_ids: Union[Unset, List[str]] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = True,
+    enable_images: Union[Unset, bool] = True,
 ) -> Response[Union[Any, BaseItemDtoQueryResult]]:
     """Gets items based on a query.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        max_official_rating (Union[Unset, None, str]):
-        has_theme_song (Union[Unset, None, bool]):
-        has_theme_video (Union[Unset, None, bool]):
-        has_subtitles (Union[Unset, None, bool]):
-        has_special_feature (Union[Unset, None, bool]):
-        has_trailer (Union[Unset, None, bool]):
-        adjacent_to (Union[Unset, None, str]):
-        parent_index_number (Union[Unset, None, int]):
-        has_parental_rating (Union[Unset, None, bool]):
-        is_hd (Union[Unset, None, bool]):
-        is_4k (Union[Unset, None, bool]):
-        location_types (Union[Unset, None, List[LocationType]]):
-        exclude_location_types (Union[Unset, None, List[LocationType]]):
-        is_missing (Union[Unset, None, bool]):
-        is_unaired (Union[Unset, None, bool]):
-        min_community_rating (Union[Unset, None, float]):
-        min_critic_rating (Union[Unset, None, float]):
-        min_premiere_date (Union[Unset, None, datetime.datetime]):
-        min_date_last_saved (Union[Unset, None, datetime.datetime]):
-        min_date_last_saved_for_user (Union[Unset, None, datetime.datetime]):
-        max_premiere_date (Union[Unset, None, datetime.datetime]):
-        has_overview (Union[Unset, None, bool]):
-        has_imdb_id (Union[Unset, None, bool]):
-        has_tmdb_id (Union[Unset, None, bool]):
-        has_tvdb_id (Union[Unset, None, bool]):
-        is_movie (Union[Unset, None, bool]):
-        is_series (Union[Unset, None, bool]):
-        is_news (Union[Unset, None, bool]):
-        is_kids (Union[Unset, None, bool]):
-        is_sports (Union[Unset, None, bool]):
-        exclude_item_ids (Union[Unset, None, List[str]]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        recursive (Union[Unset, None, bool]):
-        search_term (Union[Unset, None, str]):
-        sort_order (Union[Unset, None, List[SortOrder]]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        exclude_item_types (Union[Unset, None, List[BaseItemKind]]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        filters (Union[Unset, None, List[ItemFilter]]):
-        is_favorite (Union[Unset, None, bool]):
-        media_types (Union[Unset, None, List[str]]):
-        image_types (Union[Unset, None, List[ImageType]]):
-        sort_by (Union[Unset, None, List[str]]):
-        is_played (Union[Unset, None, bool]):
-        genres (Union[Unset, None, List[str]]):
-        official_ratings (Union[Unset, None, List[str]]):
-        tags (Union[Unset, None, List[str]]):
-        years (Union[Unset, None, List[int]]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        person (Union[Unset, None, str]):
-        person_ids (Union[Unset, None, List[str]]):
-        person_types (Union[Unset, None, List[str]]):
-        studios (Union[Unset, None, List[str]]):
-        artists (Union[Unset, None, List[str]]):
-        exclude_artist_ids (Union[Unset, None, List[str]]):
-        artist_ids (Union[Unset, None, List[str]]):
-        album_artist_ids (Union[Unset, None, List[str]]):
-        contributing_artist_ids (Union[Unset, None, List[str]]):
-        albums (Union[Unset, None, List[str]]):
-        album_ids (Union[Unset, None, List[str]]):
-        ids (Union[Unset, None, List[str]]):
-        video_types (Union[Unset, None, List[VideoType]]):
-        min_official_rating (Union[Unset, None, str]):
-        is_locked (Union[Unset, None, bool]):
-        is_place_holder (Union[Unset, None, bool]):
-        has_official_rating (Union[Unset, None, bool]):
-        collapse_box_set_items (Union[Unset, None, bool]):
-        min_width (Union[Unset, None, int]):
-        min_height (Union[Unset, None, int]):
-        max_width (Union[Unset, None, int]):
-        max_height (Union[Unset, None, int]):
-        is_3d (Union[Unset, None, bool]):
-        series_status (Union[Unset, None, List[SeriesStatus]]):
-        name_starts_with_or_greater (Union[Unset, None, str]):
-        name_starts_with (Union[Unset, None, str]):
-        name_less_than (Union[Unset, None, str]):
-        studio_ids (Union[Unset, None, List[str]]):
-        genre_ids (Union[Unset, None, List[str]]):
-        enable_total_record_count (Union[Unset, None, bool]):  Default: True.
-        enable_images (Union[Unset, None, bool]):  Default: True.
+        user_id (Union[Unset, str]):
+        max_official_rating (Union[Unset, str]):
+        has_theme_song (Union[Unset, bool]):
+        has_theme_video (Union[Unset, bool]):
+        has_subtitles (Union[Unset, bool]):
+        has_special_feature (Union[Unset, bool]):
+        has_trailer (Union[Unset, bool]):
+        adjacent_to (Union[Unset, str]):
+        parent_index_number (Union[Unset, int]):
+        has_parental_rating (Union[Unset, bool]):
+        is_hd (Union[Unset, bool]):
+        is_4k (Union[Unset, bool]):
+        location_types (Union[Unset, List[LocationType]]):
+        exclude_location_types (Union[Unset, List[LocationType]]):
+        is_missing (Union[Unset, bool]):
+        is_unaired (Union[Unset, bool]):
+        min_community_rating (Union[Unset, float]):
+        min_critic_rating (Union[Unset, float]):
+        min_premiere_date (Union[Unset, datetime.datetime]):
+        min_date_last_saved (Union[Unset, datetime.datetime]):
+        min_date_last_saved_for_user (Union[Unset, datetime.datetime]):
+        max_premiere_date (Union[Unset, datetime.datetime]):
+        has_overview (Union[Unset, bool]):
+        has_imdb_id (Union[Unset, bool]):
+        has_tmdb_id (Union[Unset, bool]):
+        has_tvdb_id (Union[Unset, bool]):
+        is_movie (Union[Unset, bool]):
+        is_series (Union[Unset, bool]):
+        is_news (Union[Unset, bool]):
+        is_kids (Union[Unset, bool]):
+        is_sports (Union[Unset, bool]):
+        exclude_item_ids (Union[Unset, List[str]]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        recursive (Union[Unset, bool]):
+        search_term (Union[Unset, str]):
+        sort_order (Union[Unset, List[SortOrder]]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        exclude_item_types (Union[Unset, List[BaseItemKind]]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        filters (Union[Unset, List[ItemFilter]]):
+        is_favorite (Union[Unset, bool]):
+        media_types (Union[Unset, List[MediaType]]):
+        image_types (Union[Unset, List[ImageType]]):
+        sort_by (Union[Unset, List[ItemSortBy]]):
+        is_played (Union[Unset, bool]):
+        genres (Union[Unset, List[str]]):
+        official_ratings (Union[Unset, List[str]]):
+        tags (Union[Unset, List[str]]):
+        years (Union[Unset, List[int]]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        person (Union[Unset, str]):
+        person_ids (Union[Unset, List[str]]):
+        person_types (Union[Unset, List[str]]):
+        studios (Union[Unset, List[str]]):
+        artists (Union[Unset, List[str]]):
+        exclude_artist_ids (Union[Unset, List[str]]):
+        artist_ids (Union[Unset, List[str]]):
+        album_artist_ids (Union[Unset, List[str]]):
+        contributing_artist_ids (Union[Unset, List[str]]):
+        albums (Union[Unset, List[str]]):
+        album_ids (Union[Unset, List[str]]):
+        ids (Union[Unset, List[str]]):
+        video_types (Union[Unset, List[VideoType]]):
+        min_official_rating (Union[Unset, str]):
+        is_locked (Union[Unset, bool]):
+        is_place_holder (Union[Unset, bool]):
+        has_official_rating (Union[Unset, bool]):
+        collapse_box_set_items (Union[Unset, bool]):
+        min_width (Union[Unset, int]):
+        min_height (Union[Unset, int]):
+        max_width (Union[Unset, int]):
+        max_height (Union[Unset, int]):
+        is_3d (Union[Unset, bool]):
+        series_status (Union[Unset, List[SeriesStatus]]):
+        name_starts_with_or_greater (Union[Unset, str]):
+        name_starts_with (Union[Unset, str]):
+        name_less_than (Union[Unset, str]):
+        studio_ids (Union[Unset, List[str]]):
+        genre_ids (Union[Unset, List[str]]):
+        enable_total_record_count (Union[Unset, bool]):  Default: True.
+        enable_images (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -1436,180 +1337,180 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    max_official_rating: Union[Unset, None, str] = UNSET,
-    has_theme_song: Union[Unset, None, bool] = UNSET,
-    has_theme_video: Union[Unset, None, bool] = UNSET,
-    has_subtitles: Union[Unset, None, bool] = UNSET,
-    has_special_feature: Union[Unset, None, bool] = UNSET,
-    has_trailer: Union[Unset, None, bool] = UNSET,
-    adjacent_to: Union[Unset, None, str] = UNSET,
-    parent_index_number: Union[Unset, None, int] = UNSET,
-    has_parental_rating: Union[Unset, None, bool] = UNSET,
-    is_hd: Union[Unset, None, bool] = UNSET,
-    is_4k: Union[Unset, None, bool] = UNSET,
-    location_types: Union[Unset, None, List[LocationType]] = UNSET,
-    exclude_location_types: Union[Unset, None, List[LocationType]] = UNSET,
-    is_missing: Union[Unset, None, bool] = UNSET,
-    is_unaired: Union[Unset, None, bool] = UNSET,
-    min_community_rating: Union[Unset, None, float] = UNSET,
-    min_critic_rating: Union[Unset, None, float] = UNSET,
-    min_premiere_date: Union[Unset, None, datetime.datetime] = UNSET,
-    min_date_last_saved: Union[Unset, None, datetime.datetime] = UNSET,
-    min_date_last_saved_for_user: Union[Unset, None, datetime.datetime] = UNSET,
-    max_premiere_date: Union[Unset, None, datetime.datetime] = UNSET,
-    has_overview: Union[Unset, None, bool] = UNSET,
-    has_imdb_id: Union[Unset, None, bool] = UNSET,
-    has_tmdb_id: Union[Unset, None, bool] = UNSET,
-    has_tvdb_id: Union[Unset, None, bool] = UNSET,
-    is_movie: Union[Unset, None, bool] = UNSET,
-    is_series: Union[Unset, None, bool] = UNSET,
-    is_news: Union[Unset, None, bool] = UNSET,
-    is_kids: Union[Unset, None, bool] = UNSET,
-    is_sports: Union[Unset, None, bool] = UNSET,
-    exclude_item_ids: Union[Unset, None, List[str]] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    recursive: Union[Unset, None, bool] = UNSET,
-    search_term: Union[Unset, None, str] = UNSET,
-    sort_order: Union[Unset, None, List[SortOrder]] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    exclude_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    include_item_types: Union[Unset, None, List[BaseItemKind]] = UNSET,
-    filters: Union[Unset, None, List[ItemFilter]] = UNSET,
-    is_favorite: Union[Unset, None, bool] = UNSET,
-    media_types: Union[Unset, None, List[str]] = UNSET,
-    image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    sort_by: Union[Unset, None, List[str]] = UNSET,
-    is_played: Union[Unset, None, bool] = UNSET,
-    genres: Union[Unset, None, List[str]] = UNSET,
-    official_ratings: Union[Unset, None, List[str]] = UNSET,
-    tags: Union[Unset, None, List[str]] = UNSET,
-    years: Union[Unset, None, List[int]] = UNSET,
-    enable_user_data: Union[Unset, None, bool] = UNSET,
-    image_type_limit: Union[Unset, None, int] = UNSET,
-    enable_image_types: Union[Unset, None, List[ImageType]] = UNSET,
-    person: Union[Unset, None, str] = UNSET,
-    person_ids: Union[Unset, None, List[str]] = UNSET,
-    person_types: Union[Unset, None, List[str]] = UNSET,
-    studios: Union[Unset, None, List[str]] = UNSET,
-    artists: Union[Unset, None, List[str]] = UNSET,
-    exclude_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    artist_ids: Union[Unset, None, List[str]] = UNSET,
-    album_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    contributing_artist_ids: Union[Unset, None, List[str]] = UNSET,
-    albums: Union[Unset, None, List[str]] = UNSET,
-    album_ids: Union[Unset, None, List[str]] = UNSET,
-    ids: Union[Unset, None, List[str]] = UNSET,
-    video_types: Union[Unset, None, List[VideoType]] = UNSET,
-    min_official_rating: Union[Unset, None, str] = UNSET,
-    is_locked: Union[Unset, None, bool] = UNSET,
-    is_place_holder: Union[Unset, None, bool] = UNSET,
-    has_official_rating: Union[Unset, None, bool] = UNSET,
-    collapse_box_set_items: Union[Unset, None, bool] = UNSET,
-    min_width: Union[Unset, None, int] = UNSET,
-    min_height: Union[Unset, None, int] = UNSET,
-    max_width: Union[Unset, None, int] = UNSET,
-    max_height: Union[Unset, None, int] = UNSET,
-    is_3d: Union[Unset, None, bool] = UNSET,
-    series_status: Union[Unset, None, List[SeriesStatus]] = UNSET,
-    name_starts_with_or_greater: Union[Unset, None, str] = UNSET,
-    name_starts_with: Union[Unset, None, str] = UNSET,
-    name_less_than: Union[Unset, None, str] = UNSET,
-    studio_ids: Union[Unset, None, List[str]] = UNSET,
-    genre_ids: Union[Unset, None, List[str]] = UNSET,
-    enable_total_record_count: Union[Unset, None, bool] = True,
-    enable_images: Union[Unset, None, bool] = True,
+    user_id: Union[Unset, str] = UNSET,
+    max_official_rating: Union[Unset, str] = UNSET,
+    has_theme_song: Union[Unset, bool] = UNSET,
+    has_theme_video: Union[Unset, bool] = UNSET,
+    has_subtitles: Union[Unset, bool] = UNSET,
+    has_special_feature: Union[Unset, bool] = UNSET,
+    has_trailer: Union[Unset, bool] = UNSET,
+    adjacent_to: Union[Unset, str] = UNSET,
+    parent_index_number: Union[Unset, int] = UNSET,
+    has_parental_rating: Union[Unset, bool] = UNSET,
+    is_hd: Union[Unset, bool] = UNSET,
+    is_4k: Union[Unset, bool] = UNSET,
+    location_types: Union[Unset, List[LocationType]] = UNSET,
+    exclude_location_types: Union[Unset, List[LocationType]] = UNSET,
+    is_missing: Union[Unset, bool] = UNSET,
+    is_unaired: Union[Unset, bool] = UNSET,
+    min_community_rating: Union[Unset, float] = UNSET,
+    min_critic_rating: Union[Unset, float] = UNSET,
+    min_premiere_date: Union[Unset, datetime.datetime] = UNSET,
+    min_date_last_saved: Union[Unset, datetime.datetime] = UNSET,
+    min_date_last_saved_for_user: Union[Unset, datetime.datetime] = UNSET,
+    max_premiere_date: Union[Unset, datetime.datetime] = UNSET,
+    has_overview: Union[Unset, bool] = UNSET,
+    has_imdb_id: Union[Unset, bool] = UNSET,
+    has_tmdb_id: Union[Unset, bool] = UNSET,
+    has_tvdb_id: Union[Unset, bool] = UNSET,
+    is_movie: Union[Unset, bool] = UNSET,
+    is_series: Union[Unset, bool] = UNSET,
+    is_news: Union[Unset, bool] = UNSET,
+    is_kids: Union[Unset, bool] = UNSET,
+    is_sports: Union[Unset, bool] = UNSET,
+    exclude_item_ids: Union[Unset, List[str]] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    recursive: Union[Unset, bool] = UNSET,
+    search_term: Union[Unset, str] = UNSET,
+    sort_order: Union[Unset, List[SortOrder]] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    exclude_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    include_item_types: Union[Unset, List[BaseItemKind]] = UNSET,
+    filters: Union[Unset, List[ItemFilter]] = UNSET,
+    is_favorite: Union[Unset, bool] = UNSET,
+    media_types: Union[Unset, List[MediaType]] = UNSET,
+    image_types: Union[Unset, List[ImageType]] = UNSET,
+    sort_by: Union[Unset, List[ItemSortBy]] = UNSET,
+    is_played: Union[Unset, bool] = UNSET,
+    genres: Union[Unset, List[str]] = UNSET,
+    official_ratings: Union[Unset, List[str]] = UNSET,
+    tags: Union[Unset, List[str]] = UNSET,
+    years: Union[Unset, List[int]] = UNSET,
+    enable_user_data: Union[Unset, bool] = UNSET,
+    image_type_limit: Union[Unset, int] = UNSET,
+    enable_image_types: Union[Unset, List[ImageType]] = UNSET,
+    person: Union[Unset, str] = UNSET,
+    person_ids: Union[Unset, List[str]] = UNSET,
+    person_types: Union[Unset, List[str]] = UNSET,
+    studios: Union[Unset, List[str]] = UNSET,
+    artists: Union[Unset, List[str]] = UNSET,
+    exclude_artist_ids: Union[Unset, List[str]] = UNSET,
+    artist_ids: Union[Unset, List[str]] = UNSET,
+    album_artist_ids: Union[Unset, List[str]] = UNSET,
+    contributing_artist_ids: Union[Unset, List[str]] = UNSET,
+    albums: Union[Unset, List[str]] = UNSET,
+    album_ids: Union[Unset, List[str]] = UNSET,
+    ids: Union[Unset, List[str]] = UNSET,
+    video_types: Union[Unset, List[VideoType]] = UNSET,
+    min_official_rating: Union[Unset, str] = UNSET,
+    is_locked: Union[Unset, bool] = UNSET,
+    is_place_holder: Union[Unset, bool] = UNSET,
+    has_official_rating: Union[Unset, bool] = UNSET,
+    collapse_box_set_items: Union[Unset, bool] = UNSET,
+    min_width: Union[Unset, int] = UNSET,
+    min_height: Union[Unset, int] = UNSET,
+    max_width: Union[Unset, int] = UNSET,
+    max_height: Union[Unset, int] = UNSET,
+    is_3d: Union[Unset, bool] = UNSET,
+    series_status: Union[Unset, List[SeriesStatus]] = UNSET,
+    name_starts_with_or_greater: Union[Unset, str] = UNSET,
+    name_starts_with: Union[Unset, str] = UNSET,
+    name_less_than: Union[Unset, str] = UNSET,
+    studio_ids: Union[Unset, List[str]] = UNSET,
+    genre_ids: Union[Unset, List[str]] = UNSET,
+    enable_total_record_count: Union[Unset, bool] = True,
+    enable_images: Union[Unset, bool] = True,
 ) -> Optional[Union[Any, BaseItemDtoQueryResult]]:
     """Gets items based on a query.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        max_official_rating (Union[Unset, None, str]):
-        has_theme_song (Union[Unset, None, bool]):
-        has_theme_video (Union[Unset, None, bool]):
-        has_subtitles (Union[Unset, None, bool]):
-        has_special_feature (Union[Unset, None, bool]):
-        has_trailer (Union[Unset, None, bool]):
-        adjacent_to (Union[Unset, None, str]):
-        parent_index_number (Union[Unset, None, int]):
-        has_parental_rating (Union[Unset, None, bool]):
-        is_hd (Union[Unset, None, bool]):
-        is_4k (Union[Unset, None, bool]):
-        location_types (Union[Unset, None, List[LocationType]]):
-        exclude_location_types (Union[Unset, None, List[LocationType]]):
-        is_missing (Union[Unset, None, bool]):
-        is_unaired (Union[Unset, None, bool]):
-        min_community_rating (Union[Unset, None, float]):
-        min_critic_rating (Union[Unset, None, float]):
-        min_premiere_date (Union[Unset, None, datetime.datetime]):
-        min_date_last_saved (Union[Unset, None, datetime.datetime]):
-        min_date_last_saved_for_user (Union[Unset, None, datetime.datetime]):
-        max_premiere_date (Union[Unset, None, datetime.datetime]):
-        has_overview (Union[Unset, None, bool]):
-        has_imdb_id (Union[Unset, None, bool]):
-        has_tmdb_id (Union[Unset, None, bool]):
-        has_tvdb_id (Union[Unset, None, bool]):
-        is_movie (Union[Unset, None, bool]):
-        is_series (Union[Unset, None, bool]):
-        is_news (Union[Unset, None, bool]):
-        is_kids (Union[Unset, None, bool]):
-        is_sports (Union[Unset, None, bool]):
-        exclude_item_ids (Union[Unset, None, List[str]]):
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        recursive (Union[Unset, None, bool]):
-        search_term (Union[Unset, None, str]):
-        sort_order (Union[Unset, None, List[SortOrder]]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        exclude_item_types (Union[Unset, None, List[BaseItemKind]]):
-        include_item_types (Union[Unset, None, List[BaseItemKind]]):
-        filters (Union[Unset, None, List[ItemFilter]]):
-        is_favorite (Union[Unset, None, bool]):
-        media_types (Union[Unset, None, List[str]]):
-        image_types (Union[Unset, None, List[ImageType]]):
-        sort_by (Union[Unset, None, List[str]]):
-        is_played (Union[Unset, None, bool]):
-        genres (Union[Unset, None, List[str]]):
-        official_ratings (Union[Unset, None, List[str]]):
-        tags (Union[Unset, None, List[str]]):
-        years (Union[Unset, None, List[int]]):
-        enable_user_data (Union[Unset, None, bool]):
-        image_type_limit (Union[Unset, None, int]):
-        enable_image_types (Union[Unset, None, List[ImageType]]):
-        person (Union[Unset, None, str]):
-        person_ids (Union[Unset, None, List[str]]):
-        person_types (Union[Unset, None, List[str]]):
-        studios (Union[Unset, None, List[str]]):
-        artists (Union[Unset, None, List[str]]):
-        exclude_artist_ids (Union[Unset, None, List[str]]):
-        artist_ids (Union[Unset, None, List[str]]):
-        album_artist_ids (Union[Unset, None, List[str]]):
-        contributing_artist_ids (Union[Unset, None, List[str]]):
-        albums (Union[Unset, None, List[str]]):
-        album_ids (Union[Unset, None, List[str]]):
-        ids (Union[Unset, None, List[str]]):
-        video_types (Union[Unset, None, List[VideoType]]):
-        min_official_rating (Union[Unset, None, str]):
-        is_locked (Union[Unset, None, bool]):
-        is_place_holder (Union[Unset, None, bool]):
-        has_official_rating (Union[Unset, None, bool]):
-        collapse_box_set_items (Union[Unset, None, bool]):
-        min_width (Union[Unset, None, int]):
-        min_height (Union[Unset, None, int]):
-        max_width (Union[Unset, None, int]):
-        max_height (Union[Unset, None, int]):
-        is_3d (Union[Unset, None, bool]):
-        series_status (Union[Unset, None, List[SeriesStatus]]):
-        name_starts_with_or_greater (Union[Unset, None, str]):
-        name_starts_with (Union[Unset, None, str]):
-        name_less_than (Union[Unset, None, str]):
-        studio_ids (Union[Unset, None, List[str]]):
-        genre_ids (Union[Unset, None, List[str]]):
-        enable_total_record_count (Union[Unset, None, bool]):  Default: True.
-        enable_images (Union[Unset, None, bool]):  Default: True.
+        user_id (Union[Unset, str]):
+        max_official_rating (Union[Unset, str]):
+        has_theme_song (Union[Unset, bool]):
+        has_theme_video (Union[Unset, bool]):
+        has_subtitles (Union[Unset, bool]):
+        has_special_feature (Union[Unset, bool]):
+        has_trailer (Union[Unset, bool]):
+        adjacent_to (Union[Unset, str]):
+        parent_index_number (Union[Unset, int]):
+        has_parental_rating (Union[Unset, bool]):
+        is_hd (Union[Unset, bool]):
+        is_4k (Union[Unset, bool]):
+        location_types (Union[Unset, List[LocationType]]):
+        exclude_location_types (Union[Unset, List[LocationType]]):
+        is_missing (Union[Unset, bool]):
+        is_unaired (Union[Unset, bool]):
+        min_community_rating (Union[Unset, float]):
+        min_critic_rating (Union[Unset, float]):
+        min_premiere_date (Union[Unset, datetime.datetime]):
+        min_date_last_saved (Union[Unset, datetime.datetime]):
+        min_date_last_saved_for_user (Union[Unset, datetime.datetime]):
+        max_premiere_date (Union[Unset, datetime.datetime]):
+        has_overview (Union[Unset, bool]):
+        has_imdb_id (Union[Unset, bool]):
+        has_tmdb_id (Union[Unset, bool]):
+        has_tvdb_id (Union[Unset, bool]):
+        is_movie (Union[Unset, bool]):
+        is_series (Union[Unset, bool]):
+        is_news (Union[Unset, bool]):
+        is_kids (Union[Unset, bool]):
+        is_sports (Union[Unset, bool]):
+        exclude_item_ids (Union[Unset, List[str]]):
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        recursive (Union[Unset, bool]):
+        search_term (Union[Unset, str]):
+        sort_order (Union[Unset, List[SortOrder]]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        exclude_item_types (Union[Unset, List[BaseItemKind]]):
+        include_item_types (Union[Unset, List[BaseItemKind]]):
+        filters (Union[Unset, List[ItemFilter]]):
+        is_favorite (Union[Unset, bool]):
+        media_types (Union[Unset, List[MediaType]]):
+        image_types (Union[Unset, List[ImageType]]):
+        sort_by (Union[Unset, List[ItemSortBy]]):
+        is_played (Union[Unset, bool]):
+        genres (Union[Unset, List[str]]):
+        official_ratings (Union[Unset, List[str]]):
+        tags (Union[Unset, List[str]]):
+        years (Union[Unset, List[int]]):
+        enable_user_data (Union[Unset, bool]):
+        image_type_limit (Union[Unset, int]):
+        enable_image_types (Union[Unset, List[ImageType]]):
+        person (Union[Unset, str]):
+        person_ids (Union[Unset, List[str]]):
+        person_types (Union[Unset, List[str]]):
+        studios (Union[Unset, List[str]]):
+        artists (Union[Unset, List[str]]):
+        exclude_artist_ids (Union[Unset, List[str]]):
+        artist_ids (Union[Unset, List[str]]):
+        album_artist_ids (Union[Unset, List[str]]):
+        contributing_artist_ids (Union[Unset, List[str]]):
+        albums (Union[Unset, List[str]]):
+        album_ids (Union[Unset, List[str]]):
+        ids (Union[Unset, List[str]]):
+        video_types (Union[Unset, List[VideoType]]):
+        min_official_rating (Union[Unset, str]):
+        is_locked (Union[Unset, bool]):
+        is_place_holder (Union[Unset, bool]):
+        has_official_rating (Union[Unset, bool]):
+        collapse_box_set_items (Union[Unset, bool]):
+        min_width (Union[Unset, int]):
+        min_height (Union[Unset, int]):
+        max_width (Union[Unset, int]):
+        max_height (Union[Unset, int]):
+        is_3d (Union[Unset, bool]):
+        series_status (Union[Unset, List[SeriesStatus]]):
+        name_starts_with_or_greater (Union[Unset, str]):
+        name_starts_with (Union[Unset, str]):
+        name_less_than (Union[Unset, str]):
+        studio_ids (Union[Unset, List[str]]):
+        genre_ids (Union[Unset, List[str]]):
+        enable_total_record_count (Union[Unset, bool]):  Default: True.
+        enable_images (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

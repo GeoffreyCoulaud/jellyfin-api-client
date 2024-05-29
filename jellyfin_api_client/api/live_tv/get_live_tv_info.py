@@ -3,19 +3,20 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.live_tv_info import LiveTvInfo
 from ...types import Response
+from ... import errors
+
+from ...models.live_tv_info import LiveTvInfo
 
 
 def _get_kwargs() -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/LiveTv/Info",
     }
+
+    return _kwargs
 
 
 def _parse_response(

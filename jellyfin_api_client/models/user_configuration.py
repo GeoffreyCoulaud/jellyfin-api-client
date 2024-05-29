@@ -1,9 +1,15 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
-from ..models.subtitle_playback_mode import SubtitlePlaybackMode
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast
+from typing import List
+from ..models.subtitle_playback_mode import SubtitlePlaybackMode
+
 
 T = TypeVar("T", bound="UserConfiguration")
 
@@ -13,10 +19,10 @@ class UserConfiguration:
     """Class UserConfiguration.
 
     Attributes:
-        audio_language_preference (Union[Unset, None, str]): Gets or sets the audio language preference.
+        audio_language_preference (Union[None, Unset, str]): Gets or sets the audio language preference.
         play_default_audio_track (Union[Unset, bool]): Gets or sets a value indicating whether [play default audio
             track].
-        subtitle_language_preference (Union[Unset, None, str]): Gets or sets the subtitle language preference.
+        subtitle_language_preference (Union[None, Unset, str]): Gets or sets the subtitle language preference.
         display_missing_episodes (Union[Unset, bool]):
         grouped_folders (Union[Unset, List[str]]):
         subtitle_mode (Union[Unset, SubtitlePlaybackMode]): An enum representing a subtitle playback mode.
@@ -29,11 +35,12 @@ class UserConfiguration:
         remember_audio_selections (Union[Unset, bool]):
         remember_subtitle_selections (Union[Unset, bool]):
         enable_next_episode_auto_play (Union[Unset, bool]):
+        cast_receiver_id (Union[None, Unset, str]): Gets or sets the id of the selected cast receiver.
     """
 
-    audio_language_preference: Union[Unset, None, str] = UNSET
+    audio_language_preference: Union[None, Unset, str] = UNSET
     play_default_audio_track: Union[Unset, bool] = UNSET
-    subtitle_language_preference: Union[Unset, None, str] = UNSET
+    subtitle_language_preference: Union[None, Unset, str] = UNSET
     display_missing_episodes: Union[Unset, bool] = UNSET
     grouped_folders: Union[Unset, List[str]] = UNSET
     subtitle_mode: Union[Unset, SubtitlePlaybackMode] = UNSET
@@ -46,12 +53,25 @@ class UserConfiguration:
     remember_audio_selections: Union[Unset, bool] = UNSET
     remember_subtitle_selections: Union[Unset, bool] = UNSET
     enable_next_episode_auto_play: Union[Unset, bool] = UNSET
+    cast_receiver_id: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        audio_language_preference = self.audio_language_preference
+        audio_language_preference: Union[None, Unset, str]
+        if isinstance(self.audio_language_preference, Unset):
+            audio_language_preference = UNSET
+        else:
+            audio_language_preference = self.audio_language_preference
+
         play_default_audio_track = self.play_default_audio_track
-        subtitle_language_preference = self.subtitle_language_preference
+
+        subtitle_language_preference: Union[None, Unset, str]
+        if isinstance(self.subtitle_language_preference, Unset):
+            subtitle_language_preference = UNSET
+        else:
+            subtitle_language_preference = self.subtitle_language_preference
+
         display_missing_episodes = self.display_missing_episodes
+
         grouped_folders: Union[Unset, List[str]] = UNSET
         if not isinstance(self.grouped_folders, Unset):
             grouped_folders = self.grouped_folders
@@ -61,7 +81,9 @@ class UserConfiguration:
             subtitle_mode = self.subtitle_mode.value
 
         display_collections_view = self.display_collections_view
+
         enable_local_password = self.enable_local_password
+
         ordered_views: Union[Unset, List[str]] = UNSET
         if not isinstance(self.ordered_views, Unset):
             ordered_views = self.ordered_views
@@ -75,9 +97,18 @@ class UserConfiguration:
             my_media_excludes = self.my_media_excludes
 
         hide_played_in_latest = self.hide_played_in_latest
+
         remember_audio_selections = self.remember_audio_selections
+
         remember_subtitle_selections = self.remember_subtitle_selections
+
         enable_next_episode_auto_play = self.enable_next_episode_auto_play
+
+        cast_receiver_id: Union[None, Unset, str]
+        if isinstance(self.cast_receiver_id, Unset):
+            cast_receiver_id = UNSET
+        else:
+            cast_receiver_id = self.cast_receiver_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -111,17 +142,40 @@ class UserConfiguration:
             field_dict["RememberSubtitleSelections"] = remember_subtitle_selections
         if enable_next_episode_auto_play is not UNSET:
             field_dict["EnableNextEpisodeAutoPlay"] = enable_next_episode_auto_play
+        if cast_receiver_id is not UNSET:
+            field_dict["CastReceiverId"] = cast_receiver_id
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        audio_language_preference = d.pop("AudioLanguagePreference", UNSET)
+
+        def _parse_audio_language_preference(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        audio_language_preference = _parse_audio_language_preference(
+            d.pop("AudioLanguagePreference", UNSET)
+        )
 
         play_default_audio_track = d.pop("PlayDefaultAudioTrack", UNSET)
 
-        subtitle_language_preference = d.pop("SubtitleLanguagePreference", UNSET)
+        def _parse_subtitle_language_preference(
+            data: object,
+        ) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        subtitle_language_preference = _parse_subtitle_language_preference(
+            d.pop("SubtitleLanguagePreference", UNSET)
+        )
 
         display_missing_episodes = d.pop("DisplayMissingEpisodes", UNSET)
 
@@ -152,6 +206,15 @@ class UserConfiguration:
 
         enable_next_episode_auto_play = d.pop("EnableNextEpisodeAutoPlay", UNSET)
 
+        def _parse_cast_receiver_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        cast_receiver_id = _parse_cast_receiver_id(d.pop("CastReceiverId", UNSET))
+
         user_configuration = cls(
             audio_language_preference=audio_language_preference,
             play_default_audio_track=play_default_audio_track,
@@ -168,6 +231,7 @@ class UserConfiguration:
             remember_audio_selections=remember_audio_selections,
             remember_subtitle_selections=remember_subtitle_selections,
             enable_next_episode_auto_play=enable_next_episode_auto_play,
+            cast_receiver_id=cast_receiver_id,
         )
 
         return user_configuration

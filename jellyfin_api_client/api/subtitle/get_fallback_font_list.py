@@ -3,19 +3,20 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.font_file import FontFile
 from ...types import Response
+from ... import errors
+
+from ...models.font_file import FontFile
 
 
 def _get_kwargs() -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/FallbackFont/Fonts",
     }
+
+    return _kwargs
 
 
 def _parse_response(

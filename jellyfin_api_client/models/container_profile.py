@@ -1,9 +1,13 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
 
-from ..models.dlna_profile_type import DlnaProfileType
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import List
+from ..models.dlna_profile_type import DlnaProfileType
 
 if TYPE_CHECKING:
     from ..models.profile_condition import ProfileCondition
@@ -17,12 +21,12 @@ class ContainerProfile:
     """
     Attributes:
         type (Union[Unset, DlnaProfileType]):
-        conditions (Union[Unset, None, List['ProfileCondition']]):
+        conditions (Union[Unset, List['ProfileCondition']]):
         container (Union[Unset, str]):
     """
 
     type: Union[Unset, DlnaProfileType] = UNSET
-    conditions: Union[Unset, None, List["ProfileCondition"]] = UNSET
+    conditions: Union[Unset, List["ProfileCondition"]] = UNSET
     container: Union[Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
@@ -30,16 +34,12 @@ class ContainerProfile:
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        conditions: Union[Unset, None, List[Dict[str, Any]]] = UNSET
+        conditions: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.conditions, Unset):
-            if self.conditions is None:
-                conditions = None
-            else:
-                conditions = []
-                for conditions_item_data in self.conditions:
-                    conditions_item = conditions_item_data.to_dict()
-
-                    conditions.append(conditions_item)
+            conditions = []
+            for conditions_item_data in self.conditions:
+                conditions_item = conditions_item_data.to_dict()
+                conditions.append(conditions_item)
 
         container = self.container
 

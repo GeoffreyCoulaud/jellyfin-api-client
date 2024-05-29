@@ -3,24 +3,25 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.metadata_editor_info import MetadataEditorInfo
-from ...models.problem_details import ProblemDetails
 from ...types import Response
+from ... import errors
+
+from ...models.problem_details import ProblemDetails
+from ...models.metadata_editor_info import MetadataEditorInfo
 
 
 def _get_kwargs(
     item_id: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Items/{itemId}/MetadataEditor".format(
-            itemId=item_id,
+        "url": "/Items/{item_id}/MetadataEditor".format(
+            item_id=item_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

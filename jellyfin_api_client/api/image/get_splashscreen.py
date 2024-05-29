@@ -3,35 +3,36 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import Unset
 from ...models.image_format import ImageFormat
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
-    tag: Union[Unset, None, str] = UNSET,
-    format_: Union[Unset, None, ImageFormat] = UNSET,
-    max_width: Union[Unset, None, int] = UNSET,
-    max_height: Union[Unset, None, int] = UNSET,
-    width: Union[Unset, None, int] = UNSET,
-    height: Union[Unset, None, int] = UNSET,
-    fill_width: Union[Unset, None, int] = UNSET,
-    fill_height: Union[Unset, None, int] = UNSET,
-    blur: Union[Unset, None, int] = UNSET,
-    background_color: Union[Unset, None, str] = UNSET,
-    foreground_layer: Union[Unset, None, str] = UNSET,
-    quality: Union[Unset, None, int] = 90,
+    tag: Union[Unset, str] = UNSET,
+    format_: Union[Unset, ImageFormat] = UNSET,
+    max_width: Union[Unset, int] = UNSET,
+    max_height: Union[Unset, int] = UNSET,
+    width: Union[Unset, int] = UNSET,
+    height: Union[Unset, int] = UNSET,
+    fill_width: Union[Unset, int] = UNSET,
+    fill_height: Union[Unset, int] = UNSET,
+    blur: Union[Unset, int] = UNSET,
+    background_color: Union[Unset, str] = UNSET,
+    foreground_layer: Union[Unset, str] = UNSET,
+    quality: Union[Unset, int] = 90,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["tag"] = tag
 
-    json_format_: Union[Unset, None, str] = UNSET
+    json_format_: Union[Unset, str] = UNSET
     if not isinstance(format_, Unset):
-        json_format_ = format_.value if format_ else None
+        json_format_ = format_.value
 
     params["format"] = json_format_
 
@@ -57,21 +58,27 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Branding/Splashscreen",
         "params": params,
     }
 
+    return _kwargs
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Any]:
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -83,34 +90,34 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    tag: Union[Unset, None, str] = UNSET,
-    format_: Union[Unset, None, ImageFormat] = UNSET,
-    max_width: Union[Unset, None, int] = UNSET,
-    max_height: Union[Unset, None, int] = UNSET,
-    width: Union[Unset, None, int] = UNSET,
-    height: Union[Unset, None, int] = UNSET,
-    fill_width: Union[Unset, None, int] = UNSET,
-    fill_height: Union[Unset, None, int] = UNSET,
-    blur: Union[Unset, None, int] = UNSET,
-    background_color: Union[Unset, None, str] = UNSET,
-    foreground_layer: Union[Unset, None, str] = UNSET,
-    quality: Union[Unset, None, int] = 90,
+    tag: Union[Unset, str] = UNSET,
+    format_: Union[Unset, ImageFormat] = UNSET,
+    max_width: Union[Unset, int] = UNSET,
+    max_height: Union[Unset, int] = UNSET,
+    width: Union[Unset, int] = UNSET,
+    height: Union[Unset, int] = UNSET,
+    fill_width: Union[Unset, int] = UNSET,
+    fill_height: Union[Unset, int] = UNSET,
+    blur: Union[Unset, int] = UNSET,
+    background_color: Union[Unset, str] = UNSET,
+    foreground_layer: Union[Unset, str] = UNSET,
+    quality: Union[Unset, int] = 90,
 ) -> Response[Any]:
     """Generates or gets the splashscreen.
 
     Args:
-        tag (Union[Unset, None, str]):
-        format_ (Union[Unset, None, ImageFormat]): Enum ImageOutputFormat.
-        max_width (Union[Unset, None, int]):
-        max_height (Union[Unset, None, int]):
-        width (Union[Unset, None, int]):
-        height (Union[Unset, None, int]):
-        fill_width (Union[Unset, None, int]):
-        fill_height (Union[Unset, None, int]):
-        blur (Union[Unset, None, int]):
-        background_color (Union[Unset, None, str]):
-        foreground_layer (Union[Unset, None, str]):
-        quality (Union[Unset, None, int]):  Default: 90.
+        tag (Union[Unset, str]):
+        format_ (Union[Unset, ImageFormat]): Enum ImageOutputFormat.
+        max_width (Union[Unset, int]):
+        max_height (Union[Unset, int]):
+        width (Union[Unset, int]):
+        height (Union[Unset, int]):
+        fill_width (Union[Unset, int]):
+        fill_height (Union[Unset, int]):
+        blur (Union[Unset, int]):
+        background_color (Union[Unset, str]):
+        foreground_layer (Union[Unset, str]):
+        quality (Union[Unset, int]):  Default: 90.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -145,34 +152,34 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    tag: Union[Unset, None, str] = UNSET,
-    format_: Union[Unset, None, ImageFormat] = UNSET,
-    max_width: Union[Unset, None, int] = UNSET,
-    max_height: Union[Unset, None, int] = UNSET,
-    width: Union[Unset, None, int] = UNSET,
-    height: Union[Unset, None, int] = UNSET,
-    fill_width: Union[Unset, None, int] = UNSET,
-    fill_height: Union[Unset, None, int] = UNSET,
-    blur: Union[Unset, None, int] = UNSET,
-    background_color: Union[Unset, None, str] = UNSET,
-    foreground_layer: Union[Unset, None, str] = UNSET,
-    quality: Union[Unset, None, int] = 90,
+    tag: Union[Unset, str] = UNSET,
+    format_: Union[Unset, ImageFormat] = UNSET,
+    max_width: Union[Unset, int] = UNSET,
+    max_height: Union[Unset, int] = UNSET,
+    width: Union[Unset, int] = UNSET,
+    height: Union[Unset, int] = UNSET,
+    fill_width: Union[Unset, int] = UNSET,
+    fill_height: Union[Unset, int] = UNSET,
+    blur: Union[Unset, int] = UNSET,
+    background_color: Union[Unset, str] = UNSET,
+    foreground_layer: Union[Unset, str] = UNSET,
+    quality: Union[Unset, int] = 90,
 ) -> Response[Any]:
     """Generates or gets the splashscreen.
 
     Args:
-        tag (Union[Unset, None, str]):
-        format_ (Union[Unset, None, ImageFormat]): Enum ImageOutputFormat.
-        max_width (Union[Unset, None, int]):
-        max_height (Union[Unset, None, int]):
-        width (Union[Unset, None, int]):
-        height (Union[Unset, None, int]):
-        fill_width (Union[Unset, None, int]):
-        fill_height (Union[Unset, None, int]):
-        blur (Union[Unset, None, int]):
-        background_color (Union[Unset, None, str]):
-        foreground_layer (Union[Unset, None, str]):
-        quality (Union[Unset, None, int]):  Default: 90.
+        tag (Union[Unset, str]):
+        format_ (Union[Unset, ImageFormat]): Enum ImageOutputFormat.
+        max_width (Union[Unset, int]):
+        max_height (Union[Unset, int]):
+        width (Union[Unset, int]):
+        height (Union[Unset, int]):
+        fill_width (Union[Unset, int]):
+        fill_height (Union[Unset, int]):
+        blur (Union[Unset, int]):
+        background_color (Union[Unset, str]):
+        foreground_layer (Union[Unset, str]):
+        quality (Union[Unset, int]):  Default: 90.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

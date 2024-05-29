@@ -1,12 +1,16 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
+from typing import Union
+from typing import List
+
 if TYPE_CHECKING:
-    from ..models.library_option_info_dto import LibraryOptionInfoDto
     from ..models.library_type_options_dto import LibraryTypeOptionsDto
+    from ..models.library_option_info_dto import LibraryOptionInfoDto
 
 
 T = TypeVar("T", bound="LibraryOptionsResultDto")
@@ -34,7 +38,6 @@ class LibraryOptionsResultDto:
             metadata_savers = []
             for metadata_savers_item_data in self.metadata_savers:
                 metadata_savers_item = metadata_savers_item_data.to_dict()
-
                 metadata_savers.append(metadata_savers_item)
 
         metadata_readers: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -42,7 +45,6 @@ class LibraryOptionsResultDto:
             metadata_readers = []
             for metadata_readers_item_data in self.metadata_readers:
                 metadata_readers_item = metadata_readers_item_data.to_dict()
-
                 metadata_readers.append(metadata_readers_item)
 
         subtitle_fetchers: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -50,7 +52,6 @@ class LibraryOptionsResultDto:
             subtitle_fetchers = []
             for subtitle_fetchers_item_data in self.subtitle_fetchers:
                 subtitle_fetchers_item = subtitle_fetchers_item_data.to_dict()
-
                 subtitle_fetchers.append(subtitle_fetchers_item)
 
         type_options: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -58,7 +59,6 @@ class LibraryOptionsResultDto:
             type_options = []
             for type_options_item_data in self.type_options:
                 type_options_item = type_options_item_data.to_dict()
-
                 type_options.append(type_options_item)
 
         field_dict: Dict[str, Any] = {}
@@ -76,28 +76,34 @@ class LibraryOptionsResultDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.library_option_info_dto import LibraryOptionInfoDto
         from ..models.library_type_options_dto import LibraryTypeOptionsDto
+        from ..models.library_option_info_dto import LibraryOptionInfoDto
 
         d = src_dict.copy()
         metadata_savers = []
         _metadata_savers = d.pop("MetadataSavers", UNSET)
         for metadata_savers_item_data in _metadata_savers or []:
-            metadata_savers_item = LibraryOptionInfoDto.from_dict(metadata_savers_item_data)
+            metadata_savers_item = LibraryOptionInfoDto.from_dict(
+                metadata_savers_item_data
+            )
 
             metadata_savers.append(metadata_savers_item)
 
         metadata_readers = []
         _metadata_readers = d.pop("MetadataReaders", UNSET)
         for metadata_readers_item_data in _metadata_readers or []:
-            metadata_readers_item = LibraryOptionInfoDto.from_dict(metadata_readers_item_data)
+            metadata_readers_item = LibraryOptionInfoDto.from_dict(
+                metadata_readers_item_data
+            )
 
             metadata_readers.append(metadata_readers_item)
 
         subtitle_fetchers = []
         _subtitle_fetchers = d.pop("SubtitleFetchers", UNSET)
         for subtitle_fetchers_item_data in _subtitle_fetchers or []:
-            subtitle_fetchers_item = LibraryOptionInfoDto.from_dict(subtitle_fetchers_item_data)
+            subtitle_fetchers_item = LibraryOptionInfoDto.from_dict(
+                subtitle_fetchers_item_data
+            )
 
             subtitle_fetchers.append(subtitle_fetchers_item)
 

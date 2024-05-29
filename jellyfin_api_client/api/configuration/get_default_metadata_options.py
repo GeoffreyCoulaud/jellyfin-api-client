@@ -3,19 +3,20 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.metadata_options import MetadataOptions
 from ...types import Response
+from ... import errors
+
+from ...models.metadata_options import MetadataOptions
 
 
 def _get_kwargs() -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/System/Configuration/MetadataOptions/Default",
     }
+
+    return _kwargs
 
 
 def _parse_response(
