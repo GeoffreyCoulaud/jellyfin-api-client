@@ -13,13 +13,10 @@ jobs:
   check_release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
       - name: Get latest release tag
         id: watching_repo
         run: |
-          latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1))
+          latest_tag=$(curl --silent "https://api.github.com/repos/${{ env.WATCHING_REPO }}/releases/latest" | jq -r .tag_name)
           echo "::set-output name=latest_tag::${latest_tag}"
 
       - name: Get latest Jellyfin release tag
