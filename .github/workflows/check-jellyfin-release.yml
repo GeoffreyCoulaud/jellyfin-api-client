@@ -36,30 +36,33 @@ jobs:
 
           ISSUE_BODY='A new release of Jellyfin is available: `$WATCHED_REPO_LATEST_TAG`'
 
-          ISSUE_NUMBER=$(curl "https://api.github.com/repos/$WATCHING_REPO/issues?state=all" | jq '.[] | select(.title == "Update to new release of Jellyfin") | .number')
+          ISSUE_NUMBER=$(curl --silent "https://api.github.com/repos/$WATCHING_REPO/issues?state=all" | jq '.[] | select(.title == "Update to new release of Jellyfin") | .number')
           if [ -z "$ISSUE_NUMBER" ]; then
             echo "Creating new issue."
             curl \
+              --silent \
               -X POST \
               -H "Authorization: token ${{ secrets.GH_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
               "https://api.github.com/repos/$WATCHING_REPO/issues" \
-              -d '{"title":"Update to new release of Jellyfin","body":"'$ISSUE_BODY'"}'
+              -d '{"title":"Update to new release of Jellyfin","body":"A new release of Jellyfin is available: '$WATCHED_REPO_LATEST_TAG'"}'
           fi
 
           if [ "$(printf '%s\n' "$WATCHED_REPO_LATEST_TAG" "WATCHING_REPO_LATEST_TAG" | sort -V | head -n1)" != "$WATCHED_REPO_LATEST_TAG" ]; then
             echo "A new release of Jellyfin is available: $WATCHED_REPO_LATEST_TAG."
             echo "Reopening issue #$ISSUE_NUMBER."
             curl \
+              --silent \
               -X PATCH \
               -H "Authorization: token ${{ secrets.GH_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
               "https://api.github.com/repos/$WATCHING_REPO/issues/$ISSUE_NUMBER" \
-              -d '{"state":"open","body":"'$ISSUE_BODY'"}'
+              -d '{"state":"open"}'
           else
             echo "No new release of Jellyfin found."
             echo "Closing issue #$ISSUE_NUMBER."
             curl \
+              --silent \
               -X PATCH \
               -H "Authorization: token ${{ secrets.GH_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
