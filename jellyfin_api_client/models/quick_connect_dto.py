@@ -1,6 +1,8 @@
 from typing import Any, Dict, Type, TypeVar
 
+
 from attrs import define as _attrs_define
+
 
 T = TypeVar("T", bound="QuickConnectDto")
 

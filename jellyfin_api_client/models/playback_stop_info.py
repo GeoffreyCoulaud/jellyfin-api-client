@@ -1,8 +1,13 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast
+from typing import List
 
 if TYPE_CHECKING:
     from ..models.base_item_dto import BaseItemDto
@@ -17,57 +22,102 @@ class PlaybackStopInfo:
     """Class PlaybackStopInfo.
 
     Attributes:
-        item (Union[Unset, None, BaseItemDto]): This is strictly used as a data transfer object from the api layer.
-            This holds information about a BaseItem in a format that is convenient for the client.
+        item (Union['BaseItemDto', None, Unset]): Gets or sets the item.
         item_id (Union[Unset, str]): Gets or sets the item identifier.
-        session_id (Union[Unset, None, str]): Gets or sets the session id.
-        media_source_id (Union[Unset, None, str]): Gets or sets the media version identifier.
-        position_ticks (Union[Unset, None, int]): Gets or sets the position ticks.
-        live_stream_id (Union[Unset, None, str]): Gets or sets the live stream identifier.
-        play_session_id (Union[Unset, None, str]): Gets or sets the play session identifier.
+        session_id (Union[None, Unset, str]): Gets or sets the session id.
+        media_source_id (Union[None, Unset, str]): Gets or sets the media version identifier.
+        position_ticks (Union[None, Unset, int]): Gets or sets the position ticks.
+        live_stream_id (Union[None, Unset, str]): Gets or sets the live stream identifier.
+        play_session_id (Union[None, Unset, str]): Gets or sets the play session identifier.
         failed (Union[Unset, bool]): Gets or sets a value indicating whether this
             MediaBrowser.Model.Session.PlaybackStopInfo is failed.
-        next_media_type (Union[Unset, None, str]):
-        playlist_item_id (Union[Unset, None, str]):
-        now_playing_queue (Union[Unset, None, List['QueueItem']]):
+        next_media_type (Union[None, Unset, str]):
+        playlist_item_id (Union[None, Unset, str]):
+        now_playing_queue (Union[List['QueueItem'], None, Unset]):
     """
 
-    item: Union[Unset, None, "BaseItemDto"] = UNSET
+    item: Union["BaseItemDto", None, Unset] = UNSET
     item_id: Union[Unset, str] = UNSET
-    session_id: Union[Unset, None, str] = UNSET
-    media_source_id: Union[Unset, None, str] = UNSET
-    position_ticks: Union[Unset, None, int] = UNSET
-    live_stream_id: Union[Unset, None, str] = UNSET
-    play_session_id: Union[Unset, None, str] = UNSET
+    session_id: Union[None, Unset, str] = UNSET
+    media_source_id: Union[None, Unset, str] = UNSET
+    position_ticks: Union[None, Unset, int] = UNSET
+    live_stream_id: Union[None, Unset, str] = UNSET
+    play_session_id: Union[None, Unset, str] = UNSET
     failed: Union[Unset, bool] = UNSET
-    next_media_type: Union[Unset, None, str] = UNSET
-    playlist_item_id: Union[Unset, None, str] = UNSET
-    now_playing_queue: Union[Unset, None, List["QueueItem"]] = UNSET
+    next_media_type: Union[None, Unset, str] = UNSET
+    playlist_item_id: Union[None, Unset, str] = UNSET
+    now_playing_queue: Union[List["QueueItem"], None, Unset] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        item: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.item, Unset):
-            item = self.item.to_dict() if self.item else None
+        from ..models.base_item_dto import BaseItemDto
+
+        item: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.item, Unset):
+            item = UNSET
+        elif isinstance(self.item, BaseItemDto):
+            item = self.item.to_dict()
+        else:
+            item = self.item
 
         item_id = self.item_id
-        session_id = self.session_id
-        media_source_id = self.media_source_id
-        position_ticks = self.position_ticks
-        live_stream_id = self.live_stream_id
-        play_session_id = self.play_session_id
-        failed = self.failed
-        next_media_type = self.next_media_type
-        playlist_item_id = self.playlist_item_id
-        now_playing_queue: Union[Unset, None, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.now_playing_queue, Unset):
-            if self.now_playing_queue is None:
-                now_playing_queue = None
-            else:
-                now_playing_queue = []
-                for now_playing_queue_item_data in self.now_playing_queue:
-                    now_playing_queue_item = now_playing_queue_item_data.to_dict()
 
-                    now_playing_queue.append(now_playing_queue_item)
+        session_id: Union[None, Unset, str]
+        if isinstance(self.session_id, Unset):
+            session_id = UNSET
+        else:
+            session_id = self.session_id
+
+        media_source_id: Union[None, Unset, str]
+        if isinstance(self.media_source_id, Unset):
+            media_source_id = UNSET
+        else:
+            media_source_id = self.media_source_id
+
+        position_ticks: Union[None, Unset, int]
+        if isinstance(self.position_ticks, Unset):
+            position_ticks = UNSET
+        else:
+            position_ticks = self.position_ticks
+
+        live_stream_id: Union[None, Unset, str]
+        if isinstance(self.live_stream_id, Unset):
+            live_stream_id = UNSET
+        else:
+            live_stream_id = self.live_stream_id
+
+        play_session_id: Union[None, Unset, str]
+        if isinstance(self.play_session_id, Unset):
+            play_session_id = UNSET
+        else:
+            play_session_id = self.play_session_id
+
+        failed = self.failed
+
+        next_media_type: Union[None, Unset, str]
+        if isinstance(self.next_media_type, Unset):
+            next_media_type = UNSET
+        else:
+            next_media_type = self.next_media_type
+
+        playlist_item_id: Union[None, Unset, str]
+        if isinstance(self.playlist_item_id, Unset):
+            playlist_item_id = UNSET
+        else:
+            playlist_item_id = self.playlist_item_id
+
+        now_playing_queue: Union[List[Dict[str, Any]], None, Unset]
+        if isinstance(self.now_playing_queue, Unset):
+            now_playing_queue = UNSET
+        elif isinstance(self.now_playing_queue, list):
+            now_playing_queue = []
+            for now_playing_queue_type_0_item_data in self.now_playing_queue:
+                now_playing_queue_type_0_item = (
+                    now_playing_queue_type_0_item_data.to_dict()
+                )
+                now_playing_queue.append(now_playing_queue_type_0_item)
+
+        else:
+            now_playing_queue = self.now_playing_queue
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -102,39 +152,116 @@ class PlaybackStopInfo:
         from ..models.queue_item import QueueItem
 
         d = src_dict.copy()
-        _item = d.pop("Item", UNSET)
-        item: Union[Unset, None, BaseItemDto]
-        if _item is None:
-            item = None
-        elif isinstance(_item, Unset):
-            item = UNSET
-        else:
-            item = BaseItemDto.from_dict(_item)
+
+        def _parse_item(data: object) -> Union["BaseItemDto", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                item_type_1 = BaseItemDto.from_dict(data)
+
+                return item_type_1
+            except:  # noqa: E722
+                pass
+            return cast(Union["BaseItemDto", None, Unset], data)
+
+        item = _parse_item(d.pop("Item", UNSET))
 
         item_id = d.pop("ItemId", UNSET)
 
-        session_id = d.pop("SessionId", UNSET)
+        def _parse_session_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        media_source_id = d.pop("MediaSourceId", UNSET)
+        session_id = _parse_session_id(d.pop("SessionId", UNSET))
 
-        position_ticks = d.pop("PositionTicks", UNSET)
+        def _parse_media_source_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        live_stream_id = d.pop("LiveStreamId", UNSET)
+        media_source_id = _parse_media_source_id(d.pop("MediaSourceId", UNSET))
 
-        play_session_id = d.pop("PlaySessionId", UNSET)
+        def _parse_position_ticks(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        position_ticks = _parse_position_ticks(d.pop("PositionTicks", UNSET))
+
+        def _parse_live_stream_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        live_stream_id = _parse_live_stream_id(d.pop("LiveStreamId", UNSET))
+
+        def _parse_play_session_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        play_session_id = _parse_play_session_id(d.pop("PlaySessionId", UNSET))
 
         failed = d.pop("Failed", UNSET)
 
-        next_media_type = d.pop("NextMediaType", UNSET)
+        def _parse_next_media_type(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        playlist_item_id = d.pop("PlaylistItemId", UNSET)
+        next_media_type = _parse_next_media_type(d.pop("NextMediaType", UNSET))
 
-        now_playing_queue = []
-        _now_playing_queue = d.pop("NowPlayingQueue", UNSET)
-        for now_playing_queue_item_data in _now_playing_queue or []:
-            now_playing_queue_item = QueueItem.from_dict(now_playing_queue_item_data)
+        def _parse_playlist_item_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-            now_playing_queue.append(now_playing_queue_item)
+        playlist_item_id = _parse_playlist_item_id(d.pop("PlaylistItemId", UNSET))
+
+        def _parse_now_playing_queue(
+            data: object,
+        ) -> Union[List["QueueItem"], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                now_playing_queue_type_0 = []
+                _now_playing_queue_type_0 = data
+                for now_playing_queue_type_0_item_data in _now_playing_queue_type_0:
+                    now_playing_queue_type_0_item = QueueItem.from_dict(
+                        now_playing_queue_type_0_item_data
+                    )
+
+                    now_playing_queue_type_0.append(now_playing_queue_type_0_item)
+
+                return now_playing_queue_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List["QueueItem"], None, Unset], data)
+
+        now_playing_queue = _parse_now_playing_queue(d.pop("NowPlayingQueue", UNSET))
 
         playback_stop_info = cls(
             item=item,

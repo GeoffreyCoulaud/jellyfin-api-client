@@ -5,6 +5,7 @@ class ExternalIdMediaType(str, Enum):
     ALBUM = "Album"
     ALBUMARTIST = "AlbumArtist"
     ARTIST = "Artist"
+    BOOK = "Book"
     BOXSET = "BoxSet"
     EPISODE = "Episode"
     MOVIE = "Movie"

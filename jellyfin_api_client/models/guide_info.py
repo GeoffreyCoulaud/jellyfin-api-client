@@ -1,10 +1,14 @@
-import datetime
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
-from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
+
+from typing import Union
+import datetime
+from dateutil.parser import isoparse
+
 
 T = TypeVar("T", bound="GuideInfo")
 

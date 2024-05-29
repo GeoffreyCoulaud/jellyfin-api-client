@@ -3,19 +3,20 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.listings_provider_info import ListingsProviderInfo
 from ...types import Response
+from ... import errors
+
+from ...models.listings_provider_info import ListingsProviderInfo
 
 
 def _get_kwargs() -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/LiveTv/ListingProviders/Default",
     }
+
+    return _kwargs
 
 
 def _parse_response(

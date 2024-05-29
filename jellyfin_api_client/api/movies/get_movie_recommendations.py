@@ -3,38 +3,35 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.item_fields import ItemFields
+from ...types import Unset
 from ...models.recommendation_dto import RecommendationDto
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
-    user_id: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    category_limit: Union[Unset, None, int] = 5,
-    item_limit: Union[Unset, None, int] = 8,
+    user_id: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    category_limit: Union[Unset, int] = 5,
+    item_limit: Union[Unset, int] = 8,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["userId"] = user_id
 
     params["parentId"] = parent_id
 
-    json_fields: Union[Unset, None, List[str]] = UNSET
+    json_fields: Union[Unset, List[str]] = UNSET
     if not isinstance(fields, Unset):
-        if fields is None:
-            json_fields = None
-        else:
-            json_fields = []
-            for fields_item_data in fields:
-                fields_item = fields_item_data.value
-
-                json_fields.append(fields_item)
+        json_fields = []
+        for fields_item_data in fields:
+            fields_item = fields_item_data.value
+            json_fields.append(fields_item)
 
     params["fields"] = json_fields
 
@@ -44,11 +41,13 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Movies/Recommendations",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -89,20 +88,20 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    category_limit: Union[Unset, None, int] = 5,
-    item_limit: Union[Unset, None, int] = 8,
+    user_id: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    category_limit: Union[Unset, int] = 5,
+    item_limit: Union[Unset, int] = 8,
 ) -> Response[Union[Any, List["RecommendationDto"]]]:
     """Gets movie recommendations.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        category_limit (Union[Unset, None, int]):  Default: 5.
-        item_limit (Union[Unset, None, int]):  Default: 8.
+        user_id (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        category_limit (Union[Unset, int]):  Default: 5.
+        item_limit (Union[Unset, int]):  Default: 8.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -130,20 +129,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    category_limit: Union[Unset, None, int] = 5,
-    item_limit: Union[Unset, None, int] = 8,
+    user_id: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    category_limit: Union[Unset, int] = 5,
+    item_limit: Union[Unset, int] = 8,
 ) -> Optional[Union[Any, List["RecommendationDto"]]]:
     """Gets movie recommendations.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        category_limit (Union[Unset, None, int]):  Default: 5.
-        item_limit (Union[Unset, None, int]):  Default: 8.
+        user_id (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        category_limit (Union[Unset, int]):  Default: 5.
+        item_limit (Union[Unset, int]):  Default: 8.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -166,20 +165,20 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    category_limit: Union[Unset, None, int] = 5,
-    item_limit: Union[Unset, None, int] = 8,
+    user_id: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    category_limit: Union[Unset, int] = 5,
+    item_limit: Union[Unset, int] = 8,
 ) -> Response[Union[Any, List["RecommendationDto"]]]:
     """Gets movie recommendations.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        category_limit (Union[Unset, None, int]):  Default: 5.
-        item_limit (Union[Unset, None, int]):  Default: 8.
+        user_id (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        category_limit (Union[Unset, int]):  Default: 5.
+        item_limit (Union[Unset, int]):  Default: 8.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -205,20 +204,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    parent_id: Union[Unset, None, str] = UNSET,
-    fields: Union[Unset, None, List[ItemFields]] = UNSET,
-    category_limit: Union[Unset, None, int] = 5,
-    item_limit: Union[Unset, None, int] = 8,
+    user_id: Union[Unset, str] = UNSET,
+    parent_id: Union[Unset, str] = UNSET,
+    fields: Union[Unset, List[ItemFields]] = UNSET,
+    category_limit: Union[Unset, int] = 5,
+    item_limit: Union[Unset, int] = 8,
 ) -> Optional[Union[Any, List["RecommendationDto"]]]:
     """Gets movie recommendations.
 
     Args:
-        user_id (Union[Unset, None, str]):
-        parent_id (Union[Unset, None, str]):
-        fields (Union[Unset, None, List[ItemFields]]):
-        category_limit (Union[Unset, None, int]):  Default: 5.
-        item_limit (Union[Unset, None, int]):  Default: 8.
+        user_id (Union[Unset, str]):
+        parent_id (Union[Unset, str]):
+        fields (Union[Unset, List[ItemFields]]):
+        category_limit (Union[Unset, int]):  Default: 5.
+        item_limit (Union[Unset, int]):  Default: 8.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

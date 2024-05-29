@@ -3,69 +3,72 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.encoding_context import EncodingContext
-from ...models.get_audio_stream_by_container_stream_options import GetAudioStreamByContainerStreamOptions
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.subtitle_delivery_method import SubtitleDeliveryMethod
-from ...types import UNSET, Response, Unset
+from ...models.encoding_context import EncodingContext
+from ...models.get_audio_stream_by_container_stream_options import (
+    GetAudioStreamByContainerStreamOptions,
+)
+from ...types import Unset
 
 
 def _get_kwargs(
     item_id: str,
     container: str,
     *,
-    static: Union[Unset, None, bool] = UNSET,
-    params: Union[Unset, None, str] = UNSET,
-    tag: Union[Unset, None, str] = UNSET,
-    device_profile_id: Union[Unset, None, str] = UNSET,
-    play_session_id: Union[Unset, None, str] = UNSET,
-    segment_container: Union[Unset, None, str] = UNSET,
-    segment_length: Union[Unset, None, int] = UNSET,
-    min_segments: Union[Unset, None, int] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    device_id: Union[Unset, None, str] = UNSET,
-    audio_codec: Union[Unset, None, str] = UNSET,
-    enable_auto_stream_copy: Union[Unset, None, bool] = UNSET,
-    allow_video_stream_copy: Union[Unset, None, bool] = UNSET,
-    allow_audio_stream_copy: Union[Unset, None, bool] = UNSET,
-    break_on_non_key_frames: Union[Unset, None, bool] = UNSET,
-    audio_sample_rate: Union[Unset, None, int] = UNSET,
-    max_audio_bit_depth: Union[Unset, None, int] = UNSET,
-    audio_bit_rate: Union[Unset, None, int] = UNSET,
-    audio_channels: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    profile: Union[Unset, None, str] = UNSET,
-    level: Union[Unset, None, str] = UNSET,
-    framerate: Union[Unset, None, float] = UNSET,
-    max_framerate: Union[Unset, None, float] = UNSET,
-    copy_timestamps: Union[Unset, None, bool] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    width: Union[Unset, None, int] = UNSET,
-    height: Union[Unset, None, int] = UNSET,
-    video_bit_rate: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_method: Union[Unset, None, SubtitleDeliveryMethod] = UNSET,
-    max_ref_frames: Union[Unset, None, int] = UNSET,
-    max_video_bit_depth: Union[Unset, None, int] = UNSET,
-    require_avc: Union[Unset, None, bool] = UNSET,
-    de_interlace: Union[Unset, None, bool] = UNSET,
-    require_non_anamorphic: Union[Unset, None, bool] = UNSET,
-    transcoding_max_audio_channels: Union[Unset, None, int] = UNSET,
-    cpu_core_limit: Union[Unset, None, int] = UNSET,
-    live_stream_id: Union[Unset, None, str] = UNSET,
-    enable_mpegts_m2_ts_mode: Union[Unset, None, bool] = UNSET,
-    video_codec: Union[Unset, None, str] = UNSET,
-    subtitle_codec: Union[Unset, None, str] = UNSET,
-    transcode_reasons: Union[Unset, None, str] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    video_stream_index: Union[Unset, None, int] = UNSET,
-    context: Union[Unset, None, EncodingContext] = UNSET,
-    stream_options: Union[Unset, None, "GetAudioStreamByContainerStreamOptions"] = UNSET,
+    static: Union[Unset, bool] = UNSET,
+    params: Union[Unset, str] = UNSET,
+    tag: Union[Unset, str] = UNSET,
+    device_profile_id: Union[Unset, str] = UNSET,
+    play_session_id: Union[Unset, str] = UNSET,
+    segment_container: Union[Unset, str] = UNSET,
+    segment_length: Union[Unset, int] = UNSET,
+    min_segments: Union[Unset, int] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    device_id: Union[Unset, str] = UNSET,
+    audio_codec: Union[Unset, str] = UNSET,
+    enable_auto_stream_copy: Union[Unset, bool] = UNSET,
+    allow_video_stream_copy: Union[Unset, bool] = UNSET,
+    allow_audio_stream_copy: Union[Unset, bool] = UNSET,
+    break_on_non_key_frames: Union[Unset, bool] = UNSET,
+    audio_sample_rate: Union[Unset, int] = UNSET,
+    max_audio_bit_depth: Union[Unset, int] = UNSET,
+    audio_bit_rate: Union[Unset, int] = UNSET,
+    audio_channels: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    profile: Union[Unset, str] = UNSET,
+    level: Union[Unset, str] = UNSET,
+    framerate: Union[Unset, float] = UNSET,
+    max_framerate: Union[Unset, float] = UNSET,
+    copy_timestamps: Union[Unset, bool] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    width: Union[Unset, int] = UNSET,
+    height: Union[Unset, int] = UNSET,
+    video_bit_rate: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    subtitle_method: Union[Unset, SubtitleDeliveryMethod] = UNSET,
+    max_ref_frames: Union[Unset, int] = UNSET,
+    max_video_bit_depth: Union[Unset, int] = UNSET,
+    require_avc: Union[Unset, bool] = UNSET,
+    de_interlace: Union[Unset, bool] = UNSET,
+    require_non_anamorphic: Union[Unset, bool] = UNSET,
+    transcoding_max_audio_channels: Union[Unset, int] = UNSET,
+    cpu_core_limit: Union[Unset, int] = UNSET,
+    live_stream_id: Union[Unset, str] = UNSET,
+    enable_mpegts_m2_ts_mode: Union[Unset, bool] = UNSET,
+    video_codec: Union[Unset, str] = UNSET,
+    subtitle_codec: Union[Unset, str] = UNSET,
+    transcode_reasons: Union[Unset, str] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    video_stream_index: Union[Unset, int] = UNSET,
+    context: Union[Unset, EncodingContext] = UNSET,
+    stream_options: Union[Unset, "GetAudioStreamByContainerStreamOptions"] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["static"] = static
 
     params["params"] = params
@@ -126,9 +129,9 @@ def _get_kwargs(
 
     params["subtitleStreamIndex"] = subtitle_stream_index
 
-    json_subtitle_method: Union[Unset, None, str] = UNSET
+    json_subtitle_method: Union[Unset, str] = UNSET
     if not isinstance(subtitle_method, Unset):
-        json_subtitle_method = subtitle_method.value if subtitle_method else None
+        json_subtitle_method = subtitle_method.value
 
     params["subtitleMethod"] = json_subtitle_method
 
@@ -160,39 +163,44 @@ def _get_kwargs(
 
     params["videoStreamIndex"] = video_stream_index
 
-    json_context: Union[Unset, None, str] = UNSET
+    json_context: Union[Unset, str] = UNSET
     if not isinstance(context, Unset):
-        json_context = context.value if context else None
+        json_context = context.value
 
     params["context"] = json_context
 
-    json_stream_options: Union[Unset, None, Dict[str, Any]] = UNSET
+    json_stream_options: Union[Unset, Dict[str, Any]] = UNSET
     if not isinstance(stream_options, Unset):
-        json_stream_options = stream_options.to_dict() if stream_options else None
-
-    if not isinstance(json_stream_options, Unset) and json_stream_options is not None:
+        json_stream_options = stream_options.to_dict()
+    if not isinstance(json_stream_options, Unset):
         params.update(json_stream_options)
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Audio/{itemId}/stream.{container}".format(
-            itemId=item_id,
+        "url": "/Audio/{item_id}/stream.{container}".format(
+            item_id=item_id,
             container=container,
         ),
         "params": params,
     }
 
+    return _kwargs
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Any]:
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -206,107 +214,107 @@ def sync_detailed(
     container: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    static: Union[Unset, None, bool] = UNSET,
-    params: Union[Unset, None, str] = UNSET,
-    tag: Union[Unset, None, str] = UNSET,
-    device_profile_id: Union[Unset, None, str] = UNSET,
-    play_session_id: Union[Unset, None, str] = UNSET,
-    segment_container: Union[Unset, None, str] = UNSET,
-    segment_length: Union[Unset, None, int] = UNSET,
-    min_segments: Union[Unset, None, int] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    device_id: Union[Unset, None, str] = UNSET,
-    audio_codec: Union[Unset, None, str] = UNSET,
-    enable_auto_stream_copy: Union[Unset, None, bool] = UNSET,
-    allow_video_stream_copy: Union[Unset, None, bool] = UNSET,
-    allow_audio_stream_copy: Union[Unset, None, bool] = UNSET,
-    break_on_non_key_frames: Union[Unset, None, bool] = UNSET,
-    audio_sample_rate: Union[Unset, None, int] = UNSET,
-    max_audio_bit_depth: Union[Unset, None, int] = UNSET,
-    audio_bit_rate: Union[Unset, None, int] = UNSET,
-    audio_channels: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    profile: Union[Unset, None, str] = UNSET,
-    level: Union[Unset, None, str] = UNSET,
-    framerate: Union[Unset, None, float] = UNSET,
-    max_framerate: Union[Unset, None, float] = UNSET,
-    copy_timestamps: Union[Unset, None, bool] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    width: Union[Unset, None, int] = UNSET,
-    height: Union[Unset, None, int] = UNSET,
-    video_bit_rate: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_method: Union[Unset, None, SubtitleDeliveryMethod] = UNSET,
-    max_ref_frames: Union[Unset, None, int] = UNSET,
-    max_video_bit_depth: Union[Unset, None, int] = UNSET,
-    require_avc: Union[Unset, None, bool] = UNSET,
-    de_interlace: Union[Unset, None, bool] = UNSET,
-    require_non_anamorphic: Union[Unset, None, bool] = UNSET,
-    transcoding_max_audio_channels: Union[Unset, None, int] = UNSET,
-    cpu_core_limit: Union[Unset, None, int] = UNSET,
-    live_stream_id: Union[Unset, None, str] = UNSET,
-    enable_mpegts_m2_ts_mode: Union[Unset, None, bool] = UNSET,
-    video_codec: Union[Unset, None, str] = UNSET,
-    subtitle_codec: Union[Unset, None, str] = UNSET,
-    transcode_reasons: Union[Unset, None, str] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    video_stream_index: Union[Unset, None, int] = UNSET,
-    context: Union[Unset, None, EncodingContext] = UNSET,
-    stream_options: Union[Unset, None, "GetAudioStreamByContainerStreamOptions"] = UNSET,
+    static: Union[Unset, bool] = UNSET,
+    params: Union[Unset, str] = UNSET,
+    tag: Union[Unset, str] = UNSET,
+    device_profile_id: Union[Unset, str] = UNSET,
+    play_session_id: Union[Unset, str] = UNSET,
+    segment_container: Union[Unset, str] = UNSET,
+    segment_length: Union[Unset, int] = UNSET,
+    min_segments: Union[Unset, int] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    device_id: Union[Unset, str] = UNSET,
+    audio_codec: Union[Unset, str] = UNSET,
+    enable_auto_stream_copy: Union[Unset, bool] = UNSET,
+    allow_video_stream_copy: Union[Unset, bool] = UNSET,
+    allow_audio_stream_copy: Union[Unset, bool] = UNSET,
+    break_on_non_key_frames: Union[Unset, bool] = UNSET,
+    audio_sample_rate: Union[Unset, int] = UNSET,
+    max_audio_bit_depth: Union[Unset, int] = UNSET,
+    audio_bit_rate: Union[Unset, int] = UNSET,
+    audio_channels: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    profile: Union[Unset, str] = UNSET,
+    level: Union[Unset, str] = UNSET,
+    framerate: Union[Unset, float] = UNSET,
+    max_framerate: Union[Unset, float] = UNSET,
+    copy_timestamps: Union[Unset, bool] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    width: Union[Unset, int] = UNSET,
+    height: Union[Unset, int] = UNSET,
+    video_bit_rate: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    subtitle_method: Union[Unset, SubtitleDeliveryMethod] = UNSET,
+    max_ref_frames: Union[Unset, int] = UNSET,
+    max_video_bit_depth: Union[Unset, int] = UNSET,
+    require_avc: Union[Unset, bool] = UNSET,
+    de_interlace: Union[Unset, bool] = UNSET,
+    require_non_anamorphic: Union[Unset, bool] = UNSET,
+    transcoding_max_audio_channels: Union[Unset, int] = UNSET,
+    cpu_core_limit: Union[Unset, int] = UNSET,
+    live_stream_id: Union[Unset, str] = UNSET,
+    enable_mpegts_m2_ts_mode: Union[Unset, bool] = UNSET,
+    video_codec: Union[Unset, str] = UNSET,
+    subtitle_codec: Union[Unset, str] = UNSET,
+    transcode_reasons: Union[Unset, str] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    video_stream_index: Union[Unset, int] = UNSET,
+    context: Union[Unset, EncodingContext] = UNSET,
+    stream_options: Union[Unset, "GetAudioStreamByContainerStreamOptions"] = UNSET,
 ) -> Response[Any]:
     """Gets an audio stream.
 
     Args:
         item_id (str):
         container (str):
-        static (Union[Unset, None, bool]):
-        params (Union[Unset, None, str]):
-        tag (Union[Unset, None, str]):
-        device_profile_id (Union[Unset, None, str]):
-        play_session_id (Union[Unset, None, str]):
-        segment_container (Union[Unset, None, str]):
-        segment_length (Union[Unset, None, int]):
-        min_segments (Union[Unset, None, int]):
-        media_source_id (Union[Unset, None, str]):
-        device_id (Union[Unset, None, str]):
-        audio_codec (Union[Unset, None, str]):
-        enable_auto_stream_copy (Union[Unset, None, bool]):
-        allow_video_stream_copy (Union[Unset, None, bool]):
-        allow_audio_stream_copy (Union[Unset, None, bool]):
-        break_on_non_key_frames (Union[Unset, None, bool]):
-        audio_sample_rate (Union[Unset, None, int]):
-        max_audio_bit_depth (Union[Unset, None, int]):
-        audio_bit_rate (Union[Unset, None, int]):
-        audio_channels (Union[Unset, None, int]):
-        max_audio_channels (Union[Unset, None, int]):
-        profile (Union[Unset, None, str]):
-        level (Union[Unset, None, str]):
-        framerate (Union[Unset, None, float]):
-        max_framerate (Union[Unset, None, float]):
-        copy_timestamps (Union[Unset, None, bool]):
-        start_time_ticks (Union[Unset, None, int]):
-        width (Union[Unset, None, int]):
-        height (Union[Unset, None, int]):
-        video_bit_rate (Union[Unset, None, int]):
-        subtitle_stream_index (Union[Unset, None, int]):
-        subtitle_method (Union[Unset, None, SubtitleDeliveryMethod]): Delivery method to use
-            during playback of a specific subtitle format.
-        max_ref_frames (Union[Unset, None, int]):
-        max_video_bit_depth (Union[Unset, None, int]):
-        require_avc (Union[Unset, None, bool]):
-        de_interlace (Union[Unset, None, bool]):
-        require_non_anamorphic (Union[Unset, None, bool]):
-        transcoding_max_audio_channels (Union[Unset, None, int]):
-        cpu_core_limit (Union[Unset, None, int]):
-        live_stream_id (Union[Unset, None, str]):
-        enable_mpegts_m2_ts_mode (Union[Unset, None, bool]):
-        video_codec (Union[Unset, None, str]):
-        subtitle_codec (Union[Unset, None, str]):
-        transcode_reasons (Union[Unset, None, str]):
-        audio_stream_index (Union[Unset, None, int]):
-        video_stream_index (Union[Unset, None, int]):
-        context (Union[Unset, None, EncodingContext]):
-        stream_options (Union[Unset, None, GetAudioStreamByContainerStreamOptions]):
+        static (Union[Unset, bool]):
+        params (Union[Unset, str]):
+        tag (Union[Unset, str]):
+        device_profile_id (Union[Unset, str]):
+        play_session_id (Union[Unset, str]):
+        segment_container (Union[Unset, str]):
+        segment_length (Union[Unset, int]):
+        min_segments (Union[Unset, int]):
+        media_source_id (Union[Unset, str]):
+        device_id (Union[Unset, str]):
+        audio_codec (Union[Unset, str]):
+        enable_auto_stream_copy (Union[Unset, bool]):
+        allow_video_stream_copy (Union[Unset, bool]):
+        allow_audio_stream_copy (Union[Unset, bool]):
+        break_on_non_key_frames (Union[Unset, bool]):
+        audio_sample_rate (Union[Unset, int]):
+        max_audio_bit_depth (Union[Unset, int]):
+        audio_bit_rate (Union[Unset, int]):
+        audio_channels (Union[Unset, int]):
+        max_audio_channels (Union[Unset, int]):
+        profile (Union[Unset, str]):
+        level (Union[Unset, str]):
+        framerate (Union[Unset, float]):
+        max_framerate (Union[Unset, float]):
+        copy_timestamps (Union[Unset, bool]):
+        start_time_ticks (Union[Unset, int]):
+        width (Union[Unset, int]):
+        height (Union[Unset, int]):
+        video_bit_rate (Union[Unset, int]):
+        subtitle_stream_index (Union[Unset, int]):
+        subtitle_method (Union[Unset, SubtitleDeliveryMethod]): Delivery method to use during
+            playback of a specific subtitle format.
+        max_ref_frames (Union[Unset, int]):
+        max_video_bit_depth (Union[Unset, int]):
+        require_avc (Union[Unset, bool]):
+        de_interlace (Union[Unset, bool]):
+        require_non_anamorphic (Union[Unset, bool]):
+        transcoding_max_audio_channels (Union[Unset, int]):
+        cpu_core_limit (Union[Unset, int]):
+        live_stream_id (Union[Unset, str]):
+        enable_mpegts_m2_ts_mode (Union[Unset, bool]):
+        video_codec (Union[Unset, str]):
+        subtitle_codec (Union[Unset, str]):
+        transcode_reasons (Union[Unset, str]):
+        audio_stream_index (Union[Unset, int]):
+        video_stream_index (Union[Unset, int]):
+        context (Union[Unset, EncodingContext]):
+        stream_options (Union[Unset, GetAudioStreamByContainerStreamOptions]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -380,107 +388,107 @@ async def asyncio_detailed(
     container: str,
     *,
     client: Union[AuthenticatedClient, Client],
-    static: Union[Unset, None, bool] = UNSET,
-    params: Union[Unset, None, str] = UNSET,
-    tag: Union[Unset, None, str] = UNSET,
-    device_profile_id: Union[Unset, None, str] = UNSET,
-    play_session_id: Union[Unset, None, str] = UNSET,
-    segment_container: Union[Unset, None, str] = UNSET,
-    segment_length: Union[Unset, None, int] = UNSET,
-    min_segments: Union[Unset, None, int] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    device_id: Union[Unset, None, str] = UNSET,
-    audio_codec: Union[Unset, None, str] = UNSET,
-    enable_auto_stream_copy: Union[Unset, None, bool] = UNSET,
-    allow_video_stream_copy: Union[Unset, None, bool] = UNSET,
-    allow_audio_stream_copy: Union[Unset, None, bool] = UNSET,
-    break_on_non_key_frames: Union[Unset, None, bool] = UNSET,
-    audio_sample_rate: Union[Unset, None, int] = UNSET,
-    max_audio_bit_depth: Union[Unset, None, int] = UNSET,
-    audio_bit_rate: Union[Unset, None, int] = UNSET,
-    audio_channels: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    profile: Union[Unset, None, str] = UNSET,
-    level: Union[Unset, None, str] = UNSET,
-    framerate: Union[Unset, None, float] = UNSET,
-    max_framerate: Union[Unset, None, float] = UNSET,
-    copy_timestamps: Union[Unset, None, bool] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    width: Union[Unset, None, int] = UNSET,
-    height: Union[Unset, None, int] = UNSET,
-    video_bit_rate: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_method: Union[Unset, None, SubtitleDeliveryMethod] = UNSET,
-    max_ref_frames: Union[Unset, None, int] = UNSET,
-    max_video_bit_depth: Union[Unset, None, int] = UNSET,
-    require_avc: Union[Unset, None, bool] = UNSET,
-    de_interlace: Union[Unset, None, bool] = UNSET,
-    require_non_anamorphic: Union[Unset, None, bool] = UNSET,
-    transcoding_max_audio_channels: Union[Unset, None, int] = UNSET,
-    cpu_core_limit: Union[Unset, None, int] = UNSET,
-    live_stream_id: Union[Unset, None, str] = UNSET,
-    enable_mpegts_m2_ts_mode: Union[Unset, None, bool] = UNSET,
-    video_codec: Union[Unset, None, str] = UNSET,
-    subtitle_codec: Union[Unset, None, str] = UNSET,
-    transcode_reasons: Union[Unset, None, str] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    video_stream_index: Union[Unset, None, int] = UNSET,
-    context: Union[Unset, None, EncodingContext] = UNSET,
-    stream_options: Union[Unset, None, "GetAudioStreamByContainerStreamOptions"] = UNSET,
+    static: Union[Unset, bool] = UNSET,
+    params: Union[Unset, str] = UNSET,
+    tag: Union[Unset, str] = UNSET,
+    device_profile_id: Union[Unset, str] = UNSET,
+    play_session_id: Union[Unset, str] = UNSET,
+    segment_container: Union[Unset, str] = UNSET,
+    segment_length: Union[Unset, int] = UNSET,
+    min_segments: Union[Unset, int] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    device_id: Union[Unset, str] = UNSET,
+    audio_codec: Union[Unset, str] = UNSET,
+    enable_auto_stream_copy: Union[Unset, bool] = UNSET,
+    allow_video_stream_copy: Union[Unset, bool] = UNSET,
+    allow_audio_stream_copy: Union[Unset, bool] = UNSET,
+    break_on_non_key_frames: Union[Unset, bool] = UNSET,
+    audio_sample_rate: Union[Unset, int] = UNSET,
+    max_audio_bit_depth: Union[Unset, int] = UNSET,
+    audio_bit_rate: Union[Unset, int] = UNSET,
+    audio_channels: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    profile: Union[Unset, str] = UNSET,
+    level: Union[Unset, str] = UNSET,
+    framerate: Union[Unset, float] = UNSET,
+    max_framerate: Union[Unset, float] = UNSET,
+    copy_timestamps: Union[Unset, bool] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    width: Union[Unset, int] = UNSET,
+    height: Union[Unset, int] = UNSET,
+    video_bit_rate: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    subtitle_method: Union[Unset, SubtitleDeliveryMethod] = UNSET,
+    max_ref_frames: Union[Unset, int] = UNSET,
+    max_video_bit_depth: Union[Unset, int] = UNSET,
+    require_avc: Union[Unset, bool] = UNSET,
+    de_interlace: Union[Unset, bool] = UNSET,
+    require_non_anamorphic: Union[Unset, bool] = UNSET,
+    transcoding_max_audio_channels: Union[Unset, int] = UNSET,
+    cpu_core_limit: Union[Unset, int] = UNSET,
+    live_stream_id: Union[Unset, str] = UNSET,
+    enable_mpegts_m2_ts_mode: Union[Unset, bool] = UNSET,
+    video_codec: Union[Unset, str] = UNSET,
+    subtitle_codec: Union[Unset, str] = UNSET,
+    transcode_reasons: Union[Unset, str] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    video_stream_index: Union[Unset, int] = UNSET,
+    context: Union[Unset, EncodingContext] = UNSET,
+    stream_options: Union[Unset, "GetAudioStreamByContainerStreamOptions"] = UNSET,
 ) -> Response[Any]:
     """Gets an audio stream.
 
     Args:
         item_id (str):
         container (str):
-        static (Union[Unset, None, bool]):
-        params (Union[Unset, None, str]):
-        tag (Union[Unset, None, str]):
-        device_profile_id (Union[Unset, None, str]):
-        play_session_id (Union[Unset, None, str]):
-        segment_container (Union[Unset, None, str]):
-        segment_length (Union[Unset, None, int]):
-        min_segments (Union[Unset, None, int]):
-        media_source_id (Union[Unset, None, str]):
-        device_id (Union[Unset, None, str]):
-        audio_codec (Union[Unset, None, str]):
-        enable_auto_stream_copy (Union[Unset, None, bool]):
-        allow_video_stream_copy (Union[Unset, None, bool]):
-        allow_audio_stream_copy (Union[Unset, None, bool]):
-        break_on_non_key_frames (Union[Unset, None, bool]):
-        audio_sample_rate (Union[Unset, None, int]):
-        max_audio_bit_depth (Union[Unset, None, int]):
-        audio_bit_rate (Union[Unset, None, int]):
-        audio_channels (Union[Unset, None, int]):
-        max_audio_channels (Union[Unset, None, int]):
-        profile (Union[Unset, None, str]):
-        level (Union[Unset, None, str]):
-        framerate (Union[Unset, None, float]):
-        max_framerate (Union[Unset, None, float]):
-        copy_timestamps (Union[Unset, None, bool]):
-        start_time_ticks (Union[Unset, None, int]):
-        width (Union[Unset, None, int]):
-        height (Union[Unset, None, int]):
-        video_bit_rate (Union[Unset, None, int]):
-        subtitle_stream_index (Union[Unset, None, int]):
-        subtitle_method (Union[Unset, None, SubtitleDeliveryMethod]): Delivery method to use
-            during playback of a specific subtitle format.
-        max_ref_frames (Union[Unset, None, int]):
-        max_video_bit_depth (Union[Unset, None, int]):
-        require_avc (Union[Unset, None, bool]):
-        de_interlace (Union[Unset, None, bool]):
-        require_non_anamorphic (Union[Unset, None, bool]):
-        transcoding_max_audio_channels (Union[Unset, None, int]):
-        cpu_core_limit (Union[Unset, None, int]):
-        live_stream_id (Union[Unset, None, str]):
-        enable_mpegts_m2_ts_mode (Union[Unset, None, bool]):
-        video_codec (Union[Unset, None, str]):
-        subtitle_codec (Union[Unset, None, str]):
-        transcode_reasons (Union[Unset, None, str]):
-        audio_stream_index (Union[Unset, None, int]):
-        video_stream_index (Union[Unset, None, int]):
-        context (Union[Unset, None, EncodingContext]):
-        stream_options (Union[Unset, None, GetAudioStreamByContainerStreamOptions]):
+        static (Union[Unset, bool]):
+        params (Union[Unset, str]):
+        tag (Union[Unset, str]):
+        device_profile_id (Union[Unset, str]):
+        play_session_id (Union[Unset, str]):
+        segment_container (Union[Unset, str]):
+        segment_length (Union[Unset, int]):
+        min_segments (Union[Unset, int]):
+        media_source_id (Union[Unset, str]):
+        device_id (Union[Unset, str]):
+        audio_codec (Union[Unset, str]):
+        enable_auto_stream_copy (Union[Unset, bool]):
+        allow_video_stream_copy (Union[Unset, bool]):
+        allow_audio_stream_copy (Union[Unset, bool]):
+        break_on_non_key_frames (Union[Unset, bool]):
+        audio_sample_rate (Union[Unset, int]):
+        max_audio_bit_depth (Union[Unset, int]):
+        audio_bit_rate (Union[Unset, int]):
+        audio_channels (Union[Unset, int]):
+        max_audio_channels (Union[Unset, int]):
+        profile (Union[Unset, str]):
+        level (Union[Unset, str]):
+        framerate (Union[Unset, float]):
+        max_framerate (Union[Unset, float]):
+        copy_timestamps (Union[Unset, bool]):
+        start_time_ticks (Union[Unset, int]):
+        width (Union[Unset, int]):
+        height (Union[Unset, int]):
+        video_bit_rate (Union[Unset, int]):
+        subtitle_stream_index (Union[Unset, int]):
+        subtitle_method (Union[Unset, SubtitleDeliveryMethod]): Delivery method to use during
+            playback of a specific subtitle format.
+        max_ref_frames (Union[Unset, int]):
+        max_video_bit_depth (Union[Unset, int]):
+        require_avc (Union[Unset, bool]):
+        de_interlace (Union[Unset, bool]):
+        require_non_anamorphic (Union[Unset, bool]):
+        transcoding_max_audio_channels (Union[Unset, int]):
+        cpu_core_limit (Union[Unset, int]):
+        live_stream_id (Union[Unset, str]):
+        enable_mpegts_m2_ts_mode (Union[Unset, bool]):
+        video_codec (Union[Unset, str]):
+        subtitle_codec (Union[Unset, str]):
+        transcode_reasons (Union[Unset, str]):
+        audio_stream_index (Union[Unset, int]):
+        video_stream_index (Union[Unset, int]):
+        context (Union[Unset, EncodingContext]):
+        stream_options (Union[Unset, GetAudioStreamByContainerStreamOptions]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

@@ -3,35 +3,38 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.problem_details import ProblemDetails
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.theme_media_result import ThemeMediaResult
-from ...types import UNSET, Response, Unset
+from ...models.problem_details import ProblemDetails
+from ...types import Unset
 
 
 def _get_kwargs(
     item_id: str,
     *,
-    user_id: Union[Unset, None, str] = UNSET,
-    inherit_from_parent: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    inherit_from_parent: Union[Unset, bool] = False,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["userId"] = user_id
 
     params["inheritFromParent"] = inherit_from_parent
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Items/{itemId}/ThemeSongs".format(
-            itemId=item_id,
+        "url": "/Items/{item_id}/ThemeSongs".format(
+            item_id=item_id,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -72,15 +75,15 @@ def sync_detailed(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    inherit_from_parent: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    inherit_from_parent: Union[Unset, bool] = False,
 ) -> Response[Union[Any, ProblemDetails, ThemeMediaResult]]:
     """Get theme songs for an item.
 
     Args:
         item_id (str):
-        user_id (Union[Unset, None, str]):
-        inherit_from_parent (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        inherit_from_parent (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -107,15 +110,15 @@ def sync(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    inherit_from_parent: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    inherit_from_parent: Union[Unset, bool] = False,
 ) -> Optional[Union[Any, ProblemDetails, ThemeMediaResult]]:
     """Get theme songs for an item.
 
     Args:
         item_id (str):
-        user_id (Union[Unset, None, str]):
-        inherit_from_parent (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        inherit_from_parent (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -137,15 +140,15 @@ async def asyncio_detailed(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    inherit_from_parent: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    inherit_from_parent: Union[Unset, bool] = False,
 ) -> Response[Union[Any, ProblemDetails, ThemeMediaResult]]:
     """Get theme songs for an item.
 
     Args:
         item_id (str):
-        user_id (Union[Unset, None, str]):
-        inherit_from_parent (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        inherit_from_parent (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -170,15 +173,15 @@ async def asyncio(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    user_id: Union[Unset, None, str] = UNSET,
-    inherit_from_parent: Union[Unset, None, bool] = False,
+    user_id: Union[Unset, str] = UNSET,
+    inherit_from_parent: Union[Unset, bool] = False,
 ) -> Optional[Union[Any, ProblemDetails, ThemeMediaResult]]:
     """Get theme songs for an item.
 
     Args:
         item_id (str):
-        user_id (Union[Unset, None, str]):
-        inherit_from_parent (Union[Unset, None, bool]):
+        user_id (Union[Unset, str]):
+        inherit_from_parent (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

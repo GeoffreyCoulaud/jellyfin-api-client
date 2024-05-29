@@ -3,36 +3,39 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.series_timer_info_dto_query_result import SeriesTimerInfoDtoQueryResult
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.sort_order import SortOrder
-from ...types import UNSET, Response, Unset
+from ...models.series_timer_info_dto_query_result import SeriesTimerInfoDtoQueryResult
+from ...types import Unset
 
 
 def _get_kwargs(
     *,
-    sort_by: Union[Unset, None, str] = UNSET,
-    sort_order: Union[Unset, None, SortOrder] = UNSET,
+    sort_by: Union[Unset, str] = UNSET,
+    sort_order: Union[Unset, SortOrder] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["sortBy"] = sort_by
 
-    json_sort_order: Union[Unset, None, str] = UNSET
+    json_sort_order: Union[Unset, str] = UNSET
     if not isinstance(sort_order, Unset):
-        json_sort_order = sort_order.value if sort_order else None
+        json_sort_order = sort_order.value
 
     params["sortOrder"] = json_sort_order
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/LiveTv/SeriesTimers",
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -68,14 +71,14 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    sort_by: Union[Unset, None, str] = UNSET,
-    sort_order: Union[Unset, None, SortOrder] = UNSET,
+    sort_by: Union[Unset, str] = UNSET,
+    sort_order: Union[Unset, SortOrder] = UNSET,
 ) -> Response[Union[Any, SeriesTimerInfoDtoQueryResult]]:
     """Gets live tv series timers.
 
     Args:
-        sort_by (Union[Unset, None, str]):
-        sort_order (Union[Unset, None, SortOrder]): An enum representing the sorting order.
+        sort_by (Union[Unset, str]):
+        sort_order (Union[Unset, SortOrder]): An enum representing the sorting order.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -100,14 +103,14 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    sort_by: Union[Unset, None, str] = UNSET,
-    sort_order: Union[Unset, None, SortOrder] = UNSET,
+    sort_by: Union[Unset, str] = UNSET,
+    sort_order: Union[Unset, SortOrder] = UNSET,
 ) -> Optional[Union[Any, SeriesTimerInfoDtoQueryResult]]:
     """Gets live tv series timers.
 
     Args:
-        sort_by (Union[Unset, None, str]):
-        sort_order (Union[Unset, None, SortOrder]): An enum representing the sorting order.
+        sort_by (Union[Unset, str]):
+        sort_order (Union[Unset, SortOrder]): An enum representing the sorting order.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -127,14 +130,14 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    sort_by: Union[Unset, None, str] = UNSET,
-    sort_order: Union[Unset, None, SortOrder] = UNSET,
+    sort_by: Union[Unset, str] = UNSET,
+    sort_order: Union[Unset, SortOrder] = UNSET,
 ) -> Response[Union[Any, SeriesTimerInfoDtoQueryResult]]:
     """Gets live tv series timers.
 
     Args:
-        sort_by (Union[Unset, None, str]):
-        sort_order (Union[Unset, None, SortOrder]): An enum representing the sorting order.
+        sort_by (Union[Unset, str]):
+        sort_order (Union[Unset, SortOrder]): An enum representing the sorting order.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -157,14 +160,14 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    sort_by: Union[Unset, None, str] = UNSET,
-    sort_order: Union[Unset, None, SortOrder] = UNSET,
+    sort_by: Union[Unset, str] = UNSET,
+    sort_order: Union[Unset, SortOrder] = UNSET,
 ) -> Optional[Union[Any, SeriesTimerInfoDtoQueryResult]]:
     """Gets live tv series timers.
 
     Args:
-        sort_by (Union[Unset, None, str]):
-        sort_order (Union[Unset, None, SortOrder]): An enum representing the sorting order.
+        sort_by (Union[Unset, str]):
+        sort_order (Union[Unset, SortOrder]): An enum representing the sorting order.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

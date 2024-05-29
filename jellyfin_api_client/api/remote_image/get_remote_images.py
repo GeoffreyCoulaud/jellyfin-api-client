@@ -3,29 +3,30 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.image_type import ImageType
-from ...models.problem_details import ProblemDetails
 from ...models.remote_image_result import RemoteImageResult
-from ...types import UNSET, Response, Unset
+from ...models.problem_details import ProblemDetails
+from ...types import Unset
 
 
 def _get_kwargs(
     item_id: str,
     *,
-    type: Union[Unset, None, ImageType] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    provider_name: Union[Unset, None, str] = UNSET,
-    include_all_languages: Union[Unset, None, bool] = False,
+    type: Union[Unset, ImageType] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    provider_name: Union[Unset, str] = UNSET,
+    include_all_languages: Union[Unset, bool] = False,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
-    json_type: Union[Unset, None, str] = UNSET
+
+    json_type: Union[Unset, str] = UNSET
     if not isinstance(type, Unset):
-        json_type = type.value if type else None
+        json_type = type.value
 
     params["type"] = json_type
 
@@ -39,13 +40,15 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Items/{itemId}/RemoteImages".format(
-            itemId=item_id,
+        "url": "/Items/{item_id}/RemoteImages".format(
+            item_id=item_id,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -86,21 +89,21 @@ def sync_detailed(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    type: Union[Unset, None, ImageType] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    provider_name: Union[Unset, None, str] = UNSET,
-    include_all_languages: Union[Unset, None, bool] = False,
+    type: Union[Unset, ImageType] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    provider_name: Union[Unset, str] = UNSET,
+    include_all_languages: Union[Unset, bool] = False,
 ) -> Response[Union[Any, ProblemDetails, RemoteImageResult]]:
     """Gets available remote images for an item.
 
     Args:
         item_id (str):
-        type (Union[Unset, None, ImageType]): Enum ImageType.
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        provider_name (Union[Unset, None, str]):
-        include_all_languages (Union[Unset, None, bool]):
+        type (Union[Unset, ImageType]): Enum ImageType.
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        provider_name (Union[Unset, str]):
+        include_all_languages (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -130,21 +133,21 @@ def sync(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    type: Union[Unset, None, ImageType] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    provider_name: Union[Unset, None, str] = UNSET,
-    include_all_languages: Union[Unset, None, bool] = False,
+    type: Union[Unset, ImageType] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    provider_name: Union[Unset, str] = UNSET,
+    include_all_languages: Union[Unset, bool] = False,
 ) -> Optional[Union[Any, ProblemDetails, RemoteImageResult]]:
     """Gets available remote images for an item.
 
     Args:
         item_id (str):
-        type (Union[Unset, None, ImageType]): Enum ImageType.
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        provider_name (Union[Unset, None, str]):
-        include_all_languages (Union[Unset, None, bool]):
+        type (Union[Unset, ImageType]): Enum ImageType.
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        provider_name (Union[Unset, str]):
+        include_all_languages (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -169,21 +172,21 @@ async def asyncio_detailed(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    type: Union[Unset, None, ImageType] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    provider_name: Union[Unset, None, str] = UNSET,
-    include_all_languages: Union[Unset, None, bool] = False,
+    type: Union[Unset, ImageType] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    provider_name: Union[Unset, str] = UNSET,
+    include_all_languages: Union[Unset, bool] = False,
 ) -> Response[Union[Any, ProblemDetails, RemoteImageResult]]:
     """Gets available remote images for an item.
 
     Args:
         item_id (str):
-        type (Union[Unset, None, ImageType]): Enum ImageType.
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        provider_name (Union[Unset, None, str]):
-        include_all_languages (Union[Unset, None, bool]):
+        type (Union[Unset, ImageType]): Enum ImageType.
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        provider_name (Union[Unset, str]):
+        include_all_languages (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -211,21 +214,21 @@ async def asyncio(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    type: Union[Unset, None, ImageType] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
-    limit: Union[Unset, None, int] = UNSET,
-    provider_name: Union[Unset, None, str] = UNSET,
-    include_all_languages: Union[Unset, None, bool] = False,
+    type: Union[Unset, ImageType] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
+    limit: Union[Unset, int] = UNSET,
+    provider_name: Union[Unset, str] = UNSET,
+    include_all_languages: Union[Unset, bool] = False,
 ) -> Optional[Union[Any, ProblemDetails, RemoteImageResult]]:
     """Gets available remote images for an item.
 
     Args:
         item_id (str):
-        type (Union[Unset, None, ImageType]): Enum ImageType.
-        start_index (Union[Unset, None, int]):
-        limit (Union[Unset, None, int]):
-        provider_name (Union[Unset, None, str]):
-        include_all_languages (Union[Unset, None, bool]):
+        type (Union[Unset, ImageType]): Enum ImageType.
+        start_index (Union[Unset, int]):
+        limit (Union[Unset, int]):
+        provider_name (Union[Unset, str]):
+        include_all_languages (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

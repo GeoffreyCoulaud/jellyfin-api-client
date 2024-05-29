@@ -3,27 +3,29 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...types import Response
+from ... import errors
 
 
 def _get_kwargs(
     item_id: str,
     playlist_id: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Videos/{itemId}/hls/{playlistId}/stream.m3u8".format(
-            itemId=item_id,
-            playlistId=playlist_id,
+        "url": "/Videos/{item_id}/hls/{playlist_id}/stream.m3u8".format(
+            item_id=item_id,
+            playlist_id=playlist_id,
         ),
     }
 
+    return _kwargs
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Any]:
     if response.status_code == HTTPStatus.UNAUTHORIZED:
         return None
     if response.status_code == HTTPStatus.FORBIDDEN:
@@ -34,7 +36,9 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,

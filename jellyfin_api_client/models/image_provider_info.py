@@ -1,9 +1,14 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
-from ..models.image_type import ImageType
 from ..types import UNSET, Unset
+
+from typing import List
+from typing import Union
+from ..models.image_type import ImageType
+
 
 T = TypeVar("T", bound="ImageProviderInfo")
 
@@ -22,12 +27,12 @@ class ImageProviderInfo:
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
+
         supported_images: Union[Unset, List[str]] = UNSET
         if not isinstance(self.supported_images, Unset):
             supported_images = []
             for supported_images_item_data in self.supported_images:
                 supported_images_item = supported_images_item_data.value
-
                 supported_images.append(supported_images_item)
 
         field_dict: Dict[str, Any] = {}

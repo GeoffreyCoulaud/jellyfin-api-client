@@ -3,31 +3,48 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.series_timer_info_dto import SeriesTimerInfoDto
 from ...types import Response
+from ... import errors
+
+from ...models.series_timer_info_dto import SeriesTimerInfoDto
 
 
 def _get_kwargs(
     timer_id: str,
     *,
-    json_body: SeriesTimerInfoDto,
+    body: Union[
+        SeriesTimerInfoDto,
+        SeriesTimerInfoDto,
+    ],
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/LiveTv/SeriesTimers/{timerId}".format(
-            timerId=timer_id,
+        "url": "/LiveTv/SeriesTimers/{timer_id}".format(
+            timer_id=timer_id,
         ),
-        "json": json_json_body,
     }
 
+    if isinstance(body, SeriesTimerInfoDto):
+        _json_body = body.to_dict()
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, SeriesTimerInfoDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
+
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
     if response.status_code == HTTPStatus.UNAUTHORIZED:
@@ -40,7 +57,9 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -53,13 +72,17 @@ def sync_detailed(
     timer_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: SeriesTimerInfoDto,
+    body: Union[
+        SeriesTimerInfoDto,
+        SeriesTimerInfoDto,
+    ],
 ) -> Response[Any]:
     """Updates a live tv series timer.
 
     Args:
         timer_id (str):
-        json_body (SeriesTimerInfoDto): Class SeriesTimerInfoDto.
+        body (SeriesTimerInfoDto): Class SeriesTimerInfoDto.
+        body (SeriesTimerInfoDto): Class SeriesTimerInfoDto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -71,7 +94,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         timer_id=timer_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -85,13 +108,17 @@ async def asyncio_detailed(
     timer_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: SeriesTimerInfoDto,
+    body: Union[
+        SeriesTimerInfoDto,
+        SeriesTimerInfoDto,
+    ],
 ) -> Response[Any]:
     """Updates a live tv series timer.
 
     Args:
         timer_id (str):
-        json_body (SeriesTimerInfoDto): Class SeriesTimerInfoDto.
+        body (SeriesTimerInfoDto): Class SeriesTimerInfoDto.
+        body (SeriesTimerInfoDto): Class SeriesTimerInfoDto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -103,7 +130,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         timer_id=timer_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)

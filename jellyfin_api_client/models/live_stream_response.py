@@ -1,8 +1,11 @@
-from typing import TYPE_CHECKING, Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.media_source_info import MediaSourceInfo

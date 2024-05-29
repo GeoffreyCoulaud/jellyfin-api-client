@@ -1,8 +1,12 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+
 
 T = TypeVar("T", bound="TimerEventInfo")
 
@@ -12,15 +16,20 @@ class TimerEventInfo:
     """
     Attributes:
         id (Union[Unset, str]):
-        program_id (Union[Unset, None, str]):
+        program_id (Union[None, Unset, str]):
     """
 
     id: Union[Unset, str] = UNSET
-    program_id: Union[Unset, None, str] = UNSET
+    program_id: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
-        program_id = self.program_id
+
+        program_id: Union[None, Unset, str]
+        if isinstance(self.program_id, Unset):
+            program_id = UNSET
+        else:
+            program_id = self.program_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -36,7 +45,14 @@ class TimerEventInfo:
         d = src_dict.copy()
         id = d.pop("Id", UNSET)
 
-        program_id = d.pop("ProgramId", UNSET)
+        def _parse_program_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        program_id = _parse_program_id(d.pop("ProgramId", UNSET))
 
         timer_event_info = cls(
             id=id,

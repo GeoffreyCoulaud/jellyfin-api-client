@@ -30,6 +30,7 @@ class GeneralCommandType(str, Enum):
     SENDSTRING = "SendString"
     SETAUDIOSTREAMINDEX = "SetAudioStreamIndex"
     SETMAXSTREAMINGBITRATE = "SetMaxStreamingBitrate"
+    SETPLAYBACKORDER = "SetPlaybackOrder"
     SETREPEATMODE = "SetRepeatMode"
     SETSHUFFLEQUEUE = "SetShuffleQueue"
     SETSUBTITLESTREAMINDEX = "SetSubtitleStreamIndex"

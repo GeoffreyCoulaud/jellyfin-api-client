@@ -1,7 +1,14 @@
-from typing import Any, Dict, List, Optional, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar
+
+from typing import List
+
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
+
+
+from typing import cast, Union
+
 
 T = TypeVar("T", bound="HeadAudioStreamStreamOptions")
 
@@ -10,12 +17,14 @@ T = TypeVar("T", bound="HeadAudioStreamStreamOptions")
 class HeadAudioStreamStreamOptions:
     """ """
 
-    additional_properties: Dict[str, Optional[str]] = _attrs_field(init=False, factory=dict)
+    additional_properties: Dict[str, Union[None, str]] = _attrs_field(
+        init=False, factory=dict
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         field_dict: Dict[str, Any] = {}
-        field_dict.update(self.additional_properties)
-        field_dict.update({})
+        for prop_name, prop in self.additional_properties.items():
+            field_dict[prop_name] = prop
 
         return field_dict
 
@@ -24,17 +33,29 @@ class HeadAudioStreamStreamOptions:
         d = src_dict.copy()
         head_audio_stream_stream_options = cls()
 
-        head_audio_stream_stream_options.additional_properties = d
+        additional_properties = {}
+        for prop_name, prop_dict in d.items():
+
+            def _parse_additional_property(data: object) -> Union[None, str]:
+                if data is None:
+                    return data
+                return cast(Union[None, str], data)
+
+            additional_property = _parse_additional_property(prop_dict)
+
+            additional_properties[prop_name] = additional_property
+
+        head_audio_stream_stream_options.additional_properties = additional_properties
         return head_audio_stream_stream_options
 
     @property
     def additional_keys(self) -> List[str]:
         return list(self.additional_properties.keys())
 
-    def __getitem__(self, key: str) -> Optional[str]:
+    def __getitem__(self, key: str) -> Union[None, str]:
         return self.additional_properties[key]
 
-    def __setitem__(self, key: str, value: Optional[str]) -> None:
+    def __setitem__(self, key: str, value: Union[None, str]) -> None:
         self.additional_properties[key] = value
 
     def __delitem__(self, key: str) -> None:

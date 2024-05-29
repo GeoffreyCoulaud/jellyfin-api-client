@@ -3,11 +3,12 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.image_type import ImageType
 from ...models.problem_details import ProblemDetails
-from ...types import UNSET, Response
 
 
 def _get_kwargs(
@@ -17,22 +18,23 @@ def _get_kwargs(
     *,
     new_index: int,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["newIndex"] = new_index
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/Items/{itemId}/Images/{imageType}/{imageIndex}/Index".format(
-            itemId=item_id,
-            imageType=image_type,
-            imageIndex=image_index,
+        "url": "/Items/{item_id}/Images/{image_type}/{image_index}/Index".format(
+            item_id=item_id,
+            image_type=image_type,
+            image_index=image_index,
         ),
         "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(

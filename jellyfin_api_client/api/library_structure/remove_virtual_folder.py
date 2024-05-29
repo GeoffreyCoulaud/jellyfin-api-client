@@ -3,33 +3,38 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...types import UNSET, Response, Unset
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import Unset
 
 
 def _get_kwargs(
     *,
-    name: Union[Unset, None, str] = UNSET,
-    refresh_library: Union[Unset, None, bool] = False,
+    name: Union[Unset, str] = UNSET,
+    refresh_library: Union[Unset, bool] = False,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["name"] = name
 
     params["refreshLibrary"] = refresh_library
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
         "url": "/Library/VirtualFolders",
         "params": params,
     }
 
+    return _kwargs
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
     if response.status_code == HTTPStatus.UNAUTHORIZED:
@@ -42,7 +47,9 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -54,14 +61,14 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    name: Union[Unset, None, str] = UNSET,
-    refresh_library: Union[Unset, None, bool] = False,
+    name: Union[Unset, str] = UNSET,
+    refresh_library: Union[Unset, bool] = False,
 ) -> Response[Any]:
     """Removes a virtual folder.
 
     Args:
-        name (Union[Unset, None, str]):
-        refresh_library (Union[Unset, None, bool]):
+        name (Union[Unset, str]):
+        refresh_library (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -86,14 +93,14 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    name: Union[Unset, None, str] = UNSET,
-    refresh_library: Union[Unset, None, bool] = False,
+    name: Union[Unset, str] = UNSET,
+    refresh_library: Union[Unset, bool] = False,
 ) -> Response[Any]:
     """Removes a virtual folder.
 
     Args:
-        name (Union[Unset, None, str]):
-        refresh_library (Union[Unset, None, bool]):
+        name (Union[Unset, str]):
+        refresh_library (Union[Unset, bool]):  Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

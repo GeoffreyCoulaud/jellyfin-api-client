@@ -3,26 +3,41 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.movie_info_remote_search_query import MovieInfoRemoteSearchQuery
-from ...models.remote_search_result import RemoteSearchResult
 from ...types import Response
+from ... import errors
+
+from ...models.remote_search_result import RemoteSearchResult
+from ...models.movie_info_remote_search_query import MovieInfoRemoteSearchQuery
 
 
 def _get_kwargs(
     *,
-    json_body: MovieInfoRemoteSearchQuery,
+    body: Union[
+        MovieInfoRemoteSearchQuery,
+        MovieInfoRemoteSearchQuery,
+    ],
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Items/RemoteSearch/Movie",
-        "json": json_json_body,
     }
+
+    if isinstance(body, MovieInfoRemoteSearchQuery):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, MovieInfoRemoteSearchQuery):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -63,12 +78,16 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: MovieInfoRemoteSearchQuery,
+    body: Union[
+        MovieInfoRemoteSearchQuery,
+        MovieInfoRemoteSearchQuery,
+    ],
 ) -> Response[Union[Any, List["RemoteSearchResult"]]]:
     """Get movie remote search.
 
     Args:
-        json_body (MovieInfoRemoteSearchQuery):
+        body (MovieInfoRemoteSearchQuery):
+        body (MovieInfoRemoteSearchQuery):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -79,7 +98,7 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -92,12 +111,16 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    json_body: MovieInfoRemoteSearchQuery,
+    body: Union[
+        MovieInfoRemoteSearchQuery,
+        MovieInfoRemoteSearchQuery,
+    ],
 ) -> Optional[Union[Any, List["RemoteSearchResult"]]]:
     """Get movie remote search.
 
     Args:
-        json_body (MovieInfoRemoteSearchQuery):
+        body (MovieInfoRemoteSearchQuery):
+        body (MovieInfoRemoteSearchQuery):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -109,19 +132,23 @@ def sync(
 
     return sync_detailed(
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    json_body: MovieInfoRemoteSearchQuery,
+    body: Union[
+        MovieInfoRemoteSearchQuery,
+        MovieInfoRemoteSearchQuery,
+    ],
 ) -> Response[Union[Any, List["RemoteSearchResult"]]]:
     """Get movie remote search.
 
     Args:
-        json_body (MovieInfoRemoteSearchQuery):
+        body (MovieInfoRemoteSearchQuery):
+        body (MovieInfoRemoteSearchQuery):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -132,7 +159,7 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -143,12 +170,16 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    json_body: MovieInfoRemoteSearchQuery,
+    body: Union[
+        MovieInfoRemoteSearchQuery,
+        MovieInfoRemoteSearchQuery,
+    ],
 ) -> Optional[Union[Any, List["RemoteSearchResult"]]]:
     """Get movie remote search.
 
     Args:
-        json_body (MovieInfoRemoteSearchQuery):
+        body (MovieInfoRemoteSearchQuery):
+        body (MovieInfoRemoteSearchQuery):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -161,6 +192,6 @@ async def asyncio(
     return (
         await asyncio_detailed(
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

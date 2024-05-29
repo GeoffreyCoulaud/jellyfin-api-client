@@ -3,23 +3,31 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.base_item_dto import BaseItemDto
-from ...types import Response
+from ...types import Unset
 
 
 def _get_kwargs(
-    user_id: str,
+    *,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
+    params: Dict[str, Any] = {}
 
-    return {
+    params["userId"] = user_id
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Users/{userId}/Items/Root".format(
-            userId=user_id,
-        ),
+        "url": "/Items/Root",
+        "params": params,
     }
+
+    return _kwargs
 
 
 def _parse_response(
@@ -53,14 +61,14 @@ def _build_response(
 
 
 def sync_detailed(
-    user_id: str,
     *,
     client: AuthenticatedClient,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, BaseItemDto]]:
     """Gets the root folder from a user's library.
 
     Args:
-        user_id (str):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -82,14 +90,14 @@ def sync_detailed(
 
 
 def sync(
-    user_id: str,
     *,
     client: AuthenticatedClient,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, BaseItemDto]]:
     """Gets the root folder from a user's library.
 
     Args:
-        user_id (str):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -100,20 +108,20 @@ def sync(
     """
 
     return sync_detailed(
-        user_id=user_id,
         client=client,
+        user_id=user_id,
     ).parsed
 
 
 async def asyncio_detailed(
-    user_id: str,
     *,
     client: AuthenticatedClient,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, BaseItemDto]]:
     """Gets the root folder from a user's library.
 
     Args:
-        user_id (str):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -133,14 +141,14 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    user_id: str,
     *,
     client: AuthenticatedClient,
+    user_id: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, BaseItemDto]]:
     """Gets the root folder from a user's library.
 
     Args:
-        user_id (str):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -152,7 +160,7 @@ async def asyncio(
 
     return (
         await asyncio_detailed(
-            user_id=user_id,
             client=client,
+            user_id=user_id,
         )
     ).parsed

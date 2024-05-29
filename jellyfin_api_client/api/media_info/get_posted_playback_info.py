@@ -3,35 +3,42 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.playback_info_dto import PlaybackInfoDto
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.playback_info_response import PlaybackInfoResponse
-from ...types import UNSET, Response, Unset
+from ...models.playback_info_dto import PlaybackInfoDto
+from ...models.problem_details import ProblemDetails
+from ...types import Unset
 
 
 def _get_kwargs(
     item_id: str,
     *,
-    json_body: PlaybackInfoDto,
-    user_id: Union[Unset, None, str] = UNSET,
-    max_streaming_bitrate: Union[Unset, None, int] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    live_stream_id: Union[Unset, None, str] = UNSET,
-    auto_open_live_stream: Union[Unset, None, bool] = UNSET,
-    enable_direct_play: Union[Unset, None, bool] = UNSET,
-    enable_direct_stream: Union[Unset, None, bool] = UNSET,
-    enable_transcoding: Union[Unset, None, bool] = UNSET,
-    allow_video_stream_copy: Union[Unset, None, bool] = UNSET,
-    allow_audio_stream_copy: Union[Unset, None, bool] = UNSET,
+    body: Union[
+        PlaybackInfoDto,
+        PlaybackInfoDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
+    max_streaming_bitrate: Union[Unset, int] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    live_stream_id: Union[Unset, str] = UNSET,
+    auto_open_live_stream: Union[Unset, bool] = UNSET,
+    enable_direct_play: Union[Unset, bool] = UNSET,
+    enable_direct_stream: Union[Unset, bool] = UNSET,
+    enable_transcoding: Union[Unset, bool] = UNSET,
+    allow_video_stream_copy: Union[Unset, bool] = UNSET,
+    allow_audio_stream_copy: Union[Unset, bool] = UNSET,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
     params: Dict[str, Any] = {}
+
     params["userId"] = user_id
 
     params["maxStreamingBitrate"] = max_streaming_bitrate
@@ -62,25 +69,40 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/Items/{itemId}/PlaybackInfo".format(
-            itemId=item_id,
+        "url": "/Items/{item_id}/PlaybackInfo".format(
+            item_id=item_id,
         ),
-        "json": json_json_body,
         "params": params,
     }
+
+    if isinstance(body, PlaybackInfoDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, PlaybackInfoDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, PlaybackInfoResponse]]:
+) -> Optional[Union[Any, PlaybackInfoResponse, ProblemDetails]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = PlaybackInfoResponse.from_dict(response.json())
 
         return response_200
+    if response.status_code == HTTPStatus.NOT_FOUND:
+        response_404 = ProblemDetails.from_dict(response.json())
+
+        return response_404
     if response.status_code == HTTPStatus.UNAUTHORIZED:
         response_401 = cast(Any, None)
         return response_401
@@ -95,7 +117,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, PlaybackInfoResponse]]:
+) -> Response[Union[Any, PlaybackInfoResponse, ProblemDetails]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -108,22 +130,25 @@ def sync_detailed(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: PlaybackInfoDto,
-    user_id: Union[Unset, None, str] = UNSET,
-    max_streaming_bitrate: Union[Unset, None, int] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    live_stream_id: Union[Unset, None, str] = UNSET,
-    auto_open_live_stream: Union[Unset, None, bool] = UNSET,
-    enable_direct_play: Union[Unset, None, bool] = UNSET,
-    enable_direct_stream: Union[Unset, None, bool] = UNSET,
-    enable_transcoding: Union[Unset, None, bool] = UNSET,
-    allow_video_stream_copy: Union[Unset, None, bool] = UNSET,
-    allow_audio_stream_copy: Union[Unset, None, bool] = UNSET,
-) -> Response[Union[Any, PlaybackInfoResponse]]:
+    body: Union[
+        PlaybackInfoDto,
+        PlaybackInfoDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
+    max_streaming_bitrate: Union[Unset, int] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    live_stream_id: Union[Unset, str] = UNSET,
+    auto_open_live_stream: Union[Unset, bool] = UNSET,
+    enable_direct_play: Union[Unset, bool] = UNSET,
+    enable_direct_stream: Union[Unset, bool] = UNSET,
+    enable_transcoding: Union[Unset, bool] = UNSET,
+    allow_video_stream_copy: Union[Unset, bool] = UNSET,
+    allow_audio_stream_copy: Union[Unset, bool] = UNSET,
+) -> Response[Union[Any, PlaybackInfoResponse, ProblemDetails]]:
     """Gets live playback media info for an item.
 
      For backwards compatibility parameters can be sent via Query or Body, with Query having higher
@@ -132,33 +157,34 @@ def sync_detailed(
 
     Args:
         item_id (str):
-        user_id (Union[Unset, None, str]):
-        max_streaming_bitrate (Union[Unset, None, int]):
-        start_time_ticks (Union[Unset, None, int]):
-        audio_stream_index (Union[Unset, None, int]):
-        subtitle_stream_index (Union[Unset, None, int]):
-        max_audio_channels (Union[Unset, None, int]):
-        media_source_id (Union[Unset, None, str]):
-        live_stream_id (Union[Unset, None, str]):
-        auto_open_live_stream (Union[Unset, None, bool]):
-        enable_direct_play (Union[Unset, None, bool]):
-        enable_direct_stream (Union[Unset, None, bool]):
-        enable_transcoding (Union[Unset, None, bool]):
-        allow_video_stream_copy (Union[Unset, None, bool]):
-        allow_audio_stream_copy (Union[Unset, None, bool]):
-        json_body (PlaybackInfoDto): Plabyback info dto.
+        user_id (Union[Unset, str]):
+        max_streaming_bitrate (Union[Unset, int]):
+        start_time_ticks (Union[Unset, int]):
+        audio_stream_index (Union[Unset, int]):
+        subtitle_stream_index (Union[Unset, int]):
+        max_audio_channels (Union[Unset, int]):
+        media_source_id (Union[Unset, str]):
+        live_stream_id (Union[Unset, str]):
+        auto_open_live_stream (Union[Unset, bool]):
+        enable_direct_play (Union[Unset, bool]):
+        enable_direct_stream (Union[Unset, bool]):
+        enable_transcoding (Union[Unset, bool]):
+        allow_video_stream_copy (Union[Unset, bool]):
+        allow_audio_stream_copy (Union[Unset, bool]):
+        body (PlaybackInfoDto): Plabyback info dto.
+        body (PlaybackInfoDto): Plabyback info dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, PlaybackInfoResponse]]
+        Response[Union[Any, PlaybackInfoResponse, ProblemDetails]]
     """
 
     kwargs = _get_kwargs(
         item_id=item_id,
-        json_body=json_body,
+        body=body,
         user_id=user_id,
         max_streaming_bitrate=max_streaming_bitrate,
         start_time_ticks=start_time_ticks,
@@ -186,22 +212,25 @@ def sync(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: PlaybackInfoDto,
-    user_id: Union[Unset, None, str] = UNSET,
-    max_streaming_bitrate: Union[Unset, None, int] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    live_stream_id: Union[Unset, None, str] = UNSET,
-    auto_open_live_stream: Union[Unset, None, bool] = UNSET,
-    enable_direct_play: Union[Unset, None, bool] = UNSET,
-    enable_direct_stream: Union[Unset, None, bool] = UNSET,
-    enable_transcoding: Union[Unset, None, bool] = UNSET,
-    allow_video_stream_copy: Union[Unset, None, bool] = UNSET,
-    allow_audio_stream_copy: Union[Unset, None, bool] = UNSET,
-) -> Optional[Union[Any, PlaybackInfoResponse]]:
+    body: Union[
+        PlaybackInfoDto,
+        PlaybackInfoDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
+    max_streaming_bitrate: Union[Unset, int] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    live_stream_id: Union[Unset, str] = UNSET,
+    auto_open_live_stream: Union[Unset, bool] = UNSET,
+    enable_direct_play: Union[Unset, bool] = UNSET,
+    enable_direct_stream: Union[Unset, bool] = UNSET,
+    enable_transcoding: Union[Unset, bool] = UNSET,
+    allow_video_stream_copy: Union[Unset, bool] = UNSET,
+    allow_audio_stream_copy: Union[Unset, bool] = UNSET,
+) -> Optional[Union[Any, PlaybackInfoResponse, ProblemDetails]]:
     """Gets live playback media info for an item.
 
      For backwards compatibility parameters can be sent via Query or Body, with Query having higher
@@ -210,34 +239,35 @@ def sync(
 
     Args:
         item_id (str):
-        user_id (Union[Unset, None, str]):
-        max_streaming_bitrate (Union[Unset, None, int]):
-        start_time_ticks (Union[Unset, None, int]):
-        audio_stream_index (Union[Unset, None, int]):
-        subtitle_stream_index (Union[Unset, None, int]):
-        max_audio_channels (Union[Unset, None, int]):
-        media_source_id (Union[Unset, None, str]):
-        live_stream_id (Union[Unset, None, str]):
-        auto_open_live_stream (Union[Unset, None, bool]):
-        enable_direct_play (Union[Unset, None, bool]):
-        enable_direct_stream (Union[Unset, None, bool]):
-        enable_transcoding (Union[Unset, None, bool]):
-        allow_video_stream_copy (Union[Unset, None, bool]):
-        allow_audio_stream_copy (Union[Unset, None, bool]):
-        json_body (PlaybackInfoDto): Plabyback info dto.
+        user_id (Union[Unset, str]):
+        max_streaming_bitrate (Union[Unset, int]):
+        start_time_ticks (Union[Unset, int]):
+        audio_stream_index (Union[Unset, int]):
+        subtitle_stream_index (Union[Unset, int]):
+        max_audio_channels (Union[Unset, int]):
+        media_source_id (Union[Unset, str]):
+        live_stream_id (Union[Unset, str]):
+        auto_open_live_stream (Union[Unset, bool]):
+        enable_direct_play (Union[Unset, bool]):
+        enable_direct_stream (Union[Unset, bool]):
+        enable_transcoding (Union[Unset, bool]):
+        allow_video_stream_copy (Union[Unset, bool]):
+        allow_audio_stream_copy (Union[Unset, bool]):
+        body (PlaybackInfoDto): Plabyback info dto.
+        body (PlaybackInfoDto): Plabyback info dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, PlaybackInfoResponse]
+        Union[Any, PlaybackInfoResponse, ProblemDetails]
     """
 
     return sync_detailed(
         item_id=item_id,
         client=client,
-        json_body=json_body,
+        body=body,
         user_id=user_id,
         max_streaming_bitrate=max_streaming_bitrate,
         start_time_ticks=start_time_ticks,
@@ -259,22 +289,25 @@ async def asyncio_detailed(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: PlaybackInfoDto,
-    user_id: Union[Unset, None, str] = UNSET,
-    max_streaming_bitrate: Union[Unset, None, int] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    live_stream_id: Union[Unset, None, str] = UNSET,
-    auto_open_live_stream: Union[Unset, None, bool] = UNSET,
-    enable_direct_play: Union[Unset, None, bool] = UNSET,
-    enable_direct_stream: Union[Unset, None, bool] = UNSET,
-    enable_transcoding: Union[Unset, None, bool] = UNSET,
-    allow_video_stream_copy: Union[Unset, None, bool] = UNSET,
-    allow_audio_stream_copy: Union[Unset, None, bool] = UNSET,
-) -> Response[Union[Any, PlaybackInfoResponse]]:
+    body: Union[
+        PlaybackInfoDto,
+        PlaybackInfoDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
+    max_streaming_bitrate: Union[Unset, int] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    live_stream_id: Union[Unset, str] = UNSET,
+    auto_open_live_stream: Union[Unset, bool] = UNSET,
+    enable_direct_play: Union[Unset, bool] = UNSET,
+    enable_direct_stream: Union[Unset, bool] = UNSET,
+    enable_transcoding: Union[Unset, bool] = UNSET,
+    allow_video_stream_copy: Union[Unset, bool] = UNSET,
+    allow_audio_stream_copy: Union[Unset, bool] = UNSET,
+) -> Response[Union[Any, PlaybackInfoResponse, ProblemDetails]]:
     """Gets live playback media info for an item.
 
      For backwards compatibility parameters can be sent via Query or Body, with Query having higher
@@ -283,33 +316,34 @@ async def asyncio_detailed(
 
     Args:
         item_id (str):
-        user_id (Union[Unset, None, str]):
-        max_streaming_bitrate (Union[Unset, None, int]):
-        start_time_ticks (Union[Unset, None, int]):
-        audio_stream_index (Union[Unset, None, int]):
-        subtitle_stream_index (Union[Unset, None, int]):
-        max_audio_channels (Union[Unset, None, int]):
-        media_source_id (Union[Unset, None, str]):
-        live_stream_id (Union[Unset, None, str]):
-        auto_open_live_stream (Union[Unset, None, bool]):
-        enable_direct_play (Union[Unset, None, bool]):
-        enable_direct_stream (Union[Unset, None, bool]):
-        enable_transcoding (Union[Unset, None, bool]):
-        allow_video_stream_copy (Union[Unset, None, bool]):
-        allow_audio_stream_copy (Union[Unset, None, bool]):
-        json_body (PlaybackInfoDto): Plabyback info dto.
+        user_id (Union[Unset, str]):
+        max_streaming_bitrate (Union[Unset, int]):
+        start_time_ticks (Union[Unset, int]):
+        audio_stream_index (Union[Unset, int]):
+        subtitle_stream_index (Union[Unset, int]):
+        max_audio_channels (Union[Unset, int]):
+        media_source_id (Union[Unset, str]):
+        live_stream_id (Union[Unset, str]):
+        auto_open_live_stream (Union[Unset, bool]):
+        enable_direct_play (Union[Unset, bool]):
+        enable_direct_stream (Union[Unset, bool]):
+        enable_transcoding (Union[Unset, bool]):
+        allow_video_stream_copy (Union[Unset, bool]):
+        allow_audio_stream_copy (Union[Unset, bool]):
+        body (PlaybackInfoDto): Plabyback info dto.
+        body (PlaybackInfoDto): Plabyback info dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, PlaybackInfoResponse]]
+        Response[Union[Any, PlaybackInfoResponse, ProblemDetails]]
     """
 
     kwargs = _get_kwargs(
         item_id=item_id,
-        json_body=json_body,
+        body=body,
         user_id=user_id,
         max_streaming_bitrate=max_streaming_bitrate,
         start_time_ticks=start_time_ticks,
@@ -335,22 +369,25 @@ async def asyncio(
     item_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: PlaybackInfoDto,
-    user_id: Union[Unset, None, str] = UNSET,
-    max_streaming_bitrate: Union[Unset, None, int] = UNSET,
-    start_time_ticks: Union[Unset, None, int] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    max_audio_channels: Union[Unset, None, int] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    live_stream_id: Union[Unset, None, str] = UNSET,
-    auto_open_live_stream: Union[Unset, None, bool] = UNSET,
-    enable_direct_play: Union[Unset, None, bool] = UNSET,
-    enable_direct_stream: Union[Unset, None, bool] = UNSET,
-    enable_transcoding: Union[Unset, None, bool] = UNSET,
-    allow_video_stream_copy: Union[Unset, None, bool] = UNSET,
-    allow_audio_stream_copy: Union[Unset, None, bool] = UNSET,
-) -> Optional[Union[Any, PlaybackInfoResponse]]:
+    body: Union[
+        PlaybackInfoDto,
+        PlaybackInfoDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
+    max_streaming_bitrate: Union[Unset, int] = UNSET,
+    start_time_ticks: Union[Unset, int] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    max_audio_channels: Union[Unset, int] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    live_stream_id: Union[Unset, str] = UNSET,
+    auto_open_live_stream: Union[Unset, bool] = UNSET,
+    enable_direct_play: Union[Unset, bool] = UNSET,
+    enable_direct_stream: Union[Unset, bool] = UNSET,
+    enable_transcoding: Union[Unset, bool] = UNSET,
+    allow_video_stream_copy: Union[Unset, bool] = UNSET,
+    allow_audio_stream_copy: Union[Unset, bool] = UNSET,
+) -> Optional[Union[Any, PlaybackInfoResponse, ProblemDetails]]:
     """Gets live playback media info for an item.
 
      For backwards compatibility parameters can be sent via Query or Body, with Query having higher
@@ -359,35 +396,36 @@ async def asyncio(
 
     Args:
         item_id (str):
-        user_id (Union[Unset, None, str]):
-        max_streaming_bitrate (Union[Unset, None, int]):
-        start_time_ticks (Union[Unset, None, int]):
-        audio_stream_index (Union[Unset, None, int]):
-        subtitle_stream_index (Union[Unset, None, int]):
-        max_audio_channels (Union[Unset, None, int]):
-        media_source_id (Union[Unset, None, str]):
-        live_stream_id (Union[Unset, None, str]):
-        auto_open_live_stream (Union[Unset, None, bool]):
-        enable_direct_play (Union[Unset, None, bool]):
-        enable_direct_stream (Union[Unset, None, bool]):
-        enable_transcoding (Union[Unset, None, bool]):
-        allow_video_stream_copy (Union[Unset, None, bool]):
-        allow_audio_stream_copy (Union[Unset, None, bool]):
-        json_body (PlaybackInfoDto): Plabyback info dto.
+        user_id (Union[Unset, str]):
+        max_streaming_bitrate (Union[Unset, int]):
+        start_time_ticks (Union[Unset, int]):
+        audio_stream_index (Union[Unset, int]):
+        subtitle_stream_index (Union[Unset, int]):
+        max_audio_channels (Union[Unset, int]):
+        media_source_id (Union[Unset, str]):
+        live_stream_id (Union[Unset, str]):
+        auto_open_live_stream (Union[Unset, bool]):
+        enable_direct_play (Union[Unset, bool]):
+        enable_direct_stream (Union[Unset, bool]):
+        enable_transcoding (Union[Unset, bool]):
+        allow_video_stream_copy (Union[Unset, bool]):
+        allow_audio_stream_copy (Union[Unset, bool]):
+        body (PlaybackInfoDto): Plabyback info dto.
+        body (PlaybackInfoDto): Plabyback info dto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, PlaybackInfoResponse]
+        Union[Any, PlaybackInfoResponse, ProblemDetails]
     """
 
     return (
         await asyncio_detailed(
             item_id=item_id,
             client=client,
-            json_body=json_body,
+            body=body,
             user_id=user_id,
             max_streaming_bitrate=max_streaming_bitrate,
             start_time_ticks=start_time_ticks,

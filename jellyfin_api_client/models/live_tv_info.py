@@ -1,8 +1,12 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, List
 
 if TYPE_CHECKING:
     from ..models.live_tv_service_info import LiveTvServiceInfo
@@ -30,10 +34,10 @@ class LiveTvInfo:
             services = []
             for services_item_data in self.services:
                 services_item = services_item_data.to_dict()
-
                 services.append(services_item)
 
         is_enabled = self.is_enabled
+
         enabled_users: Union[Unset, List[str]] = UNSET
         if not isinstance(self.enabled_users, Unset):
             enabled_users = self.enabled_users

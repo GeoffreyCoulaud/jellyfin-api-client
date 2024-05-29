@@ -3,24 +3,25 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response
+from ... import errors
+
 from ...models.problem_details import ProblemDetails
 from ...models.task_info import TaskInfo
-from ...types import Response
 
 
 def _get_kwargs(
     task_id: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/ScheduledTasks/{taskId}".format(
-            taskId=task_id,
+        "url": "/ScheduledTasks/{task_id}".format(
+            task_id=task_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

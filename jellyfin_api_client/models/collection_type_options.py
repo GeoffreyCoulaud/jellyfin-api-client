@@ -2,14 +2,14 @@ from enum import Enum
 
 
 class CollectionTypeOptions(str, Enum):
-    BOOKS = "Books"
-    BOXSETS = "BoxSets"
-    HOMEVIDEOS = "HomeVideos"
-    MIXED = "Mixed"
-    MOVIES = "Movies"
-    MUSIC = "Music"
-    MUSICVIDEOS = "MusicVideos"
-    TVSHOWS = "TvShows"
+    BOOKS = "books"
+    BOXSETS = "boxsets"
+    HOMEVIDEOS = "homevideos"
+    MIXED = "mixed"
+    MOVIES = "movies"
+    MUSIC = "music"
+    MUSICVIDEOS = "musicvideos"
+    TVSHOWS = "tvshows"
 
     def __str__(self) -> str:
         return str(self.value)

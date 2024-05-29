@@ -3,19 +3,20 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.parental_rating import ParentalRating
 from ...types import Response
+from ... import errors
+
+from ...models.parental_rating import ParentalRating
 
 
 def _get_kwargs() -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Localization/ParentalRatings",
     }
+
+    return _kwargs
 
 
 def _parse_response(

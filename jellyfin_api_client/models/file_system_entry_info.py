@@ -1,9 +1,13 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
-from ..models.file_system_entry_type import FileSystemEntryType
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..models.file_system_entry_type import FileSystemEntryType
+
 
 T = TypeVar("T", bound="FileSystemEntryInfo")
 
@@ -24,7 +28,9 @@ class FileSystemEntryInfo:
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
+
         path = self.path
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value

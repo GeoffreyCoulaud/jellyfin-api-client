@@ -1,11 +1,17 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
 
-from ..models.dlna_profile_type import DlnaProfileType
-from ..models.encoding_context import EncodingContext
-from ..models.transcode_seek_info import TranscodeSeekInfo
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast
+from typing import List
+from ..models.encoding_context import EncodingContext
+from ..models.dlna_profile_type import DlnaProfileType
+from ..models.transcode_seek_info import TranscodeSeekInfo
+from ..models.media_stream_protocol import MediaStreamProtocol
 
 if TYPE_CHECKING:
     from ..models.profile_condition import ProfileCondition
@@ -22,17 +28,18 @@ class TranscodingProfile:
         type (Union[Unset, DlnaProfileType]):
         video_codec (Union[Unset, str]):
         audio_codec (Union[Unset, str]):
-        protocol (Union[Unset, str]):
-        estimate_content_length (Union[Unset, bool]):
-        enable_mpegts_m2_ts_mode (Union[Unset, bool]):
+        protocol (Union[Unset, MediaStreamProtocol]): Media streaming protocol.
+            Lowercase for backwards compatibility.
+        estimate_content_length (Union[Unset, bool]):  Default: False.
+        enable_mpegts_m2_ts_mode (Union[Unset, bool]):  Default: False.
         transcode_seek_info (Union[Unset, TranscodeSeekInfo]):  Default: TranscodeSeekInfo.AUTO.
-        copy_timestamps (Union[Unset, bool]):
+        copy_timestamps (Union[Unset, bool]):  Default: False.
         context (Union[Unset, EncodingContext]):  Default: EncodingContext.STREAMING.
-        enable_subtitles_in_manifest (Union[Unset, bool]):
-        max_audio_channels (Union[Unset, None, str]):
-        min_segments (Union[Unset, int]):
-        segment_length (Union[Unset, int]):
-        break_on_non_key_frames (Union[Unset, bool]):
+        enable_subtitles_in_manifest (Union[Unset, bool]):  Default: False.
+        max_audio_channels (Union[None, Unset, str]):
+        min_segments (Union[Unset, int]):  Default: 0.
+        segment_length (Union[Unset, int]):  Default: 0.
+        break_on_non_key_frames (Union[Unset, bool]):  Default: False.
         conditions (Union[Unset, List['ProfileCondition']]):
     """
 
@@ -40,14 +47,14 @@ class TranscodingProfile:
     type: Union[Unset, DlnaProfileType] = UNSET
     video_codec: Union[Unset, str] = UNSET
     audio_codec: Union[Unset, str] = UNSET
-    protocol: Union[Unset, str] = UNSET
+    protocol: Union[Unset, MediaStreamProtocol] = UNSET
     estimate_content_length: Union[Unset, bool] = False
     enable_mpegts_m2_ts_mode: Union[Unset, bool] = False
     transcode_seek_info: Union[Unset, TranscodeSeekInfo] = TranscodeSeekInfo.AUTO
     copy_timestamps: Union[Unset, bool] = False
     context: Union[Unset, EncodingContext] = EncodingContext.STREAMING
     enable_subtitles_in_manifest: Union[Unset, bool] = False
-    max_audio_channels: Union[Unset, None, str] = UNSET
+    max_audio_channels: Union[None, Unset, str] = UNSET
     min_segments: Union[Unset, int] = 0
     segment_length: Union[Unset, int] = 0
     break_on_non_key_frames: Union[Unset, bool] = False
@@ -55,35 +62,52 @@ class TranscodingProfile:
 
     def to_dict(self) -> Dict[str, Any]:
         container = self.container
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
         video_codec = self.video_codec
+
         audio_codec = self.audio_codec
-        protocol = self.protocol
+
+        protocol: Union[Unset, str] = UNSET
+        if not isinstance(self.protocol, Unset):
+            protocol = self.protocol.value
+
         estimate_content_length = self.estimate_content_length
+
         enable_mpegts_m2_ts_mode = self.enable_mpegts_m2_ts_mode
+
         transcode_seek_info: Union[Unset, str] = UNSET
         if not isinstance(self.transcode_seek_info, Unset):
             transcode_seek_info = self.transcode_seek_info.value
 
         copy_timestamps = self.copy_timestamps
+
         context: Union[Unset, str] = UNSET
         if not isinstance(self.context, Unset):
             context = self.context.value
 
         enable_subtitles_in_manifest = self.enable_subtitles_in_manifest
-        max_audio_channels = self.max_audio_channels
+
+        max_audio_channels: Union[None, Unset, str]
+        if isinstance(self.max_audio_channels, Unset):
+            max_audio_channels = UNSET
+        else:
+            max_audio_channels = self.max_audio_channels
+
         min_segments = self.min_segments
+
         segment_length = self.segment_length
+
         break_on_non_key_frames = self.break_on_non_key_frames
+
         conditions: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.conditions, Unset):
             conditions = []
             for conditions_item_data in self.conditions:
                 conditions_item = conditions_item_data.to_dict()
-
                 conditions.append(conditions_item)
 
         field_dict: Dict[str, Any] = {}
@@ -141,7 +165,12 @@ class TranscodingProfile:
 
         audio_codec = d.pop("AudioCodec", UNSET)
 
-        protocol = d.pop("Protocol", UNSET)
+        _protocol = d.pop("Protocol", UNSET)
+        protocol: Union[Unset, MediaStreamProtocol]
+        if isinstance(_protocol, Unset):
+            protocol = UNSET
+        else:
+            protocol = MediaStreamProtocol(_protocol)
 
         estimate_content_length = d.pop("EstimateContentLength", UNSET)
 
@@ -165,7 +194,14 @@ class TranscodingProfile:
 
         enable_subtitles_in_manifest = d.pop("EnableSubtitlesInManifest", UNSET)
 
-        max_audio_channels = d.pop("MaxAudioChannels", UNSET)
+        def _parse_max_audio_channels(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        max_audio_channels = _parse_max_audio_channels(d.pop("MaxAudioChannels", UNSET))
 
         min_segments = d.pop("MinSegments", UNSET)
 

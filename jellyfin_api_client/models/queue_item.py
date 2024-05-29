@@ -1,8 +1,12 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+
 
 T = TypeVar("T", bound="QueueItem")
 
@@ -12,15 +16,20 @@ class QueueItem:
     """
     Attributes:
         id (Union[Unset, str]):
-        playlist_item_id (Union[Unset, None, str]):
+        playlist_item_id (Union[None, Unset, str]):
     """
 
     id: Union[Unset, str] = UNSET
-    playlist_item_id: Union[Unset, None, str] = UNSET
+    playlist_item_id: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
-        playlist_item_id = self.playlist_item_id
+
+        playlist_item_id: Union[None, Unset, str]
+        if isinstance(self.playlist_item_id, Unset):
+            playlist_item_id = UNSET
+        else:
+            playlist_item_id = self.playlist_item_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -36,7 +45,14 @@ class QueueItem:
         d = src_dict.copy()
         id = d.pop("Id", UNSET)
 
-        playlist_item_id = d.pop("PlaylistItemId", UNSET)
+        def _parse_playlist_item_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        playlist_item_id = _parse_playlist_item_id(d.pop("PlaylistItemId", UNSET))
 
         queue_item = cls(
             id=id,

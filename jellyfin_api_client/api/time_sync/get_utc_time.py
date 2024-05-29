@@ -3,19 +3,20 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.utc_time_response import UtcTimeResponse
 from ...types import Response
+from ... import errors
+
+from ...models.utc_time_response import UtcTimeResponse
 
 
 def _get_kwargs() -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/GetUtcTime",
     }
+
+    return _kwargs
 
 
 def _parse_response(

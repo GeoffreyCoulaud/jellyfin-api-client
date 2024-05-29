@@ -3,24 +3,25 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response
+from ... import errors
+
 from ...models.image_provider_info import ImageProviderInfo
 from ...models.problem_details import ProblemDetails
-from ...types import Response
 
 
 def _get_kwargs(
     item_id: str,
 ) -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": "/Items/{itemId}/RemoteImages/Providers".format(
-            itemId=item_id,
+        "url": "/Items/{item_id}/RemoteImages/Providers".format(
+            item_id=item_id,
         ),
     }
+
+    return _kwargs
 
 
 def _parse_response(

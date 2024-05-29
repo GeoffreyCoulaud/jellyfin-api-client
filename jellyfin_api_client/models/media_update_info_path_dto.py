@@ -1,8 +1,12 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+
 
 T = TypeVar("T", bound="MediaUpdateInfoPathDto")
 
@@ -12,17 +16,26 @@ class MediaUpdateInfoPathDto:
     """The media update info path.
 
     Attributes:
-        path (Union[Unset, None, str]): Gets or sets media path.
-        update_type (Union[Unset, None, str]): Gets or sets media update type.
+        path (Union[None, Unset, str]): Gets or sets media path.
+        update_type (Union[None, Unset, str]): Gets or sets media update type.
             Created, Modified, Deleted.
     """
 
-    path: Union[Unset, None, str] = UNSET
-    update_type: Union[Unset, None, str] = UNSET
+    path: Union[None, Unset, str] = UNSET
+    update_type: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        path = self.path
-        update_type = self.update_type
+        path: Union[None, Unset, str]
+        if isinstance(self.path, Unset):
+            path = UNSET
+        else:
+            path = self.path
+
+        update_type: Union[None, Unset, str]
+        if isinstance(self.update_type, Unset):
+            update_type = UNSET
+        else:
+            update_type = self.update_type
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -36,9 +49,24 @@ class MediaUpdateInfoPathDto:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        path = d.pop("Path", UNSET)
 
-        update_type = d.pop("UpdateType", UNSET)
+        def _parse_path(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        path = _parse_path(d.pop("Path", UNSET))
+
+        def _parse_update_type(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        update_type = _parse_update_type(d.pop("UpdateType", UNSET))
 
         media_update_info_path_dto = cls(
             path=path,

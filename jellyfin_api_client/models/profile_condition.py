@@ -1,10 +1,15 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
-from ..models.profile_condition_type import ProfileConditionType
-from ..models.profile_condition_value import ProfileConditionValue
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast
+from ..models.profile_condition_value import ProfileConditionValue
+from ..models.profile_condition_type import ProfileConditionType
+
 
 T = TypeVar("T", bound="ProfileCondition")
 
@@ -15,13 +20,13 @@ class ProfileCondition:
     Attributes:
         condition (Union[Unset, ProfileConditionType]):
         property_ (Union[Unset, ProfileConditionValue]):
-        value (Union[Unset, None, str]):
+        value (Union[None, Unset, str]):
         is_required (Union[Unset, bool]):
     """
 
     condition: Union[Unset, ProfileConditionType] = UNSET
     property_: Union[Unset, ProfileConditionValue] = UNSET
-    value: Union[Unset, None, str] = UNSET
+    value: Union[None, Unset, str] = UNSET
     is_required: Union[Unset, bool] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
@@ -33,7 +38,12 @@ class ProfileCondition:
         if not isinstance(self.property_, Unset):
             property_ = self.property_.value
 
-        value = self.value
+        value: Union[None, Unset, str]
+        if isinstance(self.value, Unset):
+            value = UNSET
+        else:
+            value = self.value
+
         is_required = self.is_required
 
         field_dict: Dict[str, Any] = {}
@@ -66,7 +76,14 @@ class ProfileCondition:
         else:
             property_ = ProfileConditionValue(_property_)
 
-        value = d.pop("Value", UNSET)
+        def _parse_value(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        value = _parse_value(d.pop("Value", UNSET))
 
         is_required = d.pop("IsRequired", UNSET)
 

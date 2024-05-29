@@ -1,8 +1,12 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import List
 
 if TYPE_CHECKING:
     from ..models.media_update_info_path_dto import MediaUpdateInfoPathDto
@@ -27,7 +31,6 @@ class MediaUpdateInfoDto:
             updates = []
             for updates_item_data in self.updates:
                 updates_item = updates_item_data.to_dict()
-
                 updates.append(updates_item)
 
         field_dict: Dict[str, Any] = {}

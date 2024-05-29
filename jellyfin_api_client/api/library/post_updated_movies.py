@@ -3,33 +3,38 @@ from typing import Any, Dict, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...types import UNSET, Response, Unset
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import Unset
 
 
 def _get_kwargs(
     *,
-    tmdb_id: Union[Unset, None, str] = UNSET,
-    imdb_id: Union[Unset, None, str] = UNSET,
+    tmdb_id: Union[Unset, str] = UNSET,
+    imdb_id: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
+
     params["tmdbId"] = tmdb_id
 
     params["imdbId"] = imdb_id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
         "url": "/Library/Movies/Updated",
         "params": params,
     }
 
+    return _kwargs
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
     if response.status_code == HTTPStatus.UNAUTHORIZED:
@@ -42,7 +47,9 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -54,14 +61,14 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    tmdb_id: Union[Unset, None, str] = UNSET,
-    imdb_id: Union[Unset, None, str] = UNSET,
+    tmdb_id: Union[Unset, str] = UNSET,
+    imdb_id: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
     """Reports that new movies have been added by an external source.
 
     Args:
-        tmdb_id (Union[Unset, None, str]):
-        imdb_id (Union[Unset, None, str]):
+        tmdb_id (Union[Unset, str]):
+        imdb_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -86,14 +93,14 @@ def sync_detailed(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    tmdb_id: Union[Unset, None, str] = UNSET,
-    imdb_id: Union[Unset, None, str] = UNSET,
+    tmdb_id: Union[Unset, str] = UNSET,
+    imdb_id: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
     """Reports that new movies have been added by an external source.
 
     Args:
-        tmdb_id (Union[Unset, None, str]):
-        imdb_id (Union[Unset, None, str]):
+        tmdb_id (Union[Unset, str]):
+        imdb_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

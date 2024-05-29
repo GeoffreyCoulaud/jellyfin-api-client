@@ -1,10 +1,15 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
 
-from ..models.sync_play_user_access_type import SyncPlayUserAccessType
-from ..models.unrated_item import UnratedItem
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..models.sync_play_user_access_type import SyncPlayUserAccessType
+from typing import cast
+from typing import List
+from ..models.unrated_item import UnratedItem
 
 if TYPE_CHECKING:
     from ..models.access_schedule import AccessSchedule
@@ -17,14 +22,23 @@ T = TypeVar("T", bound="UserPolicy")
 class UserPolicy:
     """
     Attributes:
+        authentication_provider_id (str):
+        password_reset_provider_id (str):
         is_administrator (Union[Unset, bool]): Gets or sets a value indicating whether this instance is administrator.
         is_hidden (Union[Unset, bool]): Gets or sets a value indicating whether this instance is hidden.
+        enable_collection_management (Union[Unset, bool]): Gets or sets a value indicating whether this instance can
+            manage collections. Default: False.
+        enable_subtitle_management (Union[Unset, bool]): Gets or sets a value indicating whether this instance can
+            manage subtitles. Default: False.
+        enable_lyric_management (Union[Unset, bool]): Gets or sets a value indicating whether this user can manage
+            lyrics. Default: False.
         is_disabled (Union[Unset, bool]): Gets or sets a value indicating whether this instance is disabled.
-        max_parental_rating (Union[Unset, None, int]): Gets or sets the max parental rating.
-        blocked_tags (Union[Unset, None, List[str]]):
+        max_parental_rating (Union[None, Unset, int]): Gets or sets the max parental rating.
+        blocked_tags (Union[List[str], None, Unset]):
+        allowed_tags (Union[List[str], None, Unset]):
         enable_user_preference_access (Union[Unset, bool]):
-        access_schedules (Union[Unset, None, List['AccessSchedule']]):
-        block_unrated_items (Union[Unset, None, List[UnratedItem]]):
+        access_schedules (Union[List['AccessSchedule'], None, Unset]):
+        block_unrated_items (Union[List[UnratedItem], None, Unset]):
         enable_remote_control_of_other_users (Union[Unset, bool]):
         enable_shared_device_control (Union[Unset, bool]):
         enable_remote_access (Union[Unset, bool]):
@@ -36,36 +50,40 @@ class UserPolicy:
         enable_playback_remuxing (Union[Unset, bool]):
         force_remote_source_transcoding (Union[Unset, bool]):
         enable_content_deletion (Union[Unset, bool]):
-        enable_content_deletion_from_folders (Union[Unset, None, List[str]]):
+        enable_content_deletion_from_folders (Union[List[str], None, Unset]):
         enable_content_downloading (Union[Unset, bool]):
         enable_sync_transcoding (Union[Unset, bool]): Gets or sets a value indicating whether [enable synchronize].
         enable_media_conversion (Union[Unset, bool]):
-        enabled_devices (Union[Unset, None, List[str]]):
+        enabled_devices (Union[List[str], None, Unset]):
         enable_all_devices (Union[Unset, bool]):
-        enabled_channels (Union[Unset, None, List[str]]):
+        enabled_channels (Union[List[str], None, Unset]):
         enable_all_channels (Union[Unset, bool]):
-        enabled_folders (Union[Unset, None, List[str]]):
+        enabled_folders (Union[List[str], None, Unset]):
         enable_all_folders (Union[Unset, bool]):
         invalid_login_attempt_count (Union[Unset, int]):
         login_attempts_before_lockout (Union[Unset, int]):
         max_active_sessions (Union[Unset, int]):
         enable_public_sharing (Union[Unset, bool]):
-        blocked_media_folders (Union[Unset, None, List[str]]):
-        blocked_channels (Union[Unset, None, List[str]]):
+        blocked_media_folders (Union[List[str], None, Unset]):
+        blocked_channels (Union[List[str], None, Unset]):
         remote_client_bitrate_limit (Union[Unset, int]):
-        authentication_provider_id (Union[Unset, None, str]):
-        password_reset_provider_id (Union[Unset, None, str]):
         sync_play_access (Union[Unset, SyncPlayUserAccessType]): Enum SyncPlayUserAccessType.
     """
 
+    authentication_provider_id: str
+    password_reset_provider_id: str
     is_administrator: Union[Unset, bool] = UNSET
     is_hidden: Union[Unset, bool] = UNSET
+    enable_collection_management: Union[Unset, bool] = False
+    enable_subtitle_management: Union[Unset, bool] = False
+    enable_lyric_management: Union[Unset, bool] = False
     is_disabled: Union[Unset, bool] = UNSET
-    max_parental_rating: Union[Unset, None, int] = UNSET
-    blocked_tags: Union[Unset, None, List[str]] = UNSET
+    max_parental_rating: Union[None, Unset, int] = UNSET
+    blocked_tags: Union[List[str], None, Unset] = UNSET
+    allowed_tags: Union[List[str], None, Unset] = UNSET
     enable_user_preference_access: Union[Unset, bool] = UNSET
-    access_schedules: Union[Unset, None, List["AccessSchedule"]] = UNSET
-    block_unrated_items: Union[Unset, None, List[UnratedItem]] = UNSET
+    access_schedules: Union[List["AccessSchedule"], None, Unset] = UNSET
+    block_unrated_items: Union[List[UnratedItem], None, Unset] = UNSET
     enable_remote_control_of_other_users: Union[Unset, bool] = UNSET
     enable_shared_device_control: Union[Unset, bool] = UNSET
     enable_remote_access: Union[Unset, bool] = UNSET
@@ -77,144 +95,227 @@ class UserPolicy:
     enable_playback_remuxing: Union[Unset, bool] = UNSET
     force_remote_source_transcoding: Union[Unset, bool] = UNSET
     enable_content_deletion: Union[Unset, bool] = UNSET
-    enable_content_deletion_from_folders: Union[Unset, None, List[str]] = UNSET
+    enable_content_deletion_from_folders: Union[List[str], None, Unset] = UNSET
     enable_content_downloading: Union[Unset, bool] = UNSET
     enable_sync_transcoding: Union[Unset, bool] = UNSET
     enable_media_conversion: Union[Unset, bool] = UNSET
-    enabled_devices: Union[Unset, None, List[str]] = UNSET
+    enabled_devices: Union[List[str], None, Unset] = UNSET
     enable_all_devices: Union[Unset, bool] = UNSET
-    enabled_channels: Union[Unset, None, List[str]] = UNSET
+    enabled_channels: Union[List[str], None, Unset] = UNSET
     enable_all_channels: Union[Unset, bool] = UNSET
-    enabled_folders: Union[Unset, None, List[str]] = UNSET
+    enabled_folders: Union[List[str], None, Unset] = UNSET
     enable_all_folders: Union[Unset, bool] = UNSET
     invalid_login_attempt_count: Union[Unset, int] = UNSET
     login_attempts_before_lockout: Union[Unset, int] = UNSET
     max_active_sessions: Union[Unset, int] = UNSET
     enable_public_sharing: Union[Unset, bool] = UNSET
-    blocked_media_folders: Union[Unset, None, List[str]] = UNSET
-    blocked_channels: Union[Unset, None, List[str]] = UNSET
+    blocked_media_folders: Union[List[str], None, Unset] = UNSET
+    blocked_channels: Union[List[str], None, Unset] = UNSET
     remote_client_bitrate_limit: Union[Unset, int] = UNSET
-    authentication_provider_id: Union[Unset, None, str] = UNSET
-    password_reset_provider_id: Union[Unset, None, str] = UNSET
     sync_play_access: Union[Unset, SyncPlayUserAccessType] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
+        authentication_provider_id = self.authentication_provider_id
+
+        password_reset_provider_id = self.password_reset_provider_id
+
         is_administrator = self.is_administrator
+
         is_hidden = self.is_hidden
+
+        enable_collection_management = self.enable_collection_management
+
+        enable_subtitle_management = self.enable_subtitle_management
+
+        enable_lyric_management = self.enable_lyric_management
+
         is_disabled = self.is_disabled
-        max_parental_rating = self.max_parental_rating
-        blocked_tags: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.blocked_tags, Unset):
-            if self.blocked_tags is None:
-                blocked_tags = None
-            else:
-                blocked_tags = self.blocked_tags
+
+        max_parental_rating: Union[None, Unset, int]
+        if isinstance(self.max_parental_rating, Unset):
+            max_parental_rating = UNSET
+        else:
+            max_parental_rating = self.max_parental_rating
+
+        blocked_tags: Union[List[str], None, Unset]
+        if isinstance(self.blocked_tags, Unset):
+            blocked_tags = UNSET
+        elif isinstance(self.blocked_tags, list):
+            blocked_tags = self.blocked_tags
+
+        else:
+            blocked_tags = self.blocked_tags
+
+        allowed_tags: Union[List[str], None, Unset]
+        if isinstance(self.allowed_tags, Unset):
+            allowed_tags = UNSET
+        elif isinstance(self.allowed_tags, list):
+            allowed_tags = self.allowed_tags
+
+        else:
+            allowed_tags = self.allowed_tags
 
         enable_user_preference_access = self.enable_user_preference_access
-        access_schedules: Union[Unset, None, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.access_schedules, Unset):
-            if self.access_schedules is None:
-                access_schedules = None
-            else:
-                access_schedules = []
-                for access_schedules_item_data in self.access_schedules:
-                    access_schedules_item = access_schedules_item_data.to_dict()
 
-                    access_schedules.append(access_schedules_item)
+        access_schedules: Union[List[Dict[str, Any]], None, Unset]
+        if isinstance(self.access_schedules, Unset):
+            access_schedules = UNSET
+        elif isinstance(self.access_schedules, list):
+            access_schedules = []
+            for access_schedules_type_0_item_data in self.access_schedules:
+                access_schedules_type_0_item = (
+                    access_schedules_type_0_item_data.to_dict()
+                )
+                access_schedules.append(access_schedules_type_0_item)
 
-        block_unrated_items: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.block_unrated_items, Unset):
-            if self.block_unrated_items is None:
-                block_unrated_items = None
-            else:
-                block_unrated_items = []
-                for block_unrated_items_item_data in self.block_unrated_items:
-                    block_unrated_items_item = block_unrated_items_item_data.value
+        else:
+            access_schedules = self.access_schedules
 
-                    block_unrated_items.append(block_unrated_items_item)
+        block_unrated_items: Union[List[str], None, Unset]
+        if isinstance(self.block_unrated_items, Unset):
+            block_unrated_items = UNSET
+        elif isinstance(self.block_unrated_items, list):
+            block_unrated_items = []
+            for block_unrated_items_type_0_item_data in self.block_unrated_items:
+                block_unrated_items_type_0_item = (
+                    block_unrated_items_type_0_item_data.value
+                )
+                block_unrated_items.append(block_unrated_items_type_0_item)
+
+        else:
+            block_unrated_items = self.block_unrated_items
 
         enable_remote_control_of_other_users = self.enable_remote_control_of_other_users
+
         enable_shared_device_control = self.enable_shared_device_control
+
         enable_remote_access = self.enable_remote_access
+
         enable_live_tv_management = self.enable_live_tv_management
+
         enable_live_tv_access = self.enable_live_tv_access
+
         enable_media_playback = self.enable_media_playback
+
         enable_audio_playback_transcoding = self.enable_audio_playback_transcoding
+
         enable_video_playback_transcoding = self.enable_video_playback_transcoding
+
         enable_playback_remuxing = self.enable_playback_remuxing
+
         force_remote_source_transcoding = self.force_remote_source_transcoding
+
         enable_content_deletion = self.enable_content_deletion
-        enable_content_deletion_from_folders: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.enable_content_deletion_from_folders, Unset):
-            if self.enable_content_deletion_from_folders is None:
-                enable_content_deletion_from_folders = None
-            else:
-                enable_content_deletion_from_folders = self.enable_content_deletion_from_folders
+
+        enable_content_deletion_from_folders: Union[List[str], None, Unset]
+        if isinstance(self.enable_content_deletion_from_folders, Unset):
+            enable_content_deletion_from_folders = UNSET
+        elif isinstance(self.enable_content_deletion_from_folders, list):
+            enable_content_deletion_from_folders = (
+                self.enable_content_deletion_from_folders
+            )
+
+        else:
+            enable_content_deletion_from_folders = (
+                self.enable_content_deletion_from_folders
+            )
 
         enable_content_downloading = self.enable_content_downloading
+
         enable_sync_transcoding = self.enable_sync_transcoding
+
         enable_media_conversion = self.enable_media_conversion
-        enabled_devices: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.enabled_devices, Unset):
-            if self.enabled_devices is None:
-                enabled_devices = None
-            else:
-                enabled_devices = self.enabled_devices
+
+        enabled_devices: Union[List[str], None, Unset]
+        if isinstance(self.enabled_devices, Unset):
+            enabled_devices = UNSET
+        elif isinstance(self.enabled_devices, list):
+            enabled_devices = self.enabled_devices
+
+        else:
+            enabled_devices = self.enabled_devices
 
         enable_all_devices = self.enable_all_devices
-        enabled_channels: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.enabled_channels, Unset):
-            if self.enabled_channels is None:
-                enabled_channels = None
-            else:
-                enabled_channels = self.enabled_channels
+
+        enabled_channels: Union[List[str], None, Unset]
+        if isinstance(self.enabled_channels, Unset):
+            enabled_channels = UNSET
+        elif isinstance(self.enabled_channels, list):
+            enabled_channels = self.enabled_channels
+
+        else:
+            enabled_channels = self.enabled_channels
 
         enable_all_channels = self.enable_all_channels
-        enabled_folders: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.enabled_folders, Unset):
-            if self.enabled_folders is None:
-                enabled_folders = None
-            else:
-                enabled_folders = self.enabled_folders
+
+        enabled_folders: Union[List[str], None, Unset]
+        if isinstance(self.enabled_folders, Unset):
+            enabled_folders = UNSET
+        elif isinstance(self.enabled_folders, list):
+            enabled_folders = self.enabled_folders
+
+        else:
+            enabled_folders = self.enabled_folders
 
         enable_all_folders = self.enable_all_folders
-        invalid_login_attempt_count = self.invalid_login_attempt_count
-        login_attempts_before_lockout = self.login_attempts_before_lockout
-        max_active_sessions = self.max_active_sessions
-        enable_public_sharing = self.enable_public_sharing
-        blocked_media_folders: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.blocked_media_folders, Unset):
-            if self.blocked_media_folders is None:
-                blocked_media_folders = None
-            else:
-                blocked_media_folders = self.blocked_media_folders
 
-        blocked_channels: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.blocked_channels, Unset):
-            if self.blocked_channels is None:
-                blocked_channels = None
-            else:
-                blocked_channels = self.blocked_channels
+        invalid_login_attempt_count = self.invalid_login_attempt_count
+
+        login_attempts_before_lockout = self.login_attempts_before_lockout
+
+        max_active_sessions = self.max_active_sessions
+
+        enable_public_sharing = self.enable_public_sharing
+
+        blocked_media_folders: Union[List[str], None, Unset]
+        if isinstance(self.blocked_media_folders, Unset):
+            blocked_media_folders = UNSET
+        elif isinstance(self.blocked_media_folders, list):
+            blocked_media_folders = self.blocked_media_folders
+
+        else:
+            blocked_media_folders = self.blocked_media_folders
+
+        blocked_channels: Union[List[str], None, Unset]
+        if isinstance(self.blocked_channels, Unset):
+            blocked_channels = UNSET
+        elif isinstance(self.blocked_channels, list):
+            blocked_channels = self.blocked_channels
+
+        else:
+            blocked_channels = self.blocked_channels
 
         remote_client_bitrate_limit = self.remote_client_bitrate_limit
-        authentication_provider_id = self.authentication_provider_id
-        password_reset_provider_id = self.password_reset_provider_id
+
         sync_play_access: Union[Unset, str] = UNSET
         if not isinstance(self.sync_play_access, Unset):
             sync_play_access = self.sync_play_access.value
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update(
+            {
+                "AuthenticationProviderId": authentication_provider_id,
+                "PasswordResetProviderId": password_reset_provider_id,
+            }
+        )
         if is_administrator is not UNSET:
             field_dict["IsAdministrator"] = is_administrator
         if is_hidden is not UNSET:
             field_dict["IsHidden"] = is_hidden
+        if enable_collection_management is not UNSET:
+            field_dict["EnableCollectionManagement"] = enable_collection_management
+        if enable_subtitle_management is not UNSET:
+            field_dict["EnableSubtitleManagement"] = enable_subtitle_management
+        if enable_lyric_management is not UNSET:
+            field_dict["EnableLyricManagement"] = enable_lyric_management
         if is_disabled is not UNSET:
             field_dict["IsDisabled"] = is_disabled
         if max_parental_rating is not UNSET:
             field_dict["MaxParentalRating"] = max_parental_rating
         if blocked_tags is not UNSET:
             field_dict["BlockedTags"] = blocked_tags
+        if allowed_tags is not UNSET:
+            field_dict["AllowedTags"] = allowed_tags
         if enable_user_preference_access is not UNSET:
             field_dict["EnableUserPreferenceAccess"] = enable_user_preference_access
         if access_schedules is not UNSET:
@@ -222,7 +323,9 @@ class UserPolicy:
         if block_unrated_items is not UNSET:
             field_dict["BlockUnratedItems"] = block_unrated_items
         if enable_remote_control_of_other_users is not UNSET:
-            field_dict["EnableRemoteControlOfOtherUsers"] = enable_remote_control_of_other_users
+            field_dict["EnableRemoteControlOfOtherUsers"] = (
+                enable_remote_control_of_other_users
+            )
         if enable_shared_device_control is not UNSET:
             field_dict["EnableSharedDeviceControl"] = enable_shared_device_control
         if enable_remote_access is not UNSET:
@@ -234,9 +337,13 @@ class UserPolicy:
         if enable_media_playback is not UNSET:
             field_dict["EnableMediaPlayback"] = enable_media_playback
         if enable_audio_playback_transcoding is not UNSET:
-            field_dict["EnableAudioPlaybackTranscoding"] = enable_audio_playback_transcoding
+            field_dict["EnableAudioPlaybackTranscoding"] = (
+                enable_audio_playback_transcoding
+            )
         if enable_video_playback_transcoding is not UNSET:
-            field_dict["EnableVideoPlaybackTranscoding"] = enable_video_playback_transcoding
+            field_dict["EnableVideoPlaybackTranscoding"] = (
+                enable_video_playback_transcoding
+            )
         if enable_playback_remuxing is not UNSET:
             field_dict["EnablePlaybackRemuxing"] = enable_playback_remuxing
         if force_remote_source_transcoding is not UNSET:
@@ -244,7 +351,9 @@ class UserPolicy:
         if enable_content_deletion is not UNSET:
             field_dict["EnableContentDeletion"] = enable_content_deletion
         if enable_content_deletion_from_folders is not UNSET:
-            field_dict["EnableContentDeletionFromFolders"] = enable_content_deletion_from_folders
+            field_dict["EnableContentDeletionFromFolders"] = (
+                enable_content_deletion_from_folders
+            )
         if enable_content_downloading is not UNSET:
             field_dict["EnableContentDownloading"] = enable_content_downloading
         if enable_sync_transcoding is not UNSET:
@@ -277,10 +386,6 @@ class UserPolicy:
             field_dict["BlockedChannels"] = blocked_channels
         if remote_client_bitrate_limit is not UNSET:
             field_dict["RemoteClientBitrateLimit"] = remote_client_bitrate_limit
-        if authentication_provider_id is not UNSET:
-            field_dict["AuthenticationProviderId"] = authentication_provider_id
-        if password_reset_provider_id is not UNSET:
-            field_dict["PasswordResetProviderId"] = password_reset_provider_id
         if sync_play_access is not UNSET:
             field_dict["SyncPlayAccess"] = sync_play_access
 
@@ -291,33 +396,126 @@ class UserPolicy:
         from ..models.access_schedule import AccessSchedule
 
         d = src_dict.copy()
+        authentication_provider_id = d.pop("AuthenticationProviderId")
+
+        password_reset_provider_id = d.pop("PasswordResetProviderId")
+
         is_administrator = d.pop("IsAdministrator", UNSET)
 
         is_hidden = d.pop("IsHidden", UNSET)
 
+        enable_collection_management = d.pop("EnableCollectionManagement", UNSET)
+
+        enable_subtitle_management = d.pop("EnableSubtitleManagement", UNSET)
+
+        enable_lyric_management = d.pop("EnableLyricManagement", UNSET)
+
         is_disabled = d.pop("IsDisabled", UNSET)
 
-        max_parental_rating = d.pop("MaxParentalRating", UNSET)
+        def _parse_max_parental_rating(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
 
-        blocked_tags = cast(List[str], d.pop("BlockedTags", UNSET))
+        max_parental_rating = _parse_max_parental_rating(
+            d.pop("MaxParentalRating", UNSET)
+        )
+
+        def _parse_blocked_tags(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                blocked_tags_type_0 = cast(List[str], data)
+
+                return blocked_tags_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        blocked_tags = _parse_blocked_tags(d.pop("BlockedTags", UNSET))
+
+        def _parse_allowed_tags(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                allowed_tags_type_0 = cast(List[str], data)
+
+                return allowed_tags_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        allowed_tags = _parse_allowed_tags(d.pop("AllowedTags", UNSET))
 
         enable_user_preference_access = d.pop("EnableUserPreferenceAccess", UNSET)
 
-        access_schedules = []
-        _access_schedules = d.pop("AccessSchedules", UNSET)
-        for access_schedules_item_data in _access_schedules or []:
-            access_schedules_item = AccessSchedule.from_dict(access_schedules_item_data)
+        def _parse_access_schedules(
+            data: object,
+        ) -> Union[List["AccessSchedule"], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                access_schedules_type_0 = []
+                _access_schedules_type_0 = data
+                for access_schedules_type_0_item_data in _access_schedules_type_0:
+                    access_schedules_type_0_item = AccessSchedule.from_dict(
+                        access_schedules_type_0_item_data
+                    )
 
-            access_schedules.append(access_schedules_item)
+                    access_schedules_type_0.append(access_schedules_type_0_item)
 
-        block_unrated_items = []
-        _block_unrated_items = d.pop("BlockUnratedItems", UNSET)
-        for block_unrated_items_item_data in _block_unrated_items or []:
-            block_unrated_items_item = UnratedItem(block_unrated_items_item_data)
+                return access_schedules_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List["AccessSchedule"], None, Unset], data)
 
-            block_unrated_items.append(block_unrated_items_item)
+        access_schedules = _parse_access_schedules(d.pop("AccessSchedules", UNSET))
 
-        enable_remote_control_of_other_users = d.pop("EnableRemoteControlOfOtherUsers", UNSET)
+        def _parse_block_unrated_items(
+            data: object,
+        ) -> Union[List[UnratedItem], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                block_unrated_items_type_0 = []
+                _block_unrated_items_type_0 = data
+                for block_unrated_items_type_0_item_data in _block_unrated_items_type_0:
+                    block_unrated_items_type_0_item = UnratedItem(
+                        block_unrated_items_type_0_item_data
+                    )
+
+                    block_unrated_items_type_0.append(block_unrated_items_type_0_item)
+
+                return block_unrated_items_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[UnratedItem], None, Unset], data)
+
+        block_unrated_items = _parse_block_unrated_items(
+            d.pop("BlockUnratedItems", UNSET)
+        )
+
+        enable_remote_control_of_other_users = d.pop(
+            "EnableRemoteControlOfOtherUsers", UNSET
+        )
 
         enable_shared_device_control = d.pop("EnableSharedDeviceControl", UNSET)
 
@@ -329,9 +527,13 @@ class UserPolicy:
 
         enable_media_playback = d.pop("EnableMediaPlayback", UNSET)
 
-        enable_audio_playback_transcoding = d.pop("EnableAudioPlaybackTranscoding", UNSET)
+        enable_audio_playback_transcoding = d.pop(
+            "EnableAudioPlaybackTranscoding", UNSET
+        )
 
-        enable_video_playback_transcoding = d.pop("EnableVideoPlaybackTranscoding", UNSET)
+        enable_video_playback_transcoding = d.pop(
+            "EnableVideoPlaybackTranscoding", UNSET
+        )
 
         enable_playback_remuxing = d.pop("EnablePlaybackRemuxing", UNSET)
 
@@ -339,7 +541,28 @@ class UserPolicy:
 
         enable_content_deletion = d.pop("EnableContentDeletion", UNSET)
 
-        enable_content_deletion_from_folders = cast(List[str], d.pop("EnableContentDeletionFromFolders", UNSET))
+        def _parse_enable_content_deletion_from_folders(
+            data: object,
+        ) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                enable_content_deletion_from_folders_type_0 = cast(List[str], data)
+
+                return enable_content_deletion_from_folders_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        enable_content_deletion_from_folders = (
+            _parse_enable_content_deletion_from_folders(
+                d.pop("EnableContentDeletionFromFolders", UNSET)
+            )
+        )
 
         enable_content_downloading = d.pop("EnableContentDownloading", UNSET)
 
@@ -347,15 +570,60 @@ class UserPolicy:
 
         enable_media_conversion = d.pop("EnableMediaConversion", UNSET)
 
-        enabled_devices = cast(List[str], d.pop("EnabledDevices", UNSET))
+        def _parse_enabled_devices(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                enabled_devices_type_0 = cast(List[str], data)
+
+                return enabled_devices_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        enabled_devices = _parse_enabled_devices(d.pop("EnabledDevices", UNSET))
 
         enable_all_devices = d.pop("EnableAllDevices", UNSET)
 
-        enabled_channels = cast(List[str], d.pop("EnabledChannels", UNSET))
+        def _parse_enabled_channels(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                enabled_channels_type_0 = cast(List[str], data)
+
+                return enabled_channels_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        enabled_channels = _parse_enabled_channels(d.pop("EnabledChannels", UNSET))
 
         enable_all_channels = d.pop("EnableAllChannels", UNSET)
 
-        enabled_folders = cast(List[str], d.pop("EnabledFolders", UNSET))
+        def _parse_enabled_folders(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                enabled_folders_type_0 = cast(List[str], data)
+
+                return enabled_folders_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        enabled_folders = _parse_enabled_folders(d.pop("EnabledFolders", UNSET))
 
         enable_all_folders = d.pop("EnableAllFolders", UNSET)
 
@@ -367,15 +635,43 @@ class UserPolicy:
 
         enable_public_sharing = d.pop("EnablePublicSharing", UNSET)
 
-        blocked_media_folders = cast(List[str], d.pop("BlockedMediaFolders", UNSET))
+        def _parse_blocked_media_folders(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                blocked_media_folders_type_0 = cast(List[str], data)
 
-        blocked_channels = cast(List[str], d.pop("BlockedChannels", UNSET))
+                return blocked_media_folders_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        blocked_media_folders = _parse_blocked_media_folders(
+            d.pop("BlockedMediaFolders", UNSET)
+        )
+
+        def _parse_blocked_channels(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                blocked_channels_type_0 = cast(List[str], data)
+
+                return blocked_channels_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        blocked_channels = _parse_blocked_channels(d.pop("BlockedChannels", UNSET))
 
         remote_client_bitrate_limit = d.pop("RemoteClientBitrateLimit", UNSET)
-
-        authentication_provider_id = d.pop("AuthenticationProviderId", UNSET)
-
-        password_reset_provider_id = d.pop("PasswordResetProviderId", UNSET)
 
         _sync_play_access = d.pop("SyncPlayAccess", UNSET)
         sync_play_access: Union[Unset, SyncPlayUserAccessType]
@@ -385,11 +681,17 @@ class UserPolicy:
             sync_play_access = SyncPlayUserAccessType(_sync_play_access)
 
         user_policy = cls(
+            authentication_provider_id=authentication_provider_id,
+            password_reset_provider_id=password_reset_provider_id,
             is_administrator=is_administrator,
             is_hidden=is_hidden,
+            enable_collection_management=enable_collection_management,
+            enable_subtitle_management=enable_subtitle_management,
+            enable_lyric_management=enable_lyric_management,
             is_disabled=is_disabled,
             max_parental_rating=max_parental_rating,
             blocked_tags=blocked_tags,
+            allowed_tags=allowed_tags,
             enable_user_preference_access=enable_user_preference_access,
             access_schedules=access_schedules,
             block_unrated_items=block_unrated_items,
@@ -421,8 +723,6 @@ class UserPolicy:
             blocked_media_folders=blocked_media_folders,
             blocked_channels=blocked_channels,
             remote_client_bitrate_limit=remote_client_bitrate_limit,
-            authentication_provider_id=authentication_provider_id,
-            password_reset_provider_id=password_reset_provider_id,
             sync_play_access=sync_play_access,
         )
 

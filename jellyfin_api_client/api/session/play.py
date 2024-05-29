@@ -3,10 +3,12 @@ from typing import Any, Dict, List, Optional, Union
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...types import Unset
 from ...models.play_command import PlayCommand
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
@@ -14,17 +16,15 @@ def _get_kwargs(
     *,
     play_command: PlayCommand,
     item_ids: List[str],
-    start_position_ticks: Union[Unset, None, int] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
+    start_position_ticks: Union[Unset, int] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
 ) -> Dict[str, Any]:
-    pass
-
     params: Dict[str, Any] = {}
-    json_play_command = play_command.value
 
+    json_play_command = play_command.value
     params["playCommand"] = json_play_command
 
     json_item_ids = item_ids
@@ -43,16 +43,20 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/Sessions/{sessionId}/Playing".format(
-            sessionId=session_id,
+        "url": "/Sessions/{session_id}/Playing".format(
+            session_id=session_id,
         ),
         "params": params,
     }
 
+    return _kwargs
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Any]:
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Any]:
     if response.status_code == HTTPStatus.NO_CONTENT:
         return None
     if response.status_code == HTTPStatus.UNAUTHORIZED:
@@ -65,7 +69,9 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Any]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Any]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -80,11 +86,11 @@ def sync_detailed(
     client: AuthenticatedClient,
     play_command: PlayCommand,
     item_ids: List[str],
-    start_position_ticks: Union[Unset, None, int] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
+    start_position_ticks: Union[Unset, int] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
 ) -> Response[Any]:
     """Instructs a session to play an item.
 
@@ -92,11 +98,11 @@ def sync_detailed(
         session_id (str):
         play_command (PlayCommand): Enum PlayCommand.
         item_ids (List[str]):
-        start_position_ticks (Union[Unset, None, int]):
-        media_source_id (Union[Unset, None, str]):
-        audio_stream_index (Union[Unset, None, int]):
-        subtitle_stream_index (Union[Unset, None, int]):
-        start_index (Union[Unset, None, int]):
+        start_position_ticks (Union[Unset, int]):
+        media_source_id (Union[Unset, str]):
+        audio_stream_index (Union[Unset, int]):
+        subtitle_stream_index (Union[Unset, int]):
+        start_index (Union[Unset, int]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -130,11 +136,11 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     play_command: PlayCommand,
     item_ids: List[str],
-    start_position_ticks: Union[Unset, None, int] = UNSET,
-    media_source_id: Union[Unset, None, str] = UNSET,
-    audio_stream_index: Union[Unset, None, int] = UNSET,
-    subtitle_stream_index: Union[Unset, None, int] = UNSET,
-    start_index: Union[Unset, None, int] = UNSET,
+    start_position_ticks: Union[Unset, int] = UNSET,
+    media_source_id: Union[Unset, str] = UNSET,
+    audio_stream_index: Union[Unset, int] = UNSET,
+    subtitle_stream_index: Union[Unset, int] = UNSET,
+    start_index: Union[Unset, int] = UNSET,
 ) -> Response[Any]:
     """Instructs a session to play an item.
 
@@ -142,11 +148,11 @@ async def asyncio_detailed(
         session_id (str):
         play_command (PlayCommand): Enum PlayCommand.
         item_ids (List[str]):
-        start_position_ticks (Union[Unset, None, int]):
-        media_source_id (Union[Unset, None, str]):
-        audio_stream_index (Union[Unset, None, int]):
-        subtitle_stream_index (Union[Unset, None, int]):
-        start_index (Union[Unset, None, int]):
+        start_position_ticks (Union[Unset, int]):
+        media_source_id (Union[Unset, str]):
+        audio_stream_index (Union[Unset, int]):
+        subtitle_stream_index (Union[Unset, int]):
+        start_index (Union[Unset, int]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

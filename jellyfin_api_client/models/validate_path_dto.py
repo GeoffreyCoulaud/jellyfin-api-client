@@ -1,8 +1,12 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+
 
 T = TypeVar("T", bound="ValidatePathDto")
 
@@ -13,18 +17,28 @@ class ValidatePathDto:
 
     Attributes:
         validate_writable (Union[Unset, bool]): Gets or sets a value indicating whether validate if path is writable.
-        path (Union[Unset, None, str]): Gets or sets the path.
-        is_file (Union[Unset, None, bool]): Gets or sets is path file.
+        path (Union[None, Unset, str]): Gets or sets the path.
+        is_file (Union[None, Unset, bool]): Gets or sets is path file.
     """
 
     validate_writable: Union[Unset, bool] = UNSET
-    path: Union[Unset, None, str] = UNSET
-    is_file: Union[Unset, None, bool] = UNSET
+    path: Union[None, Unset, str] = UNSET
+    is_file: Union[None, Unset, bool] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         validate_writable = self.validate_writable
-        path = self.path
-        is_file = self.is_file
+
+        path: Union[None, Unset, str]
+        if isinstance(self.path, Unset):
+            path = UNSET
+        else:
+            path = self.path
+
+        is_file: Union[None, Unset, bool]
+        if isinstance(self.is_file, Unset):
+            is_file = UNSET
+        else:
+            is_file = self.is_file
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -42,9 +56,23 @@ class ValidatePathDto:
         d = src_dict.copy()
         validate_writable = d.pop("ValidateWritable", UNSET)
 
-        path = d.pop("Path", UNSET)
+        def _parse_path(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        is_file = d.pop("IsFile", UNSET)
+        path = _parse_path(d.pop("Path", UNSET))
+
+        def _parse_is_file(data: object) -> Union[None, Unset, bool]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, bool], data)
+
+        is_file = _parse_is_file(d.pop("IsFile", UNSET))
 
         validate_path_dto = cls(
             validate_writable=validate_writable,

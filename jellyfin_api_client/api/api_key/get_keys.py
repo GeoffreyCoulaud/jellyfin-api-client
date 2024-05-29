@@ -3,19 +3,20 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.authentication_info_query_result import AuthenticationInfoQueryResult
 from ...types import Response
+from ... import errors
+
+from ...models.authentication_info_query_result import AuthenticationInfoQueryResult
 
 
 def _get_kwargs() -> Dict[str, Any]:
-    pass
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
         "url": "/Auth/Keys",
     }
+
+    return _kwargs
 
 
 def _parse_response(

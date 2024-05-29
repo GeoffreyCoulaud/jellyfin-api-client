@@ -3,33 +3,50 @@ from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.problem_details import ProblemDetails
-from ...models.task_trigger_info import TaskTriggerInfo
 from ...types import Response
+from ... import errors
+
+from ...models.task_trigger_info import TaskTriggerInfo
+from ...models.problem_details import ProblemDetails
 
 
 def _get_kwargs(
     task_id: str,
     *,
-    json_body: List["TaskTriggerInfo"],
+    body: Union[
+        List["TaskTriggerInfo"],
+        List["TaskTriggerInfo"],
+    ],
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = []
-    for json_body_item_data in json_body:
-        json_body_item = json_body_item_data.to_dict()
-
-        json_json_body.append(json_body_item)
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/ScheduledTasks/{taskId}/Triggers".format(
-            taskId=task_id,
+        "url": "/ScheduledTasks/{task_id}/Triggers".format(
+            task_id=task_id,
         ),
-        "json": json_json_body,
     }
+
+    if isinstance(body, List["TaskTriggerInfo"]):
+        _json_body = []
+        for body_item_data in body:
+            body_item = body_item_data.to_dict()
+            _json_body.append(body_item)
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, List["TaskTriggerInfo"]):
+        _json_body = []
+        for body_item_data in body:
+            body_item = body_item_data.to_dict()
+            _json_body.append(body_item)
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -69,13 +86,17 @@ def sync_detailed(
     task_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: List["TaskTriggerInfo"],
+    body: Union[
+        List["TaskTriggerInfo"],
+        List["TaskTriggerInfo"],
+    ],
 ) -> Response[Union[Any, ProblemDetails]]:
     """Update specified task triggers.
 
     Args:
         task_id (str):
-        json_body (List['TaskTriggerInfo']):
+        body (List['TaskTriggerInfo']):
+        body (List['TaskTriggerInfo']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -87,7 +108,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         task_id=task_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -101,13 +122,17 @@ def sync(
     task_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: List["TaskTriggerInfo"],
+    body: Union[
+        List["TaskTriggerInfo"],
+        List["TaskTriggerInfo"],
+    ],
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Update specified task triggers.
 
     Args:
         task_id (str):
-        json_body (List['TaskTriggerInfo']):
+        body (List['TaskTriggerInfo']):
+        body (List['TaskTriggerInfo']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -120,7 +145,7 @@ def sync(
     return sync_detailed(
         task_id=task_id,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
@@ -128,13 +153,17 @@ async def asyncio_detailed(
     task_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: List["TaskTriggerInfo"],
+    body: Union[
+        List["TaskTriggerInfo"],
+        List["TaskTriggerInfo"],
+    ],
 ) -> Response[Union[Any, ProblemDetails]]:
     """Update specified task triggers.
 
     Args:
         task_id (str):
-        json_body (List['TaskTriggerInfo']):
+        body (List['TaskTriggerInfo']):
+        body (List['TaskTriggerInfo']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -146,7 +175,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         task_id=task_id,
-        json_body=json_body,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -158,13 +187,17 @@ async def asyncio(
     task_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: List["TaskTriggerInfo"],
+    body: Union[
+        List["TaskTriggerInfo"],
+        List["TaskTriggerInfo"],
+    ],
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Update specified task triggers.
 
     Args:
         task_id (str):
-        json_body (List['TaskTriggerInfo']):
+        body (List['TaskTriggerInfo']):
+        body (List['TaskTriggerInfo']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -178,6 +211,6 @@ async def asyncio(
         await asyncio_detailed(
             task_id=task_id,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

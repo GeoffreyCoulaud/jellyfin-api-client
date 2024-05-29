@@ -3,29 +3,50 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.problem_details import ProblemDetails
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.user_dto import UserDto
-from ...types import Response
+from ...models.problem_details import ProblemDetails
+from ...types import Unset
 
 
 def _get_kwargs(
-    user_id: str,
     *,
-    json_body: UserDto,
+    body: Union[
+        UserDto,
+        UserDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    pass
+    headers: Dict[str, Any] = {}
 
-    json_json_body = json_body.to_dict()
+    params: Dict[str, Any] = {}
 
-    return {
+    params["userId"] = user_id
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": "/Users/{userId}".format(
-            userId=user_id,
-        ),
-        "json": json_json_body,
+        "url": "/Users",
+        "params": params,
     }
+
+    if isinstance(body, UserDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/json"
+    if isinstance(body, UserDto):
+        _json_body = body.to_dict()
+
+        _kwargs["json"] = _json_body
+        headers["Content-Type"] = "application/*+json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
 
 
 def _parse_response(
@@ -63,16 +84,20 @@ def _build_response(
 
 
 def sync_detailed(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: UserDto,
+    body: Union[
+        UserDto,
+        UserDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, ProblemDetails]]:
     """Updates a user.
 
     Args:
-        user_id (str):
-        json_body (UserDto): Class UserDto.
+        user_id (Union[Unset, str]):
+        body (UserDto): Class UserDto.
+        body (UserDto): Class UserDto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -83,8 +108,8 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
+        body=body,
         user_id=user_id,
-        json_body=json_body,
     )
 
     response = client.get_httpx_client().request(
@@ -95,16 +120,20 @@ def sync_detailed(
 
 
 def sync(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: UserDto,
+    body: Union[
+        UserDto,
+        UserDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Updates a user.
 
     Args:
-        user_id (str):
-        json_body (UserDto): Class UserDto.
+        user_id (Union[Unset, str]):
+        body (UserDto): Class UserDto.
+        body (UserDto): Class UserDto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -115,23 +144,27 @@ def sync(
     """
 
     return sync_detailed(
-        user_id=user_id,
         client=client,
-        json_body=json_body,
+        body=body,
+        user_id=user_id,
     ).parsed
 
 
 async def asyncio_detailed(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: UserDto,
+    body: Union[
+        UserDto,
+        UserDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
 ) -> Response[Union[Any, ProblemDetails]]:
     """Updates a user.
 
     Args:
-        user_id (str):
-        json_body (UserDto): Class UserDto.
+        user_id (Union[Unset, str]):
+        body (UserDto): Class UserDto.
+        body (UserDto): Class UserDto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -142,8 +175,8 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
+        body=body,
         user_id=user_id,
-        json_body=json_body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -152,16 +185,20 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    user_id: str,
     *,
     client: AuthenticatedClient,
-    json_body: UserDto,
+    body: Union[
+        UserDto,
+        UserDto,
+    ],
+    user_id: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Any, ProblemDetails]]:
     """Updates a user.
 
     Args:
-        user_id (str):
-        json_body (UserDto): Class UserDto.
+        user_id (Union[Unset, str]):
+        body (UserDto): Class UserDto.
+        body (UserDto): Class UserDto.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -173,8 +210,8 @@ async def asyncio(
 
     return (
         await asyncio_detailed(
-            user_id=user_id,
             client=client,
-            json_body=json_body,
+            body=body,
+            user_id=user_id,
         )
     ).parsed

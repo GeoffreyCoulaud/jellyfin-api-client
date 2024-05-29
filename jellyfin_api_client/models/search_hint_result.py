@@ -1,8 +1,12 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import List
 
 if TYPE_CHECKING:
     from ..models.search_hint import SearchHint
@@ -29,7 +33,6 @@ class SearchHintResult:
             search_hints = []
             for search_hints_item_data in self.search_hints:
                 search_hints_item = search_hints_item_data.to_dict()
-
                 search_hints.append(search_hints_item)
 
         total_record_count = self.total_record_count

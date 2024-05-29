@@ -1,8 +1,13 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast, List
+
 
 T = TypeVar("T", bound="PinRedeemResult")
 
@@ -21,6 +26,7 @@ class PinRedeemResult:
 
     def to_dict(self) -> Dict[str, Any]:
         success = self.success
+
         users_reset: Union[Unset, List[str]] = UNSET
         if not isinstance(self.users_reset, Unset):
             users_reset = self.users_reset

@@ -1,8 +1,13 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import Union
+from typing import cast
+from typing import List
 
 if TYPE_CHECKING:
     from ..models.name_value_pair import NameValuePair
@@ -15,104 +20,172 @@ T = TypeVar("T", bound="ListingsProviderInfo")
 class ListingsProviderInfo:
     """
     Attributes:
-        id (Union[Unset, None, str]):
-        type (Union[Unset, None, str]):
-        username (Union[Unset, None, str]):
-        password (Union[Unset, None, str]):
-        listings_id (Union[Unset, None, str]):
-        zip_code (Union[Unset, None, str]):
-        country (Union[Unset, None, str]):
-        path (Union[Unset, None, str]):
-        enabled_tuners (Union[Unset, None, List[str]]):
+        id (Union[None, Unset, str]):
+        type (Union[None, Unset, str]):
+        username (Union[None, Unset, str]):
+        password (Union[None, Unset, str]):
+        listings_id (Union[None, Unset, str]):
+        zip_code (Union[None, Unset, str]):
+        country (Union[None, Unset, str]):
+        path (Union[None, Unset, str]):
+        enabled_tuners (Union[List[str], None, Unset]):
         enable_all_tuners (Union[Unset, bool]):
-        news_categories (Union[Unset, None, List[str]]):
-        sports_categories (Union[Unset, None, List[str]]):
-        kids_categories (Union[Unset, None, List[str]]):
-        movie_categories (Union[Unset, None, List[str]]):
-        channel_mappings (Union[Unset, None, List['NameValuePair']]):
-        movie_prefix (Union[Unset, None, str]):
-        preferred_language (Union[Unset, None, str]):
-        user_agent (Union[Unset, None, str]):
+        news_categories (Union[List[str], None, Unset]):
+        sports_categories (Union[List[str], None, Unset]):
+        kids_categories (Union[List[str], None, Unset]):
+        movie_categories (Union[List[str], None, Unset]):
+        channel_mappings (Union[List['NameValuePair'], None, Unset]):
+        movie_prefix (Union[None, Unset, str]):
+        preferred_language (Union[None, Unset, str]):
+        user_agent (Union[None, Unset, str]):
     """
 
-    id: Union[Unset, None, str] = UNSET
-    type: Union[Unset, None, str] = UNSET
-    username: Union[Unset, None, str] = UNSET
-    password: Union[Unset, None, str] = UNSET
-    listings_id: Union[Unset, None, str] = UNSET
-    zip_code: Union[Unset, None, str] = UNSET
-    country: Union[Unset, None, str] = UNSET
-    path: Union[Unset, None, str] = UNSET
-    enabled_tuners: Union[Unset, None, List[str]] = UNSET
+    id: Union[None, Unset, str] = UNSET
+    type: Union[None, Unset, str] = UNSET
+    username: Union[None, Unset, str] = UNSET
+    password: Union[None, Unset, str] = UNSET
+    listings_id: Union[None, Unset, str] = UNSET
+    zip_code: Union[None, Unset, str] = UNSET
+    country: Union[None, Unset, str] = UNSET
+    path: Union[None, Unset, str] = UNSET
+    enabled_tuners: Union[List[str], None, Unset] = UNSET
     enable_all_tuners: Union[Unset, bool] = UNSET
-    news_categories: Union[Unset, None, List[str]] = UNSET
-    sports_categories: Union[Unset, None, List[str]] = UNSET
-    kids_categories: Union[Unset, None, List[str]] = UNSET
-    movie_categories: Union[Unset, None, List[str]] = UNSET
-    channel_mappings: Union[Unset, None, List["NameValuePair"]] = UNSET
-    movie_prefix: Union[Unset, None, str] = UNSET
-    preferred_language: Union[Unset, None, str] = UNSET
-    user_agent: Union[Unset, None, str] = UNSET
+    news_categories: Union[List[str], None, Unset] = UNSET
+    sports_categories: Union[List[str], None, Unset] = UNSET
+    kids_categories: Union[List[str], None, Unset] = UNSET
+    movie_categories: Union[List[str], None, Unset] = UNSET
+    channel_mappings: Union[List["NameValuePair"], None, Unset] = UNSET
+    movie_prefix: Union[None, Unset, str] = UNSET
+    preferred_language: Union[None, Unset, str] = UNSET
+    user_agent: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        id = self.id
-        type = self.type
-        username = self.username
-        password = self.password
-        listings_id = self.listings_id
-        zip_code = self.zip_code
-        country = self.country
-        path = self.path
-        enabled_tuners: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.enabled_tuners, Unset):
-            if self.enabled_tuners is None:
-                enabled_tuners = None
-            else:
-                enabled_tuners = self.enabled_tuners
+        id: Union[None, Unset, str]
+        if isinstance(self.id, Unset):
+            id = UNSET
+        else:
+            id = self.id
+
+        type: Union[None, Unset, str]
+        if isinstance(self.type, Unset):
+            type = UNSET
+        else:
+            type = self.type
+
+        username: Union[None, Unset, str]
+        if isinstance(self.username, Unset):
+            username = UNSET
+        else:
+            username = self.username
+
+        password: Union[None, Unset, str]
+        if isinstance(self.password, Unset):
+            password = UNSET
+        else:
+            password = self.password
+
+        listings_id: Union[None, Unset, str]
+        if isinstance(self.listings_id, Unset):
+            listings_id = UNSET
+        else:
+            listings_id = self.listings_id
+
+        zip_code: Union[None, Unset, str]
+        if isinstance(self.zip_code, Unset):
+            zip_code = UNSET
+        else:
+            zip_code = self.zip_code
+
+        country: Union[None, Unset, str]
+        if isinstance(self.country, Unset):
+            country = UNSET
+        else:
+            country = self.country
+
+        path: Union[None, Unset, str]
+        if isinstance(self.path, Unset):
+            path = UNSET
+        else:
+            path = self.path
+
+        enabled_tuners: Union[List[str], None, Unset]
+        if isinstance(self.enabled_tuners, Unset):
+            enabled_tuners = UNSET
+        elif isinstance(self.enabled_tuners, list):
+            enabled_tuners = self.enabled_tuners
+
+        else:
+            enabled_tuners = self.enabled_tuners
 
         enable_all_tuners = self.enable_all_tuners
-        news_categories: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.news_categories, Unset):
-            if self.news_categories is None:
-                news_categories = None
-            else:
-                news_categories = self.news_categories
 
-        sports_categories: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.sports_categories, Unset):
-            if self.sports_categories is None:
-                sports_categories = None
-            else:
-                sports_categories = self.sports_categories
+        news_categories: Union[List[str], None, Unset]
+        if isinstance(self.news_categories, Unset):
+            news_categories = UNSET
+        elif isinstance(self.news_categories, list):
+            news_categories = self.news_categories
 
-        kids_categories: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.kids_categories, Unset):
-            if self.kids_categories is None:
-                kids_categories = None
-            else:
-                kids_categories = self.kids_categories
+        else:
+            news_categories = self.news_categories
 
-        movie_categories: Union[Unset, None, List[str]] = UNSET
-        if not isinstance(self.movie_categories, Unset):
-            if self.movie_categories is None:
-                movie_categories = None
-            else:
-                movie_categories = self.movie_categories
+        sports_categories: Union[List[str], None, Unset]
+        if isinstance(self.sports_categories, Unset):
+            sports_categories = UNSET
+        elif isinstance(self.sports_categories, list):
+            sports_categories = self.sports_categories
 
-        channel_mappings: Union[Unset, None, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.channel_mappings, Unset):
-            if self.channel_mappings is None:
-                channel_mappings = None
-            else:
-                channel_mappings = []
-                for channel_mappings_item_data in self.channel_mappings:
-                    channel_mappings_item = channel_mappings_item_data.to_dict()
+        else:
+            sports_categories = self.sports_categories
 
-                    channel_mappings.append(channel_mappings_item)
+        kids_categories: Union[List[str], None, Unset]
+        if isinstance(self.kids_categories, Unset):
+            kids_categories = UNSET
+        elif isinstance(self.kids_categories, list):
+            kids_categories = self.kids_categories
 
-        movie_prefix = self.movie_prefix
-        preferred_language = self.preferred_language
-        user_agent = self.user_agent
+        else:
+            kids_categories = self.kids_categories
+
+        movie_categories: Union[List[str], None, Unset]
+        if isinstance(self.movie_categories, Unset):
+            movie_categories = UNSET
+        elif isinstance(self.movie_categories, list):
+            movie_categories = self.movie_categories
+
+        else:
+            movie_categories = self.movie_categories
+
+        channel_mappings: Union[List[Dict[str, Any]], None, Unset]
+        if isinstance(self.channel_mappings, Unset):
+            channel_mappings = UNSET
+        elif isinstance(self.channel_mappings, list):
+            channel_mappings = []
+            for channel_mappings_type_0_item_data in self.channel_mappings:
+                channel_mappings_type_0_item = (
+                    channel_mappings_type_0_item_data.to_dict()
+                )
+                channel_mappings.append(channel_mappings_type_0_item)
+
+        else:
+            channel_mappings = self.channel_mappings
+
+        movie_prefix: Union[None, Unset, str]
+        if isinstance(self.movie_prefix, Unset):
+            movie_prefix = UNSET
+        else:
+            movie_prefix = self.movie_prefix
+
+        preferred_language: Union[None, Unset, str]
+        if isinstance(self.preferred_language, Unset):
+            preferred_language = UNSET
+        else:
+            preferred_language = self.preferred_language
+
+        user_agent: Union[None, Unset, str]
+        if isinstance(self.user_agent, Unset):
+            user_agent = UNSET
+        else:
+            user_agent = self.user_agent
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -160,46 +233,220 @@ class ListingsProviderInfo:
         from ..models.name_value_pair import NameValuePair
 
         d = src_dict.copy()
-        id = d.pop("Id", UNSET)
 
-        type = d.pop("Type", UNSET)
+        def _parse_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        username = d.pop("Username", UNSET)
+        id = _parse_id(d.pop("Id", UNSET))
 
-        password = d.pop("Password", UNSET)
+        def _parse_type(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        listings_id = d.pop("ListingsId", UNSET)
+        type = _parse_type(d.pop("Type", UNSET))
 
-        zip_code = d.pop("ZipCode", UNSET)
+        def _parse_username(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        country = d.pop("Country", UNSET)
+        username = _parse_username(d.pop("Username", UNSET))
 
-        path = d.pop("Path", UNSET)
+        def _parse_password(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        enabled_tuners = cast(List[str], d.pop("EnabledTuners", UNSET))
+        password = _parse_password(d.pop("Password", UNSET))
+
+        def _parse_listings_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        listings_id = _parse_listings_id(d.pop("ListingsId", UNSET))
+
+        def _parse_zip_code(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        zip_code = _parse_zip_code(d.pop("ZipCode", UNSET))
+
+        def _parse_country(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        country = _parse_country(d.pop("Country", UNSET))
+
+        def _parse_path(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        path = _parse_path(d.pop("Path", UNSET))
+
+        def _parse_enabled_tuners(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                enabled_tuners_type_0 = cast(List[str], data)
+
+                return enabled_tuners_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        enabled_tuners = _parse_enabled_tuners(d.pop("EnabledTuners", UNSET))
 
         enable_all_tuners = d.pop("EnableAllTuners", UNSET)
 
-        news_categories = cast(List[str], d.pop("NewsCategories", UNSET))
+        def _parse_news_categories(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                news_categories_type_0 = cast(List[str], data)
 
-        sports_categories = cast(List[str], d.pop("SportsCategories", UNSET))
+                return news_categories_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
 
-        kids_categories = cast(List[str], d.pop("KidsCategories", UNSET))
+        news_categories = _parse_news_categories(d.pop("NewsCategories", UNSET))
 
-        movie_categories = cast(List[str], d.pop("MovieCategories", UNSET))
+        def _parse_sports_categories(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                sports_categories_type_0 = cast(List[str], data)
 
-        channel_mappings = []
-        _channel_mappings = d.pop("ChannelMappings", UNSET)
-        for channel_mappings_item_data in _channel_mappings or []:
-            channel_mappings_item = NameValuePair.from_dict(channel_mappings_item_data)
+                return sports_categories_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
 
-            channel_mappings.append(channel_mappings_item)
+        sports_categories = _parse_sports_categories(d.pop("SportsCategories", UNSET))
 
-        movie_prefix = d.pop("MoviePrefix", UNSET)
+        def _parse_kids_categories(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                kids_categories_type_0 = cast(List[str], data)
 
-        preferred_language = d.pop("PreferredLanguage", UNSET)
+                return kids_categories_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
 
-        user_agent = d.pop("UserAgent", UNSET)
+        kids_categories = _parse_kids_categories(d.pop("KidsCategories", UNSET))
+
+        def _parse_movie_categories(data: object) -> Union[List[str], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                movie_categories_type_0 = cast(List[str], data)
+
+                return movie_categories_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List[str], None, Unset], data)
+
+        movie_categories = _parse_movie_categories(d.pop("MovieCategories", UNSET))
+
+        def _parse_channel_mappings(
+            data: object,
+        ) -> Union[List["NameValuePair"], None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                channel_mappings_type_0 = []
+                _channel_mappings_type_0 = data
+                for channel_mappings_type_0_item_data in _channel_mappings_type_0:
+                    channel_mappings_type_0_item = NameValuePair.from_dict(
+                        channel_mappings_type_0_item_data
+                    )
+
+                    channel_mappings_type_0.append(channel_mappings_type_0_item)
+
+                return channel_mappings_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[List["NameValuePair"], None, Unset], data)
+
+        channel_mappings = _parse_channel_mappings(d.pop("ChannelMappings", UNSET))
+
+        def _parse_movie_prefix(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        movie_prefix = _parse_movie_prefix(d.pop("MoviePrefix", UNSET))
+
+        def _parse_preferred_language(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        preferred_language = _parse_preferred_language(
+            d.pop("PreferredLanguage", UNSET)
+        )
+
+        def _parse_user_agent(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        user_agent = _parse_user_agent(d.pop("UserAgent", UNSET))
 
         listings_provider_info = cls(
             id=id,

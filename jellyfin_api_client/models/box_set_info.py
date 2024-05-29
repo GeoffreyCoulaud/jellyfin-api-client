@@ -1,13 +1,17 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
+
 
 from attrs import define as _attrs_define
-from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
 
+from typing import Union
+from typing import cast
+import datetime
+from dateutil.parser import isoparse
+
 if TYPE_CHECKING:
-    from ..models.box_set_info_provider_ids import BoxSetInfoProviderIds
+    from ..models.box_set_info_provider_ids_type_0 import BoxSetInfoProviderIdsType0
 
 
 T = TypeVar("T", bound="BoxSetInfo")
@@ -17,47 +21,97 @@ T = TypeVar("T", bound="BoxSetInfo")
 class BoxSetInfo:
     """
     Attributes:
-        name (Union[Unset, None, str]): Gets or sets the name.
-        original_title (Union[Unset, None, str]): Gets or sets the original title.
-        path (Union[Unset, None, str]): Gets or sets the path.
-        metadata_language (Union[Unset, None, str]): Gets or sets the metadata language.
-        metadata_country_code (Union[Unset, None, str]): Gets or sets the metadata country code.
-        provider_ids (Union[Unset, None, BoxSetInfoProviderIds]): Gets or sets the provider ids.
-        year (Union[Unset, None, int]): Gets or sets the year.
-        index_number (Union[Unset, None, int]):
-        parent_index_number (Union[Unset, None, int]):
-        premiere_date (Union[Unset, None, datetime.datetime]):
+        name (Union[None, Unset, str]): Gets or sets the name.
+        original_title (Union[None, Unset, str]): Gets or sets the original title.
+        path (Union[None, Unset, str]): Gets or sets the path.
+        metadata_language (Union[None, Unset, str]): Gets or sets the metadata language.
+        metadata_country_code (Union[None, Unset, str]): Gets or sets the metadata country code.
+        provider_ids (Union['BoxSetInfoProviderIdsType0', None, Unset]): Gets or sets the provider ids.
+        year (Union[None, Unset, int]): Gets or sets the year.
+        index_number (Union[None, Unset, int]):
+        parent_index_number (Union[None, Unset, int]):
+        premiere_date (Union[None, Unset, datetime.datetime]):
         is_automated (Union[Unset, bool]):
     """
 
-    name: Union[Unset, None, str] = UNSET
-    original_title: Union[Unset, None, str] = UNSET
-    path: Union[Unset, None, str] = UNSET
-    metadata_language: Union[Unset, None, str] = UNSET
-    metadata_country_code: Union[Unset, None, str] = UNSET
-    provider_ids: Union[Unset, None, "BoxSetInfoProviderIds"] = UNSET
-    year: Union[Unset, None, int] = UNSET
-    index_number: Union[Unset, None, int] = UNSET
-    parent_index_number: Union[Unset, None, int] = UNSET
-    premiere_date: Union[Unset, None, datetime.datetime] = UNSET
+    name: Union[None, Unset, str] = UNSET
+    original_title: Union[None, Unset, str] = UNSET
+    path: Union[None, Unset, str] = UNSET
+    metadata_language: Union[None, Unset, str] = UNSET
+    metadata_country_code: Union[None, Unset, str] = UNSET
+    provider_ids: Union["BoxSetInfoProviderIdsType0", None, Unset] = UNSET
+    year: Union[None, Unset, int] = UNSET
+    index_number: Union[None, Unset, int] = UNSET
+    parent_index_number: Union[None, Unset, int] = UNSET
+    premiere_date: Union[None, Unset, datetime.datetime] = UNSET
     is_automated: Union[Unset, bool] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        name = self.name
-        original_title = self.original_title
-        path = self.path
-        metadata_language = self.metadata_language
-        metadata_country_code = self.metadata_country_code
-        provider_ids: Union[Unset, None, Dict[str, Any]] = UNSET
-        if not isinstance(self.provider_ids, Unset):
-            provider_ids = self.provider_ids.to_dict() if self.provider_ids else None
+        from ..models.box_set_info_provider_ids_type_0 import BoxSetInfoProviderIdsType0
 
-        year = self.year
-        index_number = self.index_number
-        parent_index_number = self.parent_index_number
-        premiere_date: Union[Unset, None, str] = UNSET
-        if not isinstance(self.premiere_date, Unset):
-            premiere_date = self.premiere_date.isoformat() if self.premiere_date else None
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
+
+        original_title: Union[None, Unset, str]
+        if isinstance(self.original_title, Unset):
+            original_title = UNSET
+        else:
+            original_title = self.original_title
+
+        path: Union[None, Unset, str]
+        if isinstance(self.path, Unset):
+            path = UNSET
+        else:
+            path = self.path
+
+        metadata_language: Union[None, Unset, str]
+        if isinstance(self.metadata_language, Unset):
+            metadata_language = UNSET
+        else:
+            metadata_language = self.metadata_language
+
+        metadata_country_code: Union[None, Unset, str]
+        if isinstance(self.metadata_country_code, Unset):
+            metadata_country_code = UNSET
+        else:
+            metadata_country_code = self.metadata_country_code
+
+        provider_ids: Union[Dict[str, Any], None, Unset]
+        if isinstance(self.provider_ids, Unset):
+            provider_ids = UNSET
+        elif isinstance(self.provider_ids, BoxSetInfoProviderIdsType0):
+            provider_ids = self.provider_ids.to_dict()
+        else:
+            provider_ids = self.provider_ids
+
+        year: Union[None, Unset, int]
+        if isinstance(self.year, Unset):
+            year = UNSET
+        else:
+            year = self.year
+
+        index_number: Union[None, Unset, int]
+        if isinstance(self.index_number, Unset):
+            index_number = UNSET
+        else:
+            index_number = self.index_number
+
+        parent_index_number: Union[None, Unset, int]
+        if isinstance(self.parent_index_number, Unset):
+            parent_index_number = UNSET
+        else:
+            parent_index_number = self.parent_index_number
+
+        premiere_date: Union[None, Unset, str]
+        if isinstance(self.premiere_date, Unset):
+            premiere_date = UNSET
+        elif isinstance(self.premiere_date, datetime.datetime):
+            premiere_date = self.premiere_date.isoformat()
+        else:
+            premiere_date = self.premiere_date
 
         is_automated = self.is_automated
 
@@ -90,42 +144,121 @@ class BoxSetInfo:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.box_set_info_provider_ids import BoxSetInfoProviderIds
+        from ..models.box_set_info_provider_ids_type_0 import BoxSetInfoProviderIdsType0
 
         d = src_dict.copy()
-        name = d.pop("Name", UNSET)
 
-        original_title = d.pop("OriginalTitle", UNSET)
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        path = d.pop("Path", UNSET)
+        name = _parse_name(d.pop("Name", UNSET))
 
-        metadata_language = d.pop("MetadataLanguage", UNSET)
+        def _parse_original_title(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        metadata_country_code = d.pop("MetadataCountryCode", UNSET)
+        original_title = _parse_original_title(d.pop("OriginalTitle", UNSET))
 
-        _provider_ids = d.pop("ProviderIds", UNSET)
-        provider_ids: Union[Unset, None, BoxSetInfoProviderIds]
-        if _provider_ids is None:
-            provider_ids = None
-        elif isinstance(_provider_ids, Unset):
-            provider_ids = UNSET
-        else:
-            provider_ids = BoxSetInfoProviderIds.from_dict(_provider_ids)
+        def _parse_path(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        year = d.pop("Year", UNSET)
+        path = _parse_path(d.pop("Path", UNSET))
 
-        index_number = d.pop("IndexNumber", UNSET)
+        def _parse_metadata_language(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        parent_index_number = d.pop("ParentIndexNumber", UNSET)
+        metadata_language = _parse_metadata_language(d.pop("MetadataLanguage", UNSET))
 
-        _premiere_date = d.pop("PremiereDate", UNSET)
-        premiere_date: Union[Unset, None, datetime.datetime]
-        if _premiere_date is None:
-            premiere_date = None
-        elif isinstance(_premiere_date, Unset):
-            premiere_date = UNSET
-        else:
-            premiere_date = isoparse(_premiere_date)
+        def _parse_metadata_country_code(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        metadata_country_code = _parse_metadata_country_code(
+            d.pop("MetadataCountryCode", UNSET)
+        )
+
+        def _parse_provider_ids(
+            data: object,
+        ) -> Union["BoxSetInfoProviderIdsType0", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                provider_ids_type_0 = BoxSetInfoProviderIdsType0.from_dict(data)
+
+                return provider_ids_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union["BoxSetInfoProviderIdsType0", None, Unset], data)
+
+        provider_ids = _parse_provider_ids(d.pop("ProviderIds", UNSET))
+
+        def _parse_year(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        year = _parse_year(d.pop("Year", UNSET))
+
+        def _parse_index_number(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        index_number = _parse_index_number(d.pop("IndexNumber", UNSET))
+
+        def _parse_parent_index_number(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        parent_index_number = _parse_parent_index_number(
+            d.pop("ParentIndexNumber", UNSET)
+        )
+
+        def _parse_premiere_date(data: object) -> Union[None, Unset, datetime.datetime]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                premiere_date_type_0 = isoparse(data)
+
+                return premiere_date_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, datetime.datetime], data)
+
+        premiere_date = _parse_premiere_date(d.pop("PremiereDate", UNSET))
 
         is_automated = d.pop("IsAutomated", UNSET)
 

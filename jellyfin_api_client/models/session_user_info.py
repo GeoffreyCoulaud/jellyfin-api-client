@@ -1,8 +1,12 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
+
 
 from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
+
+from typing import cast, Union
+
 
 T = TypeVar("T", bound="SessionUserInfo")
 
@@ -13,15 +17,20 @@ class SessionUserInfo:
 
     Attributes:
         user_id (Union[Unset, str]): Gets or sets the user identifier.
-        user_name (Union[Unset, None, str]): Gets or sets the name of the user.
+        user_name (Union[None, Unset, str]): Gets or sets the name of the user.
     """
 
     user_id: Union[Unset, str] = UNSET
-    user_name: Union[Unset, None, str] = UNSET
+    user_name: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
         user_id = self.user_id
-        user_name = self.user_name
+
+        user_name: Union[None, Unset, str]
+        if isinstance(self.user_name, Unset):
+            user_name = UNSET
+        else:
+            user_name = self.user_name
 
         field_dict: Dict[str, Any] = {}
         field_dict.update({})
@@ -37,7 +46,14 @@ class SessionUserInfo:
         d = src_dict.copy()
         user_id = d.pop("UserId", UNSET)
 
-        user_name = d.pop("UserName", UNSET)
+        def _parse_user_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        user_name = _parse_user_name(d.pop("UserName", UNSET))
 
         session_user_info = cls(
             user_id=user_id,
