@@ -5,14 +5,14 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from typing import cast
 from typing import List
 from ..models.task_state import TaskState
+from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.task_trigger_info import TaskTriggerInfo
     from ..models.task_result import TaskResult
+    from ..models.task_trigger_info import TaskTriggerInfo
 
 
 T = TypeVar("T", bound="TaskInfo")
@@ -138,8 +138,8 @@ class TaskInfo:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.task_trigger_info import TaskTriggerInfo
         from ..models.task_result import TaskResult
+        from ..models.task_trigger_info import TaskTriggerInfo
 
         d = src_dict.copy()
 

@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.quick_connect_dto import QuickConnectDto
 from ...models.authentication_result import AuthenticationResult
+from ...models.quick_connect_dto import QuickConnectDto
 
 
 def _get_kwargs(

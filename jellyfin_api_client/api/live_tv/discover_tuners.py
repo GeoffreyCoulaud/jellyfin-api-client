@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.tuner_host_info import TunerHostInfo
 from ...types import Unset
+from ...models.tuner_host_info import TunerHostInfo
 
 
 def _get_kwargs(

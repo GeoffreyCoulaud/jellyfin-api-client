@@ -5,15 +5,15 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from ..models.item_sort_by import ItemSortBy
-from typing import cast
-from ..models.sort_order import SortOrder
-import datetime
-from typing import List
-from dateutil.parser import isoparse
-from ..models.item_fields import ItemFields
 from ..models.image_type import ImageType
+import datetime
+from ..models.sort_order import SortOrder
+from typing import cast
+from ..models.item_fields import ItemFields
+from typing import List
+from typing import Union
+from dateutil.parser import isoparse
 
 
 T = TypeVar("T", bound="GetProgramsDto")

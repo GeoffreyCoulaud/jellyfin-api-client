@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.general_command_type import GeneralCommandType
-from ...models.media_type import MediaType
 from ...types import Unset
+from ...models.media_type import MediaType
+from ...models.general_command_type import GeneralCommandType
 
 
 def _get_kwargs(

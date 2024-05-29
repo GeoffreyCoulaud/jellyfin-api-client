@@ -11,29 +11,35 @@ from ..types import UNSET, Unset
 from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.base_item_person_image_blur_hashes_type_0_banner import (
-        BaseItemPersonImageBlurHashesType0Banner,
+    from ..models.base_item_person_image_blur_hashes_type_0_backdrop import (
+        BaseItemPersonImageBlurHashesType0Backdrop,
     )
     from ..models.base_item_person_image_blur_hashes_type_0_menu import (
         BaseItemPersonImageBlurHashesType0Menu,
     )
-    from ..models.base_item_person_image_blur_hashes_type_0_box_rear import (
-        BaseItemPersonImageBlurHashesType0BoxRear,
+    from ..models.base_item_person_image_blur_hashes_type_0_logo import (
+        BaseItemPersonImageBlurHashesType0Logo,
     )
     from ..models.base_item_person_image_blur_hashes_type_0_art import (
         BaseItemPersonImageBlurHashesType0Art,
     )
+    from ..models.base_item_person_image_blur_hashes_type_0_box_rear import (
+        BaseItemPersonImageBlurHashesType0BoxRear,
+    )
+    from ..models.base_item_person_image_blur_hashes_type_0_banner import (
+        BaseItemPersonImageBlurHashesType0Banner,
+    )
+    from ..models.base_item_person_image_blur_hashes_type_0_screenshot import (
+        BaseItemPersonImageBlurHashesType0Screenshot,
+    )
+    from ..models.base_item_person_image_blur_hashes_type_0_chapter import (
+        BaseItemPersonImageBlurHashesType0Chapter,
+    )
     from ..models.base_item_person_image_blur_hashes_type_0_thumb import (
         BaseItemPersonImageBlurHashesType0Thumb,
     )
-    from ..models.base_item_person_image_blur_hashes_type_0_backdrop import (
-        BaseItemPersonImageBlurHashesType0Backdrop,
-    )
     from ..models.base_item_person_image_blur_hashes_type_0_disc import (
         BaseItemPersonImageBlurHashesType0Disc,
-    )
-    from ..models.base_item_person_image_blur_hashes_type_0_box import (
-        BaseItemPersonImageBlurHashesType0Box,
     )
     from ..models.base_item_person_image_blur_hashes_type_0_primary import (
         BaseItemPersonImageBlurHashesType0Primary,
@@ -41,14 +47,8 @@ if TYPE_CHECKING:
     from ..models.base_item_person_image_blur_hashes_type_0_profile import (
         BaseItemPersonImageBlurHashesType0Profile,
     )
-    from ..models.base_item_person_image_blur_hashes_type_0_chapter import (
-        BaseItemPersonImageBlurHashesType0Chapter,
-    )
-    from ..models.base_item_person_image_blur_hashes_type_0_logo import (
-        BaseItemPersonImageBlurHashesType0Logo,
-    )
-    from ..models.base_item_person_image_blur_hashes_type_0_screenshot import (
-        BaseItemPersonImageBlurHashesType0Screenshot,
+    from ..models.base_item_person_image_blur_hashes_type_0_box import (
+        BaseItemPersonImageBlurHashesType0Box,
     )
 
 
@@ -177,29 +177,35 @@ class BaseItemPersonImageBlurHashesType0:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.base_item_person_image_blur_hashes_type_0_banner import (
-            BaseItemPersonImageBlurHashesType0Banner,
+        from ..models.base_item_person_image_blur_hashes_type_0_backdrop import (
+            BaseItemPersonImageBlurHashesType0Backdrop,
         )
         from ..models.base_item_person_image_blur_hashes_type_0_menu import (
             BaseItemPersonImageBlurHashesType0Menu,
         )
-        from ..models.base_item_person_image_blur_hashes_type_0_box_rear import (
-            BaseItemPersonImageBlurHashesType0BoxRear,
+        from ..models.base_item_person_image_blur_hashes_type_0_logo import (
+            BaseItemPersonImageBlurHashesType0Logo,
         )
         from ..models.base_item_person_image_blur_hashes_type_0_art import (
             BaseItemPersonImageBlurHashesType0Art,
         )
+        from ..models.base_item_person_image_blur_hashes_type_0_box_rear import (
+            BaseItemPersonImageBlurHashesType0BoxRear,
+        )
+        from ..models.base_item_person_image_blur_hashes_type_0_banner import (
+            BaseItemPersonImageBlurHashesType0Banner,
+        )
+        from ..models.base_item_person_image_blur_hashes_type_0_screenshot import (
+            BaseItemPersonImageBlurHashesType0Screenshot,
+        )
+        from ..models.base_item_person_image_blur_hashes_type_0_chapter import (
+            BaseItemPersonImageBlurHashesType0Chapter,
+        )
         from ..models.base_item_person_image_blur_hashes_type_0_thumb import (
             BaseItemPersonImageBlurHashesType0Thumb,
         )
-        from ..models.base_item_person_image_blur_hashes_type_0_backdrop import (
-            BaseItemPersonImageBlurHashesType0Backdrop,
-        )
         from ..models.base_item_person_image_blur_hashes_type_0_disc import (
             BaseItemPersonImageBlurHashesType0Disc,
-        )
-        from ..models.base_item_person_image_blur_hashes_type_0_box import (
-            BaseItemPersonImageBlurHashesType0Box,
         )
         from ..models.base_item_person_image_blur_hashes_type_0_primary import (
             BaseItemPersonImageBlurHashesType0Primary,
@@ -207,14 +213,8 @@ class BaseItemPersonImageBlurHashesType0:
         from ..models.base_item_person_image_blur_hashes_type_0_profile import (
             BaseItemPersonImageBlurHashesType0Profile,
         )
-        from ..models.base_item_person_image_blur_hashes_type_0_chapter import (
-            BaseItemPersonImageBlurHashesType0Chapter,
-        )
-        from ..models.base_item_person_image_blur_hashes_type_0_logo import (
-            BaseItemPersonImageBlurHashesType0Logo,
-        )
-        from ..models.base_item_person_image_blur_hashes_type_0_screenshot import (
-            BaseItemPersonImageBlurHashesType0Screenshot,
+        from ..models.base_item_person_image_blur_hashes_type_0_box import (
+            BaseItemPersonImageBlurHashesType0Box,
         )
 
         d = src_dict.copy()

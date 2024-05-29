@@ -5,10 +5,10 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import cast
 import datetime
 from ..models.task_completion_status import TaskCompletionStatus
+from typing import cast
+from typing import Union
 from dateutil.parser import isoparse
 
 

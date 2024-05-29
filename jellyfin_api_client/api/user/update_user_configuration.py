@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.user_configuration import UserConfiguration
-from ...models.problem_details import ProblemDetails
 from ...types import Unset
+from ...models.problem_details import ProblemDetails
+from ...models.user_configuration import UserConfiguration
 
 
 def _get_kwargs(

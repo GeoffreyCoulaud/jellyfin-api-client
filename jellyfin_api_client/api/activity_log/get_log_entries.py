@@ -8,8 +8,8 @@ from ...types import Response, UNSET
 from ... import errors
 
 import datetime
-from ...models.activity_log_entry_query_result import ActivityLogEntryQueryResult
 from ...types import Unset
+from ...models.activity_log_entry_query_result import ActivityLogEntryQueryResult
 
 
 def _get_kwargs(

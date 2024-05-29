@@ -5,10 +5,10 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
+from ..models.media_type import MediaType
 from typing import cast
 from typing import List
-from ..models.media_type import MediaType
+from typing import Union
 from ..models.general_command_type import GeneralCommandType
 
 if TYPE_CHECKING:

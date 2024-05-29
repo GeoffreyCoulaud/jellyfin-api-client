@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
 from ...types import Unset
+from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
 
 
 def _get_kwargs(

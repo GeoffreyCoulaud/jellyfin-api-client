@@ -5,13 +5,13 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
+from ..models.media_stream_protocol import MediaStreamProtocol
 from typing import cast
-from typing import List
-from ..models.encoding_context import EncodingContext
 from ..models.dlna_profile_type import DlnaProfileType
 from ..models.transcode_seek_info import TranscodeSeekInfo
-from ..models.media_stream_protocol import MediaStreamProtocol
+from typing import List
+from ..models.encoding_context import EncodingContext
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.profile_condition import ProfileCondition

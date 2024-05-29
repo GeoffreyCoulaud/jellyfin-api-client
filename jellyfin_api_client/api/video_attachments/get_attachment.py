@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
+from io import BytesIO
 from ...models.problem_details import ProblemDetails
 from ...types import File
-from io import BytesIO
 
 
 def _get_kwargs(

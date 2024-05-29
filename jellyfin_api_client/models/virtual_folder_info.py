@@ -5,9 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from typing import cast
 from typing import List
+from typing import Union
 from ..models.virtual_folder_info_collection_type import VirtualFolderInfoCollectionType
 
 if TYPE_CHECKING:

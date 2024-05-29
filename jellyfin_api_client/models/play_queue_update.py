@@ -5,13 +5,13 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from ..models.group_repeat_mode import GroupRepeatMode
 import datetime
+from ..models.group_shuffle_mode import GroupShuffleMode
 from typing import List
 from dateutil.parser import isoparse
-from ..models.group_shuffle_mode import GroupShuffleMode
+from ..models.group_repeat_mode import GroupRepeatMode
 from ..models.play_queue_update_reason import PlayQueueUpdateReason
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.sync_play_queue_item import SyncPlayQueueItem

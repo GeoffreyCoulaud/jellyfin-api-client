@@ -5,8 +5,8 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from typing import List
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.library_type_options_dto import LibraryTypeOptionsDto

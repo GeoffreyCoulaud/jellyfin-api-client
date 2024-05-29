@@ -5,10 +5,10 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from ..models.embedded_subtitle_options import EmbeddedSubtitleOptions
 from typing import cast
 from typing import List
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.media_path_info import MediaPathInfo

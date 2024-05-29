@@ -5,11 +5,11 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import cast
-import datetime
-from dateutil.parser import isoparse
 from ..models.send_command_type import SendCommandType
+import datetime
+from typing import cast
+from typing import Union
+from dateutil.parser import isoparse
 
 
 T = TypeVar("T", bound="SendCommand")

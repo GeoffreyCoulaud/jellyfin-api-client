@@ -7,12 +7,12 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.subtitle_delivery_method import SubtitleDeliveryMethod
-from ...models.encoding_context import EncodingContext
 from ...types import Unset
+from ...models.encoding_context import EncodingContext
 from ...models.get_video_stream_by_container_stream_options import (
     GetVideoStreamByContainerStreamOptions,
 )
+from ...models.subtitle_delivery_method import SubtitleDeliveryMethod
 
 
 def _get_kwargs(

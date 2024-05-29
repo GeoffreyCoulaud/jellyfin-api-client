@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.media_path_dto import MediaPathDto
 from ...types import Unset
+from ...models.media_path_dto import MediaPathDto
 
 
 def _get_kwargs(

@@ -5,11 +5,11 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import cast
 import datetime
-from ..models.log_level import LogLevel
+from typing import cast
+from typing import Union
 from dateutil.parser import isoparse
+from ..models.log_level import LogLevel
 
 
 T = TypeVar("T", bound="ActivityLogEntry")

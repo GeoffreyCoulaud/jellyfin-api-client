@@ -5,8 +5,8 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import cast, Union
 from ..models.external_id_info_type import ExternalIdInfoType
+from typing import cast, Union
 
 
 T = TypeVar("T", bound="ExternalIdInfo")

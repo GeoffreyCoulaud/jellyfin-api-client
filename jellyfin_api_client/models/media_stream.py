@@ -5,13 +5,12 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from ..models.video_range_type import VideoRangeType
 from ..models.media_stream_delivery_method import MediaStreamDeliveryMethod
+from ..models.video_range_type import VideoRangeType
 from ..models.audio_spatial_format import AudioSpatialFormat
-from typing import cast
-from ..models.media_stream_type import MediaStreamType
 from ..models.video_range import VideoRange
+from typing import cast, Union
+from ..models.media_stream_type import MediaStreamType
 
 
 T = TypeVar("T", bound="MediaStream")

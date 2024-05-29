@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.problem_details import ProblemDetails
 from ...models.device_options import DeviceOptions
+from ...models.problem_details import ProblemDetails
 
 
 def _get_kwargs(

@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.problem_details import ProblemDetails
 from ...models.quick_connect_result import QuickConnectResult
+from ...models.problem_details import ProblemDetails
 
 
 def _get_kwargs(

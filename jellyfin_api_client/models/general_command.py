@@ -5,8 +5,8 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from ..models.general_command_type import GeneralCommandType
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.general_command_arguments import GeneralCommandArguments

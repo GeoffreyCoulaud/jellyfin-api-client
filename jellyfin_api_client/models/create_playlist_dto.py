@@ -5,9 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from typing import cast
 from typing import List
+from typing import Union
 from ..models.create_playlist_dto_media_type import CreatePlaylistDtoMediaType
 
 if TYPE_CHECKING:

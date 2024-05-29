@@ -5,10 +5,10 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from ..models.codec_type import CodecType
-from typing import Union
 from typing import cast
 from typing import List
+from typing import Union
+from ..models.codec_type import CodecType
 
 if TYPE_CHECKING:
     from ..models.profile_condition import ProfileCondition

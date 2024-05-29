@@ -5,9 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from ..models.session_message_type import SessionMessageType
 from typing import cast
+from ..models.session_message_type import SessionMessageType
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.timer_event_info import TimerEventInfo

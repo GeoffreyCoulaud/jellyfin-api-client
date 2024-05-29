@@ -5,20 +5,20 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import cast
 import datetime
-from typing import List
 from ..models.media_type import MediaType
+from typing import cast
+from typing import List
+from typing import Union
 from dateutil.parser import isoparse
 from ..models.general_command_type import GeneralCommandType
 
 if TYPE_CHECKING:
+    from ..models.queue_item import QueueItem
+    from ..models.base_item_dto import BaseItemDto
     from ..models.client_capabilities import ClientCapabilities
     from ..models.transcoding_info import TranscodingInfo
-    from ..models.queue_item import QueueItem
     from ..models.player_state_info import PlayerStateInfo
-    from ..models.base_item_dto import BaseItemDto
     from ..models.session_user_info import SessionUserInfo
 
 
@@ -44,9 +44,7 @@ class SessionInfo:
         last_paused_date (Union[None, Unset, datetime.datetime]): Gets or sets the last paused date.
         device_name (Union[None, Unset, str]): Gets or sets the name of the device.
         device_type (Union[None, Unset, str]): Gets or sets the type of the device.
-        now_playing_item (Union['BaseItemDto', None, Unset]): This is strictly used as a data transfer object from the
-            api layer.
-            This holds information about a BaseItem in a format that is convenient for the client.
+        now_playing_item (Union['BaseItemDto', None, Unset]): Gets or sets the now playing item.
         now_viewing_item (Union['BaseItemDto', None, Unset]): This is strictly used as a data transfer object from the
             api layer.
             This holds information about a BaseItem in a format that is convenient for the client.
@@ -96,10 +94,10 @@ class SessionInfo:
     supported_commands: Union[List[GeneralCommandType], None, Unset] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
+        from ..models.base_item_dto import BaseItemDto
         from ..models.client_capabilities import ClientCapabilities
         from ..models.transcoding_info import TranscodingInfo
         from ..models.player_state_info import PlayerStateInfo
-        from ..models.base_item_dto import BaseItemDto
 
         play_state: Union[Dict[str, Any], None, Unset]
         if isinstance(self.play_state, Unset):
@@ -372,11 +370,11 @@ class SessionInfo:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        from ..models.queue_item import QueueItem
+        from ..models.base_item_dto import BaseItemDto
         from ..models.client_capabilities import ClientCapabilities
         from ..models.transcoding_info import TranscodingInfo
-        from ..models.queue_item import QueueItem
         from ..models.player_state_info import PlayerStateInfo
-        from ..models.base_item_dto import BaseItemDto
         from ..models.session_user_info import SessionUserInfo
 
         d = src_dict.copy()

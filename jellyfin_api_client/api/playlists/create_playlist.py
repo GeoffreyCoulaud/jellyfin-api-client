@@ -7,10 +7,10 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.create_playlist_dto import CreatePlaylistDto
-from ...models.playlist_creation_result import PlaylistCreationResult
-from ...models.media_type import MediaType
 from ...types import Unset
+from ...models.playlist_creation_result import PlaylistCreationResult
+from ...models.create_playlist_dto import CreatePlaylistDto
+from ...models.media_type import MediaType
 
 
 def _get_kwargs(

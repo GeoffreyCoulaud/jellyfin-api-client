@@ -5,14 +5,14 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
+from ..models.image_type import ImageType
 from typing import cast
 from typing import List
-from ..models.image_type import ImageType
+from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.library_option_info_dto import LibraryOptionInfoDto
     from ..models.image_option import ImageOption
+    from ..models.library_option_info_dto import LibraryOptionInfoDto
 
 
 T = TypeVar("T", bound="LibraryTypeOptionsDto")
@@ -88,8 +88,8 @@ class LibraryTypeOptionsDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.library_option_info_dto import LibraryOptionInfoDto
         from ..models.image_option import ImageOption
+        from ..models.library_option_info_dto import LibraryOptionInfoDto
 
         d = src_dict.copy()
 

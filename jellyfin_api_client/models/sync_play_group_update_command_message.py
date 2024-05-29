@@ -5,15 +5,15 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from ..models.session_message_type import SessionMessageType
 from typing import cast
+from ..models.session_message_type import SessionMessageType
+from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.group_info_dto_group_update import GroupInfoDtoGroupUpdate
     from ..models.play_queue_update_group_update import PlayQueueUpdateGroupUpdate
-    from ..models.string_group_update import StringGroupUpdate
     from ..models.group_state_update_group_update import GroupStateUpdateGroupUpdate
+    from ..models.string_group_update import StringGroupUpdate
+    from ..models.group_info_dto_group_update import GroupInfoDtoGroupUpdate
 
 
 T = TypeVar("T", bound="SyncPlayGroupUpdateCommandMessage")
@@ -25,7 +25,7 @@ class SyncPlayGroupUpdateCommandMessage:
 
     Attributes:
         data (Union['GroupInfoDtoGroupUpdate', 'GroupStateUpdateGroupUpdate', 'PlayQueueUpdateGroupUpdate',
-            'StringGroupUpdate', None, Unset]): Group update without data.
+            'StringGroupUpdate', None, Unset]): Gets or sets the data.
         message_id (Union[Unset, str]): Gets or sets the message id.
         message_type (Union[Unset, SessionMessageType]): The different kinds of messages that are used in the WebSocket
             api. Default: SessionMessageType.SYNCPLAYGROUPUPDATE.
@@ -45,10 +45,10 @@ class SyncPlayGroupUpdateCommandMessage:
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        from ..models.group_info_dto_group_update import GroupInfoDtoGroupUpdate
         from ..models.play_queue_update_group_update import PlayQueueUpdateGroupUpdate
-        from ..models.string_group_update import StringGroupUpdate
         from ..models.group_state_update_group_update import GroupStateUpdateGroupUpdate
+        from ..models.string_group_update import StringGroupUpdate
+        from ..models.group_info_dto_group_update import GroupInfoDtoGroupUpdate
 
         data: Union[Dict[str, Any], None, Unset]
         if isinstance(self.data, Unset):
@@ -83,10 +83,10 @@ class SyncPlayGroupUpdateCommandMessage:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.group_info_dto_group_update import GroupInfoDtoGroupUpdate
         from ..models.play_queue_update_group_update import PlayQueueUpdateGroupUpdate
-        from ..models.string_group_update import StringGroupUpdate
         from ..models.group_state_update_group_update import GroupStateUpdateGroupUpdate
+        from ..models.string_group_update import StringGroupUpdate
+        from ..models.group_info_dto_group_update import GroupInfoDtoGroupUpdate
 
         d = src_dict.copy()
 

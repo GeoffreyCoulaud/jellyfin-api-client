@@ -5,10 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import cast
-from ..models.rating_type import RatingType
 from ..models.image_type import ImageType
+from typing import cast, Union
+from ..models.rating_type import RatingType
 
 
 T = TypeVar("T", bound="RemoteImageInfo")

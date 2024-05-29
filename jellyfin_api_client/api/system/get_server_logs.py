@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.log_file import LogFile
 from ...models.problem_details import ProblemDetails
+from ...models.log_file import LogFile
 
 
 def _get_kwargs() -> Dict[str, Any]:

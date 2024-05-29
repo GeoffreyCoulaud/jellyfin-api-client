@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.get_programs_dto import GetProgramsDto
 from ...models.base_item_dto_query_result import BaseItemDtoQueryResult
+from ...models.get_programs_dto import GetProgramsDto
 
 
 def _get_kwargs(

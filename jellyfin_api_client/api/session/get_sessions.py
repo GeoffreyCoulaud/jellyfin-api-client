@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.session_info import SessionInfo
 from ...types import Unset
+from ...models.session_info import SessionInfo
 
 
 def _get_kwargs(

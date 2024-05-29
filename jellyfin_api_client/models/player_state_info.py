@@ -5,11 +5,10 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from ..models.repeat_mode import RepeatMode
-from typing import cast
 from ..models.playback_order import PlaybackOrder
 from ..models.player_state_info_play_method import PlayerStateInfoPlayMethod
+from ..models.repeat_mode import RepeatMode
+from typing import cast, Union
 
 
 T = TypeVar("T", bound="PlayerStateInfo")

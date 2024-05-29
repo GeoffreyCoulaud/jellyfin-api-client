@@ -5,10 +5,10 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from typing import cast
-from typing import List
 from ..models.playback_info_response_error_code import PlaybackInfoResponseErrorCode
+from typing import List
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.media_source_info import MediaSourceInfo

@@ -5,9 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from ..models.session_message_type import SessionMessageType
 from typing import cast
+from ..models.session_message_type import SessionMessageType
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.plugin_info import PluginInfo
@@ -21,8 +21,7 @@ class PluginUninstalledMessage:
     """Plugin uninstalled message.
 
     Attributes:
-        data (Union['PluginInfo', None, Unset]): This is a serializable stub class that is used by the api to provide
-            information about installed plugins.
+        data (Union['PluginInfo', None, Unset]): Gets or sets the data.
         message_id (Union[Unset, str]): Gets or sets the message id.
         message_type (Union[Unset, SessionMessageType]): The different kinds of messages that are used in the WebSocket
             api. Default: SessionMessageType.PACKAGEUNINSTALLED.

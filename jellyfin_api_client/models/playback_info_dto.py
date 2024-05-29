@@ -5,8 +5,8 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from typing import cast
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.device_profile import DeviceProfile
@@ -28,16 +28,7 @@ class PlaybackInfoDto:
         max_audio_channels (Union[None, Unset, int]): Gets or sets the max audio channels.
         media_source_id (Union[None, Unset, str]): Gets or sets the media source id.
         live_stream_id (Union[None, Unset, str]): Gets or sets the live stream id.
-        device_profile (Union['DeviceProfile', None, Unset]): A MediaBrowser.Model.Dlna.DeviceProfile represents a set
-            of metadata which determines which content a certain device is able to play.
-            <br />
-            Specifically, it defines the supported <see
-            cref="P:MediaBrowser.Model.Dlna.DeviceProfile.ContainerProfiles">containers</see> and
-            <see cref="P:MediaBrowser.Model.Dlna.DeviceProfile.CodecProfiles">codecs</see> (video and/or audio, including
-            codec profiles and levels)
-            the device is able to direct play (without transcoding or remuxing),
-            as well as which <see cref="P:MediaBrowser.Model.Dlna.DeviceProfile.TranscodingProfiles">containers/codecs to
-            transcode to</see> in case it isn't.
+        device_profile (Union['DeviceProfile', None, Unset]): Gets or sets the device profile.
         enable_direct_play (Union[None, Unset, bool]): Gets or sets a value indicating whether to enable direct play.
         enable_direct_stream (Union[None, Unset, bool]): Gets or sets a value indicating whether to enable direct
             stream.

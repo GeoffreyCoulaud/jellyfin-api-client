@@ -5,9 +5,8 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
+from typing import cast, List
 from typing import Union
-from typing import cast
-from typing import List
 from ..models.play_command import PlayCommand
 
 

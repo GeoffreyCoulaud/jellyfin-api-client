@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
+from ...types import Unset
 from ...models.add_virtual_folder_dto import AddVirtualFolderDto
 from ...models.collection_type_options import CollectionTypeOptions
-from ...types import Unset
 
 
 def _get_kwargs(

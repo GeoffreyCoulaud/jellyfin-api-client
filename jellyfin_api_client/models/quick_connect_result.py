@@ -5,9 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 import datetime
 from dateutil.parser import isoparse
+from typing import Union
 
 
 T = TypeVar("T", bound="QuickConnectResult")

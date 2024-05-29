@@ -5,9 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from ..models.group_queue_mode import GroupQueueMode
 from typing import cast, List
+from typing import Union
 
 
 T = TypeVar("T", bound="QueueRequestDto")

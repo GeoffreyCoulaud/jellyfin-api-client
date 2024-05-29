@@ -7,10 +7,10 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.image_type import ImageType
+from ...types import Unset
 from ...models.problem_details import ProblemDetails
 from ...models.image_format import ImageFormat
-from ...types import Unset
+from ...models.image_type import ImageType
 
 
 def _get_kwargs(

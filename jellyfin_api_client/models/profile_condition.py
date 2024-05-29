@@ -5,9 +5,8 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import cast
 from ..models.profile_condition_value import ProfileConditionValue
+from typing import cast, Union
 from ..models.profile_condition_type import ProfileConditionType
 
 

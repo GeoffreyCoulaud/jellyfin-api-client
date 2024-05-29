@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.collection_creation_result import CollectionCreationResult
 from ...types import Unset
+from ...models.collection_creation_result import CollectionCreationResult
 
 
 def _get_kwargs(

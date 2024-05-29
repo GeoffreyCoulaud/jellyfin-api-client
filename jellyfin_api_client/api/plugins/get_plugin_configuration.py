@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.problem_details import ProblemDetails
 from ...models.base_plugin_configuration import BasePluginConfiguration
+from ...models.problem_details import ProblemDetails
 
 
 def _get_kwargs(

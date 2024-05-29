@@ -5,9 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from typing import cast
 from ..models.person_kind import PersonKind
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.base_item_person_image_blur_hashes_type_0 import (

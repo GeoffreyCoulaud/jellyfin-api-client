@@ -8,8 +8,8 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...models.media_stream_protocol import MediaStreamProtocol
-from ...models.problem_details import ProblemDetails
 from ...types import Unset
+from ...models.problem_details import ProblemDetails
 
 
 def _get_kwargs(

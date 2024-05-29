@@ -5,16 +5,16 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from ..models.metadata_editor_info_content_type import MetadataEditorInfoContentType
 from typing import List
+from ..models.metadata_editor_info_content_type import MetadataEditorInfoContentType
+from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.external_id_info import ExternalIdInfo
-    from ..models.culture_dto import CultureDto
-    from ..models.name_value_pair import NameValuePair
     from ..models.country_info import CountryInfo
+    from ..models.culture_dto import CultureDto
     from ..models.parental_rating import ParentalRating
+    from ..models.external_id_info import ExternalIdInfo
+    from ..models.name_value_pair import NameValuePair
 
 
 T = TypeVar("T", bound="MetadataEditorInfo")
@@ -100,11 +100,11 @@ class MetadataEditorInfo:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.external_id_info import ExternalIdInfo
-        from ..models.culture_dto import CultureDto
-        from ..models.name_value_pair import NameValuePair
         from ..models.country_info import CountryInfo
+        from ..models.culture_dto import CultureDto
         from ..models.parental_rating import ParentalRating
+        from ..models.external_id_info import ExternalIdInfo
+        from ..models.name_value_pair import NameValuePair
 
         d = src_dict.copy()
         parental_rating_options = []

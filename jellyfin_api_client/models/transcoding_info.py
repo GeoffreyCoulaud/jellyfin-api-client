@@ -5,9 +5,8 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
 from ..models.transcoding_info_transcode_reasons import TranscodingInfoTranscodeReasons
-from typing import cast
+from typing import cast, Union
 from ..models.transcoding_info_hardware_acceleration_type import (
     TranscodingInfoHardwareAccelerationType,
 )

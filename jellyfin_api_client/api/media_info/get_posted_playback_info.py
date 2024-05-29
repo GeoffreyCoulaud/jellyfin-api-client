@@ -7,10 +7,10 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.playback_info_response import PlaybackInfoResponse
+from ...types import Unset
 from ...models.playback_info_dto import PlaybackInfoDto
 from ...models.problem_details import ProblemDetails
-from ...types import Unset
+from ...models.playback_info_response import PlaybackInfoResponse
 
 
 def _get_kwargs(

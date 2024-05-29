@@ -5,10 +5,10 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
+from ..models.media_type import MediaType
 from typing import cast
 from typing import List
-from ..models.media_type import MediaType
+from typing import Union
 from ..models.general_command_type import GeneralCommandType
 
 if TYPE_CHECKING:
@@ -29,16 +29,7 @@ class ClientCapabilitiesDto:
             control.
         supports_persistent_identifier (Union[Unset, bool]): Gets or sets a value indicating whether session supports a
             persistent identifier.
-        device_profile (Union['DeviceProfile', None, Unset]): A MediaBrowser.Model.Dlna.DeviceProfile represents a set
-            of metadata which determines which content a certain device is able to play.
-            <br />
-            Specifically, it defines the supported <see
-            cref="P:MediaBrowser.Model.Dlna.DeviceProfile.ContainerProfiles">containers</see> and
-            <see cref="P:MediaBrowser.Model.Dlna.DeviceProfile.CodecProfiles">codecs</see> (video and/or audio, including
-            codec profiles and levels)
-            the device is able to direct play (without transcoding or remuxing),
-            as well as which <see cref="P:MediaBrowser.Model.Dlna.DeviceProfile.TranscodingProfiles">containers/codecs to
-            transcode to</see> in case it isn't.
+        device_profile (Union['DeviceProfile', None, Unset]): Gets or sets the device profile.
         app_store_url (Union[None, Unset, str]): Gets or sets the app store url.
         icon_url (Union[None, Unset, str]): Gets or sets the icon url.
         supports_content_uploading (Union[None, Unset, bool]):  Default: False.

@@ -5,11 +5,11 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
+from ..models.playback_order import PlaybackOrder
 from ..models.repeat_mode import RepeatMode
 from typing import cast
 from typing import List
-from ..models.playback_order import PlaybackOrder
+from typing import Union
 from ..models.play_method import PlayMethod
 
 if TYPE_CHECKING:

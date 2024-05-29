@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.forgot_password_dto import ForgotPasswordDto
 from ...models.forgot_password_result import ForgotPasswordResult
+from ...models.forgot_password_dto import ForgotPasswordDto
 
 
 def _get_kwargs(

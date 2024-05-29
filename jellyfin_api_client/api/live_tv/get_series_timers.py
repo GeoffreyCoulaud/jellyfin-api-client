@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.sort_order import SortOrder
-from ...models.series_timer_info_dto_query_result import SeriesTimerInfoDtoQueryResult
 from ...types import Unset
+from ...models.series_timer_info_dto_query_result import SeriesTimerInfoDtoQueryResult
+from ...models.sort_order import SortOrder
 
 
 def _get_kwargs(

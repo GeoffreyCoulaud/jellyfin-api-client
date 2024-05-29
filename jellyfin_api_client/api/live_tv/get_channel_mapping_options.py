@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.channel_mapping_options_dto import ChannelMappingOptionsDto
 from ...types import Unset
+from ...models.channel_mapping_options_dto import ChannelMappingOptionsDto
 
 
 def _get_kwargs(

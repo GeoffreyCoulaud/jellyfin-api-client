@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.name_id_pair import NameIdPair
 from ...types import Unset
+from ...models.name_id_pair import NameIdPair
 
 
 def _get_kwargs(

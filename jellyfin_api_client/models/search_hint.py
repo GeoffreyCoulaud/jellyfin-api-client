@@ -5,13 +5,13 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import cast
 import datetime
-from typing import List
-from ..models.media_type import MediaType
-from dateutil.parser import isoparse
 from ..models.base_item_kind import BaseItemKind
+from ..models.media_type import MediaType
+from typing import cast
+from typing import List
+from typing import Union
+from dateutil.parser import isoparse
 
 
 T = TypeVar("T", bound="SearchHint")
@@ -25,7 +25,7 @@ class SearchHint:
         item_id (Union[Unset, str]): Gets or sets the item id.
         id (Union[Unset, str]): Gets or sets the item id.
         name (Union[Unset, str]): Gets or sets the name.
-        matched_term (Union[Unset, str]): Gets or sets the matched term.
+        matched_term (Union[None, Unset, str]): Gets or sets the matched term.
         index_number (Union[None, Unset, int]): Gets or sets the index number.
         production_year (Union[None, Unset, int]): Gets or sets the production year.
         parent_index_number (Union[None, Unset, int]): Gets or sets the parent index number.
@@ -56,7 +56,7 @@ class SearchHint:
     item_id: Union[Unset, str] = UNSET
     id: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
-    matched_term: Union[Unset, str] = UNSET
+    matched_term: Union[None, Unset, str] = UNSET
     index_number: Union[None, Unset, int] = UNSET
     production_year: Union[None, Unset, int] = UNSET
     parent_index_number: Union[None, Unset, int] = UNSET
@@ -90,7 +90,11 @@ class SearchHint:
 
         name = self.name
 
-        matched_term = self.matched_term
+        matched_term: Union[None, Unset, str]
+        if isinstance(self.matched_term, Unset):
+            matched_term = UNSET
+        else:
+            matched_term = self.matched_term
 
         index_number: Union[None, Unset, int]
         if isinstance(self.index_number, Unset):
@@ -312,7 +316,14 @@ class SearchHint:
 
         name = d.pop("Name", UNSET)
 
-        matched_term = d.pop("MatchedTerm", UNSET)
+        def _parse_matched_term(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        matched_term = _parse_matched_term(d.pop("MatchedTerm", UNSET))
 
         def _parse_index_number(data: object) -> Union[None, Unset, int]:
             if data is None:

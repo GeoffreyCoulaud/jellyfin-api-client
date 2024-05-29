@@ -7,12 +7,12 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.subtitle_delivery_method import SubtitleDeliveryMethod
+from ...types import Unset
 from ...models.get_hls_audio_segment_stream_options import (
     GetHlsAudioSegmentStreamOptions,
 )
 from ...models.encoding_context import EncodingContext
-from ...types import Unset
+from ...models.subtitle_delivery_method import SubtitleDeliveryMethod
 
 
 def _get_kwargs(

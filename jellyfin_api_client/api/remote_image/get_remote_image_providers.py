@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.image_provider_info import ImageProviderInfo
 from ...models.problem_details import ProblemDetails
+from ...models.image_provider_info import ImageProviderInfo
 
 
 def _get_kwargs(

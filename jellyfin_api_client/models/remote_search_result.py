@@ -5,10 +5,10 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import Union
-from typing import cast
 import datetime
+from typing import cast
 from typing import List
+from typing import Union
 from dateutil.parser import isoparse
 
 if TYPE_CHECKING:
