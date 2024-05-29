@@ -1,0 +1,67 @@
+name: Check for new Jellyfin release
+
+on:
+  workflow_dispatch: # Allow for manually triggering the workflow
+  schedule:
+    - cron: "0 15 * * *" # Everyday at 3PM UTC (5PM Europe/Paris)
+
+env:
+  WATCHING_REPO: GeoffreyCoulaud/jellyfin-api-client
+  WATCHED_REPO: jellyfin/jellyfin
+
+jobs:
+  check_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Get latest release tag
+        id: watching_repo
+        run: |
+          latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo "::set-output name=latest_tag::${latest_tag}"
+
+      - name: Get latest Jellyfin release tag
+        id: watched_repo
+        run: |
+          latest_tag=$(curl --silent "https://api.github.com/repos/${{ env.WATCHED_REPO }}/releases/latest" | jq -r .tag_name)
+          echo "::set-output name=latest_tag::${latest_tag}"
+
+      - name: Compare versions and update issue if necessary
+        id: create_issue
+        run: |
+          WATCHING_REPO_LATEST_TAG="${{ steps.watching_repo.outputs.latest_tag }}"
+          WATCHED_REPO_LATEST_TAG="${{ steps.watched_repo.outputs.latest_tag }}"
+          ISSUE_BODY='A new release of Jellyfin is available: `$WATCHED_REPO_LATEST_TAG`'
+
+          ISSUE_NUMBER=$(curl https://api.github.com/repos/$WATCHING_REPO/issues?state=all | jq '.[] | select(.title == "Update to new release of Jellyfin") | .number')
+          if [ -z "$ISSUE_NUMBER" ]; then
+            echo "Creating new issue."
+            curl \
+              -X POST \
+              -H "Authorization: token ${{ secrets.GH_PAT }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              https://api.github.com/repos/$WATCHING_REPO/issues \
+              -d '{"title":"Update to new release of Jellyfin","body":"'$ISSUE_BODY'"}'
+          fi
+
+          if [ "$(printf '%s\n' "$WATCHED_REPO_LATEST_TAG" "WATCHING_REPO_LATEST_TAG" | sort -V | head -n1)" != "$WATCHED_REPO_LATEST_TAG" ]; then
+            echo "A new release of Jellyfin is available: $WATCHED_REPO_LATEST_TAG."
+            echo "Reopening issue #$ISSUE_NUMBER."
+            curl \
+              -X PATCH \
+              -H "Authorization: token ${{ secrets.GH_PAT }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              https://api.github.com/repos/$WATCHING_REPO/issues/$ISSUE_NUMBER \
+              -d '{"state":"open","body":"'$ISSUE_BODY'"}'
+          else
+            echo "No new release of Jellyfin found."
+            echo "Closing issue #$ISSUE_NUMBER."
+            curl \
+              -X PATCH \
+              -H "Authorization: token ${{ secrets.GH_PAT }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              https://api.github.com/repos/$WATCHING_REPO/issues/$ISSUE_NUMBER \
+              -d '{"state":"closed"}'
+          fi
