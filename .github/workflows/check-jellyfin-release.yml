@@ -30,16 +30,20 @@ jobs:
         run: |
           WATCHING_REPO_LATEST_TAG="${{ steps.watching_repo.outputs.latest_tag }}"
           WATCHED_REPO_LATEST_TAG="${{ steps.watched_repo.outputs.latest_tag }}"
+
+          echo "$WATCHING_REPO latest tag: $WATCHING_REPO_LATEST_TAG"
+          echo "$WATCHED_REPO latest tag: $WATCHED_REPO_LATEST_TAG"
+
           ISSUE_BODY='A new release of Jellyfin is available: `$WATCHED_REPO_LATEST_TAG`'
 
-          ISSUE_NUMBER=$(curl https://api.github.com/repos/$WATCHING_REPO/issues?state=all | jq '.[] | select(.title == "Update to new release of Jellyfin") | .number')
+          ISSUE_NUMBER=$(curl "https://api.github.com/repos/$WATCHING_REPO/issues?state=all" | jq '.[] | select(.title == "Update to new release of Jellyfin") | .number')
           if [ -z "$ISSUE_NUMBER" ]; then
             echo "Creating new issue."
             curl \
               -X POST \
               -H "Authorization: token ${{ secrets.GH_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
-              https://api.github.com/repos/$WATCHING_REPO/issues \
+              "https://api.github.com/repos/$WATCHING_REPO/issues" \
               -d '{"title":"Update to new release of Jellyfin","body":"'$ISSUE_BODY'"}'
           fi
 
@@ -50,7 +54,7 @@ jobs:
               -X PATCH \
               -H "Authorization: token ${{ secrets.GH_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
-              https://api.github.com/repos/$WATCHING_REPO/issues/$ISSUE_NUMBER \
+              "https://api.github.com/repos/$WATCHING_REPO/issues/$ISSUE_NUMBER" \
               -d '{"state":"open","body":"'$ISSUE_BODY'"}'
           else
             echo "No new release of Jellyfin found."
@@ -59,6 +63,6 @@ jobs:
               -X PATCH \
               -H "Authorization: token ${{ secrets.GH_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
-              https://api.github.com/repos/$WATCHING_REPO/issues/$ISSUE_NUMBER \
+              "https://api.github.com/repos/$WATCHING_REPO/issues/$ISSUE_NUMBER" \
               -d '{"state":"closed"}'
           fi
