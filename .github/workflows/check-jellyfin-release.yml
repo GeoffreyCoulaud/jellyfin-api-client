@@ -16,25 +16,22 @@ jobs:
       - name: Get latest release tag
         id: watching_repo
         run: |
-          latest_tag=$(curl --silent "https://api.github.com/repos/$WATCHING_REPO/releases/latest" | jq -r .tag_name)
-          echo "::set-output name=latest_tag::${latest_tag}"
+          tag=$(curl --silent "https://api.github.com/repos/$WATCHING_REPO/releases/latest" | jq -r .tag_name)
+          echo "tag=$tag" >> $GITHUB_OUTPUT
 
       - name: Get latest Jellyfin release tag
         id: watched_repo
         run: |
-          latest_tag=$(curl --silent "https://api.github.com/repos/$WATCHED_REPO/releases/latest" | jq -r .tag_name)
-          echo "::set-output name=latest_tag::${latest_tag}"
+          tag=$(curl --silent "https://api.github.com/repos/$WATCHED_REPO/releases/latest" | jq -r .tag_name)
+          echo "tag=$tag" >> $GITHUB_OUTPUT
 
       - name: Compare versions and update issue if necessary
         id: create_issue
         run: |
-          WATCHING_REPO_LATEST_TAG="${{ steps.watching_repo.outputs.latest_tag }}"
-          WATCHED_REPO_LATEST_TAG="${{ steps.watched_repo.outputs.latest_tag }}"
-
-          echo "$WATCHING_REPO latest tag: $WATCHING_REPO_LATEST_TAG"
-          echo "$WATCHED_REPO latest tag: $WATCHED_REPO_LATEST_TAG"
-
-          ISSUE_BODY='A new release of Jellyfin is available: `$WATCHED_REPO_LATEST_TAG`'
+          WATCHING_REPO_TAG="${{ steps.watching_repo.outputs.tag }}"
+          echo "$WATCHING_REPO latest tag: $WATCHING_REPO_TAG"
+          WATCHED_REPO_TAG="${{ steps.watched_repo.outputs.tag }}"
+          echo "$WATCHED_REPO latest tag: $WATCHED_REPO_TAG"
 
           ISSUE_NUMBER=$(curl --silent "https://api.github.com/repos/$WATCHING_REPO/issues?state=all" | jq '.[] | select(.title == "Update to new release of Jellyfin") | .number')
           if [ -z "$ISSUE_NUMBER" ]; then
@@ -45,11 +42,12 @@ jobs:
               -H "Authorization: token ${{ secrets.GH_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
               "https://api.github.com/repos/$WATCHING_REPO/issues" \
-              -d '{"title":"Update to new release of Jellyfin","body":"A new release of Jellyfin is available: '$WATCHED_REPO_LATEST_TAG'"}'
+              -d '{"title":"Update to new release of Jellyfin","body":"A new release of Jellyfin is available: '$WATCHED_REPO_TAG'"}'
           fi
 
-          if [ "$(printf '%s\n' "$WATCHED_REPO_LATEST_TAG" "WATCHING_REPO_LATEST_TAG" | sort -V | head -n1)" != "$WATCHED_REPO_LATEST_TAG" ]; then
-            echo "A new release of Jellyfin is available: $WATCHED_REPO_LATEST_TAG."
+          MOST_RECENT=$(printf '%s\n' "$WATCHING_REPO_TAG" "$WATCHED_REPO_TAG" | sort -V | head -n1)
+          if [ "$MOST_RECENT" != "$WATCHING_REPO_TAG" ]; then
+            echo "A new release of Jellyfin is available: $WATCHED_REPO_TAG."
             echo "Reopening issue #$ISSUE_NUMBER."
             curl \
               --silent \
@@ -57,7 +55,7 @@ jobs:
               -H "Authorization: token ${{ secrets.GH_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
               "https://api.github.com/repos/$WATCHING_REPO/issues/$ISSUE_NUMBER" \
-              -d '{"state":"open"}'
+              -d '{"state":"open","state_reason":"reopened"}'
           else
             echo "No new release of Jellyfin found."
             echo "Closing issue #$ISSUE_NUMBER."
@@ -67,5 +65,5 @@ jobs:
               -H "Authorization: token ${{ secrets.GH_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
               "https://api.github.com/repos/$WATCHING_REPO/issues/$ISSUE_NUMBER" \
-              -d '{"state":"closed"}'
+              -d '{"state":"closed","state_reason":"completed"}'
           fi
