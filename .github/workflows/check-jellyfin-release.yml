@@ -16,13 +16,13 @@ jobs:
       - name: Get latest release tag
         id: watching_repo
         run: |
-          latest_tag=$(curl --silent "https://api.github.com/repos/${{ env.WATCHING_REPO }}/releases/latest" | jq -r .tag_name)
+          latest_tag=$(curl --silent "https://api.github.com/repos/$WATCHING_REPO/releases/latest" | jq -r .tag_name)
           echo "::set-output name=latest_tag::${latest_tag}"
 
       - name: Get latest Jellyfin release tag
         id: watched_repo
         run: |
-          latest_tag=$(curl --silent "https://api.github.com/repos/${{ env.WATCHED_REPO }}/releases/latest" | jq -r .tag_name)
+          latest_tag=$(curl --silent "https://api.github.com/repos/$WATCHED_REPO/releases/latest" | jq -r .tag_name)
           echo "::set-output name=latest_tag::${latest_tag}"
 
       - name: Compare versions and update issue if necessary
