@@ -55,7 +55,7 @@ jobs:
               -H "Authorization: token ${{ secrets.GH_PAT }}" \
               -H "Accept: application/vnd.github.v3+json" \
               "https://api.github.com/repos/$WATCHING_REPO/issues/$ISSUE_NUMBER" \
-              -d '{"state":"open","state_reason":"reopened"}'
+              -d '{"state":"open","state_reason":"reopened","body":"A new release of Jellyfin is available: '$WATCHED_REPO_TAG'"}'
           else
             echo "No new release of Jellyfin found."
             echo "Closing issue #$ISSUE_NUMBER."
