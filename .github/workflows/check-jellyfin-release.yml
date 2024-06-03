@@ -45,7 +45,7 @@ jobs:
               -d '{"title":"Update to new release of Jellyfin","body":"A new release of Jellyfin is available: '$WATCHED_REPO_TAG'"}'
           fi
 
-          MOST_RECENT=$(printf '%s\n' "$WATCHING_REPO_TAG" "$WATCHED_REPO_TAG" | sort -V | head -n1)
+          MOST_RECENT=$(printf '%s\n' "$WATCHING_REPO_TAG" "$WATCHED_REPO_TAG" | sort -Vr | head -n1)
           if [ "$MOST_RECENT" != "$WATCHING_REPO_TAG" ]; then
             echo "A new release of Jellyfin is available: $WATCHED_REPO_TAG."
             echo "Reopening issue #$ISSUE_NUMBER."
