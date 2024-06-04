@@ -8,8 +8,8 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...types import Unset
-from ...models.update_user_password import UpdateUserPassword
 from ...models.problem_details import ProblemDetails
+from ...models.update_user_password import UpdateUserPassword
 
 
 def _get_kwargs(

@@ -5,14 +5,13 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
+from typing import cast, Union
 from ..models.embedded_subtitle_options import EmbeddedSubtitleOptions
-from typing import cast
 from typing import List
-from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.media_path_info import MediaPathInfo
     from ..models.type_options import TypeOptions
+    from ..models.media_path_info import MediaPathInfo
 
 
 T = TypeVar("T", bound="LibraryOptions")
@@ -299,8 +298,8 @@ class LibraryOptions:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.media_path_info import MediaPathInfo
         from ..models.type_options import TypeOptions
+        from ..models.media_path_info import MediaPathInfo
 
         d = src_dict.copy()
         enabled = d.pop("Enabled", UNSET)

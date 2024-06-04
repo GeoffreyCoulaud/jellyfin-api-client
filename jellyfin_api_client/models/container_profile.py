@@ -5,9 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from ..models.dlna_profile_type import DlnaProfileType
 from typing import List
 from typing import Union
+from ..models.dlna_profile_type import DlnaProfileType
 
 if TYPE_CHECKING:
     from ..models.profile_condition import ProfileCondition

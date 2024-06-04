@@ -5,24 +5,23 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from ..models.media_source_info_timestamp import MediaSourceInfoTimestamp
-from typing import cast
-from ..models.media_stream_protocol import MediaStreamProtocol
-from ..models.media_source_info_iso_type import MediaSourceInfoIsoType
 from ..models.media_source_info_video_type import MediaSourceInfoVideoType
+from typing import cast, Union
 from ..models.media_protocol import MediaProtocol
+from ..models.media_source_info_timestamp import MediaSourceInfoTimestamp
+from ..models.media_stream_protocol import MediaStreamProtocol
 from typing import List
-from typing import Union
-from ..models.media_source_info_encoder_protocol import MediaSourceInfoEncoderProtocol
-from ..models.media_source_info_video_3d_format import MediaSourceInfoVideo3DFormat
+from ..models.media_source_info_iso_type import MediaSourceInfoIsoType
 from ..models.media_source_type import MediaSourceType
+from ..models.media_source_info_video_3d_format import MediaSourceInfoVideo3DFormat
+from ..models.media_source_info_encoder_protocol import MediaSourceInfoEncoderProtocol
 
 if TYPE_CHECKING:
-    from ..models.media_attachment import MediaAttachment
-    from ..models.media_stream import MediaStream
     from ..models.media_source_info_required_http_headers_type_0 import (
         MediaSourceInfoRequiredHttpHeadersType0,
     )
+    from ..models.media_attachment import MediaAttachment
+    from ..models.media_stream import MediaStream
 
 
 T = TypeVar("T", bound="MediaSourceInfo")
@@ -424,11 +423,11 @@ class MediaSourceInfo:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.media_attachment import MediaAttachment
-        from ..models.media_stream import MediaStream
         from ..models.media_source_info_required_http_headers_type_0 import (
             MediaSourceInfoRequiredHttpHeadersType0,
         )
+        from ..models.media_attachment import MediaAttachment
+        from ..models.media_stream import MediaStream
 
         d = src_dict.copy()
         _protocol = d.pop("Protocol", UNSET)

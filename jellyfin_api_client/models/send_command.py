@@ -5,10 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
+from typing import cast, Union
 from ..models.send_command_type import SendCommandType
 import datetime
-from typing import cast
-from typing import Union
 from dateutil.parser import isoparse
 
 

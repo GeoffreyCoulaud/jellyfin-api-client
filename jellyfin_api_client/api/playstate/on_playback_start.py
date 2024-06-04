@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.play_method import PlayMethod
 from ...types import Unset
+from ...models.play_method import PlayMethod
 
 
 def _get_kwargs(

@@ -5,8 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
+from typing import Union
 from ..models.plugin_status import PluginStatus
-from typing import cast, Union
+from typing import cast
 
 
 T = TypeVar("T", bound="PluginInfo")

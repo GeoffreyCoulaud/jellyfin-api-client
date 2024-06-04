@@ -9,8 +9,8 @@ from ... import errors
 
 from ...types import Unset
 from ...models.problem_details import ProblemDetails
-from ...models.remote_image_result import RemoteImageResult
 from ...models.image_type import ImageType
+from ...models.remote_image_result import RemoteImageResult
 
 
 def _get_kwargs(

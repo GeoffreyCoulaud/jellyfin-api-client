@@ -5,8 +5,8 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from ..models.group_shuffle_mode import GroupShuffleMode
 from typing import Union
+from ..models.group_shuffle_mode import GroupShuffleMode
 
 
 T = TypeVar("T", bound="SetShuffleModeRequestDto")

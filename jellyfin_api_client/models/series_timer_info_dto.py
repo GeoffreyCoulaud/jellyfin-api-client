@@ -5,14 +5,13 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-import datetime
-from typing import cast
-from ..models.day_of_week import DayOfWeek
-from typing import List
-from ..models.keep_until import KeepUntil
-from typing import Union
-from dateutil.parser import isoparse
 from ..models.series_timer_info_dto_day_pattern import SeriesTimerInfoDtoDayPattern
+from typing import cast, Union
+from typing import List
+import datetime
+from dateutil.parser import isoparse
+from ..models.day_of_week import DayOfWeek
+from ..models.keep_until import KeepUntil
 
 if TYPE_CHECKING:
     from ..models.series_timer_info_dto_image_tags_type_0 import (

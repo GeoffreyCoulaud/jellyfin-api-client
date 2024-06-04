@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.collection_type import CollectionType
 from ...types import Unset
+from ...models.collection_type import CollectionType
 from ...models.library_options_result_dto import LibraryOptionsResultDto
 
 

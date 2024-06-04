@@ -6,10 +6,9 @@ from attrs import define as _attrs_define
 from ..types import UNSET, Unset
 
 from ..models.media_type import MediaType
-from typing import cast
-from typing import List
-from typing import Union
+from typing import cast, Union
 from ..models.general_command_type import GeneralCommandType
+from typing import List
 
 if TYPE_CHECKING:
     from ..models.device_profile import DeviceProfile

@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.device_info_query_result import DeviceInfoQueryResult
 from ...types import Unset
+from ...models.device_info_query_result import DeviceInfoQueryResult
 
 
 def _get_kwargs(

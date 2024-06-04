@@ -5,14 +5,13 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 from ..models.session_message_type import SessionMessageType
-from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.play_queue_update_group_update import PlayQueueUpdateGroupUpdate
     from ..models.group_state_update_group_update import GroupStateUpdateGroupUpdate
     from ..models.string_group_update import StringGroupUpdate
+    from ..models.play_queue_update_group_update import PlayQueueUpdateGroupUpdate
     from ..models.group_info_dto_group_update import GroupInfoDtoGroupUpdate
 
 
@@ -45,9 +44,9 @@ class SyncPlayGroupUpdateCommandMessage:
     )
 
     def to_dict(self) -> Dict[str, Any]:
-        from ..models.play_queue_update_group_update import PlayQueueUpdateGroupUpdate
         from ..models.group_state_update_group_update import GroupStateUpdateGroupUpdate
         from ..models.string_group_update import StringGroupUpdate
+        from ..models.play_queue_update_group_update import PlayQueueUpdateGroupUpdate
         from ..models.group_info_dto_group_update import GroupInfoDtoGroupUpdate
 
         data: Union[Dict[str, Any], None, Unset]
@@ -83,9 +82,9 @@ class SyncPlayGroupUpdateCommandMessage:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.play_queue_update_group_update import PlayQueueUpdateGroupUpdate
         from ..models.group_state_update_group_update import GroupStateUpdateGroupUpdate
         from ..models.string_group_update import StringGroupUpdate
+        from ..models.play_queue_update_group_update import PlayQueueUpdateGroupUpdate
         from ..models.group_info_dto_group_update import GroupInfoDtoGroupUpdate
 
         d = src_dict.copy()

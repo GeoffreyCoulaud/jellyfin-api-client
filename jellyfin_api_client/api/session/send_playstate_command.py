@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.playstate_command import PlaystateCommand
 from ...types import Unset
+from ...models.playstate_command import PlaystateCommand
 
 
 def _get_kwargs(

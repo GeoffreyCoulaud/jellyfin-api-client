@@ -5,13 +5,12 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 from typing import List
-from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.base_item_dto import BaseItemDto
     from ..models.queue_item import QueueItem
+    from ..models.base_item_dto import BaseItemDto
 
 
 T = TypeVar("T", bound="PlaybackStopInfo")
@@ -148,8 +147,8 @@ class PlaybackStopInfo:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.base_item_dto import BaseItemDto
         from ..models.queue_item import QueueItem
+        from ..models.base_item_dto import BaseItemDto
 
         d = src_dict.copy()
 

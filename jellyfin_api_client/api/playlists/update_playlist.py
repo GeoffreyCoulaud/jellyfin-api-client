@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.update_playlist_dto import UpdatePlaylistDto
 from ...models.problem_details import ProblemDetails
+from ...models.update_playlist_dto import UpdatePlaylistDto
 
 
 def _get_kwargs(

@@ -5,12 +5,11 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-import datetime
-from typing import cast
-from typing import List
-from ..models.group_state_type import GroupStateType
-from dateutil.parser import isoparse
+from typing import cast, List
 from typing import Union
+from ..models.group_state_type import GroupStateType
+import datetime
+from dateutil.parser import isoparse
 
 
 T = TypeVar("T", bound="GroupInfoDto")

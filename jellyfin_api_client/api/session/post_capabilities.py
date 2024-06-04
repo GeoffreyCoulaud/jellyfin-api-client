@@ -8,8 +8,8 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...types import Unset
-from ...models.media_type import MediaType
 from ...models.general_command_type import GeneralCommandType
+from ...models.media_type import MediaType
 
 
 def _get_kwargs(

@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.playlist_user_permissions import PlaylistUserPermissions
 from ...models.problem_details import ProblemDetails
+from ...models.playlist_user_permissions import PlaylistUserPermissions
 
 
 def _get_kwargs(

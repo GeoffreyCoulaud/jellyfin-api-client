@@ -11,44 +11,44 @@ from ..types import UNSET, Unset
 from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.base_item_dto_image_blur_hashes_type_0_menu import (
-        BaseItemDtoImageBlurHashesType0Menu,
+    from ..models.base_item_dto_image_blur_hashes_type_0_screenshot import (
+        BaseItemDtoImageBlurHashesType0Screenshot,
     )
     from ..models.base_item_dto_image_blur_hashes_type_0_box import (
         BaseItemDtoImageBlurHashesType0Box,
     )
-    from ..models.base_item_dto_image_blur_hashes_type_0_art import (
-        BaseItemDtoImageBlurHashesType0Art,
-    )
-    from ..models.base_item_dto_image_blur_hashes_type_0_disc import (
-        BaseItemDtoImageBlurHashesType0Disc,
-    )
-    from ..models.base_item_dto_image_blur_hashes_type_0_backdrop import (
-        BaseItemDtoImageBlurHashesType0Backdrop,
-    )
     from ..models.base_item_dto_image_blur_hashes_type_0_banner import (
         BaseItemDtoImageBlurHashesType0Banner,
     )
-    from ..models.base_item_dto_image_blur_hashes_type_0_screenshot import (
-        BaseItemDtoImageBlurHashesType0Screenshot,
+    from ..models.base_item_dto_image_blur_hashes_type_0_logo import (
+        BaseItemDtoImageBlurHashesType0Logo,
     )
     from ..models.base_item_dto_image_blur_hashes_type_0_box_rear import (
         BaseItemDtoImageBlurHashesType0BoxRear,
     )
-    from ..models.base_item_dto_image_blur_hashes_type_0_primary import (
-        BaseItemDtoImageBlurHashesType0Primary,
+    from ..models.base_item_dto_image_blur_hashes_type_0_art import (
+        BaseItemDtoImageBlurHashesType0Art,
     )
-    from ..models.base_item_dto_image_blur_hashes_type_0_profile import (
-        BaseItemDtoImageBlurHashesType0Profile,
+    from ..models.base_item_dto_image_blur_hashes_type_0_backdrop import (
+        BaseItemDtoImageBlurHashesType0Backdrop,
     )
     from ..models.base_item_dto_image_blur_hashes_type_0_chapter import (
         BaseItemDtoImageBlurHashesType0Chapter,
     )
+    from ..models.base_item_dto_image_blur_hashes_type_0_profile import (
+        BaseItemDtoImageBlurHashesType0Profile,
+    )
     from ..models.base_item_dto_image_blur_hashes_type_0_thumb import (
         BaseItemDtoImageBlurHashesType0Thumb,
     )
-    from ..models.base_item_dto_image_blur_hashes_type_0_logo import (
-        BaseItemDtoImageBlurHashesType0Logo,
+    from ..models.base_item_dto_image_blur_hashes_type_0_menu import (
+        BaseItemDtoImageBlurHashesType0Menu,
+    )
+    from ..models.base_item_dto_image_blur_hashes_type_0_primary import (
+        BaseItemDtoImageBlurHashesType0Primary,
+    )
+    from ..models.base_item_dto_image_blur_hashes_type_0_disc import (
+        BaseItemDtoImageBlurHashesType0Disc,
     )
 
 
@@ -178,44 +178,44 @@ class BaseItemDtoImageBlurHashesType0:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.base_item_dto_image_blur_hashes_type_0_menu import (
-            BaseItemDtoImageBlurHashesType0Menu,
+        from ..models.base_item_dto_image_blur_hashes_type_0_screenshot import (
+            BaseItemDtoImageBlurHashesType0Screenshot,
         )
         from ..models.base_item_dto_image_blur_hashes_type_0_box import (
             BaseItemDtoImageBlurHashesType0Box,
         )
-        from ..models.base_item_dto_image_blur_hashes_type_0_art import (
-            BaseItemDtoImageBlurHashesType0Art,
-        )
-        from ..models.base_item_dto_image_blur_hashes_type_0_disc import (
-            BaseItemDtoImageBlurHashesType0Disc,
-        )
-        from ..models.base_item_dto_image_blur_hashes_type_0_backdrop import (
-            BaseItemDtoImageBlurHashesType0Backdrop,
-        )
         from ..models.base_item_dto_image_blur_hashes_type_0_banner import (
             BaseItemDtoImageBlurHashesType0Banner,
         )
-        from ..models.base_item_dto_image_blur_hashes_type_0_screenshot import (
-            BaseItemDtoImageBlurHashesType0Screenshot,
+        from ..models.base_item_dto_image_blur_hashes_type_0_logo import (
+            BaseItemDtoImageBlurHashesType0Logo,
         )
         from ..models.base_item_dto_image_blur_hashes_type_0_box_rear import (
             BaseItemDtoImageBlurHashesType0BoxRear,
         )
-        from ..models.base_item_dto_image_blur_hashes_type_0_primary import (
-            BaseItemDtoImageBlurHashesType0Primary,
+        from ..models.base_item_dto_image_blur_hashes_type_0_art import (
+            BaseItemDtoImageBlurHashesType0Art,
         )
-        from ..models.base_item_dto_image_blur_hashes_type_0_profile import (
-            BaseItemDtoImageBlurHashesType0Profile,
+        from ..models.base_item_dto_image_blur_hashes_type_0_backdrop import (
+            BaseItemDtoImageBlurHashesType0Backdrop,
         )
         from ..models.base_item_dto_image_blur_hashes_type_0_chapter import (
             BaseItemDtoImageBlurHashesType0Chapter,
         )
+        from ..models.base_item_dto_image_blur_hashes_type_0_profile import (
+            BaseItemDtoImageBlurHashesType0Profile,
+        )
         from ..models.base_item_dto_image_blur_hashes_type_0_thumb import (
             BaseItemDtoImageBlurHashesType0Thumb,
         )
-        from ..models.base_item_dto_image_blur_hashes_type_0_logo import (
-            BaseItemDtoImageBlurHashesType0Logo,
+        from ..models.base_item_dto_image_blur_hashes_type_0_menu import (
+            BaseItemDtoImageBlurHashesType0Menu,
+        )
+        from ..models.base_item_dto_image_blur_hashes_type_0_primary import (
+            BaseItemDtoImageBlurHashesType0Primary,
+        )
+        from ..models.base_item_dto_image_blur_hashes_type_0_disc import (
+            BaseItemDtoImageBlurHashesType0Disc,
         )
 
         d = src_dict.copy()

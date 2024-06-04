@@ -5,8 +5,7 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import cast
-from typing import Union
+from typing import cast, Union
 
 if TYPE_CHECKING:
     from ..models.person_lookup_info import PersonLookupInfo

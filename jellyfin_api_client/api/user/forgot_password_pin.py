@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.pin_redeem_result import PinRedeemResult
 from ...models.forgot_password_pin_dto import ForgotPasswordPinDto
+from ...models.pin_redeem_result import PinRedeemResult
 
 
 def _get_kwargs(

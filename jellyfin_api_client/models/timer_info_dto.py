@@ -5,13 +5,12 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-import datetime
-from ..models.recording_status import RecordingStatus
-from typing import cast
+from typing import cast, Union
 from typing import List
-from ..models.keep_until import KeepUntil
-from typing import Union
+import datetime
 from dateutil.parser import isoparse
+from ..models.recording_status import RecordingStatus
+from ..models.keep_until import KeepUntil
 
 if TYPE_CHECKING:
     from ..models.base_item_dto import BaseItemDto

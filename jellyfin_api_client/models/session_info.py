@@ -5,21 +5,20 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-import datetime
 from ..models.media_type import MediaType
-from typing import cast
-from typing import List
-from typing import Union
-from dateutil.parser import isoparse
+from typing import cast, Union
 from ..models.general_command_type import GeneralCommandType
+from typing import List
+import datetime
+from dateutil.parser import isoparse
 
 if TYPE_CHECKING:
-    from ..models.queue_item import QueueItem
-    from ..models.base_item_dto import BaseItemDto
-    from ..models.client_capabilities import ClientCapabilities
-    from ..models.transcoding_info import TranscodingInfo
     from ..models.player_state_info import PlayerStateInfo
     from ..models.session_user_info import SessionUserInfo
+    from ..models.client_capabilities import ClientCapabilities
+    from ..models.base_item_dto import BaseItemDto
+    from ..models.queue_item import QueueItem
+    from ..models.transcoding_info import TranscodingInfo
 
 
 T = TypeVar("T", bound="SessionInfo")
@@ -94,10 +93,10 @@ class SessionInfo:
     supported_commands: Union[List[GeneralCommandType], None, Unset] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        from ..models.base_item_dto import BaseItemDto
-        from ..models.client_capabilities import ClientCapabilities
-        from ..models.transcoding_info import TranscodingInfo
         from ..models.player_state_info import PlayerStateInfo
+        from ..models.client_capabilities import ClientCapabilities
+        from ..models.base_item_dto import BaseItemDto
+        from ..models.transcoding_info import TranscodingInfo
 
         play_state: Union[Dict[str, Any], None, Unset]
         if isinstance(self.play_state, Unset):
@@ -370,12 +369,12 @@ class SessionInfo:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.queue_item import QueueItem
-        from ..models.base_item_dto import BaseItemDto
-        from ..models.client_capabilities import ClientCapabilities
-        from ..models.transcoding_info import TranscodingInfo
         from ..models.player_state_info import PlayerStateInfo
         from ..models.session_user_info import SessionUserInfo
+        from ..models.client_capabilities import ClientCapabilities
+        from ..models.base_item_dto import BaseItemDto
+        from ..models.queue_item import QueueItem
+        from ..models.transcoding_info import TranscodingInfo
 
         d = src_dict.copy()
 

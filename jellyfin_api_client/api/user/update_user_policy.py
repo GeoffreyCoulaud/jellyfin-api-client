@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.user_policy import UserPolicy
 from ...models.problem_details import ProblemDetails
+from ...models.user_policy import UserPolicy
 
 
 def _get_kwargs(

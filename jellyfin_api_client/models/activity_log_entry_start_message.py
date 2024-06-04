@@ -5,8 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
+from typing import Union
 from ..models.session_message_type import SessionMessageType
-from typing import cast, Union
+from typing import cast
 
 
 T = TypeVar("T", bound="ActivityLogEntryStartMessage")

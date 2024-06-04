@@ -8,8 +8,8 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...types import Unset
-from ...models.configuration_page_info import ConfigurationPageInfo
 from ...models.problem_details import ProblemDetails
+from ...models.configuration_page_info import ConfigurationPageInfo
 
 
 def _get_kwargs(

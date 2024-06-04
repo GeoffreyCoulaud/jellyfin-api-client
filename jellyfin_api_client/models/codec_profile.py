@@ -5,9 +5,8 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 from typing import List
-from typing import Union
 from ..models.codec_type import CodecType
 
 if TYPE_CHECKING:

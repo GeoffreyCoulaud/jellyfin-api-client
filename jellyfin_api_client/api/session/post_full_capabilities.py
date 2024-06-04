@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.client_capabilities_dto import ClientCapabilitiesDto
 from ...types import Unset
+from ...models.client_capabilities_dto import ClientCapabilitiesDto
 
 
 def _get_kwargs(

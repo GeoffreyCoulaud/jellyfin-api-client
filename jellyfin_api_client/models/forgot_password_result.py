@@ -5,11 +5,10 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
+from typing import cast, Union
 import datetime
-from ..models.forgot_password_action import ForgotPasswordAction
-from typing import cast
-from typing import Union
 from dateutil.parser import isoparse
+from ..models.forgot_password_action import ForgotPasswordAction
 
 
 T = TypeVar("T", bound="ForgotPasswordResult")

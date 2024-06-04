@@ -6,8 +6,8 @@ from attrs import define as _attrs_define
 from ..types import UNSET, Unset
 
 from typing import Union
-from typing import cast
 from ..models.task_trigger_info_day_of_week import TaskTriggerInfoDayOfWeek
+from typing import cast
 
 
 T = TypeVar("T", bound="TaskTriggerInfo")

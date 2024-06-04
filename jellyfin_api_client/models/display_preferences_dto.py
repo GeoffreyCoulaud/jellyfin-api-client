@@ -5,9 +5,8 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
+from typing import cast, Union
 from ..models.sort_order import SortOrder
-from typing import cast
-from typing import Union
 from ..models.scroll_direction import ScrollDirection
 
 if TYPE_CHECKING:

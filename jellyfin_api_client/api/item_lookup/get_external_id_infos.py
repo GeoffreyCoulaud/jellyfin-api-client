@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.external_id_info import ExternalIdInfo
 from ...models.problem_details import ProblemDetails
+from ...models.external_id_info import ExternalIdInfo
 
 
 def _get_kwargs(

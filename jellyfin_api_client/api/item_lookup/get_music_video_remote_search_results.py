@@ -7,10 +7,10 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
+from ...models.remote_search_result import RemoteSearchResult
 from ...models.music_video_info_remote_search_query import (
     MusicVideoInfoRemoteSearchQuery,
 )
-from ...models.remote_search_result import RemoteSearchResult
 
 
 def _get_kwargs(

@@ -5,12 +5,11 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import cast
-from typing import Union
+from typing import cast, Union
 
 if TYPE_CHECKING:
-    from ..models.user_dto import UserDto
     from ..models.session_info import SessionInfo
+    from ..models.user_dto import UserDto
 
 
 T = TypeVar("T", bound="AuthenticationResult")
@@ -32,8 +31,8 @@ class AuthenticationResult:
     server_id: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        from ..models.user_dto import UserDto
         from ..models.session_info import SessionInfo
+        from ..models.user_dto import UserDto
 
         user: Union[Dict[str, Any], None, Unset]
         if isinstance(self.user, Unset):
@@ -78,8 +77,8 @@ class AuthenticationResult:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.user_dto import UserDto
         from ..models.session_info import SessionInfo
+        from ..models.user_dto import UserDto
 
         d = src_dict.copy()
 

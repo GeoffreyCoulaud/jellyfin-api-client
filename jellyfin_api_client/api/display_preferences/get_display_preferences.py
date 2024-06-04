@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.display_preferences_dto import DisplayPreferencesDto
 from ...types import Unset
+from ...models.display_preferences_dto import DisplayPreferencesDto
 
 
 def _get_kwargs(

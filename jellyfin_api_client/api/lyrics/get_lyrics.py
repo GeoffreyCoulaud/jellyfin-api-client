@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.lyric_dto import LyricDto
 from ...models.problem_details import ProblemDetails
+from ...models.lyric_dto import LyricDto
 
 
 def _get_kwargs(

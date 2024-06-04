@@ -5,9 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import cast, List
-from typing import Union
 from ..models.subtitle_playback_mode import SubtitlePlaybackMode
+from typing import cast, Union
+from typing import List
 
 
 T = TypeVar("T", bound="UserConfiguration")

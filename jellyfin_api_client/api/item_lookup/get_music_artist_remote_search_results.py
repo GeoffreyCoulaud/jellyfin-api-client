@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.artist_info_remote_search_query import ArtistInfoRemoteSearchQuery
 from ...models.remote_search_result import RemoteSearchResult
+from ...models.artist_info_remote_search_query import ArtistInfoRemoteSearchQuery
 
 
 def _get_kwargs(

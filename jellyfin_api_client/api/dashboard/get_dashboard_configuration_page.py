@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from io import BytesIO
 from ...types import Unset
 from ...models.problem_details import ProblemDetails
+from io import BytesIO
 from ...types import File
 
 

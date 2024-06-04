@@ -5,10 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 from typing import List
 from ..models.task_state import TaskState
-from typing import Union
 
 if TYPE_CHECKING:
     from ..models.task_result import TaskResult

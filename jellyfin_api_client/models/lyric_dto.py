@@ -9,8 +9,8 @@ from typing import List
 from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.lyric_metadata import LyricMetadata
     from ..models.lyric_line import LyricLine
+    from ..models.lyric_metadata import LyricMetadata
 
 
 T = TypeVar("T", bound="LyricDto")
@@ -51,8 +51,8 @@ class LyricDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.lyric_metadata import LyricMetadata
         from ..models.lyric_line import LyricLine
+        from ..models.lyric_metadata import LyricMetadata
 
         d = src_dict.copy()
         _metadata = d.pop("Metadata", UNSET)

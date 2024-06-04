@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.authentication_result import AuthenticationResult
 from ...models.authenticate_user_by_name import AuthenticateUserByName
+from ...models.authentication_result import AuthenticationResult
 
 
 def _get_kwargs(

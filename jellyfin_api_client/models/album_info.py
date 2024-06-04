@@ -5,16 +5,15 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-import datetime
-from typing import cast
+from typing import cast, Union
 from typing import List
-from typing import Union
+import datetime
 from dateutil.parser import isoparse
 
 if TYPE_CHECKING:
+    from ..models.album_info_artist_provider_ids import AlbumInfoArtistProviderIds
     from ..models.song_info import SongInfo
     from ..models.album_info_provider_ids_type_0 import AlbumInfoProviderIdsType0
-    from ..models.album_info_artist_provider_ids import AlbumInfoArtistProviderIds
 
 
 T = TypeVar("T", bound="AlbumInfo")
@@ -174,9 +173,9 @@ class AlbumInfo:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        from ..models.album_info_artist_provider_ids import AlbumInfoArtistProviderIds
         from ..models.song_info import SongInfo
         from ..models.album_info_provider_ids_type_0 import AlbumInfoProviderIdsType0
-        from ..models.album_info_artist_provider_ids import AlbumInfoArtistProviderIds
 
         d = src_dict.copy()
 

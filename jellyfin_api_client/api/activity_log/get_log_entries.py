@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-import datetime
 from ...types import Unset
 from ...models.activity_log_entry_query_result import ActivityLogEntryQueryResult
+import datetime
 
 
 def _get_kwargs(

@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.set_channel_mapping_dto import SetChannelMappingDto
 from ...models.tuner_channel_mapping import TunerChannelMapping
+from ...models.set_channel_mapping_dto import SetChannelMappingDto
 
 
 def _get_kwargs(

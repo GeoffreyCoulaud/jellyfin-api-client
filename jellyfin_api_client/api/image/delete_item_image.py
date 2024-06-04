@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...types import Unset
 from ...models.problem_details import ProblemDetails
+from ...types import Unset
 from ...models.image_type import ImageType
 
 

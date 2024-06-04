@@ -5,12 +5,11 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-import datetime
 from ..models.base_item_kind import BaseItemKind
 from ..models.media_type import MediaType
-from typing import cast
+from typing import cast, Union
 from typing import List
-from typing import Union
+import datetime
 from dateutil.parser import isoparse
 
 

@@ -5,19 +5,18 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
+from typing import cast, Union
 from ..models.image_resolution import ImageResolution
-from typing import cast
-from ..models.image_saving_convention import ImageSavingConvention
 from typing import List
-from typing import Union
+from ..models.image_saving_convention import ImageSavingConvention
 
 if TYPE_CHECKING:
-    from ..models.metadata_options import MetadataOptions
-    from ..models.trickplay_options import TrickplayOptions
     from ..models.path_substitution import PathSubstitution
-    from ..models.cast_receiver_application import CastReceiverApplication
     from ..models.repository_info import RepositoryInfo
     from ..models.name_value_pair import NameValuePair
+    from ..models.trickplay_options import TrickplayOptions
+    from ..models.cast_receiver_application import CastReceiverApplication
+    from ..models.metadata_options import MetadataOptions
 
 
 T = TypeVar("T", bound="ServerConfiguration")
@@ -477,12 +476,12 @@ class ServerConfiguration:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.metadata_options import MetadataOptions
-        from ..models.trickplay_options import TrickplayOptions
         from ..models.path_substitution import PathSubstitution
-        from ..models.cast_receiver_application import CastReceiverApplication
         from ..models.repository_info import RepositoryInfo
         from ..models.name_value_pair import NameValuePair
+        from ..models.trickplay_options import TrickplayOptions
+        from ..models.cast_receiver_application import CastReceiverApplication
+        from ..models.metadata_options import MetadataOptions
 
         d = src_dict.copy()
         log_file_retention_days = d.pop("LogFileRetentionDays", UNSET)

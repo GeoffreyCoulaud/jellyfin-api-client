@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.box_set_info_remote_search_query import BoxSetInfoRemoteSearchQuery
 from ...models.remote_search_result import RemoteSearchResult
+from ...models.box_set_info_remote_search_query import BoxSetInfoRemoteSearchQuery
 
 
 def _get_kwargs(

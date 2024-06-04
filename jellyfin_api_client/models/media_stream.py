@@ -7,10 +7,10 @@ from ..types import UNSET, Unset
 
 from ..models.media_stream_delivery_method import MediaStreamDeliveryMethod
 from ..models.video_range_type import VideoRangeType
-from ..models.audio_spatial_format import AudioSpatialFormat
-from ..models.video_range import VideoRange
 from typing import cast, Union
+from ..models.video_range import VideoRange
 from ..models.media_stream_type import MediaStreamType
+from ..models.audio_spatial_format import AudioSpatialFormat
 
 
 T = TypeVar("T", bound="MediaStream")

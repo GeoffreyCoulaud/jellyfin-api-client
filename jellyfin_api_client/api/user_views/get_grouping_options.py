@@ -8,8 +8,8 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...types import Unset
-from ...models.special_view_option_dto import SpecialViewOptionDto
 from ...models.problem_details import ProblemDetails
+from ...models.special_view_option_dto import SpecialViewOptionDto
 
 
 def _get_kwargs(

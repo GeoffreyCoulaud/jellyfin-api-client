@@ -5,16 +5,15 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 from typing import List
-from typing import Union
 
 if TYPE_CHECKING:
     from ..models.subtitle_profile import SubtitleProfile
-    from ..models.container_profile import ContainerProfile
     from ..models.direct_play_profile import DirectPlayProfile
-    from ..models.transcoding_profile import TranscodingProfile
     from ..models.codec_profile import CodecProfile
+    from ..models.container_profile import ContainerProfile
+    from ..models.transcoding_profile import TranscodingProfile
 
 
 T = TypeVar("T", bound="DeviceProfile")
@@ -169,10 +168,10 @@ class DeviceProfile:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         from ..models.subtitle_profile import SubtitleProfile
-        from ..models.container_profile import ContainerProfile
         from ..models.direct_play_profile import DirectPlayProfile
-        from ..models.transcoding_profile import TranscodingProfile
         from ..models.codec_profile import CodecProfile
+        from ..models.container_profile import ContainerProfile
+        from ..models.transcoding_profile import TranscodingProfile
 
         d = src_dict.copy()
 

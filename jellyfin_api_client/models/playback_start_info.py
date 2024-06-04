@@ -6,15 +6,14 @@ from attrs import define as _attrs_define
 from ..types import UNSET, Unset
 
 from ..models.playback_order import PlaybackOrder
-from ..models.repeat_mode import RepeatMode
-from typing import cast
-from typing import List
-from typing import Union
+from typing import cast, Union
 from ..models.play_method import PlayMethod
+from typing import List
+from ..models.repeat_mode import RepeatMode
 
 if TYPE_CHECKING:
-    from ..models.base_item_dto import BaseItemDto
     from ..models.queue_item import QueueItem
+    from ..models.base_item_dto import BaseItemDto
 
 
 T = TypeVar("T", bound="PlaybackStartInfo")
@@ -236,8 +235,8 @@ class PlaybackStartInfo:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.base_item_dto import BaseItemDto
         from ..models.queue_item import QueueItem
+        from ..models.base_item_dto import BaseItemDto
 
         d = src_dict.copy()
         can_seek = d.pop("CanSeek", UNSET)

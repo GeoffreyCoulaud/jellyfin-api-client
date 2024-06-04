@@ -5,9 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import cast, List
 from ..models.live_tv_service_status import LiveTvServiceStatus
-from typing import Union
+from typing import cast, Union
+from typing import List
 
 
 T = TypeVar("T", bound="LiveTvServiceInfo")

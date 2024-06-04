@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.media_stream_protocol import MediaStreamProtocol
 from ...types import Unset
 from ...models.problem_details import ProblemDetails
+from ...models.media_stream_protocol import MediaStreamProtocol
 
 
 def _get_kwargs(

@@ -6,9 +6,9 @@ from attrs import define as _attrs_define
 from ..types import UNSET, Unset
 
 from ..models.process_priority_class import ProcessPriorityClass
-from ..models.trickplay_scan_behavior import TrickplayScanBehavior
 from typing import cast, List
 from typing import Union
+from ..models.trickplay_scan_behavior import TrickplayScanBehavior
 
 
 T = TypeVar("T", bound="TrickplayOptions")

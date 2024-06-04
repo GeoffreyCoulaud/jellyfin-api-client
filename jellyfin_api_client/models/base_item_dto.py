@@ -5,40 +5,40 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from ..models.base_item_dto_extra_type import BaseItemDtoExtraType
-from ..models.base_item_kind import BaseItemKind
-from ..models.base_item_dto_video_type import BaseItemDtoVideoType
-from ..models.base_item_dto_iso_type import BaseItemDtoIsoType
-from typing import Union
-from ..models.base_item_dto_collection_type import BaseItemDtoCollectionType
-from typing import cast, List
-from ..models.base_item_dto_image_orientation import BaseItemDtoImageOrientation
-from ..models.base_item_dto_location_type import BaseItemDtoLocationType
-from ..models.media_type import MediaType
-from ..models.day_of_week import DayOfWeek
-from ..models.base_item_dto_audio import BaseItemDtoAudio
-from dateutil.parser import isoparse
-from ..models.metadata_field import MetadataField
-from ..models.base_item_dto_video_3d_format import BaseItemDtoVideo3DFormat
-import datetime
-from ..models.base_item_dto_channel_type import BaseItemDtoChannelType
+from typing import cast, Union
 from ..models.base_item_dto_play_access import BaseItemDtoPlayAccess
+import datetime
+from ..models.base_item_dto_video_type import BaseItemDtoVideoType
+from ..models.base_item_kind import BaseItemKind
+from ..models.media_type import MediaType
+from ..models.base_item_dto_collection_type import BaseItemDtoCollectionType
+from ..models.base_item_dto_audio import BaseItemDtoAudio
+from ..models.base_item_dto_extra_type import BaseItemDtoExtraType
+from ..models.base_item_dto_video_3d_format import BaseItemDtoVideo3DFormat
+from ..models.base_item_dto_iso_type import BaseItemDtoIsoType
+from typing import List
+from ..models.base_item_dto_image_orientation import BaseItemDtoImageOrientation
+from ..models.day_of_week import DayOfWeek
+from ..models.base_item_dto_location_type import BaseItemDtoLocationType
+from dateutil.parser import isoparse
+from ..models.base_item_dto_channel_type import BaseItemDtoChannelType
+from ..models.metadata_field import MetadataField
 
 if TYPE_CHECKING:
-    from ..models.media_source_info import MediaSourceInfo
-    from ..models.user_item_data_dto import UserItemDataDto
     from ..models.chapter_info import ChapterInfo
-    from ..models.base_item_dto_image_tags_type_0 import BaseItemDtoImageTagsType0
-    from ..models.name_guid_pair import NameGuidPair
-    from ..models.media_url import MediaUrl
-    from ..models.external_url import ExternalUrl
+    from ..models.media_source_info import MediaSourceInfo
     from ..models.base_item_dto_image_blur_hashes_type_0 import (
         BaseItemDtoImageBlurHashesType0,
     )
+    from ..models.media_url import MediaUrl
     from ..models.base_item_person import BaseItemPerson
     from ..models.base_item_dto_trickplay_type_0 import BaseItemDtoTrickplayType0
+    from ..models.name_guid_pair import NameGuidPair
     from ..models.base_item_dto_provider_ids_type_0 import BaseItemDtoProviderIdsType0
     from ..models.media_stream import MediaStream
+    from ..models.external_url import ExternalUrl
+    from ..models.base_item_dto_image_tags_type_0 import BaseItemDtoImageTagsType0
+    from ..models.user_item_data_dto import UserItemDataDto
 
 
 T = TypeVar("T", bound="BaseItemDto")
@@ -368,8 +368,6 @@ class BaseItemDto:
     current_program: Union["BaseItemDto", None, Unset] = UNSET
 
     def to_dict(self) -> Dict[str, Any]:
-        from ..models.user_item_data_dto import UserItemDataDto
-        from ..models.base_item_dto_image_tags_type_0 import BaseItemDtoImageTagsType0
         from ..models.base_item_dto_image_blur_hashes_type_0 import (
             BaseItemDtoImageBlurHashesType0,
         )
@@ -377,6 +375,8 @@ class BaseItemDto:
         from ..models.base_item_dto_provider_ids_type_0 import (
             BaseItemDtoProviderIdsType0,
         )
+        from ..models.base_item_dto_image_tags_type_0 import BaseItemDtoImageTagsType0
+        from ..models.user_item_data_dto import UserItemDataDto
 
         name: Union[None, Unset, str]
         if isinstance(self.name, Unset):
@@ -1699,22 +1699,22 @@ class BaseItemDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.media_source_info import MediaSourceInfo
-        from ..models.user_item_data_dto import UserItemDataDto
         from ..models.chapter_info import ChapterInfo
-        from ..models.base_item_dto_image_tags_type_0 import BaseItemDtoImageTagsType0
-        from ..models.name_guid_pair import NameGuidPair
-        from ..models.media_url import MediaUrl
-        from ..models.external_url import ExternalUrl
+        from ..models.media_source_info import MediaSourceInfo
         from ..models.base_item_dto_image_blur_hashes_type_0 import (
             BaseItemDtoImageBlurHashesType0,
         )
+        from ..models.media_url import MediaUrl
         from ..models.base_item_person import BaseItemPerson
         from ..models.base_item_dto_trickplay_type_0 import BaseItemDtoTrickplayType0
+        from ..models.name_guid_pair import NameGuidPair
         from ..models.base_item_dto_provider_ids_type_0 import (
             BaseItemDtoProviderIdsType0,
         )
         from ..models.media_stream import MediaStream
+        from ..models.external_url import ExternalUrl
+        from ..models.base_item_dto_image_tags_type_0 import BaseItemDtoImageTagsType0
+        from ..models.user_item_data_dto import UserItemDataDto
 
         d = src_dict.copy()
 

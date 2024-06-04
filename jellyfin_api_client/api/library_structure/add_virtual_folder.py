@@ -8,8 +8,8 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...types import Unset
-from ...models.add_virtual_folder_dto import AddVirtualFolderDto
 from ...models.collection_type_options import CollectionTypeOptions
+from ...models.add_virtual_folder_dto import AddVirtualFolderDto
 
 
 def _get_kwargs(

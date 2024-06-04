@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.file_system_entry_info import FileSystemEntryInfo
 from ...types import Unset
+from ...models.file_system_entry_info import FileSystemEntryInfo
 
 
 def _get_kwargs(

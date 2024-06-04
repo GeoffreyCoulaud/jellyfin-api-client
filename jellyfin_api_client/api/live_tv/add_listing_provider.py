@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.listings_provider_info import ListingsProviderInfo
 from ...types import Unset
+from ...models.listings_provider_info import ListingsProviderInfo
 
 
 def _get_kwargs(

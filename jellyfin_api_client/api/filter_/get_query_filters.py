@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.base_item_kind import BaseItemKind
 from ...types import Unset
+from ...models.base_item_kind import BaseItemKind
 from ...models.query_filters import QueryFilters
 
 

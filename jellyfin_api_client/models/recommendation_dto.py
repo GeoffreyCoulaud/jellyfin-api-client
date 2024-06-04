@@ -5,10 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 from typing import List
 from ..models.recommendation_type import RecommendationType
-from typing import Union
 
 if TYPE_CHECKING:
     from ..models.base_item_dto import BaseItemDto

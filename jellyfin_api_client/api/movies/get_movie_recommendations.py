@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.recommendation_dto import RecommendationDto
 from ...types import Unset
 from ...models.item_fields import ItemFields
+from ...models.recommendation_dto import RecommendationDto
 
 
 def _get_kwargs(

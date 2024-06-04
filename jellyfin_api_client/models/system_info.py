@@ -5,13 +5,12 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 from typing import List
-from typing import Union
 
 if TYPE_CHECKING:
-    from ..models.cast_receiver_application import CastReceiverApplication
     from ..models.installation_info import InstallationInfo
+    from ..models.cast_receiver_application import CastReceiverApplication
 
 
 T = TypeVar("T", bound="SystemInfo")
@@ -306,8 +305,8 @@ class SystemInfo:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.cast_receiver_application import CastReceiverApplication
         from ..models.installation_info import InstallationInfo
+        from ..models.cast_receiver_application import CastReceiverApplication
 
         d = src_dict.copy()
 

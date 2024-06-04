@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.validate_path_dto import ValidatePathDto
 from ...models.problem_details import ProblemDetails
+from ...models.validate_path_dto import ValidatePathDto
 
 
 def _get_kwargs(

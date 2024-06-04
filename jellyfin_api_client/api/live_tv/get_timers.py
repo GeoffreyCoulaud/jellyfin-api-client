@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.timer_info_dto_query_result import TimerInfoDtoQueryResult
 from ...types import Unset
+from ...models.timer_info_dto_query_result import TimerInfoDtoQueryResult
 
 
 def _get_kwargs(

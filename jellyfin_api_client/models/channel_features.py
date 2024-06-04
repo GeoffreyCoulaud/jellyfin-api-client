@@ -5,11 +5,11 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from ..models.channel_item_sort_field import ChannelItemSortField
-from typing import cast, List
-from typing import Union
-from ..models.channel_media_content_type import ChannelMediaContentType
 from ..models.channel_media_type import ChannelMediaType
+from ..models.channel_item_sort_field import ChannelItemSortField
+from ..models.channel_media_content_type import ChannelMediaContentType
+from typing import cast, Union
+from typing import List
 
 
 T = TypeVar("T", bound="ChannelFeatures")

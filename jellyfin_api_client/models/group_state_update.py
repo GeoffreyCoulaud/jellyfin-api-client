@@ -5,9 +5,9 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from ..models.playback_request_type import PlaybackRequestType
-from ..models.group_state_type import GroupStateType
 from typing import Union
+from ..models.group_state_type import GroupStateType
+from ..models.playback_request_type import PlaybackRequestType
 
 
 T = TypeVar("T", bound="GroupStateUpdate")

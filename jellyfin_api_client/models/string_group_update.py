@@ -5,8 +5,8 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from ..models.group_update_type import GroupUpdateType
 from typing import Union
+from ..models.group_update_type import GroupUpdateType
 
 
 T = TypeVar("T", bound="StringGroupUpdate")

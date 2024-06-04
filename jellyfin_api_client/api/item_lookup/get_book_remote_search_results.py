@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.book_info_remote_search_query import BookInfoRemoteSearchQuery
 from ...models.remote_search_result import RemoteSearchResult
+from ...models.book_info_remote_search_query import BookInfoRemoteSearchQuery
 
 
 def _get_kwargs(

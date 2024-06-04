@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.upload_subtitle_dto import UploadSubtitleDto
 from ...models.problem_details import ProblemDetails
+from ...models.upload_subtitle_dto import UploadSubtitleDto
 
 
 def _get_kwargs(

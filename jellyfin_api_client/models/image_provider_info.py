@@ -6,8 +6,8 @@ from attrs import define as _attrs_define
 from ..types import UNSET, Unset
 
 from typing import Union
-from ..models.image_type import ImageType
 from typing import List
+from ..models.image_type import ImageType
 
 
 T = TypeVar("T", bound="ImageProviderInfo")

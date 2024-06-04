@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response
 from ... import errors
 
-from ...models.task_trigger_info import TaskTriggerInfo
 from ...models.problem_details import ProblemDetails
+from ...models.task_trigger_info import TaskTriggerInfo
 
 
 def _get_kwargs(

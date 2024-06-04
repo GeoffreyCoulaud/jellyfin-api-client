@@ -5,11 +5,11 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from ..models.transcoding_info_transcode_reasons import TranscodingInfoTranscodeReasons
 from typing import cast, Union
 from ..models.transcoding_info_hardware_acceleration_type import (
     TranscodingInfoHardwareAccelerationType,
 )
+from ..models.transcoding_info_transcode_reasons import TranscodingInfoTranscodeReasons
 
 
 T = TypeVar("T", bound="TranscodingInfo")

@@ -8,9 +8,9 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...types import Unset
-from ...models.playback_info_dto import PlaybackInfoDto
 from ...models.problem_details import ProblemDetails
 from ...models.playback_info_response import PlaybackInfoResponse
+from ...models.playback_info_dto import PlaybackInfoDto
 
 
 def _get_kwargs(

@@ -5,8 +5,8 @@ from attrs import define as _attrs_define
 
 from ..types import UNSET, Unset
 
-from ..models.file_system_entry_type import FileSystemEntryType
 from typing import Union
+from ..models.file_system_entry_type import FileSystemEntryType
 
 
 T = TypeVar("T", bound="FileSystemEntryInfo")
