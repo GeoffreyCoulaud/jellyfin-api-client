@@ -1,3 +1,12 @@
+# Archival notice
+
+`jellyfin-api-client` consists 100% of generated code.  
+Maintaining it costs me time which I don't have in abundance.  
+
+**This project will no longer be maintained, as of 2025-02-05** 
+
+If you do still need the library, feel free to follow the [openapi-python-client](https://github.com/openapi-generators/openapi-python-client) documentation to generate the code for yourself.
+
 # jellyfin-api-client
 A client library for accessing Jellyfin API
 
